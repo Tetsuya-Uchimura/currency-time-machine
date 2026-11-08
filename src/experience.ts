@@ -12,7 +12,9 @@ import {
   AudioListener,
   createSystem,
   Group,
+  type Object3D,
   PokeInteractable,
+  Quaternion,
   Pressed,
   RayInteractable,
   Vector3,
@@ -95,6 +97,9 @@ export class ExperienceSystem extends createSystem({
   private readonly orbStates: OrbState[] = SLOTS.map(() => ({ alive: false, height: 0, brightness: 0, focus: 0, code: '' }));
   private readonly v1 = new Vector3();
   private readonly v2 = new Vector3();
+  private readonly q1 = new Quaternion();
+  private readonly q2 = new Quaternion();
+  private listener: Object3D | null = null;
 
   init(): void {
     this.cleanupFuncs.push(
@@ -312,6 +317,7 @@ export class ExperienceSystem extends createSystem({
     if (!this.ready) return;
     const dt = Math.min(delta, 0.1);
     this.anchorIfNeeded(dt);
+    this.syncListener();
 
     if (this.phase === 'playing' && !this.clock.paused) {
       this.clock.advance(dt);
@@ -599,11 +605,37 @@ export class ExperienceSystem extends createSystem({
 
   /** Our PannerNodes need a listener on the head; reuse IWSDK's if present. */
   private ensureListener(): void {
-    let found = false;
     this.world.scene.traverse((o) => {
-      if (o.type === 'AudioListener') found = true;
+      if (!this.listener && o.type === 'AudioListener') this.listener = o;
     });
-    if (!found) this.world.camera.add(new AudioListener());
+    if (!this.listener) {
+      this.listener = new AudioListener();
+      this.world.camera.add(this.listener);
+    }
+  }
+
+  /**
+   * In XR the listener rides on the tracked head. In the browser the camera is
+   * placed by the render config while the head stays at the origin, so we move
+   * the listener onto the camera to keep sound directions right.
+   */
+  private syncListener(): void {
+    const l = this.listener;
+    if (!l || !l.parent || l.parent === this.world.camera) return;
+    if (this.world.session) {
+      if (l.position.lengthSq() > 0) {
+        l.position.set(0, 0, 0);
+        l.quaternion.identity();
+      }
+      return;
+    }
+    const cam = this.world.camera;
+    cam.getWorldPosition(this.v1);
+    l.parent.worldToLocal(this.v1);
+    l.position.copy(this.v1);
+    cam.getWorldQuaternion(this.q1);
+    l.parent.getWorldQuaternion(this.q2);
+    l.quaternion.copy(this.q2.invert().multiply(this.q1));
   }
 }
 
