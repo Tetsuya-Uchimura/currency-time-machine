@@ -54,8 +54,8 @@ export const LAYOUT = {
   /** Total horizontal span of the arc in degrees (centered straight ahead). */
   arcDeg: 90,
   /** Orb "birth level" relative to eye height (slightly below the eyes). */
-  baseY: -0.08,
+  baseY: -0.1,
   /** Max height travel above/below the birth level. */
-  heightRange: 0.2,
+  heightRange: 0.18,
   orbRadius: 0.032,
 };

@@ -87,6 +87,7 @@ export class ExperienceSystem extends createSystem({
   private needsAnchor = true;
   private anchorDelay = 0;
   private audioPosTimer = 0;
+  private debugTimer = 5;
   private infoTimer = 0;
 
   // Reused per-frame objects (no allocations in update()).
@@ -156,7 +157,8 @@ export class ExperienceSystem extends createSystem({
 
     // Caption board: ahead and above the orbs, large type.
     this.captionPanel = await this.world.assets.instantiate<UIKitMLAsset>('caption-panel');
-    this.captionPanel.position.set(0, 0.3, -1.1);
+    // High enough that even the strongest orb (CHF) never overlaps it.
+    this.captionPanel.position.set(0, 0.42, -1.1);
     this.captionPanel.scale.setScalar(0.1);
     this.world.createTransformEntity(this.captionPanel, { parent: this.rig });
 
@@ -342,6 +344,30 @@ export class ExperienceSystem extends createSystem({
       });
     }
     this.updateInfoCard(dt, p);
+    if (import.meta.env.DEV) this.logDiagnostics(dt, p);
+  }
+
+  /** Dev only: lets us confirm the (inaudible to CI) audio graph is alive. */
+  private logDiagnostics(dt: number, p: number): void {
+    this.debugTimer -= dt;
+    if (this.debugTimer > 0) return;
+    this.debugTimer = 5;
+    const l = this.audio.ctx.listener;
+    const year = this.timeline.dateAt(p).getUTCFullYear();
+    const line =
+      `[ctm] phase=${this.phase} year=${year} paused=${this.clock.paused} audio=${this.audio.ctx.state} ` +
+      `notes=${this.audio.noteCount} listener=(${l.positionX.value.toFixed(2)},${l.positionY.value.toFixed(2)},${l.positionZ.value.toFixed(2)})`;
+    console.info(line);
+    // Also mirror into a hidden status element (readable by automation snapshots).
+    let el = document.getElementById('ctm-debug');
+    if (!el) {
+      el = document.createElement('div');
+      el.id = 'ctm-debug';
+      el.setAttribute('role', 'status');
+      el.style.cssText = 'position:fixed;left:-9999px;top:0;';
+      document.body.appendChild(el);
+    }
+    el.textContent = line;
   }
 
   /** Per-slot numbers at week p -> orb + voice inputs. */

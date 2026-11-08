@@ -390,9 +390,14 @@ def main(argv: list[str] | None = None) -> int:
     snapshot = build_snapshot(by_code)
 
     OUT_DIR.mkdir(parents=True, exist_ok=True)
-    # Compact separators keep the bundle small (~0.3 MB, gzip ~0.1 MB).
-    (OUT_DIR / "history.json").write_text(json.dumps(history, separators=(",", ":")), encoding="utf-8")
-    (OUT_DIR / "snapshot.json").write_text(json.dumps(snapshot, indent=1), encoding="utf-8")
+    # Compact separators keep the bundle small (~0.2 MB, gzip well under 0.1 MB).
+    # newline="\n" keeps LF endings on Windows too (stable git diffs).
+    (OUT_DIR / "history.json").write_text(
+        json.dumps(history, separators=(",", ":")), encoding="utf-8", newline="\n"
+    )
+    (OUT_DIR / "snapshot.json").write_text(
+        json.dumps(snapshot, indent=1) + "\n", encoding="utf-8", newline="\n"
+    )
 
     size_kb = (OUT_DIR / "history.json").stat().st_size / 1024
     print(f"history.json: {history['count']} weeks {history['start']}..{history['end']}, {size_kb:.0f} KB")

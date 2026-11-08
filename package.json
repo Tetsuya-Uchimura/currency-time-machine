@@ -12,7 +12,10 @@
     "reference:warmup": "iwsdk reference warmup",
     "typecheck": "tsc --noEmit",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test": "python -m pytest -q && node --test tests/today.test.ts",
+    "data": "python scripts/build_history.py",
+    "pacing": "node scripts/simulate-pacing.ts"
   },
   "dependencies": {
     "@iwsdk/core": "1.1.0-rc.2",

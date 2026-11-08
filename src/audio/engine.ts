@@ -69,6 +69,8 @@ export class SoundEngine {
   private noteListener: NoteListener | null = null;
   private suspendTimer: number | undefined;
   paused = false;
+  /** Number of notes scheduled so far (dev diagnostics). */
+  noteCount = 0;
 
   constructor(private readonly timbreIds: TimbreId[]) {
     this.ctx = ThreeAudioContext.getContext() as AudioContext;
@@ -288,6 +290,7 @@ export class SoundEngine {
     }
     osc.start(when);
     osc.stop(end + 0.05);
+    this.noteCount++;
     this.noteListener?.(i, velocity, when);
   }
 
