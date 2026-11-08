@@ -1,0 +1,62 @@
+{
+ "attribution": "Exchange rate data: Frankfurter (frankfurter.dev)",
+ "base": "USD",
+ "asOf": "2026-11-09",
+ "source": "bundled",
+ "rates": {
+  "EUR": {
+   "date": "2026-11-09",
+   "rate": 0.8923,
+   "prev": 0.89151,
+   "prevDate": "2026-11-06"
+  },
+  "GBP": {
+   "date": "2026-11-09",
+   "rate": 0.74475,
+   "prev": 0.7441,
+   "prevDate": "2026-11-06"
+  },
+  "CHF": {
+   "date": "2026-11-06",
+   "rate": 0.81703,
+   "prev": 0.81683,
+   "prevDate": "2026-11-05"
+  },
+  "CAD": {
+   "date": "2026-11-06",
+   "rate": 1.3998,
+   "prev": 1.396,
+   "prevDate": "2026-11-05"
+  },
+  "JPY": {
+   "date": "2026-11-09",
+   "rate": 158.21,
+   "prev": 158.19,
+   "prevDate": "2026-11-06"
+  },
+  "AUD": {
+   "date": "2026-11-09",
+   "rate": 1.4443,
+   "prev": 1.4405,
+   "prevDate": "2026-11-06"
+  },
+  "INR": {
+   "date": "2026-11-06",
+   "rate": 94.16,
+   "prev": 94.47,
+   "prevDate": "2026-11-05"
+  },
+  "CNY": {
+   "date": "2026-11-09",
+   "rate": 6.664,
+   "prev": 6.6638,
+   "prevDate": "2026-11-06"
+  },
+  "KRW": {
+   "date": "2026-11-06",
+   "rate": 1351.58,
+   "prev": 1342.81,
+   "prevDate": "2026-11-05"
+  }
+ }
+}
