@@ -1,11 +1,11 @@
 /**
- * Copyright (c) Meta Platforms, Inc. and affiliates.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
+ * ECS component catalog (shared with the IWSDK editor).
  */
+import { createComponent, defineComponents, Types } from '@iwsdk/core';
 
-import { defineComponents } from '@iwsdk/core';
-import { Robot } from './robot-component.js';
+/** Marks a currency orb entity; slotIndex points into config SLOTS. */
+export const Orb = createComponent('Orb', {
+  slotIndex: { type: Types.Int8, default: 0 },
+});
 
-export default defineComponents([Robot]);
+export default defineComponents([Orb]);

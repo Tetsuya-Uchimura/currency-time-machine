@@ -1,16 +1,49 @@
 <!doctype html>
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, shrink-to-fit=no"
-    />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="Feel the history of the world's money, from 1948 to today, as sound and light. A hands-only WebXR experience." />
     <link rel="icon" href="data:," />
-    <title>currency-time-machine</title>
+    <title>Currency Time Machine</title>
+    <style>
+      :root { color-scheme: dark; }
+      body { margin: 0; background: #02040a; font-family: system-ui, -apple-system, 'Segoe UI', sans-serif; }
+      #start-overlay {
+        position: fixed; inset: 0; display: flex; align-items: center; justify-content: center;
+        background: radial-gradient(ellipse at 50% 30%, rgba(10, 23, 52, 0.92), rgba(2, 4, 9, 0.96));
+        color: #f4f6fa; z-index: 10; padding: 16px; box-sizing: border-box;
+      }
+      #start-overlay.hidden { display: none; }
+      .card { max-width: 560px; text-align: center; }
+      h1 { font-size: clamp(28px, 6vw, 44px); margin: 0 0 12px; letter-spacing: 0.5px; }
+      p { font-size: 18px; line-height: 1.5; color: #d8deea; margin: 0 0 22px; }
+      .buttons { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+      button {
+        font: inherit; font-size: 18px; font-weight: 600; padding: 14px 24px; border-radius: 999px;
+        border: 2px solid #ffd84a; cursor: pointer; min-width: 200px;
+      }
+      #enter-vr { background: #ffd84a; color: #0b0f1a; }
+      #watch-browser { background: transparent; color: #ffd84a; }
+      button:disabled { opacity: 0.45; cursor: default; }
+      button:focus-visible { outline: 3px solid #ffffff; outline-offset: 3px; }
+      .small { font-size: 14px; color: #aab3c5; margin-top: 22px; }
+    </style>
   </head>
-  <body style="margin: 0">
+  <body>
     <div id="scene-container"></div>
+    <div id="start-overlay" role="dialog" aria-labelledby="title">
+      <div class="card">
+        <h1 id="title">Currency Time Machine</h1>
+        <p>Sit back. From 1948 to today, the world's money plays around you as sound and light. Headphones recommended.</p>
+        <div class="buttons">
+          <button id="enter-vr" disabled>Enter VR</button>
+          <button id="watch-browser" disabled>Watch in browser</button>
+        </div>
+        <p class="small" id="start-status">Loading...</p>
+        <p class="small">Exchange rate data: Frankfurter (frankfurter.dev)</p>
+      </div>
+    </div>
     <script type="module" src="/src/index.ts"></script>
   </body>
 </html>
