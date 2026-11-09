@@ -38,6 +38,7 @@ import {
   RingGeometry,
   Sprite,
   SpriteMaterial,
+  Vector3,
 } from '@iwsdk/core';
 import { BANDS, MAP } from '../config.js';
 import { changeText } from '../data/chart-series.js';
@@ -68,6 +69,10 @@ export interface MapFrame {
   solo: number;
   /** False while paused: the scan light stops with time. */
   flowing: boolean;
+  /** Spotlight per slot (1 lit, 0 dimmed), or null for none (Year Journey). */
+  spot?: number[] | null;
+  /** Emphasis on the US dollar's marker (the base; Year Journey). */
+  usd?: number;
 }
 
 const LAND = new Color(0.13, 0.18, 0.28);
@@ -78,6 +83,8 @@ export class WorldCurrencyMap {
   readonly root = new Group();
   /** Pinch targets per slot (marker + label); index = slot. */
   readonly hits: Group[] = [];
+  /** The US dollar's pinch target (Year Journey: the United States' leaders). */
+  usdHit: Group | null = null;
 
   private readonly W = BANDS.map.width;
   private readonly H = BANDS.map.height;
@@ -90,6 +97,7 @@ export class WorldCurrencyMap {
   private readonly labelKeys: string[] = [];
   private readonly leaders: Segments;
   private readonly emphasis: Float32Array;
+  private readonly note: TextPlane;
   private dots: Points | null = null;
   private dotColor: BufferAttribute | null = null;
   private dotData: Float32Array | null = null;
@@ -123,18 +131,32 @@ export class WorldCurrencyMap {
     this.root.add(this.leaders.lines);
     for (const { def, slot } of this.entries) this.buildMarker(def, slot);
 
-    const note = new TextPlane(this.W, 0.022, 44);
-    note.mesh.position.set(0, -this.H / 2 - 0.024, 0);
-    note.mat.opacity = 0.75;
-    note.draw('note', (ctx, w, h) => {
+    this.note = new TextPlane(this.W, 0.022, 44);
+    this.note.mesh.position.set(0, -this.H / 2 - 0.024, 0);
+    this.note.mat.opacity = 0.75;
+    this.setYearMode(false);
+    this.root.add(this.note.mesh);
+  }
+
+  /** The note under the map says what the numbers measure (52 weeks, or this year). */
+  setYearMode(on: boolean): void {
+    const text = on
+      ? "Markers show each currency's home, not where it is traded. Change vs USD since the year's first week."
+      : "Markers show each currency's home, not where it is traded. Change vs USD over the chart's 52 weeks.";
+    this.note.draw(text, (ctx, w, h) => {
       ctx.textBaseline = 'middle';
       ctx.font = `${Math.round(h * 0.68)}px system-ui, sans-serif`;
       ctx.fillStyle = '#9fb0cc';
-      ctx.fillText("Markers show each currency's home, not where it is traded. Change vs USD over the chart's 52 weeks.", 6, h / 2);
+      ctx.fillText(text, 6, h / 2);
       ctx.textAlign = 'right';
       ctx.fillText('Map: Natural Earth', w - 6, h / 2);
     });
-    this.root.add(note.mesh);
+  }
+
+  /** Marker position (band-local meters) of a slot, or of the US dollar ('USD'). */
+  markerPosition(id: string, out: Vector3): Vector3 {
+    const k = this.entries.findIndex((e) => e.def.id === id);
+    return k < 0 ? out.set(0, 0, 0) : out.copy(this.markers[k].group.position);
   }
 
   /** Map position (band-local meters) of a longitude/latitude. */
@@ -257,7 +279,7 @@ export class WorldCurrencyMap {
     this.leaders.end();
 
     // Pinch target: the marker (a generous circle) and its label.
-    if (!isUsd) {
+    {
       const hit = new Group();
       hit.name = `map-${def.id}`;
       const invisible = () => new MeshBasicMaterial({ transparent: true, opacity: 0, depthWrite: false, colorWrite: false });
@@ -268,7 +290,8 @@ export class WorldCurrencyMap {
       plate.rotation.copy(label.mesh.rotation);
       hit.add(dot, plate);
       this.root.add(hit);
-      this.hits[slot] = hit;
+      if (isUsd) this.usdHit = hit;
+      else this.hits[slot] = hit;
     }
   }
 
@@ -276,9 +299,9 @@ export class WorldCurrencyMap {
     this.time += dt;
     if (f.flowing) this.sweep = (this.sweep + dt / 9) % 1.4;
 
-    // Emphasis shared with the chart: event focus or solo.
+    // Emphasis shared with the chart: event focus or solo (and the guide's spotlight).
     for (let i = 0; i < this.emphasis.length; i++) {
-      const target = Math.max(f.focus[i], f.solo === i ? 1 : 0);
+      const target = Math.max(f.focus[i], f.solo === i ? 1 : 0, f.spot && f.spot[i] > 0 ? 0.6 : 0);
       this.emphasis[i] += (target - this.emphasis[i]) * Math.min(1, dt / 0.5);
     }
 
@@ -346,10 +369,16 @@ export class WorldCurrencyMap {
     const breathe = 0.5 + 0.5 * Math.sin(this.time * Math.PI * 0.8);
     this.entries.forEach(({ def, slot }, k) => {
       const m = this.markers[k];
-      if (def.id === 'USD') return;
+      if (def.id === 'USD') {
+        const u = f.usd ?? 0;
+        m.ringMat.opacity = 0.8 + 0.2 * u;
+        m.halo.opacity = 0.35 + 0.5 * u;
+        m.group.scale.setScalar(1 + 0.4 * u * (0.85 + 0.15 * breathe));
+        return;
+      }
       const alive = f.pct[slot] !== null;
       const e = this.emphasis[slot];
-      const dim = f.solo >= 0 && f.solo !== slot ? 0.45 : 1;
+      const dim = (f.solo >= 0 && f.solo !== slot ? 0.45 : 1) * (f.spot && f.solo < 0 && !(f.spot[slot] > 0) ? 0.5 : 1);
       m.core.opacity = (alive ? 1 : 0.35) * dim;
       m.halo.opacity = (alive ? 0.35 + 0.5 * e : 0.08) * dim;
       m.ringMat.opacity = alive ? e * (0.55 + 0.35 * breathe) : 0;

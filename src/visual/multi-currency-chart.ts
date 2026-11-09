@@ -20,6 +20,12 @@
  * (never vanish). Right-hand labels ("JPY ▲ +8.4%") are spread so they never
  * overlap, with a leader line when a label had to move.
  *
+ * Year mode (Year Journey): the x axis is one calendar year, January to
+ * December, fixed; each line grows from the year's first weekly observation to
+ * the playhead (never beyond it), measured from that first week. Event markers
+ * stand at their dates. A spotlight keeps the guide's currencies bright and
+ * dims the rest (All Currencies turns it off).
+ *
  * Quest budget: one dynamic strip mesh per line, a few line sets and small
  * canvas labels redrawn only when their text changes. No post-processing.
  */
@@ -60,6 +66,13 @@ export interface ChartFrame {
   /** Display code per line (DEM before 1999, then EUR). */
   codes: string[];
   turbulence: number;
+  /**
+   * Year mode: lines start at `start` (the year's first weekly observation)
+   * and the x axis runs from `axis0` (1 January) to `axis1` (next 1 January).
+   */
+  year?: { start: number; axis0: number; axis1: number } | null;
+  /** Spotlight per line (1 lit, 0 dimmed), or null for none. */
+  spot?: number[] | null;
 }
 
 /** A dated event that gets a marker line once the playhead has passed it. */
@@ -69,6 +82,7 @@ export interface ChartEvent {
 }
 
 const MAX_GRID = 9;
+const MONTH_LETTERS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 const MAX_YEARS = 3;
 const MAX_EVENT_MARKS = 3;
 const WHITE = new Color(1, 1, 1);
@@ -153,7 +167,7 @@ export class MultiCurrencyChart {
   private readonly keep: Float32Array;
   private readonly pulse: Float32Array;
   private readonly heads: Float64Array;
-  private readonly events: ChartEvent[];
+  private events: ChartEvent[];
   private readonly yearIndex: (year: number) => number;
   private readonly yearAt: (index: number) => number;
 
@@ -183,6 +197,9 @@ export class MultiCurrencyChart {
   private dateText = '';
   private soloShown = 0;
   private textTimer = 0;
+  private year: { start: number; axis0: number; axis1: number } | null = null;
+  private readonly spotShown: Float32Array;
+  private readonly monthLabels: TextPlane[] = [];
   private readonly labelText: string[];
 
   constructor(
@@ -202,15 +219,17 @@ export class MultiCurrencyChart {
     this.colors = colors.map((c) => new Color(c));
     this.css = this.colors.map((c) => '#' + c.getHexString());
     this.sparkColors = this.colors.map((c) => c.clone().lerp(WHITE, 0.45));
-    this.samples = series.map(() => createSamples(W));
-    this.tracks = series.map(() => new Track(maxPts));
-    this.pct = series.map(() => new Float32Array(maxPts));
+    // (+2 weeks: a calendar year can hold 53 weekly observations.)
+    this.samples = series.map(() => createSamples(W + 2));
+    this.tracks = series.map(() => new Track(maxPts + 2));
+    this.pct = series.map(() => new Float32Array(maxPts + 2));
     this.bases = series.map(() => null);
     this.emphasis = new Float32Array(n);
     this.keep = new Float32Array(n).fill(1);
     this.pulse = new Float32Array(n);
     this.heads = new Float64Array(n);
     this.labelText = series.map(() => '');
+    this.spotShown = new Float32Array(n).fill(1);
 
     const Hh = CHART.plotHalfHeight;
     const L = CHART.plotLeft;
@@ -252,6 +271,19 @@ export class MultiCurrencyChart {
       this.yearLabels.push(t);
       this.root.add(t.mesh);
     }
+    for (let k = 0; k < 12; k++) {
+      const t = new TextPlane(0.06, 0.022, 44);
+      t.mesh.position.y = -Hh - 0.02;
+      t.draw(MONTH_LETTERS[k], (ctx, w, h) => {
+        ctx.font = `${Math.round(h * 0.74)}px system-ui, sans-serif`;
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillStyle = '#c9d3e8';
+        ctx.fillText(MONTH_LETTERS[k], w / 2, h / 2);
+      });
+      this.monthLabels.push(t);
+      this.root.add(t.mesh);
+    }
     for (let k = 0; k < MAX_EVENT_MARKS; k++) {
       const t = new TextPlane(0.2, 0.024, 48);
       t.mesh.position.y = Hh - 0.016;
@@ -267,7 +299,7 @@ export class MultiCurrencyChart {
     this.root.add(this.header.mesh, this.dateLabel.mesh, this.footnote.mesh);
 
     this.ribbons = this.colors.map((c) => {
-      const r = new Ribbon(maxPts, c, 0.7, 0.24);
+      const r = new Ribbon(maxPts + 2, c, 0.7, 0.24);
       r.mesh.position.z = 0.003;
       this.root.add(r.mesh);
       return r;
@@ -355,6 +387,11 @@ export class MultiCurrencyChart {
     this.markers.add({ slot: i, t: index, born: this.now, shown: -1, vel: 1 });
   }
 
+  /** Replace the dated event markers (the Year Journey uses the year's verified events). */
+  setEvents(events: ChartEvent[]): void {
+    this.events = events.slice().sort((a, b) => a.t - b.t);
+  }
+
   /** A major moment: every line becomes clearer for a few seconds. */
   boostAll(): void {
     this.boostTarget = 1;
@@ -366,6 +403,12 @@ export class MultiCurrencyChart {
     this.pulse.fill(0);
     this.emphasis.fill(0);
     this.boost = this.boostTarget = 0;
+  }
+
+  /** Year mode: x of a week index on the fixed January-December axis. */
+  private xOfT(t: number): number {
+    const yr = this.year!;
+    return CHART.plotLeft + ((CHART.plotRight - CHART.plotLeft) * (t - yr.axis0)) / (yr.axis1 - yr.axis0);
   }
 
   private yOf(pct: number): number {
@@ -387,14 +430,19 @@ export class MultiCurrencyChart {
     for (let i = 0; i < n; i++) maxFocus = Math.max(maxFocus, f.focus[i]);
 
     // 1. Sample every line and convert it to change since the common start.
+    // (Year mode: from the year's first week to the playhead, never beyond.)
+    const yr = f.year ?? null;
+    if ((yr === null) !== (this.year === null) || (yr && this.year && yr.start !== this.year.start)) this.rangeReady = false;
+    this.year = yr;
     let now = 0;
     for (let i = 0; i < n; i++) {
       const s = this.series[i];
-      const head = f.heads[i];
+      const head = yr ? Math.max(yr.start, f.heads[i]) : f.heads[i];
       this.heads[i] = head;
       now = Math.max(now, head);
-      sampleTrail(s.strength, s.first, head, W, this.samples[i], f.tails[i]);
-      this.bases[i] = changeSeries(this.samples[i], head - W, this.pct[i]);
+      const span = yr ? Math.max(1e-6, head - yr.start) : W;
+      sampleTrail(s.strength, s.first, head, span, this.samples[i], yr ? null : f.tails[i]);
+      this.bases[i] = changeSeries(this.samples[i], head - span, this.pct[i]);
     }
 
     // 2. One shared y-range for all lines (focus and solo stay fully on it).
@@ -421,7 +469,7 @@ export class MultiCurrencyChart {
       const cnt = smp.count;
       tr.count = cnt;
       for (let k = 0; k < cnt; k++) {
-        tr.xs[k] = R - (R - L) * smp.age[k];
+        tr.xs[k] = yr ? this.xOfT(smp.t[k]) : R - (R - L) * smp.age[k];
         tr.ys[k] = this.yOf(pct[k]);
       }
       tr.morph.apply(cnt, smp.age, tr.ys, smp.valid, tr.vis, dt);
@@ -436,8 +484,13 @@ export class MultiCurrencyChart {
       const solo = f.solo === i ? 1 : 0;
       this.emphasis[i] += (Math.max(f.focus[i], solo) - this.emphasis[i]) * Math.min(1, dt / 0.5);
       const e = this.emphasis[i];
+      // Spotlight (Year Journey): the guide's currencies stay lit, the others dim to 28%.
+      const spotTarget = f.spot ? (f.spot[i] > 0 ? 1 : 0.28) : 1;
+      this.spotShown[i] += (spotTarget - this.spotShown[i]) * Math.min(1, dt / 0.6);
       // Others step back while one is soloed (never below 25%), or a little during an event.
-      const others = f.solo >= 0 && f.solo !== i ? 1 - 0.75 * this.soloShown : 1 - 0.45 * maxFocus * (1 - f.focus[i]);
+      const others =
+        (f.solo >= 0 && f.solo !== i ? 1 - 0.75 * this.soloShown : 1 - 0.45 * maxFocus * (1 - f.focus[i])) *
+        (f.solo === i ? 1 : this.spotShown[i]);
       this.keep[i] = others;
       const thick = (1 + 0.7 * e) * (f.solo === i ? 1.25 : 1);
       for (let k = 0; k < cnt; k++) {
@@ -529,11 +582,19 @@ export class MultiCurrencyChart {
     }
     for (let k = used; k < MAX_GRID; k++) this.gridLabels[k].mat.opacity = 0;
     // Time marks pinned to fixed weeks along the bottom: they flow even when rates are flat.
+    // (Year mode: a mark at each month's start, fixed.)
     const W = CHART.windowWeeks;
     const step = CHART.tickWeeks;
-    for (let t = Math.ceil((now - W) / step) * step; t <= now; t += step) {
-      const x = R - ((R - L) * (now - t)) / W;
-      this.grid.add(x, -Hh, x, -Hh + 0.012);
+    if (this.year) {
+      for (let m = 0; m <= 12; m++) {
+        const x = L + ((R - L) * m) / 12;
+        this.grid.add(x, -Hh, x, -Hh + (m % 3 === 0 ? 0.02 : 0.01));
+      }
+    } else {
+      for (let t = Math.ceil((now - W) / step) * step; t <= now; t += step) {
+        const x = R - ((R - L) * (now - t)) / W;
+        this.grid.add(x, -Hh, x, -Hh + 0.012);
+      }
     }
     this.grid.end();
     this.zero.begin();
@@ -548,11 +609,16 @@ export class MultiCurrencyChart {
     const R = CHART.plotRight;
     const Hh = CHART.plotHalfHeight;
     const W = CHART.windowWeeks;
-    const xAt = (t: number) => R - ((R - L) * (now - t)) / W;
+    const yr = this.year;
+    const xAt = (t: number) => (yr ? this.xOfT(t) : R - ((R - L) * (now - t)) / W);
     this.timeGrid.begin();
     let used = 0;
     const y1 = this.yearAt(now);
-    for (let y = y1; y > y1 - 3 && used < MAX_YEARS; y--) {
+    this.monthLabels.forEach((t, m) => {
+      t.mesh.position.x = L + ((R - L) * (m + 0.5)) / 12;
+      t.mat.opacity = yr ? 0.85 : 0;
+    });
+    for (let y = y1; !yr && y > y1 - 3 && used < MAX_YEARS; y--) {
       const t = this.yearIndex(y);
       const age = (now - t) / W;
       if (age < 0 || age > 1) continue;
@@ -576,13 +642,13 @@ export class MultiCurrencyChart {
     let ev = 0;
     for (let j = this.events.length - 1; j >= 0 && ev < MAX_EVENT_MARKS; j--) {
       const e = this.events[j];
-      const age = (now - e.t) / W;
-      if (age < 0 || age > 1) continue; // future events are never shown early
+      const age = yr ? (e.t < yr.axis0 || e.t >= yr.axis1 ? -1 : (now - e.t) / W) : (now - e.t) / W;
+      if (age < 0 || (!yr && age > 1)) continue; // future events are never shown early
       const x = xAt(e.t);
       this.eventLines.add(x, -Hh, x, Hh - 0.03, 0.0015);
       const label = this.eventLabels[ev++];
       label.mesh.position.x = Math.min(R - 0.1, Math.max(L + 0.1, x));
-      label.mat.opacity = 0.9 * Math.min(1, (1 - age) * 5);
+      label.mat.opacity = yr ? 0.9 : 0.9 * Math.min(1, (1 - age) * 5);
       label.draw(e.label, (ctx, w, h) => {
         ctx.font = `bold ${Math.round(h * 0.72)}px system-ui, sans-serif`;
         ctx.textAlign = 'center';
@@ -606,20 +672,21 @@ export class MultiCurrencyChart {
       for (let j = cloud.items.length - 1; j >= 0; j--) {
         const sp = cloud.items[j];
         const head = this.heads[sp.slot];
-        const age = (head - sp.t) / W;
+        const span = this.year ? Math.max(1e-6, head - this.year.start) : W;
+        const age = (head - sp.t) / span;
         const life = this.now - sp.born;
-        if (age > 1 || (!isMarker && life > 6) || sp.t < this.series[sp.slot].first) {
+        if ((this.year ? sp.t < this.year.start - 1e-6 : age > 1) || (!isMarker && life > 6) || sp.t < this.series[sp.slot].first) {
           cloud.items.splice(j, 1);
           continue;
         }
         if (age < 0) continue; // a date the playhead has not reached yet
         if (sp.shown < 0) sp.shown = this.now;
         const fadeIn = Math.min(1, (this.now - sp.shown) / (isMarker ? 0.5 : 0.15));
-        const along = Math.pow(1 - age, isMarker ? 0.7 : 1.2);
+        const along = this.year ? 1 : Math.pow(1 - age, isMarker ? 0.7 : 1.2);
         const a = isMarker ? 0.85 * fadeIn * along : sp.vel * 0.8 * fadeIn * along * Math.exp(-life / 1.8);
         const tr = this.tracks[sp.slot];
         const y = interpByAge(tr.count, this.samples[sp.slot].age, tr.ys, age);
-        this.v.set(R - (R - L) * age, y, 0);
+        this.v.set(this.year ? this.xOfT(sp.t) : R - (R - L) * age, y, 0);
         cloud.put(this.v, isMarker ? EVENT_COLOR : this.sparkColors[sp.slot], a * this.keep[sp.slot]);
       }
       cloud.end();
@@ -676,7 +743,7 @@ export class MultiCurrencyChart {
     this.ribbons.forEach((r) => r.dispose());
     this.orbs.forEach((o) => o.dispose());
     this.labels.forEach((l) => l.dispose());
-    [...this.gridLabels, ...this.yearLabels, ...this.eventLabels, this.header, this.dateLabel, this.footnote].forEach((t) => t.dispose());
+    [...this.gridLabels, ...this.yearLabels, ...this.monthLabels, ...this.eventLabels, this.header, this.dateLabel, this.footnote].forEach((t) => t.dispose());
     [this.grid, this.zero, this.timeGrid, this.eventLines, this.leaders].forEach((s) => s.dispose());
     this.notes.dispose();
     this.markers.dispose();

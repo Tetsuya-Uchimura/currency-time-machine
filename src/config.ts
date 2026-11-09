@@ -130,3 +130,41 @@ export const MAP = {
  * nine stay easy to tell apart.
  */
 export const VOICES = { radius: 1.2, arcDeg: 80, y: -0.03, rise: 0.4 };
+
+/**
+ * Contest-safe build (Meta VR Start Developer Competition, official rules,
+ * section 17, on identifiable people): `VITE_SHOW_PEOPLE=false npm run build`
+ * (or `npm run build:contest`) hides every real person's name and portrait,
+ * in the guide's words and on every panel. The full build shows them.
+ */
+export const SHOW_PEOPLE = readFlag('VITE_SHOW_PEOPLE', true);
+
+function readFlag(name: string, fallback: boolean): boolean {
+  try {
+    const env = (import.meta as unknown as { env?: Record<string, string | undefined> }).env;
+    const v = env?.[name];
+    return v === undefined || v === '' ? fallback : v !== 'false' && v !== '0';
+  } catch {
+    return fallback;
+  }
+}
+
+/** Year Journey pacing and the guide robot's places (rig-local meters). */
+export const YEAR_JOURNEY = {
+  /** Weeks of the year played per second between the guide's stops (a year in ~33 s of flow). */
+  weeksPerSecond: 1.6,
+  warpSeconds: 2.8,
+  calmWarpSeconds: 3.2,
+};
+
+export const ROBOT_SPOTS = {
+  /** Intro and year selection: front left, a little below the eyes (never in front of the face). */
+  front: [-0.55, -0.06, -0.72] as const,
+  /** During a year: beside the panels on the left. */
+  side: [-0.66, 0.06, -0.86] as const,
+  /** In the time tunnel: a fixed companion in view. */
+  warp: [-0.3, -0.16, -0.68] as const,
+};
+
+/** The guide's subtitle strip: along the bottom of the top band (band-local y). */
+export const CAPTION_STRIP = { y: -0.2, width: 1.66, height: 0.08 };

@@ -8,9 +8,10 @@
 import { World } from '@iwsdk/core';
 import projectOptions from 'virtual:iwsdk-project';
 import { SLOTS } from './config.js';
+import { loadAnnualData } from './data/annual-history.js';
 import { loadHistoryContent } from './data/history-content.js';
 import { loadTimeline } from './data/timeline.js';
-import { ExperienceSystem } from './experience.js';
+import { ExperienceSystem, type JourneyMode } from './experience.js';
 import { loadWorldMap } from './visual/world-currency-map.js';
 
 const overlay = document.getElementById('start-overlay');
@@ -22,24 +23,34 @@ async function main(): Promise<void> {
   const world = await World.create(document.getElementById('scene-container') as HTMLDivElement, projectOptions);
   world.registerSystem(ExperienceSystem, { priority: 10 });
   const experience = world.getSystem(ExperienceSystem)!;
-  const [timeline, content, worldMap] = await Promise.all([
+  const [timeline, content, worldMap, annual] = await Promise.all([
     loadTimeline(SLOTS.map((s) => s.slot)),
     loadHistoryContent(import.meta.env.BASE_URL),
     loadWorldMap(import.meta.env.BASE_URL),
+    loadAnnualData(import.meta.env.BASE_URL),
   ]);
-  await experience.setup(timeline, content, worldMap);
+  await experience.setup(timeline, content, worldMap, annual, import.meta.env.BASE_URL);
+  // Start-screen options, read inside the click (a user gesture: audio and speech may start).
+  const options = () => ({
+    mode: ((document.querySelector('input[name="mode"]:checked') as HTMLInputElement | null)?.value ?? 'year') as JourneyMode,
+    voice: (document.getElementById('opt-voice') as HTMLInputElement | null)?.checked ?? false,
+    calm: (document.getElementById('opt-calm') as HTMLInputElement | null)?.checked ?? false,
+  });
 
   const hideOverlay = () => overlay?.classList.add('hidden');
   if (status) status.textContent = '';
   if (enterVr) {
     enterVr.disabled = !world.xrEnabled;
     enterVr.addEventListener('click', () => {
+      experience.configure(options());
       experience.unlockAudio(); // inside the click: allowed to start audio
       world.launchXR();
     });
   }
   watch?.addEventListener('click', () => {
     hideOverlay();
+    experience.configure(options());
+    experience.unlockAudio();
     experience.start();
   });
   // Entering XR by any route (button or the browser's own offer) hides the overlay.

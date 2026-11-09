@@ -2,36 +2,69 @@
   Hand panel: rests low and close (~40 cm ahead, tilted toward the user) so
   any single hand can pinch (ray) or poke (touch) every control while seated.
   Entity is scaled by 0.1 in code: width 360 -> 36 cm.
+
+  Rows are shown or hidden by the experience:
+    row-main   Pause / Voice / Skip                    (always)
+    row-dial   -10  -1  [1985]  +1  +10                (Year Journey)
+    row-year   Start Travel / Years / All currencies   (Year Journey)
+    row-chapters 1948 1971 1990 2008 2020 / Years      (Full Journey)
+    row-mode   Full Journey / Calm motion
 -->
 <style>
   .panel-root {
     flex-direction: column;
     width: 360;
-    padding-top: 14;
-    padding-bottom: 12;
-    padding-left: 14;
-    padding-right: 14;
-    gap: 10;
+    padding-top: 12;
+    padding-bottom: 10;
+    padding-left: 12;
+    padding-right: 12;
+    gap: 8;
   }
 
   .row {
     flex-direction: row;
-    gap: 8;
+    gap: 6;
     justify-content: space-between;
+    align-items: center;
   }
 
   .main-button {
-    width: 196;
-  }
-
-  .side-button {
     width: 128;
   }
 
-  .chapter {
-    width: 58;
+  .side-button {
+    width: 98;
     min-width: 0;
-    max-width: 58;
+    flex-shrink: 1;
+  }
+
+  .dial {
+    width: 52;
+    min-width: 0;
+    max-width: 52;
+    flex-shrink: 1;
+    padding-left: 0;
+    padding-right: 0;
+    justify-content: center;
+  }
+
+  .year-label {
+    width: 104;
+    font-size: 30;
+    font-weight: bold;
+    color: #1a1d24;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .year-label:dark {
+    color: #ffe1a0;
+  }
+
+  .chapter {
+    width: 50;
+    min-width: 0;
+    max-width: 50;
     flex-shrink: 1;
     padding-left: 0;
     padding-right: 0;
@@ -39,12 +72,12 @@
   }
 
   .chapter-label {
-    font-size: 15;
+    font-size: 14;
   }
 
   .note {
     color: #3a3b40;
-    font-size: 11;
+    font-size: 10;
   }
 
   .note:dark {
@@ -52,7 +85,7 @@
   }
 </style>
 <Panel class="panel-root">
-  <div class="row">
+  <div class="row" id="row-main">
     <Button id="btn-pause" class="main-button">
       <ButtonIcon>
         <Pause id="icon-pause"></Pause>
@@ -66,13 +99,43 @@
       </ButtonIcon>
       <ButtonLabel id="label-voice">Voice</ButtonLabel>
     </Button>
+    <Button id="btn-skip" class="side-button" variant="secondary">
+      <ButtonLabel id="label-skip">Skip</ButtonLabel>
+    </Button>
   </div>
-  <div class="row">
+  <div class="row" id="row-dial">
+    <Button id="btn-minus10" class="dial" variant="secondary"><ButtonLabel class="chapter-label">-10</ButtonLabel></Button>
+    <Button id="btn-minus1" class="dial" variant="secondary"><ButtonLabel class="chapter-label">-1</ButtonLabel></Button>
+    <div class="year-label" id="label-year">1985</div>
+    <Button id="btn-plus1" class="dial" variant="secondary"><ButtonLabel class="chapter-label">+1</ButtonLabel></Button>
+    <Button id="btn-plus10" class="dial" variant="secondary"><ButtonLabel class="chapter-label">+10</ButtonLabel></Button>
+  </div>
+  <div class="row" id="row-year">
+    <Button id="btn-travel" class="main-button">
+      <ButtonLabel id="label-travel">Start Travel</ButtonLabel>
+    </Button>
+    <Button id="btn-years" class="side-button" variant="secondary">
+      <ButtonLabel>Years</ButtonLabel>
+    </Button>
+    <Button id="btn-all" class="side-button" variant="secondary">
+      <ButtonLabel id="label-all">All</ButtonLabel>
+    </Button>
+  </div>
+  <div class="row" id="row-chapters" style="display: none">
     <Button id="ch-0" class="chapter" variant="secondary"><ButtonLabel class="chapter-label">1948</ButtonLabel></Button>
     <Button id="ch-1" class="chapter" variant="secondary"><ButtonLabel class="chapter-label">1971</ButtonLabel></Button>
     <Button id="ch-2" class="chapter" variant="secondary"><ButtonLabel class="chapter-label">1990</ButtonLabel></Button>
     <Button id="ch-3" class="chapter" variant="secondary"><ButtonLabel class="chapter-label">2008</ButtonLabel></Button>
     <Button id="ch-4" class="chapter" variant="secondary"><ButtonLabel class="chapter-label">2020</ButtonLabel></Button>
+    <Button id="btn-years2" class="chapter" variant="secondary"><ButtonLabel class="chapter-label">Years</ButtonLabel></Button>
+  </div>
+  <div class="row" id="row-mode">
+    <Button id="btn-full" class="main-button" variant="secondary">
+      <ButtonLabel id="label-full">Full Journey</ButtonLabel>
+    </Button>
+    <Button id="btn-calm" class="main-button" variant="secondary">
+      <ButtonLabel id="label-calm">Calm: off</ButtonLabel>
+    </Button>
   </div>
   <div class="note" id="attribution">Exchange rate data: Frankfurter (frankfurter.dev)</div>
 </Panel>

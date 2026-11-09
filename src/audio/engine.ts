@@ -409,6 +409,87 @@ export class SoundEngine {
     }
   }
 
+  /**
+   * Narration ducking: while the guide speaks, the music bus steps back so the
+   * voice stays clear (and comes back smoothly afterwards).
+   */
+  duck(on: boolean): void {
+    if (!this.built) return;
+    this.bus.gain.setTargetAtTime(on ? 0.32 : 0.9, this.ctx.currentTime, on ? 0.12 : 0.6);
+  }
+
+  /** A short, soft two-note blip: the guide robot's "beep" and button feedback. */
+  blip(up = true): void {
+    if (!this.running) return;
+    const ctx = this.ctx;
+    const t = ctx.currentTime + 0.01;
+    (up ? [9, 13] : [13, 9]).forEach((degree, k) => {
+      const osc = ctx.createOscillator();
+      osc.type = 'triangle';
+      osc.frequency.value = degreeToHz(degree);
+      const g = ctx.createGain();
+      const s = t + k * 0.07;
+      g.gain.setValueAtTime(0, s);
+      g.gain.linearRampToValueAtTime(0.03, s + 0.012);
+      g.gain.exponentialRampToValueAtTime(0.0001, s + 0.22);
+      osc.connect(g);
+      g.connect(this.bus);
+      osc.start(s);
+      osc.stop(s + 0.25);
+    });
+  }
+
+  /**
+   * The time machine: a filtered-noise rush that swells and settles, under a
+   * slow falling glide (time running backward), then a soft arrival shimmer.
+   * Gentle levels; `calm` makes it quieter and smoother.
+   */
+  warp(seconds: number, calm = false): void {
+    if (!this.running) return;
+    const ctx = this.ctx;
+    const t = ctx.currentTime + 0.02;
+    const end = t + seconds;
+    const len = Math.floor(ctx.sampleRate * (seconds + 0.5));
+    const buf = ctx.createBuffer(1, len, ctx.sampleRate);
+    const data = buf.getChannelData(0);
+    for (let i = 0; i < len; i++) data[i] = Math.random() * 2 - 1;
+    const noise = ctx.createBufferSource();
+    noise.buffer = buf;
+    const band = ctx.createBiquadFilter();
+    band.type = 'bandpass';
+    band.Q.value = 1.4;
+    band.frequency.setValueAtTime(240, t);
+    band.frequency.exponentialRampToValueAtTime(calm ? 900 : 2200, t + seconds * 0.55);
+    band.frequency.exponentialRampToValueAtTime(320, end);
+    const g = ctx.createGain();
+    const peak = calm ? 0.05 : 0.09;
+    g.gain.setValueAtTime(0, t);
+    g.gain.linearRampToValueAtTime(peak, t + seconds * 0.35);
+    g.gain.linearRampToValueAtTime(peak * 0.8, t + seconds * 0.75);
+    g.gain.linearRampToValueAtTime(0, end + 0.3);
+    noise.connect(band);
+    band.connect(g);
+    g.connect(this.bus);
+    g.connect(this.reverbSend);
+    noise.start(t);
+    noise.stop(end + 0.4);
+    for (const [from, to, level] of [[14, 2, 0.02], [9, -3, 0.016]] as const) {
+      const osc = ctx.createOscillator();
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(degreeToHz(from), t);
+      osc.frequency.exponentialRampToValueAtTime(degreeToHz(to), end);
+      const og = ctx.createGain();
+      og.gain.setValueAtTime(0, t);
+      og.gain.linearRampToValueAtTime(level, t + 0.4);
+      og.gain.linearRampToValueAtTime(0, end + 0.2);
+      osc.connect(og);
+      og.connect(this.bus);
+      og.connect(this.reverbSend);
+      osc.start(t);
+      osc.stop(end + 0.3);
+    }
+  }
+
   /** Quick dip used when jumping between chapters. */
   dip(): void {
     if (!this.running || this.paused) return;

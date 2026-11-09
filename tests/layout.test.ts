@@ -36,7 +36,7 @@ test('each band faces the head; the map is tilted back like a table', () => {
 });
 
 test('the hand panel stays below the map, so it never hides it', () => {
-  const panelTop = deg(Math.atan2(HAND_PANEL.y + 0.06, HAND_PANEL.z));
+  const panelTop = deg(Math.atan2(HAND_PANEL.y + 0.1, HAND_PANEL.z - 0.08)); // (the taller Year Journey panel)
   assert.ok(panelTop < bandSpanDeg(BANDS.map).bottom, `${panelTop.toFixed(1)} deg`);
 });
 

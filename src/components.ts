@@ -11,4 +11,9 @@ export const Orb = createComponent('Orb', {
 /** Marks the Historical Events band's portal (pinch it for people, policies and sources). */
 export const PortalTarget = createComponent('PortalTarget', {});
 
-export default defineComponents([Orb, PortalTarget]);
+/** A Year Journey button (year selector, summary); `action` is a UiAction (src/visual/ui-button.ts). */
+export const UiTarget = createComponent('UiTarget', {
+  action: { type: Types.Int16, default: 0 },
+});
+
+export default defineComponents([Orb, PortalTarget, UiTarget]);

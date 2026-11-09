@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <meta name="description" content="The history of the world's money, from 1948 to today, as light, sound and history: where it moved, how much, and why. A hands-only WebXR experience." />
+    <meta name="description" content="Travel through time with a guide robot: pick a year from 1948 to today, meet the people, explore the events, and discover how currencies changed. A hands-only WebXR experience." />
     <link rel="icon" href="data:," />
     <title>Currency Time Machine</title>
     <style>
@@ -28,6 +28,11 @@
       button:disabled { opacity: 0.45; cursor: default; }
       button:focus-visible { outline: 3px solid #ffffff; outline-offset: 3px; }
       .small { font-size: 14px; color: #aab3c5; margin-top: 22px; }
+      fieldset { border: 0; margin: 0 0 18px; padding: 0; display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+      fieldset label { display: flex; gap: 8px; align-items: center; padding: 10px 14px; border-radius: 12px; border: 1px solid #3a4a6a; cursor: pointer; text-align: left; font-size: 16px; color: #e4e9f3; }
+      fieldset label:has(input:checked) { border-color: #ffd84a; background: rgba(255, 216, 74, 0.08); }
+      fieldset small { display: block; color: #aab3c5; font-size: 13px; }
+      .opts { display: flex; gap: 18px; justify-content: center; flex-wrap: wrap; margin: -6px 0 18px; font-size: 15px; color: #d8deea; }
     </style>
   </head>
   <body>
@@ -35,7 +40,15 @@
     <div id="start-overlay" role="dialog" aria-labelledby="title">
       <div class="card">
         <h1 id="title">Currency Time Machine</h1>
-        <p>Sit back. From 1948 to today, the world's money plays in front of you as light, sound and history. Headphones recommended.</p>
+        <p>Travel through time. Meet the people, explore the events, and discover how currencies changed. Headphones recommended.</p>
+        <fieldset aria-label="Journey">
+          <label><input type="radio" name="mode" value="year" checked /> <span>Year Journey<small>Pick a year; a guide robot shows you around (about 2 minutes)</small></span></label>
+          <label><input type="radio" name="mode" value="full" /> <span>Full Journey<small>Every year from 1948 to today (about 4 minutes)</small></span></label>
+        </fieldset>
+        <div class="opts">
+          <label><input type="checkbox" id="opt-voice" checked /> Guide voice (subtitles always on)</label>
+          <label><input type="checkbox" id="opt-calm" /> Calm motion</label>
+        </div>
         <div class="buttons">
           <button id="enter-vr" disabled>Enter VR</button>
           <button id="watch-browser" disabled>Watch in browser</button>

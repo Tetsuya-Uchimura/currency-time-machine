@@ -65,6 +65,13 @@ export class PlaybackClock {
   ended = false;
   /** Extra speed factor (1 = normal); eased down while a history card is open. */
   rate = 1;
+  /**
+   * The clock never passes this week (Year Journey: the guide's next beat).
+   * It slows smoothly into it, then waits until it is moved on.
+   */
+  stopAt = Infinity;
+  /** Year Journey: play only [start, end] at a constant pace (weeks per second). */
+  private window: { start: number; end: number; speed: number } | null = null;
 
   private readonly lastIndex: number;
   private readonly pacing: PacingConfig;
@@ -77,6 +84,11 @@ export class PlaybackClock {
   }
 
   speedAt(p: number): number {
+    if (this.window) {
+      // Constant pace, easing into the next stop (never below 12%, so it arrives).
+      const gap = Math.min(this.stopAt, this.window.end) - p;
+      return this.window.speed * Math.min(1, Math.max(0.12, gap / 1.2));
+    }
     const c = this.pacing;
     const blend = smoothstep(c.floatStart - c.blendWeeks, c.floatStart + c.blendWeeks, p);
     let speed = c.fixedSpeed + (c.floatSpeed - c.fixedSpeed) * blend;
@@ -96,15 +108,42 @@ export class PlaybackClock {
     const t = dt * this.rate;
     const mid = this.position + 0.5 * t * this.speedAt(this.position);
     this.position += t * this.speedAt(mid);
-    if (this.position >= this.lastIndex) {
-      this.position = this.lastIndex;
+    const end = this.endIndex;
+    if (this.position >= this.stopAt && this.stopAt < end) this.position = Math.max(prev, this.stopAt);
+    if (this.position >= end) {
+      this.position = end;
       this.ended = true;
     }
     return prev;
   }
 
+  /** The last week this clock may reach (a Year Journey's window, or the data's end). */
+  get endIndex(): number {
+    return this.window ? Math.min(this.window.end, this.lastIndex) : this.lastIndex;
+  }
+
+  get windowed(): boolean {
+    return this.window !== null;
+  }
+
   seek(p: number): void {
-    this.position = Math.max(0, Math.min(this.lastIndex, p));
+    const lo = this.window ? this.window.start : 0;
+    this.position = Math.max(lo, Math.min(this.endIndex, p));
+    this.ended = this.position >= this.endIndex;
+  }
+
+  /** Year Journey: play only [start, end] (week indices) at `speed` weeks per second. */
+  setWindow(start: number, end: number, speed: number): void {
+    this.window = { start, end, speed };
+    this.stopAt = Infinity;
+    this.rate = 1;
+    this.seek(start);
+  }
+
+  /** Back to the full 1948-today journey. */
+  clearWindow(): void {
+    this.window = null;
+    this.stopAt = Infinity;
     this.ended = this.position >= this.lastIndex;
   }
 
