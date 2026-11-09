@@ -5,8 +5,11 @@
 A hands-only, seated WebXR experience for Meta Quest, built with the Immersive Web SDK (IWSDK).
 Nine currencies float around you as glowing orbs, each trailing a ribbon of light drawn from its own past
 year. Time fast-forwards from the quiet fixed-rate
-world of 1948, through the Nixon Shock, the Plaza Accord, the birth of the euro and the 2008 crisis,
-until the present catches up with you and today's real exchange rates appear.
+world of 1948, through the 1971 break between the dollar and gold, the coordinated push on the dollar in 1985,
+the Asian currency crisis, the birth of the euro and the 2008 crisis, until the present catches up with you
+and today's real exchange rates appear. At four of these moments a **window onto the era** opens behind the
+orbs: a city of that time (Washington, D.C., Tokyo, Seoul, New York) rises as a soft hologram while the
+currencies' light trails flow in front of it.
 
 It is not a chart to read. It is a way to *feel* how the balance of power between currencies has shifted.
 
@@ -26,6 +29,7 @@ Exchange rate data: Frankfurter (frankfurter.dev)
 | **Pinch** (or **poke**) **Pause** on the small panel at your lap | Time and sound fade out smoothly; pinch again to resume. |
 | Pinch or poke **1948 / 1971 / 1990 / 2008 / 2020** | Jump to that era. |
 | **Pinch a glowing orb** (from afar, or touch it) | Solo: that currency comes forward in the mix, the others step back, and its **light lane** opens: its past 12 months, larger and auto-zoomed, with its change over the year and since its data began. Pinch again to release. |
+| Pinch a **window onto the era** (when one is open) | Two or three sentences of context about that moment; pinch again to close. Optional: the windows play by themselves. |
 | Pinch **Voice** | Captions are also read aloud. |
 | At the end, pinch **Replay** | Start again from 1948. |
 
@@ -51,7 +55,8 @@ on an arc around you, arranged west to east like a map: CAD, GBP, DEM/EUR, CHF, 
 - **The era of silence (1948-1971):** rates were fixed, so the orbs sit still and only soft sustained
   tones sound. Orbs light up one by one as each currency's data begins.
 - **Floating rates (1971-today):** the orbs start to move and play; the busier the market, the more they play.
-- **Major moments** slow time down, ring a low gong and warm the sky. **Minor moments** only show a caption.
+- **Major moments** slow time down and tint the sky as their caption appears; a low gong rings on the
+  event's actual date. **Minor moments** only show a caption.
 - **Today:** the clock catches up with the present. Each currency plays once, left to right, followed by a
   rising or falling grace note that says whether it gained or lost against the dollar since the previous
   business day. Because the ending uses live rates, it is different every day you open it. Each trail ends
@@ -82,6 +87,37 @@ and as time moves on the shape flows away to the left while new moves are born a
 - **Light for Quest.** One small dynamic ribbon per trail (about 54 points) with an additive glow shader,
   plus point sprites; no post-processing, nothing allocated per frame for geometry.
 
+### Historical Portals (windows onto the era)
+
+Four major moments open a window onto a city of their time, far behind everything else (1.9 m ahead,
+behind the orbs at 0.6 m, the solo lane at 0.95 m and the captions at 1.1 m, and below the caption board),
+so the light trails float in front of the era's streets without anything being hidden.
+
+| Moment | City and era | Trails highlighted |
+| --- | --- | --- |
+| Aug 1971, the dollar-gold break | Washington, D.C., early 1970s | JPY, DEM, CHF |
+| Sep 1985, a coordinated push on the dollar | Tokyo, mid-1980s | JPY, DEM |
+| Dec 1997, the Asian currency crisis | Seoul, late 1990s | KRW |
+| Oct 2008, the global financial crisis | New York, around 2008 | JPY, KRW, AUD, GBP |
+
+- **Two clocks kept apart.** The window opens with the caption, a little before the event (the
+  "approaching" state). Its highlight (a slight brightening, spreading motes, the gong, the trails lighting
+  up again) happens when the playhead reaches the **actual date**. The rates themselves are never altered:
+  the moves you then see are the real weekly data playing on.
+- **Cinematic, never flashy.** A thin outline draws itself from the top, the city fades in, then the title.
+  Leaving, color and brightness drain first, then the outline. Each window is on screen for about 6 to 10
+  seconds and is always gone before the next caption, so scenes of different eras never mix.
+- **Depth.** The scene is three separate layers (sky, city, foreground) at slightly different depths, with
+  motes drifting in front: a gentle, honest parallax when you move your head. Nothing moves the camera.
+- **Pause, jumps, Replay.** Pausing freezes the window and its timers. A jump or Replay clears the open
+  window at once (with a short fade) and shows the right one if you land just before a moment.
+- **The solo lane has priority.** While a currency's lane is open, the window dims and its title steps aside.
+- **Images and rights.** No photograph is used yet. Every window is a **code-generated city impression**
+  (generic silhouettes: no people, no text, no logos) and says so on screen: "Artistic impression, not a
+  photograph". A photograph can be added later only after its rights, people and logos have been checked
+  item by item, as a local optimized file; anything not marked verified is ignored at runtime. See
+  [docs/portal-assets.md](docs/portal-assets.md).
+
 ### The historical moments
 
 Every event was checked against the bundled data before it was included. The captions are our own short
@@ -92,10 +128,10 @@ factual sentences.
 | minor | Jun 1948 | Deutsche Mark launched | DEM is the first series in the data |
 | minor | Nov 1967 | Pound devalued | GBP from $2.80 to $2.40 |
 | minor | Dec 1969 | The yen joins (held at 360 yen to the dollar since 1949) | JPY data begins at about 358 |
-| **major** | Aug 1971 | Nixon Shock | JPY 357 to 320 by December |
+| **major** | Aug 1971 | The dollar-gold break | JPY 357 to 320 by December |
 | **major** | Feb 1973 | Floating rates | 3rd most turbulent week in the whole history (JPY -12%) |
 | minor | Jan 1981 | Yuan and won appear | CNY and KRW data begin |
-| **major** | Sep 1985 | Plaza Accord | JPY 240 to 128 within two years |
+| **major** | Sep 1985 | Coordinated push on the dollar | JPY 242 to 127 within two years |
 | minor | Sep 1992 | Pound leaves the ERM | GBP -14% in two weeks |
 | **major** | Dec 1997 | Asian Financial Crisis | KRW 889 to 1,695 (the won lost almost half its value) |
 | **major** | Jan 1999 | Euro launched | the DEM orb hands over to EUR |
@@ -148,6 +184,8 @@ Designed in from the start, not added at the end:
   are capped below 3 per second, and the sky changes over seconds. Trail highlights rise over about half a
   second and lanes cross-fade. Nothing flashes 3 or more times per second.
 - **No moving world.** The trails scroll inside their small ribbons only; the camera and the scene never move.
+- **Honest images.** City windows are labelled as artistic impressions, fade in and out over seconds, and
+  never cover an orb, a trail, a caption or the hand panel (they sit behind all of them).
 - **Comfortable sound.** Pentatonic scale (no clashes), a gentle compressor, smooth fades on pause and jumps,
   and no sudden volume jumps.
 - **Quick to start, easy to stop.** It starts on entering VR and pauses automatically when the system menu
@@ -177,8 +215,11 @@ src/audio/                 sound engine, pentatonic scale, timbres
 src/visual/                orbs, guides, sky and motes, light trails (trails.ts) and their pure math
                            (trail-sampling.ts, unit tested)
 src/audio/note-queue.ts    releases note events when they are heard (sound/light sync)
+src/data/portals.ts        Historical Portal scenes: city, era, texts, image/rights metadata
+src/playback/portal-director.ts  when a window opens, highlights and closes (pure, unit tested)
+src/visual/historical-portals.ts the window itself; city-painter.ts paints the city impressions
 public/ui/*.uikitml        caption board and hand panel
-tests/                     pytest for the data pipeline, node:test for the function and the trails
+tests/                     pytest for the data pipeline, node:test for the function, trails and portals
 ```
 
 ## Development
@@ -197,8 +238,9 @@ npm run build      # production build into dist/
 In the emulator, enter XR, then switch the input to hands to try pinch and poke.
 
 Dev builds only (not in production): keys `1`-`5` jump to the chapters, `g h j k l b n m ,` solo CAD to AUD,
-`p` pauses, `0` / `6` / `7` jump before the Plaza Accord / the Asian crisis / the 2022 yen slide, `8` goes to
-the last weeks and `9` replays. Handy for checking scenes and recording clips.
+`p` pauses, `0` / `6` / `7` jump before the 1985 moment / the Asian crisis / the 2022 yen slide, `8` goes to
+the last weeks, `9` replays, and `c` lifts the frame-time cap (useful when a backgrounded emulator window is
+throttled to 1 fps). Handy for checking scenes and recording clips.
 
 ### Deploy (Cloudflare Pages)
 
