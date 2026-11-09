@@ -1,0 +1,551 @@
+{
+ "generatedBy": "scripts/build_media.py",
+ "events": [
+  {
+   "id": "gold-break",
+   "date": "1971-08-15",
+   "title": "The dollar-gold break",
+   "where": {
+    "city": "Washington, D.C.",
+    "country": "United States"
+   },
+   "summary": "On 15 August 1971 the United States stopped converting dollars into gold for foreign governments. Within days most major currencies began to move against the dollar; Japan let the yen float from 28 August.",
+   "policies": [
+    "Suspension of the dollar's convertibility into gold",
+    "A temporary 10% surcharge on imports",
+    "A 90-day freeze on wages and prices"
+   ],
+   "currencies": [
+    "JPY",
+    "EUR",
+    "CHF"
+   ],
+   "people": [
+    {
+     "key": "nixon",
+     "name": "Richard Nixon",
+     "role": "President of the United States",
+     "involvement": "Announced the measures in a televised address on 15 August 1971.",
+     "verified": {
+      "source": "Wikidata",
+      "qid": "Q9588",
+      "position": "President of the United States",
+      "start": "1969-01-20",
+      "end": "1974-08-09"
+     },
+     "portrait": {
+      "src": "media/people/nixon.webp",
+      "license": "Public domain",
+      "licenseUrl": "",
+      "artist": "Department of Defense. Department of the Army. Office of the Deputy Chief of Staff for Operations. U.S. Army Audiovisual Center. (ca. 1974 - 05/15/1984)",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Richard_Nixon_presidential_portrait.jpg",
+      "date": "1 June 1972, per [1] [2] [3]"
+     }
+    },
+    {
+     "key": "connally",
+     "name": "John Connally",
+     "role": "US Secretary of the Treasury",
+     "involvement": "Led the US side in the currency talks that followed, which ended in the Smithsonian Agreement of December 1971.",
+     "verified": {
+      "source": "Wikidata",
+      "qid": "Q311293",
+      "position": "United States Secretary of the Treasury",
+      "start": "1971-02-11",
+      "end": "1972-06-12"
+     },
+     "portrait": {
+      "src": "media/people/connally.webp",
+      "license": "Public domain",
+      "licenseUrl": "",
+      "artist": "Unknown",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:John_Connally.jpg",
+      "date": ""
+     }
+    },
+    {
+     "key": "burns",
+     "name": "Arthur F. Burns",
+     "role": "Chair of the Federal Reserve",
+     "involvement": "Took part in the Camp David meetings of 13 to 15 August 1971 at which the measures were prepared.",
+     "verified": {
+      "source": "Wikidata",
+      "qid": "Q284230",
+      "position": "Chair of the Federal Reserve",
+      "start": "1970-02-01",
+      "end": "1978-01-31"
+     },
+     "portrait": {
+      "src": "media/people/burns.webp",
+      "license": "Public domain",
+      "licenseUrl": "",
+      "artist": "Oscar Porter, U.S. Army Photograph",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:ArthurBurns_USArmyPhoto_1955.jpg",
+      "date": "2012-11-12 07:48:03"
+     }
+    },
+    {
+     "key": "sato",
+     "name": "Eisaku Sato",
+     "role": "Prime Minister of Japan",
+     "involvement": "His government kept the yen at 360 per dollar for about two weeks, then let it float on 28 August 1971.",
+     "verified": {
+      "source": "Wikidata",
+      "qid": "Q179871",
+      "position": "Prime Minister of Japan",
+      "start": "1970-01-14",
+      "end": "1972-07-07"
+     },
+     "portrait": {
+      "src": "media/people/sato.webp",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+      "artist": "内閣官房内閣広報室",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Eisaku_Sato_19641109.jpg",
+      "date": "1964-11-09"
+     }
+    }
+   ],
+   "portal": {
+    "period": "1971",
+    "photos": [
+     {
+      "key": "dc-aerial-1971",
+      "src": "media/places/dc-aerial-1971.webp",
+      "width": 1024,
+      "height": 691,
+      "caption": "The Jefferson Memorial and the Tidal Basin from the air",
+      "taken": "1971",
+      "license": "Public domain",
+      "licenseUrl": "",
+      "artist": "Vitold Muratov",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:%D0%94%D0%B6%D0%B5%D1%84%D1%84%D0%B5%D1%80%D1%81%D0%BE%D0%BD.jpg"
+     },
+     {
+      "key": "dc-street-1971",
+      "src": "media/places/dc-street-1971.webp",
+      "width": 1024,
+      "height": 682,
+      "caption": "A downtown street",
+      "taken": "June 1971",
+      "license": "CC BY 2.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+      "artist": "lindsaybridge from Sydney, Australia",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:1971_WASHINGTON_D._C._(8180284817).jpg"
+     }
+    ]
+   }
+  },
+  {
+   "id": "dollar-adjustment",
+   "date": "1985-09-22",
+   "title": "A coordinated push on the dollar",
+   "where": {
+    "city": "Tokyo",
+    "country": "Japan",
+    "note": "The agreement was made at a meeting in New York."
+   },
+   "summary": "On 22 September 1985 the finance ministers and central bank governors of five major economies met in New York and said a further orderly rise of other currencies against the dollar was desirable. The dollar's fall that followed is widely associated with the agreement, although the dollar had already peaked in early 1985.",
+   "policies": [
+    "Joint statement of the G5: United States, Japan, West Germany, France and the United Kingdom",
+    "Coordinated intervention in currency markets"
+   ],
+   "currencies": [
+    "JPY",
+    "EUR"
+   ],
+   "people": [
+    {
+     "key": "baker",
+     "name": "James A. Baker III",
+     "role": "US Secretary of the Treasury",
+     "involvement": "Hosted the meeting of the five countries in New York.",
+     "verified": {
+      "source": "Wikidata",
+      "qid": "Q223151",
+      "position": "United States Secretary of the Treasury",
+      "start": "1985-02-04",
+      "end": "1988-08-17"
+     },
+     "portrait": {
+      "src": "media/people/baker.webp",
+      "license": "Public domain",
+      "licenseUrl": "",
+      "artist": "U.S. Department of State from United States",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:James_A._Baker_III,_U.S._Secretary_of_State_(2380044355).jpg",
+      "date": "circa 1989date QS:P,+1989-00-00T00:00:00Z/9,P1480,Q5727902"
+     }
+    },
+    {
+     "key": "takeshita",
+     "name": "Noboru Takeshita",
+     "role": "Minister of Finance of Japan",
+     "involvement": "Represented Japan at the meeting.",
+     "verified": {
+      "source": "English Wikipedia infobox (Noboru Takeshita, revision 1378199275)",
+      "qid": "Q315561",
+      "position": "Minister of Finance",
+      "start": "1982-11-27",
+      "end": "1986-07-22"
+     },
+     "portrait": {
+      "src": "media/people/takeshita.webp",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+      "artist": "内閣官房内閣広報室",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Noboru_Takeshita_19871106.jpg",
+      "date": "Unknown date"
+     }
+    },
+    {
+     "key": "volcker",
+     "name": "Paul Volcker",
+     "role": "Chair of the Federal Reserve",
+     "involvement": "Attended as head of the US central bank.",
+     "verified": {
+      "source": "Wikidata",
+      "qid": "Q349785",
+      "position": "Chair of the Federal Reserve",
+      "start": "1979-08-06",
+      "end": "1987-08-11"
+     },
+     "portrait": {
+      "src": "media/people/volcker.webp",
+      "license": "Public domain",
+      "licenseUrl": "",
+      "artist": "Unknown authorUnknown author",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Paulvolcker.jpg",
+      "date": "Unknown date"
+     }
+    },
+    {
+     "key": "sumita",
+     "name": "Satoshi Sumita",
+     "role": "Governor of the Bank of Japan",
+     "involvement": "Attended for the Bank of Japan.",
+     "verified": {
+      "source": "Wikidata",
+      "qid": "Q5385335",
+      "position": "governor of the Bank of Japan",
+      "start": "1984-12-17",
+      "end": "1989-12-16"
+     },
+     "portrait": null
+    },
+    {
+     "key": "stoltenberg",
+     "name": "Gerhard Stoltenberg",
+     "role": "Finance Minister of West Germany",
+     "involvement": "Represented West Germany at the meeting.",
+     "verified": {
+      "source": "Wikidata",
+      "qid": "Q62214",
+      "position": "Federal Minister of Finance",
+      "start": "1982-10-04",
+      "end": "1989-04-21"
+     },
+     "portrait": {
+      "src": "media/people/stoltenberg.webp",
+      "license": "CC BY 2.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+      "artist": "Bundeswehr-Fotos Wir.Dienen.Deutschland.",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Verteidigungsminister_Dr._Gerhard_Stoltenberg_(4909220253).jpg",
+      "date": "2010-08-20 00:00"
+     }
+    },
+    {
+     "key": "pohl",
+     "name": "Karl Otto Pöhl",
+     "role": "President of the Deutsche Bundesbank",
+     "involvement": "Attended for the Bundesbank.",
+     "verified": {
+      "source": "Wikidata",
+      "qid": "Q97051",
+      "position": "President of the Bundesbank",
+      "start": "1980-01-01",
+      "end": "1991-08-01"
+     },
+     "portrait": {
+      "src": "media/people/pohl.webp",
+      "license": "CC BY-SA 3.0 de",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/de/deed.en",
+      "artist": "Arne Schambeck",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Bundesarchiv_B_145_Bild-F083630-0020,_Bonn,_Karl_Otto_P%C3%B6hl_auf_Pressekonferenz.jpg",
+      "date": "9 February 1990date QS:P571,+1990-02-09T00:00:00Z/11"
+     }
+    }
+   ],
+   "portal": {
+    "period": "1984-1987",
+    "photos": [
+     {
+      "key": "tokyo-avenue-1987",
+      "src": "media/places/tokyo-avenue-1987.webp",
+      "width": 1024,
+      "height": 688,
+      "caption": "An avenue in central Tokyo",
+      "taken": "1987",
+      "license": "CC BY 2.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+      "artist": "Phillip Capper",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Tokyo_Japan_1987.jpg"
+     },
+     {
+      "key": "tokyo-minato-1984",
+      "src": "media/places/tokyo-minato-1984.webp",
+      "width": 1024,
+      "height": 693,
+      "caption": "An expressway in Minato from above",
+      "taken": "March 1984",
+      "license": "CC BY 2.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+      "artist": "David Wipf",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:1984-03-25_Minato,_Tokyo.jpg"
+     }
+    ]
+   }
+  },
+  {
+   "id": "asian-crisis",
+   "date": "1997-12-03",
+   "title": "The Asian currency crisis",
+   "where": {
+    "city": "Seoul",
+    "country": "South Korea"
+   },
+   "summary": "From July 1997 several Asian currencies fell sharply as foreign capital left the region. South Korea asked the IMF for support on 21 November 1997 and a rescue program was agreed on 3 December. Between June and late December the won fell from about 888 to about 1,743 per dollar.",
+   "policies": [
+    "IMF stand-by arrangement for Korea, approved on 4 December 1997",
+    "Higher interest rates and restructuring of the financial sector under the program",
+    "The won's daily trading band was widened in November and removed in December 1997"
+   ],
+   "currencies": [
+    "KRW"
+   ],
+   "people": [
+    {
+     "key": "kimys",
+     "name": "Kim Young-sam",
+     "role": "President of South Korea",
+     "involvement": "In office when Korea requested and agreed the IMF program.",
+     "verified": {
+      "source": "Wikidata",
+      "qid": "Q165210",
+      "position": "President of South Korea",
+      "start": "1993-02-25",
+      "end": "1998-02-24"
+     },
+     "portrait": {
+      "src": "media/people/kimys.webp",
+      "license": "KOGL Type 1",
+      "licenseUrl": "http://www.kogl.or.kr/info/licenseType1.do",
+      "artist": "대한민국 국가기록원",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Kim_Young-sam_presidential_portrait.jpg",
+      "date": "1993-02-25"
+     }
+    },
+    {
+     "key": "leeks",
+     "name": "Lee Kyung-shik",
+     "role": "Governor of the Bank of Korea",
+     "involvement": "Headed the central bank during the crisis.",
+     "verified": {
+      "source": "Wikidata",
+      "qid": "Q16090696",
+      "position": "Governor of the Bank of Korea",
+      "start": "1995-08-24",
+      "end": "1998-03-05"
+     },
+     "portrait": null
+    },
+    {
+     "key": "camdessus",
+     "name": "Michel Camdessus",
+     "role": "Managing Director of the IMF",
+     "involvement": "Headed the IMF, whose board approved the program for Korea on 4 December 1997.",
+     "verified": {
+      "source": "Wikidata",
+      "qid": "Q551363",
+      "position": "Managing Director of the International Monetary Fund",
+      "start": "1987-01-01",
+      "end": "2000-01-01"
+     },
+     "portrait": {
+      "src": "media/people/camdessus.webp",
+      "license": "CC BY-SA 2.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+      "artist": "World Economic Forum from Cologny, Switzerland",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Michel_Camdessus.jpg",
+      "date": "1989"
+     }
+    }
+   ],
+   "portal": {
+    "period": "1996-1998",
+    "photos": [
+     {
+      "key": "seoul-namsan-1998",
+      "src": "media/places/seoul-namsan-1998.webp",
+      "width": 1024,
+      "height": 666,
+      "caption": "Central Seoul seen from Namsan",
+      "taken": "October 1998",
+      "license": "CC BY 2.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+      "artist": "UNC - CFC - USFK",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:View_from_Namsan_Tower_1998.jpg"
+     },
+     {
+      "key": "seoul-gwanghwamun-1996",
+      "src": "media/places/seoul-gwanghwamun-1996.webp",
+      "width": 1024,
+      "height": 683,
+      "caption": "Gwanghwamun gate",
+      "taken": "August 1996",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+      "artist": "서울연구데이터서비스",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:%EA%B4%91%ED%99%94%EB%AC%B8%EA%B3%BC_%EA%B5%AC%EC%A4%91%EC%95%99%EC%B2%AD_(1996.08)_01.jpg"
+     }
+    ]
+   }
+  },
+  {
+   "id": "gfc",
+   "date": "2008-10-08",
+   "title": "The global financial crisis",
+   "where": {
+    "city": "New York",
+    "country": "United States"
+   },
+   "summary": "In September and October 2008 a banking crisis that began in the United States spread around the world. Investors moved into the dollar and the yen: between late June and late November the won fell from about 1,040 to about 1,470 per dollar, and the Australian dollar lost about a third of its value against the dollar.",
+   "policies": [
+    "Troubled Asset Relief Program, enacted on 3 October 2008",
+    "Coordinated interest-rate cut by six central banks on 8 October 2008",
+    "Dollar swap lines from the Federal Reserve to other central banks, including the Bank of Korea on 29 October 2008",
+    "Bank of Japan rate cut to 0.3% on 31 October 2008"
+   ],
+   "currencies": [
+    "JPY",
+    "KRW",
+    "AUD",
+    "GBP"
+   ],
+   "people": [
+    {
+     "key": "bush43",
+     "name": "George W. Bush",
+     "role": "President of the United States",
+     "involvement": "Signed the Emergency Economic Stabilization Act, which created the Troubled Asset Relief Program, on 3 October 2008.",
+     "verified": {
+      "source": "Wikidata",
+      "qid": "Q207",
+      "position": "President of the United States",
+      "start": "2001-01-20",
+      "end": "2009-01-20"
+     },
+     "portrait": {
+      "src": "media/people/bush43.webp",
+      "license": "Public domain",
+      "licenseUrl": "",
+      "artist": "Eric Draper",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:George-W-Bush.jpeg",
+      "date": "14 January 2003"
+     }
+    },
+    {
+     "key": "paulson",
+     "name": "Henry Paulson",
+     "role": "US Secretary of the Treasury",
+     "involvement": "Proposed the 700-billion-dollar rescue program to Congress in September 2008.",
+     "verified": {
+      "source": "Wikidata",
+      "qid": "Q311025",
+      "position": "United States Secretary of the Treasury",
+      "start": "2006-07-10",
+      "end": "2009-01-20"
+     },
+     "portrait": {
+      "src": "media/people/paulson.webp",
+      "license": "Public domain",
+      "licenseUrl": "",
+      "artist": "Treasury Department",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Henry_Paulson_official_Treasury_photo,_2006.jpg",
+      "date": "Circa mid-2006"
+     }
+    },
+    {
+     "key": "bernanke",
+     "name": "Ben Bernanke",
+     "role": "Chair of the Federal Reserve",
+     "involvement": "The Federal Reserve joined the coordinated rate cut of 8 October and extended dollar swap lines to other central banks.",
+     "verified": {
+      "source": "Wikidata",
+      "qid": "Q201795",
+      "position": "Chair of the Federal Reserve",
+      "start": "2006-02-01",
+      "end": "2014-02-03"
+     },
+     "portrait": {
+      "src": "media/people/bernanke.webp",
+      "license": "Public domain",
+      "licenseUrl": "",
+      "artist": "United States Federal Reserve",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Ben_Bernanke_official_portrait.jpg",
+      "date": "2008"
+     }
+    },
+    {
+     "key": "shirakawa",
+     "name": "Masaaki Shirakawa",
+     "role": "Governor of the Bank of Japan",
+     "involvement": "The Bank of Japan cut its policy rate to 0.3% on 31 October 2008.",
+     "verified": {
+      "source": "Wikidata",
+      "qid": "Q168716",
+      "position": "governor of the Bank of Japan",
+      "start": "2008-04-09",
+      "end": "2013-03-19"
+     },
+     "portrait": {
+      "src": "media/people/shirakawa.webp",
+      "license": "Public domain",
+      "licenseUrl": "",
+      "artist": "US Government",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Masaaki_Shirakawa_2012.jpg",
+      "date": "2012-10-11 16:28:32"
+     }
+    }
+   ],
+   "portal": {
+    "period": "2008",
+    "photos": [
+     {
+      "key": "nyc-lower-manhattan-2008",
+      "src": "media/places/nyc-lower-manhattan-2008.webp",
+      "width": 1024,
+      "height": 682,
+      "caption": "Lower Manhattan from across the Hudson River",
+      "taken": "January 2008",
+      "license": "CC BY-SA 2.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+      "artist": "Bill Benzon",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:New_York-.jpg"
+     },
+     {
+      "key": "nyc-wall-street-2008",
+      "src": "media/places/nyc-wall-street-2008.webp",
+      "width": 1024,
+      "height": 768,
+      "caption": "Wall Street",
+      "taken": "October 2008",
+      "license": "CC BY-SA 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+      "artist": "Faizul Latif Chowdhury",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Wall_Street_New_York_2008.jpg"
+     }
+    ]
+   }
+  }
+ ]
+}

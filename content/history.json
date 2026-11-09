@@ -1,0 +1,149 @@
+{
+  "_comment": "Source of the historical cards and portals. Edit here, then run `npm run media` (scripts/build_media.py): it verifies each person's office on the date against Wikidata, fetches portraits and city photos from Wikimedia Commons with their licenses, and writes public/data/history-content.json and docs/history-verification.md. People whose office cannot be verified are left out of the app.",
+  "people": {
+    "nixon": { "name": "Richard Nixon", "search": "Richard Nixon" },
+    "connally": { "name": "John Connally", "search": "John Connally" },
+    "burns": { "name": "Arthur F. Burns", "search": "Arthur F. Burns", "crop": { "cx": 0.5, "cy": 0.3, "size": 0.5 } },
+    "sato": { "name": "Eisaku Sato", "search": "Eisaku Satō" },
+    "baker": { "name": "James A. Baker III", "search": "James Baker", "enwiki": "James Baker" },
+    "takeshita": { "name": "Noboru Takeshita", "search": "Noboru Takeshita" },
+    "stoltenberg": { "name": "Gerhard Stoltenberg", "search": "Gerhard Stoltenberg" },
+    "volcker": { "name": "Paul Volcker", "search": "Paul Volcker" },
+    "sumita": { "name": "Satoshi Sumita", "search": "Satoshi Sumita" },
+    "pohl": { "name": "Karl Otto Pöhl", "search": "Karl Otto Pöhl" },
+    "kimys": { "name": "Kim Young-sam", "search": "Kim Young-sam" },
+    "limcy": { "name": "Lim Chang-yuel", "search": ["Lim Chang-yuel", "임창열"] },
+    "leeks": { "name": "Lee Kyung-shik", "search": ["Lee Kyung-shik", "이경식"] },
+    "camdessus": { "name": "Michel Camdessus", "search": "Michel Camdessus", "crop": { "cx": 0.46, "cy": 0.36, "size": 0.5 } },
+    "bush43": { "name": "George W. Bush", "search": "George W. Bush" },
+    "paulson": { "name": "Henry Paulson", "search": "Henry Paulson" },
+    "bernanke": { "name": "Ben Bernanke", "search": "Ben Bernanke" },
+    "shirakawa": { "name": "Masaaki Shirakawa", "search": "Masaaki Shirakawa" }
+  },
+  "photos": {
+    "dc-aerial-1971": {
+      "file": "Джефферсон.jpg",
+      "caption": "The Jefferson Memorial and the Tidal Basin from the air",
+      "taken": "1971"
+    },
+    "dc-street-1971": {
+      "file": "1971 WASHINGTON D. C. (8180284817).jpg",
+      "caption": "A downtown street",
+      "taken": "June 1971"
+    },
+    "tokyo-avenue-1987": {
+      "file": "Tokyo Japan 1987.jpg",
+      "caption": "An avenue in central Tokyo",
+      "taken": "1987"
+    },
+    "tokyo-minato-1984": {
+      "file": "1984-03-25 Minato, Tokyo.jpg",
+      "caption": "An expressway in Minato from above",
+      "taken": "March 1984"
+    },
+    "seoul-namsan-1998": {
+      "file": "View from Namsan Tower 1998.jpg",
+      "caption": "Central Seoul seen from Namsan",
+      "taken": "October 1998"
+    },
+    "seoul-gwanghwamun-1996": {
+      "file": "광화문과 구중앙청 (1996.08) 01.jpg",
+      "caption": "Gwanghwamun gate",
+      "taken": "August 1996"
+    },
+    "nyc-lower-manhattan-2008": {
+      "file": "New York-.jpg",
+      "caption": "Lower Manhattan from across the Hudson River",
+      "taken": "January 2008"
+    },
+    "nyc-wall-street-2008": {
+      "file": "Wall Street New York 2008.jpg",
+      "caption": "Wall Street",
+      "taken": "October 2008"
+    }
+  },
+  "events": [
+    {
+      "id": "gold-break",
+      "date": "1971-08-15",
+      "title": "The dollar-gold break",
+      "where": { "city": "Washington, D.C.", "country": "United States" },
+      "summary": "On 15 August 1971 the United States stopped converting dollars into gold for foreign governments. Within days most major currencies began to move against the dollar; Japan let the yen float from 28 August.",
+      "policies": [
+        "Suspension of the dollar's convertibility into gold",
+        "A temporary 10% surcharge on imports",
+        "A 90-day freeze on wages and prices"
+      ],
+      "currencies": ["JPY", "EUR", "CHF"],
+      "people": [
+        { "person": "nixon", "role": "President of the United States", "roleMatch": "^President of the United States$", "involvement": "Announced the measures in a televised address on 15 August 1971." },
+        { "person": "connally", "role": "US Secretary of the Treasury", "roleMatch": "Secretary of the Treasury", "involvement": "Led the US side in the currency talks that followed, which ended in the Smithsonian Agreement of December 1971." },
+        { "person": "burns", "role": "Chair of the Federal Reserve", "roleMatch": "Chair.*Federal Reserve", "involvement": "Took part in the Camp David meetings of 13 to 15 August 1971 at which the measures were prepared." },
+        { "person": "sato", "role": "Prime Minister of Japan", "roleMatch": "^Prime Minister of Japan$", "involvement": "His government kept the yen at 360 per dollar for about two weeks, then let it float on 28 August 1971." }
+      ],
+      "portal": { "photos": ["dc-aerial-1971", "dc-street-1971"], "period": "1971" }
+    },
+    {
+      "id": "dollar-adjustment",
+      "date": "1985-09-22",
+      "title": "A coordinated push on the dollar",
+      "where": { "city": "Tokyo", "country": "Japan", "note": "The agreement was made at a meeting in New York." },
+      "summary": "On 22 September 1985 the finance ministers and central bank governors of five major economies met in New York and said a further orderly rise of other currencies against the dollar was desirable. The dollar's fall that followed is widely associated with the agreement, although the dollar had already peaked in early 1985.",
+      "policies": [
+        "Joint statement of the G5: United States, Japan, West Germany, France and the United Kingdom",
+        "Coordinated intervention in currency markets"
+      ],
+      "currencies": ["JPY", "EUR"],
+      "people": [
+        { "person": "baker", "role": "US Secretary of the Treasury", "roleMatch": "Secretary of the Treasury", "involvement": "Hosted the meeting of the five countries in New York." },
+        { "person": "takeshita", "role": "Minister of Finance of Japan", "roleMatch": "Minister of Finance", "involvement": "Represented Japan at the meeting." },
+        { "person": "volcker", "role": "Chair of the Federal Reserve", "roleMatch": "Chair.*Federal Reserve", "involvement": "Attended as head of the US central bank." },
+        { "person": "sumita", "role": "Governor of the Bank of Japan", "roleMatch": "Governor of the Bank of Japan", "involvement": "Attended for the Bank of Japan." },
+        { "person": "stoltenberg", "role": "Finance Minister of West Germany", "roleMatch": "Minister of Finance|Finance Minister", "involvement": "Represented West Germany at the meeting." },
+        { "person": "pohl", "role": "President of the Deutsche Bundesbank", "roleMatch": "Bundesbank", "involvement": "Attended for the Bundesbank." }
+      ],
+      "portal": { "photos": ["tokyo-avenue-1987", "tokyo-minato-1984"], "period": "1984-1987" }
+    },
+    {
+      "id": "asian-crisis",
+      "date": "1997-12-03",
+      "title": "The Asian currency crisis",
+      "where": { "city": "Seoul", "country": "South Korea" },
+      "summary": "From July 1997 several Asian currencies fell sharply as foreign capital left the region. South Korea asked the IMF for support on 21 November 1997 and a rescue program was agreed on 3 December. Between June and late December the won fell from about 888 to about 1,743 per dollar.",
+      "policies": [
+        "IMF stand-by arrangement for Korea, approved on 4 December 1997",
+        "Higher interest rates and restructuring of the financial sector under the program",
+        "The won's daily trading band was widened in November and removed in December 1997"
+      ],
+      "currencies": ["KRW"],
+      "people": [
+        { "person": "kimys", "role": "President of South Korea", "roleMatch": "President of South Korea", "involvement": "In office when Korea requested and agreed the IMF program." },
+        { "person": "limcy", "role": "Minister of Finance and Economy of South Korea", "roleMatch": "Finance", "involvement": "Announced on 21 November 1997 that Korea would ask the IMF for support." },
+        { "person": "leeks", "role": "Governor of the Bank of Korea", "roleMatch": "Bank of Korea", "involvement": "Headed the central bank during the crisis." },
+        { "person": "camdessus", "role": "Managing Director of the IMF", "roleMatch": "International Monetary Fund", "involvement": "Headed the IMF, whose board approved the program for Korea on 4 December 1997." }
+      ],
+      "portal": { "photos": ["seoul-namsan-1998", "seoul-gwanghwamun-1996"], "period": "1996-1998" }
+    },
+    {
+      "id": "gfc",
+      "date": "2008-10-08",
+      "title": "The global financial crisis",
+      "where": { "city": "New York", "country": "United States" },
+      "summary": "In September and October 2008 a banking crisis that began in the United States spread around the world. Investors moved into the dollar and the yen: between late June and late November the won fell from about 1,040 to about 1,470 per dollar, and the Australian dollar lost about a third of its value against the dollar.",
+      "policies": [
+        "Troubled Asset Relief Program, enacted on 3 October 2008",
+        "Coordinated interest-rate cut by six central banks on 8 October 2008",
+        "Dollar swap lines from the Federal Reserve to other central banks, including the Bank of Korea on 29 October 2008",
+        "Bank of Japan rate cut to 0.3% on 31 October 2008"
+      ],
+      "currencies": ["JPY", "KRW", "AUD", "GBP"],
+      "people": [
+        { "person": "bush43", "role": "President of the United States", "roleMatch": "^President of the United States$", "involvement": "Signed the Emergency Economic Stabilization Act, which created the Troubled Asset Relief Program, on 3 October 2008." },
+        { "person": "paulson", "role": "US Secretary of the Treasury", "roleMatch": "Secretary of the Treasury", "involvement": "Proposed the 700-billion-dollar rescue program to Congress in September 2008." },
+        { "person": "bernanke", "role": "Chair of the Federal Reserve", "roleMatch": "Chair.*Federal Reserve", "involvement": "The Federal Reserve joined the coordinated rate cut of 8 October and extended dollar swap lines to other central banks." },
+        { "person": "shirakawa", "role": "Governor of the Bank of Japan", "roleMatch": "Governor of the Bank of Japan", "involvement": "The Bank of Japan cut its policy rate to 0.3% on 31 October 2008." }
+      ],
+      "portal": { "photos": ["nyc-lower-manhattan-2008", "nyc-wall-street-2008"], "period": "2008" }
+    }
+  ]
+}
