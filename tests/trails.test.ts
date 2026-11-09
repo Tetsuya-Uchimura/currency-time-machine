@@ -8,7 +8,6 @@ import { test } from 'node:test';
 import { NoteQueue } from '../src/audio/note-queue.ts';
 import { Timeline, type HistoryFile } from '../src/data/timeline.ts';
 import {
-  compactTrailLength,
   createSamples,
   interpByAge,
   maxTrailPoints,
@@ -154,18 +153,6 @@ test('window change and auto-zoom are computed from real values', () => {
   const chf = slot('CHF');
   sampleTrail(chf.strength, chf.first, timeline.indexOf('1960-01-01'), W, s);
   assert.equal(zoomTarget(s, 0.012)!.half, 0.012);
-});
-
-test('compact trails stop before the neighboring orb', () => {
-  const radius = 0.6;
-  const arcDeg = 90;
-  const n = 9;
-  const orb = 0.032;
-  const L = compactTrailLength(radius, arcDeg, n, orb, 0.012);
-  const step = (arcDeg * Math.PI) / 180 / (n - 1);
-  const chord = 2 * radius * Math.sin(step / 2);
-  assert.ok(L > 0.05, `long enough to read (${L.toFixed(3)} m)`);
-  assert.ok(L + orb + 0.012 <= chord + 1e-12, 'never reaches the next orb');
 });
 
 test('seek morph starts on the old curve and settles on the new one', () => {

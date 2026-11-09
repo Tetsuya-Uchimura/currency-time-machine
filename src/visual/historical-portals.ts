@@ -1,22 +1,21 @@
 /**
- * Historical Portals: a "window onto the era" that rises far behind the orbs
- * when one of four major moments approaches. It answers three questions at
- * once, while the currencies' light trails flow in front of it:
+ * Historical Portals: a "window onto the era" that takes over the top band
+ * (Historical Events) when one of four major moments approaches. It answers
+ * three questions at once, while the chart and the map below react:
  *
- *   Where           photographs of the city at the time (one across the
- *                   window, a second floating in front of it for depth),
- *                   with the city, country and period in the title plate;
+ *   Where           photographs of the city at the time (one across the band,
+ *                   dimmed, and a clear one floating in front of it on the
+ *                   left), with the city, country and period in the title;
  *   Who & Why       portrait cards of the main decision makers (verified
- *                   offices; pinch the window for everyone's role, the
+ *                   offices; pinch the band for everyone's role, the
  *                   policies and the sources);
- *   What happened   a live readout of the affected currencies: the rate on
- *                   the decision's date and at the playhead, updated as time
- *                   flows on.
+ *   What happened   the actual date, the currencies involved and a live
+ *                   readout: the rate on the decision's date and at the
+ *                   playhead, updated as time flows on.
  *
- * Depth (meters ahead of the user): orbs 0.6, solo lane 0.95, captions 1.1,
- * portal 1.9. It sits behind everything, so it can never hide an orb, a trail,
- * the hand panel or the caption, and it stays below the caption board. If the
- * solo lane is open, the lane wins: the portal dims and its texts step aside.
+ * Layout in the band (left to right): floating photo, title plate, three
+ * portrait cards. The band is the farthest of the three (see config BANDS),
+ * so it never hides the chart or the map; the pinch card comes forward.
  *
  * If no verified photographs are available (or they fail to load), the window
  * shows the code-generated city impression instead, labelled as such.
@@ -46,11 +45,11 @@ import {
   TextureLoader,
   type Texture,
 } from '@iwsdk/core';
-import { PORTAL } from '../config.js';
+import { BANDS } from '../config.js';
 import type { HistoryContent, HistoryEventContent, HistoryPhoto } from '../data/history-content.js';
 import { IMPRESSION_NOTE, sceneStyle, type PortalScene } from '../data/portals.js';
 import { paintCity } from './city-painter.js';
-import { haloTexture } from './orbs.js';
+import { haloTexture } from './glow.js';
 
 export interface PortalView {
   /** Scene index from the director (-1: none). */
@@ -60,7 +59,7 @@ export interface PortalView {
   out: number;
   /** False while paused: motes freeze with time. */
   flowing: boolean;
-  /** 0..1 visibility of the solo lane (it has priority). */
+  /** 0..1: something nearer has priority (dims the window, hides its texts). */
   laneVisible: number;
 }
 
@@ -131,6 +130,14 @@ interface People {
 
 const MOTES = 90;
 const MAX_CARDS = 3;
+/** Sizes in the band (meters): title plate and the three portrait cards. */
+const TITLE_W = 0.52;
+const CARDS_W = 0.6;
+const CARD_H = 0.42;
+const CARDS_PX = 1440;
+/** The floating photo: at most this tall and this wide. */
+const INSET_H = 0.4;
+const INSET_MAX_W = 0.54;
 
 function layerMaterial(): ShaderMaterial {
   return new ShaderMaterial({
@@ -266,19 +273,27 @@ export class HistoricalPortals {
   /** Last envelope of the displayed window, held while it is being switched out. */
   private readonly held = { appear: 0, out: 0, hl: 0 };
 
-  constructor(scenes: PortalScene[], content: HistoryContent | null, initTexture: (t: Texture) => void = () => {}) {
+  /** CSS color per slot id (currency codes in the title). */
+  private readonly slotCss: Record<string, string>;
+
+  constructor(
+    scenes: PortalScene[],
+    content: HistoryContent | null,
+    initTexture: (t: Texture) => void = () => {},
+    slotCss: Record<string, string> = {},
+  ) {
     this.scenes = scenes;
     this.content = content;
     this.initTexture = initTexture;
-    const W = PORTAL.width;
-    const H = PORTAL.height;
-    this.root.position.set(0, PORTAL.y, -PORTAL.z);
+    this.slotCss = slotCss;
+    const W = BANDS.events.width;
+    const H = BANDS.events.height;
 
     // Scene layers, back to front, each a little larger as it goes deeper so
     // they still fill the window from the seat. (A photograph uses the first.)
     [-0.12, -0.06, -0.018].forEach((z, k) => {
       const mat = layerMaterial();
-      const s = 1 + -z / PORTAL.z;
+      const s = 1 + -z / BANDS.events.z;
       const mesh = new Mesh(new PlaneGeometry(W * s, H * s), mat);
       mesh.position.z = z;
       mesh.renderOrder = -7 + k;
@@ -300,7 +315,7 @@ export class HistoricalPortals {
     this.insetMat = layerMaterial();
     this.insetMat.uniforms.uEdge.value = [0.015, 0.02];
     this.inset = new Mesh(new PlaneGeometry(1, 1), this.insetMat);
-    this.inset.position.set(W / 2 - 0.29, -0.06, 0.08);
+    this.inset.position.set(-W / 2 + 0.31, 0, 0.05);
     this.inset.renderOrder = -2;
     this.inset.raycast = () => {};
     this.inset.visible = false;
@@ -312,16 +327,17 @@ export class HistoricalPortals {
     this.insetFrame.visible = false;
     this.root.add(this.inset, this.insetFrame);
 
-    // Title plate (top-left) and portrait cards (top-right), in the sky band.
-    this.title = new CanvasPlane(0.62, 0.2, 1240);
-    this.title.mesh.position.set(-W / 2 + 0.03 + 0.31, H / 2 - 0.03 - 0.1, 0.03);
-    this.cards = new CanvasPlane(0.9, 0.15, 2160);
-    this.cards.mesh.position.set(W / 2 - 0.03 - 0.45, H / 2 - 0.03 - 0.075, 0.03);
-    // Details (pinch): centered, in front of the city.
+    // Title plate (middle) and portrait cards (right), in front of the backdrop.
+    this.title = new CanvasPlane(TITLE_W, CARD_H, 1200);
+    this.title.mesh.position.set(-0.03, 0, 0.03);
+    this.cards = new CanvasPlane(CARDS_W, CARD_H, CARDS_PX);
+    this.cards.mesh.position.set(W / 2 - 0.04 - CARDS_W / 2, 0, 0.03);
+    // Details (pinch): comes forward and down to eye level (over the chart,
+    // while time almost stops), large enough to read comfortably.
     this.detail = new CanvasPlane(1.34, 0.74, 1700);
-    this.detail.mesh.position.set(0, -0.02, 0.35); // nearer than the window: larger to read
+    this.detail.mesh.position.set(0, -0.4, 0.32);
     for (const p of [this.title, this.cards]) p.mesh.renderOrder = 0;
-    this.detail.mesh.renderOrder = 1;
+    this.detail.mesh.renderOrder = 20; // over the chart and map below it while open
     this.root.add(this.title.mesh, this.cards.mesh, this.detail.mesh);
 
     // Motes drifting slowly in front of the window.
@@ -353,6 +369,11 @@ export class HistoricalPortals {
     this.hit.position.z = 0.02;
     this.hit.name = 'historical-portal';
     this.setHittable(false);
+  }
+
+  /** 0..1 how much of the band the window holds (the era view yields to it). */
+  get visibility(): number {
+    return this.visible;
   }
 
   /** Is a window on screen (for input and diagnostics)? */
@@ -474,8 +495,8 @@ export class HistoricalPortals {
   private apply(i: number): void {
     const a = this.assets.get(i);
     if (!a) return;
-    const W = PORTAL.width;
-    const H = PORTAL.height;
+    const W = BANDS.events.width;
+    const H = BANDS.events.height;
     if (a.kind === 'impression') {
       this.layerMats.forEach((m, k) => {
         m.uniforms.uMap.value = a.layers[k];
@@ -488,8 +509,10 @@ export class HistoricalPortals {
       coverFit(this.layerMats[0], a.backAspect, W / H);
       this.insetMat.uniforms.uMap.value = a.inset;
       if (a.inset) {
-        const w = 0.46;
+        const w = Math.min(INSET_MAX_W, INSET_H * a.insetAspect);
         const h = w / a.insetAspect;
+        this.inset.position.x = -W / 2 + 0.04 + w / 2;
+        this.insetFrame.position.x = this.inset.position.x;
         this.inset.scale.set(w, h, 1);
         this.insetFrame.scale.set(w + 0.06, h + 0.06, 1);
         this.insetFrameMat.uniforms.uSize.value = [w + 0.06, h + 0.06];
@@ -538,11 +561,11 @@ export class HistoricalPortals {
 
     const a = this.assets.get(i);
     const photo = a?.kind === 'photo';
-    // Photos stay a backdrop: the orbs and trails in front remain the stars.
-    const imageOpacity = (photo ? 0.8 : 0.85) * imageIn * (1 - imageOut) * q * laneDim;
+    // The band-wide photo stays a backdrop behind the plates.
+    const imageOpacity = (photo ? 0.7 : 0.85) * imageIn * (1 - imageOut) * q * laneDim;
     this.visible = on ? Math.max(imageOpacity, frameIn * (1 - frameOut) * q) : 0;
     const sat = 1 - 0.85 * smooth(out / 0.6);
-    const bright = (photo ? 0.78 : 1.25) + 0.25 * hl - 0.6 * smooth(out / 0.8);
+    const bright = (photo ? 0.55 : 1.1) + 0.25 * hl - 0.5 * smooth(out / 0.8);
     this.layerMats.forEach((m) => {
       m.uniforms.uOpacity.value = imageOpacity;
       m.uniforms.uSat.value = sat;
@@ -581,8 +604,8 @@ export class HistoricalPortals {
   }
 
   private updateMotes(hl: number, vis: number): void {
-    const W = PORTAL.width;
-    const H = PORTAL.height;
+    const W = BANDS.events.width;
+    const H = BANDS.events.height;
     const p = this.motePos.array as Float32Array;
     const s = this.moteSeed;
     const spread = 1 + 0.18 * hl;
@@ -597,7 +620,7 @@ export class HistoricalPortals {
     this.moteMat.opacity = vis * (0.35 + 0.45 * hl);
   }
 
-  /** Where (city, country, period), the moment, what happened, and credits. */
+  /** Where (city, country, period), the moment and its date, the currencies, what happened, and credits. */
   private drawTitle(i: number): void {
     const scene = this.scenes[i];
     const c = this.contentOf(i);
@@ -606,33 +629,65 @@ export class HistoricalPortals {
     const key = `${i}|${credits}|${this.readout.join('|')}`;
     const accent = '#' + this.accent.getHexString();
     this.title.draw(key, (ctx, w, h) => {
-      plate(ctx, w, h);
+      ctx.fillStyle = 'rgba(4,7,14,0.82)';
+      roundRect(ctx, 0, 0, w, h, 26);
+      ctx.fill();
       ctx.fillStyle = accent;
-      ctx.fillRect(24, 28, 6, h - 56);
+      ctx.fillRect(22, 30, 7, h - 60);
+      const x = 52;
+      const maxW = w - x - 30;
       const city = (c?.where.city ?? scene.city).toUpperCase();
       const country = c?.where.country ?? scene.region;
       const period = c?.portal?.period ?? scene.period;
-      let y = 86;
-      ctx.font = 'bold 60px system-ui, sans-serif';
+      let y = 106;
+      ctx.font = 'bold 84px system-ui, sans-serif';
       ctx.fillStyle = '#ffffff';
-      ctx.fillText(city, 52, y);
-      const cw = ctx.measureText(city).width;
-      ctx.font = '36px system-ui, sans-serif';
+      ctx.fillText(fit(ctx, city, maxW), x, y);
+      y += 58;
+      ctx.font = '40px system-ui, sans-serif';
       ctx.fillStyle = accent;
-      ctx.fillText(`  ${country}  ${period}`, 52 + cw, y);
-      y += 52;
-      ctx.font = '36px system-ui, sans-serif';
-      ctx.fillStyle = '#e6ebf5';
-      ctx.fillText(c?.title ?? scene.title, 52, y);
-      ctx.font = '31px system-ui, sans-serif';
+      ctx.fillText(fit(ctx, `${country}  ·  photos ${period}`, maxW), x, y);
+      y += 74;
+      ctx.font = 'bold 52px system-ui, sans-serif';
+      ctx.fillStyle = '#f2f5fb';
+      for (const line of wrap(ctx, c?.title ?? scene.title, maxW).slice(0, 2)) {
+        ctx.fillText(line, x, y);
+        y += 60;
+      }
+      y += 4;
+      // The actual date, then the currencies involved, as on the chart and the map (code + color).
+      const when = c ? longDate(c.date) : scene.period;
+      ctx.font = '40px system-ui, sans-serif';
+      ctx.fillStyle = '#d6deee';
+      ctx.fillText(when, x, y);
+      let cx = x + ctx.measureText(when).width + 30;
+      const day = c?.date ?? scene.eventDate;
+      ctx.font = 'bold 40px system-ui, sans-serif';
+      for (const slot of c?.currencies ?? scene.affectedSlots) {
+        const code = slot === 'EUR' && day < '1999-01-01' ? 'DEM' : slot;
+        const cw = ctx.measureText(code).width;
+        if (cx + cw > w - 30) break;
+        ctx.fillStyle = this.slotCss[slot] ?? '#ffffff';
+        ctx.fillText(code, cx, y);
+        cx += cw + 22;
+      }
+      ctx.font = '38px system-ui, sans-serif';
       ctx.fillStyle = '#ffe2a0';
       for (const line of this.readout.slice(0, 2)) {
-        y += 42;
-        ctx.fillText(line, 52, y);
+        y += 54;
+        ctx.fillText(fit(ctx, line, maxW), x, y);
       }
-      ctx.font = '22px system-ui, sans-serif';
+      ctx.font = '23px system-ui, sans-serif';
       ctx.fillStyle = '#9fadc6';
-      ctx.fillText(fit(ctx, `${credits}  |  Pinch the window for people, policies and sources`, w - 80), 52, h - 26);
+      const foot = wrap(ctx, credits, maxW).slice(0, 2);
+      let fy = h - 44 - foot.length * 28;
+      for (const line of foot) {
+        ctx.fillText(line, x, fy);
+        fy += 28;
+      }
+      ctx.font = 'bold 30px system-ui, sans-serif';
+      ctx.fillStyle = '#c9d5ec';
+      ctx.fillText('Pinch for people, policies and sources', x, h - 28);
     });
   }
 
@@ -641,7 +696,7 @@ export class HistoricalPortals {
     const scene = this.scenes[i];
     const a = this.assets.get(i);
     this.detail.draw(`${i}`, (ctx, w, h) => {
-      ctx.fillStyle = 'rgba(5,8,16,0.93)';
+      ctx.fillStyle = 'rgba(5,8,16,0.97)';
       roundRect(ctx, 0, 0, w, h, 28);
       ctx.fill();
       ctx.strokeStyle = '#' + this.accent.getHexString();
@@ -735,62 +790,64 @@ export class HistoricalPortals {
 // Helpers
 // ---------------------------------------------------------------------------
 
-/** Portrait cards for the first few people: real portraits only, never a stand-in face. */
+/** Portrait cards for the first few people, side by side: real portraits only, never a stand-in face. */
 async function buildCards(c: HistoryEventContent, initTexture: (t: Texture) => void): Promise<People> {
   const list = c.people.slice(0, MAX_CARDS);
   const images = await Promise.all(list.map((p) => (p.portrait ? loadImage(p.portrait.src) : Promise.resolve(null))));
   const cv = document.createElement('canvas');
-  cv.width = 2160;
-  cv.height = 360;
+  cv.width = CARDS_PX;
+  cv.height = Math.round((CARDS_PX * CARD_H) / CARDS_W);
   const ctx = cv.getContext('2d')!;
   const cardW = cv.width / MAX_CARDS;
   list.forEach((p, k) => {
-    const x0 = k * cardW + 10;
+    const x0 = k * cardW + 8;
+    const cw = cardW - 16;
     ctx.fillStyle = 'rgba(5,8,16,0.86)';
-    roundRect(ctx, x0, 10, cardW - 20, cv.height - 20, 22);
+    roundRect(ctx, x0, 6, cw, cv.height - 12, 22);
     ctx.fill();
-    const side = 280;
+    // Portrait on top (square, as stored), the name and office below.
+    const side = cw - 40;
+    const ph = side;
     const px = x0 + 20;
-    const py = 40;
+    const py = 22;
     const img = images[k];
     if (img) {
       ctx.save();
-      roundRect(ctx, px, py, side, side, 16);
+      roundRect(ctx, px, py, side, ph, 16);
       ctx.clip();
-      ctx.drawImage(img, px, py, side, side);
+      ctx.drawImage(img, px, py, side, ph);
       ctx.restore();
     } else {
       // No verified portrait: a plain plate with initials (not a likeness).
       ctx.fillStyle = '#1b2236';
-      roundRect(ctx, px, py, side, side, 16);
+      roundRect(ctx, px, py, side, ph, 16);
       ctx.fill();
-      ctx.font = 'bold 96px system-ui, sans-serif';
+      ctx.font = 'bold 110px system-ui, sans-serif';
       ctx.fillStyle = '#8a97b4';
       ctx.textAlign = 'center';
-      ctx.fillText(initials(p.name), px + side / 2, py + side / 2 + 34);
-      ctx.font = '20px system-ui, sans-serif';
-      ctx.fillText('no portrait available', px + side / 2, py + side - 18);
+      ctx.fillText(initials(p.name), px + side / 2, py + ph / 2 + 38);
+      ctx.font = '24px system-ui, sans-serif';
+      ctx.fillText('no portrait available', px + side / 2, py + ph - 22);
       ctx.textAlign = 'left';
     }
-    const tx = px + side + 26;
-    const tw = cardW - side - 86;
-    ctx.font = 'bold 44px system-ui, sans-serif';
+    const tw = cw - 40;
+    let y = py + ph + 56;
+    ctx.font = 'bold 46px system-ui, sans-serif';
     ctx.fillStyle = '#ffffff';
-    let y = 100;
     for (const line of wrap(ctx, p.name, tw).slice(0, 2)) {
-      ctx.fillText(line, tx, y);
-      y += 50;
+      ctx.fillText(line, px, y);
+      y += 52;
     }
-    ctx.font = '32px system-ui, sans-serif';
+    ctx.font = '36px system-ui, sans-serif';
     ctx.fillStyle = '#c9d5ec';
     for (const line of wrap(ctx, p.role, tw).slice(0, 3)) {
-      ctx.fillText(line, tx, y);
-      y += 40;
+      ctx.fillText(line, px, y);
+      y += 42;
     }
     if (p.portrait) {
-      ctx.font = '20px system-ui, sans-serif';
+      ctx.font = '19px system-ui, sans-serif';
       ctx.fillStyle = '#8a97b4';
-      ctx.fillText(fit(ctx, `Portrait: ${p.portrait.license}`, tw), tx, cv.height - 40);
+      ctx.fillText(fit(ctx, `Portrait: ${p.portrait.license}`, tw), px, cv.height - 22);
     }
   });
   const tex = new CanvasTexture(cv);
@@ -820,16 +877,6 @@ function initials(name: string): string {
 function longDate(iso: string): string {
   const d = new Date(iso + 'T00:00:00Z');
   return d.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' });
-}
-
-function plate(ctx: CanvasRenderingContext2D, w: number, h: number): void {
-  const g = ctx.createLinearGradient(0, 0, w, 0);
-  g.addColorStop(0, 'rgba(4,7,14,0.86)');
-  g.addColorStop(0.85, 'rgba(4,7,14,0.78)');
-  g.addColorStop(1, 'rgba(4,7,14,0)');
-  ctx.fillStyle = g;
-  roundRect(ctx, 0, 0, w, h, 22);
-  ctx.fill();
 }
 
 function roundRect(ctx: CanvasRenderingContext2D, x: number, y: number, w: number, h: number, r: number): void {

@@ -29,7 +29,10 @@
   }
 
   .chapter {
-    width: 60;
+    width: 58;
+    min-width: 0;
+    max-width: 58;
+    flex-shrink: 1;
     padding-left: 0;
     padding-right: 0;
     justify-content: center;

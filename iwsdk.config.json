@@ -20,7 +20,7 @@
       "canvasPointerEvents": true
     },
     "render": {
-      "fov": 80,
+      "fov": 90,
       "near": 0.01,
       "far": 200,
       "camera": {
@@ -31,7 +31,7 @@
         ],
         "lookAt": [
           0,
-          0.98,
+          0.94,
           -1
         ]
       }

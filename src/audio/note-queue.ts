@@ -1,7 +1,7 @@
 /**
  * Holds notes that are scheduled in the AudioContext's future and releases
  * them when they actually become audible, so the light that answers a note
- * (orb pulse, trail spark) appears with the sound, not when it was booked.
+ * (the line's head glow and spark) appears with the sound, not when it was booked.
  *
  * Pure (no Web Audio) so it can be unit tested. Fixed capacity, no
  * allocations per note.

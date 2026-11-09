@@ -3,12 +3,12 @@
  */
 import { createComponent, defineComponents, Types } from '@iwsdk/core';
 
-/** Marks a currency orb entity; slotIndex points into config SLOTS. */
+/** Marks a currency's pinch target (map marker or chart label); slotIndex points into config SLOTS. */
 export const Orb = createComponent('Orb', {
   slotIndex: { type: Types.Int8, default: 0 },
 });
 
-/** Marks the Historical Portal window (pinch it for a short explanation). */
+/** Marks the Historical Events band's portal (pinch it for people, policies and sources). */
 export const PortalTarget = createComponent('PortalTarget', {});
 
 export default defineComponents([Orb, PortalTarget]);

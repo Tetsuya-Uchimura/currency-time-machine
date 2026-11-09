@@ -2,7 +2,8 @@
  * Pure time-series math for the light trails (no three.js, no imports), so it
  * can be unit tested with node:test (see tests/trails.test.ts).
  *
- * A trail shows a fixed window of history ending at the playback head:
+ * Used by the Multi-Currency Timeline (src/visual/multi-currency-chart.ts).
+ * A line shows a fixed window of history ending at the playback head:
  *
  *     age 1 (left end) = head - windowWeeks      age 0 (right end) = head
  *
@@ -140,16 +141,6 @@ export function windowChange(s: TrailSamples): { fromT: number; pct: number } | 
   const kh = s.count - 1;
   if (k0 < 0 || !s.valid[kh]) return null;
   return { fromT: s.t[k0], pct: (Math.exp(s.value[kh] - s.value[k0]) - 1) * 100 };
-}
-
-/**
- * Length of a compact trail: it starts at its orb and must end before the
- * neighbor's orb (core plus a margin), on an arc of `count` evenly spaced orbs.
- */
-export function compactTrailLength(radius: number, arcDeg: number, count: number, orbRadius: number, margin: number): number {
-  const step = ((arcDeg * Math.PI) / 180) / (count - 1);
-  const chord = 2 * radius * Math.sin(step / 2);
-  return Math.max(0, chord - orbRadius - margin);
 }
 
 /**

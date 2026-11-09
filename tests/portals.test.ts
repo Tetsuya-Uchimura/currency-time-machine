@@ -5,7 +5,6 @@
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { test } from 'node:test';
-import { LANE, LAYOUT, PORTAL } from '../src/config.ts';
 import { EVENTS, FLOAT_START } from '../src/data/events.ts';
 import { displayablePhoto, IMPRESSION_NOTE, PORTAL_SCENES, provenance, type PortalScene } from '../src/data/portals.ts';
 import { Timeline, type HistoryFile } from '../src/data/timeline.ts';
@@ -211,15 +210,6 @@ test('real pacing: each window is on screen for 6 to 12 s and gone before the ne
     assert.ok(total >= 6 && total <= 12, `${PORTAL_SCENES[k].city}: ${total.toFixed(1)} s on screen`);
     assert.ok(datedAt - openedAt > 1, `${PORTAL_SCENES[k].city}: the date comes after the window opened`);
   }
-});
-
-test('placement: behind orbs, lane and captions; below the caption board', () => {
-  assert.ok(PORTAL.z > LANE.z && PORTAL.z > 1.1 && PORTAL.z > LAYOUT.radius);
-  const captionBottomDeg = (Math.atan2(0.42 - 0.125, 1.1) * 180) / Math.PI;
-  const portalTopDeg = (Math.atan2(PORTAL.y + PORTAL.height / 2, PORTAL.z) * 180) / Math.PI;
-  assert.ok(portalTopDeg < captionBottomDeg, `${portalTopDeg.toFixed(1)} < ${captionBottomDeg.toFixed(1)} deg`);
-  const halfWidthDeg = (Math.atan2(PORTAL.width / 2, PORTAL.z) * 180) / Math.PI;
-  assert.ok(halfWidthDeg < 25, 'readable without turning the head');
 });
 
 test('a window closes early (and quickly) when the next caption is near', () => {

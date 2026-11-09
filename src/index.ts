@@ -11,6 +11,7 @@ import { SLOTS } from './config.js';
 import { loadHistoryContent } from './data/history-content.js';
 import { loadTimeline } from './data/timeline.js';
 import { ExperienceSystem } from './experience.js';
+import { loadWorldMap } from './visual/world-currency-map.js';
 
 const overlay = document.getElementById('start-overlay');
 const enterVr = document.getElementById('enter-vr') as HTMLButtonElement | null;
@@ -21,11 +22,12 @@ async function main(): Promise<void> {
   const world = await World.create(document.getElementById('scene-container') as HTMLDivElement, projectOptions);
   world.registerSystem(ExperienceSystem, { priority: 10 });
   const experience = world.getSystem(ExperienceSystem)!;
-  const [timeline, content] = await Promise.all([
+  const [timeline, content, worldMap] = await Promise.all([
     loadTimeline(SLOTS.map((s) => s.slot)),
     loadHistoryContent(import.meta.env.BASE_URL),
+    loadWorldMap(import.meta.env.BASE_URL),
   ]);
-  await experience.setup(timeline, content);
+  await experience.setup(timeline, content, worldMap);
 
   const hideOverlay = () => overlay?.classList.add('hidden');
   if (status) status.textContent = '';

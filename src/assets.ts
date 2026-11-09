@@ -1,6 +1,6 @@
 /**
- * Asset manifest. Everything visual is procedural; only the two UIKitML
- * panels are loaded from public/ui/.
+ * Asset manifest. Everything visual is procedural or loaded by the bands
+ * themselves (photos, map data); only the UIKitML hand panel is loaded here.
  */
 import { AssetType, defineAssets } from '@iwsdk/core';
 
@@ -14,6 +14,5 @@ const uikitml = (fileName: string, name: string) => ({
 });
 
 export default defineAssets({
-  'caption-panel': uikitml('caption.uikitml', 'Caption Panel'),
   'hand-panel': uikitml('hand-panel.uikitml', 'Hand Panel'),
 });

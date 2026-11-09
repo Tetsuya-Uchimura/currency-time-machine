@@ -1,11 +1,12 @@
 /**
  * Static configuration: which currencies appear, where, and how they sound/look.
  *
- * Orbs are laid out west -> east from the listener's left to right, like a
- * world map wrapped around the seated user. Colors come from the Okabe-Ito
- * color-vision-deficiency-safe palette (plus a few light tints for contrast
- * on a dark sky); identity is never carried by color alone, every orb also
- * has a label, a fixed position and its own timbre.
+ * Slots are ordered west -> east, like the world map, and their voices are
+ * spread from the listener's left to right in the same order. Colors come
+ * from the Okabe-Ito color-vision-deficiency-safe palette (plus a few light
+ * tints for contrast on a dark sky); identity is never carried by color
+ * alone: every line and marker also has its code, a place on the map and its
+ * own timbre.
  */
 
 export type TimbreId =
@@ -47,65 +48,85 @@ export const BASE_CURRENCY = { code: 'USD', name: 'US dollar' };
 
 export const ATTRIBUTION = 'Exchange rate data: Frankfurter (frankfurter.dev)';
 
-/** Spatial layout (meters, relative to the seated user's head at start). */
-export const LAYOUT = {
-  /** Distance of the orb arc from the head: inside a seated arm's reach. */
-  radius: 0.6,
-  /** Total horizontal span of the arc in degrees (centered straight ahead). */
-  arcDeg: 90,
-  /** Orb "birth level" relative to eye height (slightly below the eyes). */
-  baseY: -0.1,
-  /** Max height travel above/below the birth level. */
-  heightRange: 0.18,
-  orbRadius: 0.032,
-};
-
-/** Orb (and compact trail) height for a strength: one shared scale for all. */
-export function strengthToHeight(strength: number): number {
-  return LAYOUT.heightRange * Math.tanh(strength);
+/**
+ * Spatial layout: three bands in front of the seated user, top to bottom
+ *
+ *   events  Historical Events (photos, people, policies; the era between events)
+ *   chart   Multi-Currency Timeline (the nine lines, one shared scale)
+ *   map     Interactive World Currency Map (where each currency lives)
+ *
+ * Meters in rig space: the head is at the origin at start, looking down -Z.
+ * Each band is centered straight ahead at height `y` and distance `z`, and
+ * turned to face the head; the map is tilted back a further `tiltDeg`, like
+ * a table seen from a chair. The bands are at different depths (events
+ * farthest, map nearest), so a small head movement shows real parallax.
+ * Together they span about 55 degrees vertically: seen with the eyes and a
+ * slight nod, never a turn. Nothing ever moves the camera.
+ */
+export interface Band {
+  y: number;
+  z: number;
+  width: number;
+  height: number;
+  /** Extra backward tilt (top edge away from the user), degrees. */
+  tiltDeg?: number;
 }
 
-/** Temporal light trails (see src/visual/trails.ts). */
-export const TRAIL = {
-  /** History shown behind each orb, in weeks (the same at any playback speed). */
+export const BANDS = {
+  events: { y: 0.48, z: 1.42, width: 1.74, height: 0.48 } as Band,
+  chart: { y: -0.03, z: 1.3, width: 1.74, height: 0.44 } as Band,
+  /** height = width / MAP_ASPECT (src/data/world-map.ts; checked in tests). */
+  map: { y: -0.5, z: 1.12, width: 1.3, height: 0.56, tiltDeg: 18 } as Band,
+};
+
+/** The hand panel (UIKit), low and close like a lap tray. */
+export const HAND_PANEL = { y: -0.4, z: 0.33, tiltRad: -0.85 };
+
+/** Pitch (radians, three.js rotation.x) that turns a band toward the head, plus its tilt. */
+export function bandPitch(b: Band): number {
+  return Math.atan2(b.y, b.z) - ((b.tiltDeg ?? 0) * Math.PI) / 180;
+}
+
+/** Elevation (degrees) of a band's top and bottom edges as seen from the head. */
+export function bandSpanDeg(b: Band): { top: number; bottom: number } {
+  const a = bandPitch(b);
+  // In the vertical plane: up along the band is (cos a) up and (sin a) nearer.
+  const dy = (Math.cos(a) * b.height) / 2;
+  const dz = (Math.sin(a) * b.height) / 2;
+  const deg = (y: number, z: number) => (Math.atan2(y, z) * 180) / Math.PI;
+  return { top: deg(b.y + dy, b.z - dz), bottom: deg(b.y - dy, b.z + dz) };
+}
+
+/** Multi-Currency Timeline (src/visual/multi-currency-chart.ts), in the chart band's local meters. */
+export const CHART = {
+  /** History shown, in weeks (the same at any playback speed). */
   windowWeeks: 52,
-  /** Gap kept between a compact trail's far end and the neighbor orb's core. */
-  compactMargin: 0.012,
-  /** Trails sit this far behind the orb center, so the orb covers their head. */
-  behindOrb: 0.006,
-  /** Ribbon half-width (glow included) in calm weeks, plus extra when busy. */
-  compactHalfWidth: 0.0042,
-  compactVolWidth: 0.0036,
-  /** Faint time marks pinned every this many weeks: they show the flow even
-   *  when rates are flat (the fixed-rate era). */
+  plotLeft: -0.78,
+  plotRight: 0.58,
+  plotHalfHeight: 0.15,
+  /** Right-hand labels ("JPY ▲ +8.4%"): left edge, size and the least spacing. */
+  labelX: 0.625,
+  labelWidth: 0.23,
+  labelHeight: 0.03,
+  labelGap: 0.033,
+  /** Line half-width (glow included) in calm weeks, plus extra when busy. */
+  halfWidthBase: 0.0026,
+  halfWidthVol: 0.0026,
+  /** Faint time marks pinned every this many weeks: the flow shows even when rates are flat. */
   tickWeeks: 13,
 };
 
-/** Expanded lane shown while a currency is soloed. */
-export const LANE = {
-  /** Distance ahead of the head; farther than the orbs, nearer than captions. */
-  z: 0.95,
-  /** Center height: above most orbs, below the caption board. */
-  y: 0.1,
-  halfWidth: 0.27,
-  halfHeight: 0.07,
-  /** Smallest half-range the auto-zoom fits (log units, about 1.2%). */
-  minHalfRange: 0.012,
-  /** Time constant of the zoom glide (s). */
-  zoomTau: 0.6,
-  halfWidthBase: 0.005,
-  halfWidthVol: 0.006,
+/** Interactive World Currency Map (src/visual/world-currency-map.ts), in the map band's local meters. */
+export const MAP = {
+  labelWidth: 0.155,
+  labelHeight: 0.05,
+  usdLabelWidth: 0.17,
+  markerRadius: 0.0075,
 };
 
-/** Historical Portals: behind the orbs (0.6), lane (0.95) and captions (1.1). */
-export const PORTAL = {
-  z: 1.9,
-  /**
-   * Centered at eye level: the top stays below the caption board, and the
-   * city's skyline (lower part of the scene) sits behind the row of orbs, so
-   * the light trails float in front of the era's streets.
-   */
-  y: -0.03,
-  width: 1.6,
-  height: 0.9,
-};
+/**
+ * Where each currency's voice is heard: spread west to east (the map's
+ * order) across the chart band at eye level, never down at the map, so the
+ * nine stay easy to tell apart.
+ */
+export const VOICES = { radius: 1.2, arcDeg: 80, y: -0.03, rise: 0.4 };

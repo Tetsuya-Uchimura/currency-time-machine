@@ -1,8 +1,9 @@
 /**
  * Historical Portals: scene metadata (pure data, no imports, unit tested).
  *
- * A portal is a "window onto the era": a city scene that rises behind the
- * orbs as one of four major moments approaches and fades once it has passed.
+ * A portal is a "window onto the era": a city scene that takes over the top
+ * band (Historical Events) as one of four major moments approaches and fades
+ * once it has passed.
  *
  * Visuals: the photographs, people and policies come from the verified
  * content file (public/data/history-content.json, built by

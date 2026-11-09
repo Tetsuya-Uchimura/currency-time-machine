@@ -37,7 +37,7 @@ export interface HistoryFile {
 
 export interface SlotSeries {
   slot: string;
-  /** First week index with data (the orb is dormant before it). */
+  /** First week index with data (no line, a dim marker before it). */
   first: number;
   segments: HistorySegment[];
   /** Units of the slot's (chained) currency per base unit at its first week. */

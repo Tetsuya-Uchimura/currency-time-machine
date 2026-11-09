@@ -24,11 +24,21 @@ export interface HistoryEvent {
   focus: string[];
   /** Optional custom slow-down (majors default to MAJOR_SLOWDOWN). */
   slow?: { width: number; depth: number };
+  /** A few words for the chart's event marker and the journey line. */
+  short: string;
+  /**
+   * The actual calendar day, where it differs from `date` (the anchor the
+   * time-lapse uses). The chart's marker stands on this day, which is not a
+   * weekly data point. Portal events take theirs from the history content.
+   */
+  actual?: string;
 }
 
 export const EVENTS: HistoryEvent[] = [
   {
     id: 'dm-born',
+    short: 'Deutsche Mark launched',
+    actual: '1948-06-20',
     date: '1948-06-25',
     tier: 'minor',
     label: 'June 1948',
@@ -37,6 +47,8 @@ export const EVENTS: HistoryEvent[] = [
   },
   {
     id: 'sterling-1967',
+    short: 'Pound devalued',
+    actual: '1967-11-18',
     date: '1967-11-24',
     tier: 'minor',
     label: '1967',
@@ -45,6 +57,7 @@ export const EVENTS: HistoryEvent[] = [
   },
   {
     id: 'yen-joins',
+    short: 'Yen data begins',
     date: '1969-12-05',
     tier: 'minor',
     label: '1969',
@@ -55,6 +68,7 @@ export const EVENTS: HistoryEvent[] = [
   },
   {
     id: 'gold-break',
+    short: 'Dollar-gold break',
     date: '1971-08-20',
     tier: 'major',
     label: 'August 1971',
@@ -63,6 +77,7 @@ export const EVENTS: HistoryEvent[] = [
   },
   {
     id: 'float',
+    short: 'Rates float',
     date: '1973-02-23',
     tier: 'major',
     label: '1973',
@@ -71,6 +86,7 @@ export const EVENTS: HistoryEvent[] = [
   },
   {
     id: 'asia-arrives',
+    short: 'Yuan and won data begin',
     date: '1981-01-09',
     tier: 'minor',
     label: '1981',
@@ -79,6 +95,7 @@ export const EVENTS: HistoryEvent[] = [
   },
   {
     id: 'dollar-adjustment',
+    short: 'Push on the dollar',
     date: '1985-09-27',
     tier: 'major',
     label: 'September 1985',
@@ -87,6 +104,8 @@ export const EVENTS: HistoryEvent[] = [
   },
   {
     id: 'black-wednesday',
+    short: 'Pound leaves the ERM',
+    actual: '1992-09-16',
     date: '1992-09-18',
     tier: 'minor',
     label: 'September 1992',
@@ -95,6 +114,7 @@ export const EVENTS: HistoryEvent[] = [
   },
   {
     id: 'asian-crisis',
+    short: 'Asian currency crisis',
     date: '1997-12-12',
     tier: 'major',
     label: '1997',
@@ -103,6 +123,7 @@ export const EVENTS: HistoryEvent[] = [
   },
   {
     id: 'euro',
+    short: 'Euro launched',
     date: '1999-01-01',
     tier: 'major',
     label: 'January 1999',
@@ -111,6 +132,7 @@ export const EVENTS: HistoryEvent[] = [
   },
   {
     id: 'gfc',
+    short: 'Global financial crisis',
     date: '2008-10-17',
     tier: 'major',
     label: '2008',
@@ -119,6 +141,8 @@ export const EVENTS: HistoryEvent[] = [
   },
   {
     id: 'chf-shock',
+    short: 'Franc cap dropped',
+    actual: '2015-01-15',
     date: '2015-01-16',
     tier: 'minor',
     label: 'January 2015',
@@ -127,6 +151,8 @@ export const EVENTS: HistoryEvent[] = [
   },
   {
     id: 'brexit',
+    short: 'UK votes to leave the EU',
+    actual: '2016-06-23',
     date: '2016-06-24',
     tier: 'minor',
     label: 'June 2016',
@@ -135,6 +161,7 @@ export const EVENTS: HistoryEvent[] = [
   },
   {
     id: 'pandemic',
+    short: 'Pandemic dollar rush',
     date: '2020-03-20',
     tier: 'minor',
     label: 'March 2020',
@@ -143,6 +170,7 @@ export const EVENTS: HistoryEvent[] = [
   },
   {
     id: 'yen-slide',
+    short: 'Yen slides',
     date: '2022-10-21',
     tier: 'major',
     label: '2022',
@@ -170,4 +198,4 @@ export const CHAPTERS: Chapter[] = [
 export const FLOAT_START = '1971-08-13';
 
 /** One-line onboarding hint, shown once before the first major event. */
-export const HINT_TEXT = 'Pinch the panel to pause or jump in time. Pinch a light to hear it alone.';
+export const HINT_TEXT = 'Pinch a currency on the map or the chart to hear it alone. Pinch the hand panel to pause or jump in time.';

@@ -8,8 +8,8 @@
  *   bus -> reverb (generated impulse) -> master -> compressor -> speakers
  *
  * We share three.js' AudioContext so the AudioListener that IWSDK attaches to
- * the player's head drives our PannerNodes: each currency is heard from the
- * direction of its orb.
+ * the player's head drives our PannerNodes: each currency is heard from its
+ * own direction (spread west to east by the chart band, see config VOICES).
  *
  * Musical rules (see brief section 5):
  *   strength change -> pitch (quantized to D major pentatonic)
@@ -174,7 +174,8 @@ export class SoundEngine {
       const panner = new PannerNode(ctx, {
         panningModel: 'HRTF',
         distanceModel: 'inverse',
-        refDistance: 0.6,
+        // Voices sit about 1.2 m away, by the chart band (see config VOICES).
+        refDistance: 1.2,
         rolloffFactor: 0.6,
         maxDistance: 20,
       });
