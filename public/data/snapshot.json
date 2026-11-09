@@ -2,6 +2,7 @@
  "attribution": "Exchange rate data: Frankfurter (frankfurter.dev)",
  "base": "USD",
  "asOf": "2026-11-09",
+ "fetchedAt": "2026-11-08T22:50:29Z",
  "source": "bundled",
  "rates": {
   "EUR": {

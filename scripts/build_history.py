@@ -364,14 +364,23 @@ def build_history(by_code: dict[str, Series], today: dt.date) -> dict:
     }
 
 
-def build_snapshot(by_code: dict[str, Series]) -> dict:
+def build_snapshot(by_code: dict[str, Series], fetched_at: dt.datetime | None = None) -> dict:
     rates = {}
     for code in TODAY_CODES:
         info = latest_and_previous(by_code.get(code, {}))
         if info:
             rates[code] = info
     as_of = max(v["date"] for v in rates.values())
-    return {"attribution": ATTRIBUTION, "base": BASE, "asOf": as_of, "source": "bundled", "rates": rates}
+    # When the data was fetched, so the app can say how old a saved copy is.
+    fetched = fetched_at or dt.datetime.now(dt.timezone.utc)
+    return {
+        "attribution": ATTRIBUTION,
+        "base": BASE,
+        "asOf": as_of,
+        "fetchedAt": fetched.strftime("%Y-%m-%dT%H:%M:%SZ"),
+        "source": "bundled",
+        "rates": rates,
+    }
 
 
 def main(argv: list[str] | None = None) -> int:

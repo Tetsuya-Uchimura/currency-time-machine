@@ -221,3 +221,14 @@ def test_snapshot_has_all_today_codes():
     for info in snap["rates"].values():
         assert info["rate"] > 0 and info["prev"] > 0
         assert info["prevDate"] <= info["date"]
+    # The app shows when a saved copy was fetched.
+    assert bh.dt.datetime.strptime(snap["fetchedAt"], "%Y-%m-%dT%H:%M:%SZ")
+
+
+def test_build_snapshot_records_fetch_time():
+    days = [bh.dt.date(2026, 11, 5), bh.dt.date(2026, 11, 6)]
+    series = {code: {days[0]: 1.0, days[1]: 1.1} for code in bh.TODAY_CODES}
+    when = bh.dt.datetime(2026, 11, 8, 22, 50, 29, tzinfo=bh.dt.timezone.utc)
+    snap = bh.build_snapshot(series, fetched_at=when)
+    assert snap["fetchedAt"] == "2026-11-08T22:50:29Z"
+    assert snap["asOf"] == "2026-11-06"

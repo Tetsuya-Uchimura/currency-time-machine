@@ -21,6 +21,8 @@ export interface TodayData {
   base: string;
   asOf: string;
   source: 'live' | 'bundled';
+  /** When this data was fetched from the API (ISO, UTC); set in the snapshot. */
+  fetchedAt?: string;
   rates: Record<string, TodayRate>;
 }
 
