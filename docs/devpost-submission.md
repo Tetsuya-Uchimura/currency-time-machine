@@ -5,9 +5,9 @@
 
 ## Tagline (max 140 characters)
 
-> 78 years of the world's money, played around you as sound and light. Sit back, pinch, and feel history move.
+> 78 years of the world's money as light, sound and history: where it moved, how much, and why. Sit back and pinch.
 
-(108 characters)
+(113 characters)
 
 ## Description (max 500 words)
 
@@ -20,21 +20,20 @@ rather than by reading a chart.
 
 ### What it does
 
-You sit down and history starts: it is 1948. Around you float the currencies of the world as glowing orbs,
-arranged west to east like a map, each trailing a ribbon of light drawn from its own past year. You stand
-in the place of the US dollar. Time fast-forwards. In the
-fixed-rate era almost nothing moves, and you hear calm. In 1971 the dollar's link to gold is cut and the
-orbs come alive: each currency rises when it strengthens and sinks when it weakens, sings with its own
-voice from its own direction, and plays faster when its market is restless, while its light trail keeps
-the shape of the past year flowing away behind it. The 1985 push on the dollar, the Asian
-crisis, the birth of the euro and the 2008 crisis arrive as storms of sound and light; at four of these
-moments a window onto the era opens behind the orbs: photographs of the city at the time (Washington, Tokyo,
-Seoul, New York), the people who made the decisions, and a live readout of the rates, while the real moves
-play out in front of it. Finally the clock
-catches up with the present and today's real exchange rates appear, so the ending is different every day.
+You sit down and history starts: it is 1948. Three layers of light float in front of you, all driven by one
+clock. At the top, the era you are in. In the middle, nine glowing lines flow from right to left: each
+currency's change against the US dollar over the past year, on one shared scale. At the bottom, a holographic world map shows where each currency lives, with the same numbers.
+Each currency also sings with its own voice from its own direction, faster when its market is restless.
 
-Pinch a currency to hear it alone and open its light lane: its last twelve months, larger, with the change. Pinch the small panel at your lap to pause or jump between eras.
-Everything works with one hand, seated, in about four minutes.
+In the fixed-rate era almost nothing moves, and you hear calm. In 1971 the dollar's link to gold is cut and
+the lines come alive. At four great moments (1971, 1985, 1997, 2008) the top layer opens onto the city at
+the time, with photographs, the people who decided, and the rates moving live, while the currencies involved
+light up on the chart and their countries glow on the map.
+Finally the clock catches up with the present and today's real exchange rates appear, so the ending is
+different every day.
+
+Pinch a currency on the map or the chart to hear it alone. Pinch the small panel at your lap to pause or jump
+between eras. Everything works with one hand, seated, in about four minutes.
 
 ### How we built it
 
@@ -45,7 +44,8 @@ edge caching and a bundled fallback, so the experience works even if the API is 
 
 All sound is synthesized live with Web Audio: one HRTF-spatialized voice per currency, pitch quantized to a
 pentatonic scale so it never clashes, note density driven by volatility, and a drone whose tension follows
-market turbulence. All visuals are procedural, kept light for Quest.
+market turbulence. Chart lines are sampled from the weekly data every frame, from a common start, never
+inventing a value; the map is drawn from public-domain Natural Earth data. Visuals are procedural and light.
 
 ### Challenges
 
@@ -57,17 +57,19 @@ breathe; and designing light that reacts to sound without ever flashing.
 Choosing your own home currency as your position, more voices (more currencies), a calm "listen to today"
 mode, and haptic pulses on major moments.
 
-(about 495 words)
+(about 486 words)
 
 ## How we implemented hand interactions
 
-- **Hands-first, no controller required.** Every interactive object uses IWSDK's input stack: orbs and the
-  hand panel carry both `RayInteractable` (pinch from a distance via the hand's target ray) and
-  `PokeInteractable` (direct touch with the index fingertip). Presses reach our ECS system as the `Pressed`
-  tag (orbs) and as UIKit `click` events (panel buttons).
+- **Hands-first, no controller required.** Every interactive object uses IWSDK's input stack: the map
+  markers and labels, the chart labels, the history band and the hand panel carry `RayInteractable` (pinch
+  from a distance via the hand's target ray), and the currencies and panel also `PokeInteractable` (direct
+  touch with the index fingertip). Presses reach our ECS system as the `Pressed` tag and as UIKit `click`
+  events (panel buttons). Pinching a currency on the map or the chart solos it everywhere at once: its line,
+  its region and its voice.
 - **One hand, seated.** The panel rests low and close like a lap tray (about 40 cm below and 33 cm in front of
-  the eyes), and the orbs sit on a 90 degree arc 60 cm away, so everything is reachable with either hand
-  without leaning, and nothing needs two hands.
+  the eyes); the three layers sit 1.1 to 1.4 m away, within about +28 to -37 degrees, so everything is
+  seen with the eyes and a slight nod and pinched from the seat with either hand. Nothing needs two hands.
 - **Anchored to you.** When the session starts, the whole scene is placed relative to your head position and
   facing, so it fits any seat height and posture. There is no locomotion at all.
 - **Tested without a headset.** We developed and tested entirely in IWSDK's built-in emulator, scripting real
