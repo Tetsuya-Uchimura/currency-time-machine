@@ -59,3 +59,40 @@ export const LAYOUT = {
   heightRange: 0.18,
   orbRadius: 0.032,
 };
+
+/** Orb (and compact trail) height for a strength: one shared scale for all. */
+export function strengthToHeight(strength: number): number {
+  return LAYOUT.heightRange * Math.tanh(strength);
+}
+
+/** Temporal light trails (see src/visual/trails.ts). */
+export const TRAIL = {
+  /** History shown behind each orb, in weeks (the same at any playback speed). */
+  windowWeeks: 52,
+  /** Gap kept between a compact trail's far end and the neighbor orb's core. */
+  compactMargin: 0.012,
+  /** Trails sit this far behind the orb center, so the orb covers their head. */
+  behindOrb: 0.006,
+  /** Ribbon half-width (glow included) in calm weeks, plus extra when busy. */
+  compactHalfWidth: 0.0042,
+  compactVolWidth: 0.0036,
+  /** Faint time marks pinned every this many weeks: they show the flow even
+   *  when rates are flat (the fixed-rate era). */
+  tickWeeks: 13,
+};
+
+/** Expanded lane shown while a currency is soloed. */
+export const LANE = {
+  /** Distance ahead of the head; farther than the orbs, nearer than captions. */
+  z: 0.95,
+  /** Center height: above most orbs, below the caption board. */
+  y: 0.1,
+  halfWidth: 0.27,
+  halfHeight: 0.07,
+  /** Smallest half-range the auto-zoom fits (log units, about 1.2%). */
+  minHalfRange: 0.012,
+  /** Time constant of the zoom glide (s). */
+  zoomTau: 0.6,
+  halfWidthBase: 0.005,
+  halfWidthVol: 0.006,
+};

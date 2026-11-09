@@ -26,13 +26,15 @@ import { Narration } from './a11y/narration.js';
 import { SoundEngine, type VoiceInput } from './audio/engine.js';
 import { strengthToSteps } from './audio/scale.js';
 import { Orb } from './components.js';
-import { BASE_CURRENCY, LAYOUT, SLOTS } from './config.js';
+import { BASE_CURRENCY, LAYOUT, SLOTS, strengthToHeight, TRAIL } from './config.js';
 import { CHAPTERS, EVENTS, FLOAT_START, HINT_TEXT, type HistoryEvent } from './data/events.js';
 import { Timeline } from './data/timeline.js';
 import { loadToday, type TodayData } from './data/today.js';
 import { DEFAULT_PACING, PlaybackClock, slowDownsFor } from './playback/clock.js';
 import { Ambience } from './visual/ambience.js';
-import { createGuides, InfoCard, OrbView, type OrbState } from './visual/orbs.js';
+import { createGuides, OrbView, type OrbState } from './visual/orbs.js';
+import type { TrailTail } from './visual/trail-sampling.js';
+import { TrailField } from './visual/trails.js';
 
 type Phase = 'idle' | 'playing' | 'today';
 
@@ -69,7 +71,7 @@ export class ExperienceSystem extends createSystem({
 
   private rig!: Entity;
   private orbs: OrbView[] = [];
-  private infoCard = new InfoCard();
+  private trails!: TrailField;
   private ambience!: Ambience;
   private captionPanel!: UIKitMLAsset;
   private handPanel!: UIKitMLAsset;
@@ -91,10 +93,16 @@ export class ExperienceSystem extends createSystem({
   private audioPosTimer = 0;
   private debugTimer = 5;
   private infoTimer = 0;
+  /** Today's rates have been applied to the trails (morph done once). */
+  private todayApplied = false;
 
   // Reused per-frame objects (no allocations in update()).
   private readonly voiceInputs: VoiceInput[] = SLOTS.map(() => ({ alive: false, degree: 0, vol: 0 }));
-  private readonly orbStates: OrbState[] = SLOTS.map(() => ({ alive: false, height: 0, brightness: 0, focus: 0, code: '' }));
+  private readonly orbStates: OrbState[] = SLOTS.map(() => ({ alive: false, height: 0, brightness: 0, focus: 0, dim: 0, code: '' }));
+  /** Trail heads (week index) per slot; they differ only in the today ending. */
+  private readonly trailHeads = new Float64Array(SLOTS.length);
+  private readonly trailTails: (TrailTail | null)[] = SLOTS.map(() => null);
+  private readonly orbHeights: number[] = SLOTS.map(() => 0);
   private readonly v1 = new Vector3();
   private readonly v2 = new Vector3();
   private readonly q1 = new Quaternion();
@@ -114,6 +122,33 @@ export class ExperienceSystem extends createSystem({
     };
     document.addEventListener('visibilitychange', onHidden);
     this.cleanupFuncs.push(() => document.removeEventListener('visibilitychange', onHidden));
+    if (import.meta.env.DEV) this.devKeys();
+  }
+
+  /**
+   * Dev only (stripped from production builds): keyboard shortcuts so the
+   * emulator can be driven by automation and demo clips are easy to set up.
+   *   1-5 chapters   g h j k l b n m , solo CAD..AUD   p pause
+   *   6 before the Asian crisis   7 before the 2022 yen slide   0 before the Plaza
+   *   8 near the end   9 replay
+   * (W/A/S/D and the arrows are left alone: the emulator moves the head with them.)
+   */
+  private devKeys(): void {
+    const soloKeys = 'ghjklbnm,';
+    const onKey = (e: KeyboardEvent) => {
+      if (!this.ready) return;
+      const k = e.key.toLowerCase();
+      if (k >= '1' && k <= '5') this.jumpTo(this.timeline.indexOf(CHAPTERS[Number(k) - 1].date));
+      else if (soloKeys.includes(k)) this.toggleSolo(soloKeys.indexOf(k));
+      else if (k === 'p' && this.phase === 'playing') this.setPaused(!this.clock.paused);
+      else if (k === '8') this.jumpTo(this.timeline.count - 40);
+      else if (k === '9') this.start();
+      else if (k === '6') this.jumpTo(this.timeline.indexOf('1997-08-01'));
+      else if (k === '7') this.jumpTo(this.timeline.indexOf('2022-01-07'));
+      else if (k === '0') this.jumpTo(this.timeline.indexOf('1985-06-07'));
+    };
+    window.addEventListener('keydown', onKey);
+    this.cleanupFuncs.push(() => window.removeEventListener('keydown', onKey));
   }
 
   /** Builds the world once data and panels are available. Called from index.ts. */
@@ -135,7 +170,11 @@ export class ExperienceSystem extends createSystem({
     this.focus = SLOTS.map(() => 0);
 
     this.audio = new SoundEngine(SLOTS.map((s) => s.timbre));
-    this.audio.onNote((i, velocity) => this.orbs[i]?.pulse(velocity));
+    // Fires when the note is actually heard (not when it is booked).
+    this.audio.onNote((i, velocity) => {
+      this.orbs[i]?.pulse(velocity);
+      this.trails?.note(i, velocity);
+    });
     // Start fetching today's rates right away; the ending needs them later.
     // (Slot ids are also today's codes: the EUR slot ends as the euro.)
     this.todayPromise = loadToday(SLOTS.map((s) => s.slot));
@@ -158,7 +197,16 @@ export class ExperienceSystem extends createSystem({
       entity.addComponent(PokeInteractable);
       this.orbs.push(view);
     });
-    this.world.createTransformEntity(this.infoCard.mesh, { parent: this.rig });
+
+    // Temporal light trails: each orb drags its past year as a ribbon of light.
+    this.trails = new TrailField(
+      timeline.slots,
+      SLOTS.map((s) => s.color),
+      angles,
+      (year) => timeline.indexOf(`${year}-01-01`),
+      (index) => timeline.dateAt(index).getUTCFullYear(),
+    );
+    this.world.createTransformEntity(this.trails.root, { parent: this.rig });
 
     // Caption board: ahead and above the orbs, large type.
     this.captionPanel = await this.world.assets.instantiate<UIKitMLAsset>('caption-panel');
@@ -191,12 +239,33 @@ export class ExperienceSystem extends createSystem({
   start(): void {
     if (!this.ready) return;
     void this.audio.unlock().then(() => this.audio.setPaused(false));
+    this.morphTrails();
     this.clock.paused = false;
     this.clock.seek(0);
     this.resetMoments(0);
     this.phase = 'playing';
     this.lastDecade = -1;
+    this.lastYear = -1;
+    // Replay: nothing from the previous run may linger (the today caption
+    // never times out on its own, the solo lane, event highlights).
+    this.captionQueue.length = 0;
+    this.caption = null;
+    this.showCaption(null);
+    this.narration.stop();
+    this.today = null;
+    this.todayApplied = false;
+    this.focus.fill(0);
+    this.trails.reset();
+    this.trailTails.fill(null);
+    if (this.solo >= 0) this.toggleSolo(this.solo);
+    this.autoPaused = false;
     this.updatePauseButton();
+  }
+
+  /** The playhead is about to jump: let trails and orbs glide to the new time. */
+  private morphTrails(): void {
+    this.orbs.forEach((o, i) => (this.orbHeights[i] = o.displayHeight));
+    this.trails.beginMorph(this.orbHeights);
   }
 
   /** Called from a user gesture before entering XR so audio may start. */
@@ -282,6 +351,9 @@ export class ExperienceSystem extends createSystem({
   private jumpTo(index: number): void {
     if (this.phase === 'idle') this.start();
     this.audio.dip();
+    this.morphTrails();
+    this.trailTails.fill(null);
+    this.todayApplied = false;
     this.clock.seek(index);
     this.clock.paused = false;
     this.audio.setPaused(false);
@@ -305,8 +377,9 @@ export class ExperienceSystem extends createSystem({
     void this.audio.unlock();
     this.solo = this.solo === index ? -1 : index;
     this.audio.setSolo(this.solo);
+    // The visual half of solo: the expanded light lane.
+    this.trails.setExpanded(this.solo);
     this.infoTimer = 0;
-    if (this.solo < 0) this.infoCard.hide();
   }
 
   // -------------------------------------------------------------------------
@@ -331,11 +404,15 @@ export class ExperienceSystem extends createSystem({
     this.updateYear(p, flowing);
     for (let i = 0; i < this.focus.length; i++) this.focus[i] = Math.max(0, this.focus[i] - dt / FOCUS_HOLD_S);
 
+    this.trailHeads.fill(p);
     if (this.phase === 'today' && this.today) this.applyToday();
     else this.applyPosition(p, dt);
 
     const turb = this.phase === 'today' ? 0.15 : Timeline.sample(this.timeline.turbulence, p);
     const floatBlend = Math.min(1, Math.max(0, (p - this.floatStartIndex + 20) / 40));
+    this.trails.update(dt, { heads: this.trailHeads, tails: this.trailTails, focus: this.focus, turbulence: turb });
+    // Each orb rides exactly on the head of its trail.
+    for (let i = 0; i < this.orbStates.length; i++) this.orbStates[i].height = this.trails.headY(i);
     this.audio.update(this.voiceInputs, turb, floatBlend, flowing);
     this.ambience.update(dt, turb);
     this.orbs.forEach((o, i) => o.update(dt, this.orbStates[i]));
@@ -349,7 +426,7 @@ export class ExperienceSystem extends createSystem({
         this.audio.setVoicePosition(i, this.v1.x, this.v1.y, this.v1.z);
       });
     }
-    this.updateInfoCard(dt, p);
+    this.updateLaneText(dt, p);
     if (import.meta.env.DEV) this.logDiagnostics(dt, p);
   }
 
@@ -391,9 +468,10 @@ export class ExperienceSystem extends createSystem({
   private fill(i: number, alive: boolean, strength: number, momentum: number, vol: number, code: string): void {
     const os = this.orbStates[i];
     os.alive = alive;
-    os.height = LAYOUT.heightRange * Math.tanh(strength / 1.0);
+    os.height = strengthToHeight(strength); // replaced by the trail head each frame
     os.brightness = 0.5 + 0.5 * Math.tanh(momentum * 6);
     os.focus = Math.max(this.focus[i], this.solo === i ? 1 : 0);
+    os.dim = this.solo >= 0 && this.solo !== i ? 1 : 0;
     os.code = code;
     const vi = this.voiceInputs[i];
     vi.alive = alive;
@@ -414,13 +492,20 @@ export class ExperienceSystem extends createSystem({
       const e = m.event;
       const [minS, maxS] = CAPTION_TIMES[e.tier];
       this.enqueue({ label: e.label, text: e.text, minS, maxS });
+      const at = this.timeline.indexOf(e.date);
       for (const slot of e.focus) {
         const i = SLOTS.findIndex((s) => s.slot === slot);
-        if (i >= 0) this.focus[i] = 1;
+        if (i < 0) continue;
+        this.focus[i] = 1;
+        // A warm marker pinned to the event's date on that currency's trail;
+        // it appears when time reaches the date and then flows away with the
+        // history, so the moves that followed are drawn right after it.
+        this.trails.markEvent(i, at);
       }
       if (e.tier === 'major') {
         this.audio.gong();
         this.ambience.markEvent();
+        this.trails.boostAll();
       }
     }
   }
@@ -490,42 +575,67 @@ export class ExperienceSystem extends createSystem({
     this.phase = 'today';
     this.updatePauseButton();
     void (this.todayPromise ?? Promise.resolve(null)).then((today) => {
+      if (this.phase !== 'today') return; // Replay was pressed meanwhile
       this.today = today;
       this.captionPanel.requireElementById('year-text').setProperties({ text: 'Today' });
-      const when = today ? formatDate(today.asOf) : formatDate(this.timeline.dateAt(this.timeline.count - 1).toISOString().slice(0, 10));
-      const saved = today?.source === 'bundled' ? ' (latest saved rates)' : '';
       this.captionQueue.length = 0;
       this.caption = null;
-      this.enqueue({
-        label: `${when}${saved}`,
-        text: 'This is the world of money right now. Pinch a light to hear how it moved since yesterday.',
-        minS: 30,
-        maxS: 1e9,
-      });
+      this.enqueue({ ...this.todayCaption(today), minS: 30, maxS: 1e9 });
       if (today) this.rollCall(today);
     });
+  }
+
+  /**
+   * The ending's caption. It says plainly when the rates are a saved copy
+   * (and when that copy was fetched), and when currencies' latest rates come
+   * from different days, so they are not mistaken for one live moment.
+   */
+  private todayCaption(today: TodayData | null): { label: string; text: string } {
+    if (!today) {
+      const last = this.timeline.dateAt(this.timeline.count - 1).toISOString().slice(0, 10);
+      return { label: formatDate(last), text: 'Live rates are unavailable. This is the last week in our history.' };
+    }
+    const dates = SLOTS.map((_, i) => this.todayRate(i, today)?.date).filter((d): d is string => !!d);
+    const earliest = dates.reduce((m, d) => (d < m ? d : m), today.asOf);
+    const mixed = earliest !== today.asOf;
+    const bundled = today.source === 'bundled';
+    const label = bundled ? `Saved rates from ${formatFetched(today.fetchedAt ?? today.asOf)}` : formatDate(today.asOf);
+    let text: string;
+    if (mixed) text = `Each light shows its latest rate; some are from ${formatShort(earliest)}. Pinch one for details.`;
+    else if (bundled) text = 'Live rates are unavailable right now. Pinch a light to hear its latest move.';
+    else text = 'This is the world of money right now. Pinch a light to hear how it moved since yesterday.';
+    return { label, text };
   }
 
   /** Map today's live rates onto the orbs (strength since each one's birth). */
   private applyToday(): void {
     const today = this.today!;
+    const last = this.timeline.count - 1;
+    if (!this.todayApplied) this.morphTrails(); // glide from the last week to today
     this.timeline.slots.forEach((s, i) => {
       const r = this.todayRate(i, today);
       if (!r) return;
       const strength = Math.log(s.firstRate / r.rate);
       const daily = Math.log(r.prev / r.rate);
       this.fill(i, true, strength, daily * 40, 0, r.code);
+      // The trail ends at this currency's own latest date (not a shared
+      // "today"), joined to the weekly history by a straight line between
+      // two real observations.
+      const at = Math.max(last, this.timeline.indexOf(r.date));
+      this.trailHeads[i] = at;
+      this.trailTails[i] = { index: at, value: strength };
     });
+    this.todayApplied = true;
   }
 
-  private todayRate(i: number, today: TodayData): { code: string; rate: number; prev: number } | null {
+  private todayRate(i: number, today: TodayData): { code: string; rate: number; prev: number; date: string; prevDate: string } | null {
     const s = this.timeline.slots[i];
     const code = s.segments[s.segments.length - 1].code;
     const r = today.rates[code];
     if (!r) return null;
     // The EUR slot's history is in Deutsche Mark units; convert today's euro.
     const k = s.segments.length > 1 ? s.chainFactor : 1;
-    return { code, rate: r.rate * k, prev: r.prev * k };
+    return { code, rate: r.rate * k, prev: r.prev * k, date: r.date, prevDate: r.prevDate };
   }
 
   /** Each currency speaks once, left to right: a rising or falling grace note
@@ -545,43 +655,48 @@ export class ExperienceSystem extends createSystem({
   }
 
   // -------------------------------------------------------------------------
-  // Solo info card
+  // Solo lane text
   // -------------------------------------------------------------------------
 
-  private updateInfoCard(dt: number, p: number): void {
+  /** Name and numbers for the expanded lane (a few times a second). */
+  private updateLaneText(dt: number, p: number): void {
     if (this.solo < 0) return;
-    const orb = this.orbs[this.solo];
-    orb.group.getWorldPosition(this.v1);
-    this.rig.object3D!.worldToLocal(this.v1);
-    // Float the card just above the orb, nudged toward the user.
-    this.v2.copy(this.v1).multiplyScalar(0.92);
-    this.infoCard.mesh.position.set(this.v2.x, this.v1.y + 0.1, this.v2.z);
-    this.infoCard.mesh.rotation.y = orb.group.rotation.y;
-
     this.infoTimer -= dt;
     if (this.infoTimer > 0) return;
     this.infoTimer = 0.25;
     const i = this.solo;
     const s = this.timeline.slots[i];
     const meta = SLOTS[i];
+    const base = BASE_CURRENCY.code;
+    const months = Math.round((TRAIL.windowWeeks * 7) / 30.44);
+
     if (this.phase === 'today' && this.today) {
       const r = this.todayRate(i, this.today);
       if (r) {
-        const pct = (r.prev / r.rate - 1) * 100;
-        this.infoCard.show(`${r.code}  ${meta.names[r.code] ?? ''}`, `${signed(pct, 2)}% vs ${BASE_CURRENCY.code} since yesterday`, meta.color);
+        const day = (r.prev / r.rate - 1) * 100;
+        const w = this.trails.windowInfo(i);
+        this.trails.setLaneText(
+          `${r.code}  ${meta.names[r.code] ?? ''}`,
+          w ? `${signed(w.pct, 1)}% vs ${base} in ${months} months` : '',
+          `${formatShort(r.prevDate)} to ${formatShort(r.date)}: ${signed(day, 2)}% vs ${base}`,
+        );
         return;
       }
     }
     const code = this.timeline.codeAt(i, p);
-    const name = meta.names[code] ?? code;
+    const title = `${code}  ${meta.names[code] ?? code}`;
     if (p < s.first) {
       const from = this.timeline.dateAt(s.first).getUTCFullYear();
-      this.infoCard.show(`${code}  ${name}`, `Data begins in ${from}`, meta.color);
+      this.trails.setLaneText(title, '', `Data begins in ${from}`);
       return;
     }
-    const pct = (Math.exp(Timeline.sample(s.strength, p)) - 1) * 100;
+    const w = this.trails.windowInfo(i);
     const since = this.timeline.dateAt(s.first).getUTCFullYear();
-    this.infoCard.show(`${code}  ${name}`, `${signed(pct, 0)}% vs ${BASE_CURRENCY.code} since ${since}`, meta.color);
+    const total = (Math.exp(Timeline.sample(s.strength, p)) - 1) * 100;
+    // When the window reaches back before the data starts, say so.
+    const clipped = w !== null && w.fromT > p - TRAIL.windowWeeks + 0.5;
+    const stat = w ? `${signed(w.pct, 1)}% vs ${base} ${clipped ? `since ${since}` : `in ${months} months`}` : '';
+    this.trails.setLaneText(title, stat, `Since ${since}: ${signed(total, 0)}% vs ${base}`);
   }
 
   // -------------------------------------------------------------------------
@@ -642,6 +757,20 @@ export class ExperienceSystem extends createSystem({
 function signed(x: number, digits: number): string {
   const s = Math.abs(x).toFixed(digits);
   return x >= 0 ? `+${s}` : `-${s}`;
+}
+
+/** "Nov 6" */
+function formatShort(iso: string): string {
+  const d = new Date(iso.slice(0, 10) + 'T00:00:00Z');
+  return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', timeZone: 'UTC' });
+}
+
+/** "Nov 8, 22:50 UTC" (short enough for one caption line), or a plain date. */
+function formatFetched(iso: string): string {
+  if (iso.length <= 10) return formatShort(iso);
+  const d = new Date(iso);
+  if (Number.isNaN(d.getTime())) return iso;
+  return `${formatShort(d.toISOString())}, ${d.toISOString().slice(11, 16)} UTC`;
 }
 
 function formatDate(iso: string): string {

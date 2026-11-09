@@ -39,6 +39,8 @@ export interface OrbState {
   brightness: number;
   /** Extra emphasis 0..1 (event focus / solo). */
   focus: number;
+  /** 0..1: another currency is soloed, so this one steps back. */
+  dim: number;
   code: string;
 }
 
@@ -58,6 +60,7 @@ export class OrbView {
   private glow = 0;
   private shown = 0; // displayed brightness (slew limited)
   private height = 0;
+  private dimShown = 0;
   private wake = 0; // 0 dormant -> 1 fully awake
 
   constructor(
@@ -99,6 +102,11 @@ export class OrbView {
     this.group.rotation.y = -angle;
   }
 
+  /** Current displayed height offset (m) relative to the birth level. */
+  get displayHeight(): number {
+    return this.height;
+  }
+
   /** A note was played by this currency: start a soft glow. */
   pulse(velocity: number): void {
     this.glow = Math.max(this.glow, 0.35 + 0.4 * velocity);
@@ -112,10 +120,12 @@ export class OrbView {
     this.wake = Math.min(1, Math.max(0, this.wake));
     const w = this.wake * this.wake * (3 - 2 * this.wake);
 
-    // Height follows the data smoothly (no jitter between weekly samples).
-    const targetH = s.alive ? s.height : 0;
-    this.height += (targetH - this.height) * Math.min(1, dt * 6);
+    // While alive the orb sits exactly on the head of its light trail (the
+    // trail already smooths jumps). Dormant orbs settle back to the birth level.
+    if (s.alive) this.height = s.height;
+    else this.height += (0 - this.height) * Math.min(1, dt * 6);
     this.group.position.y = LAYOUT.baseY + this.height;
+    this.dimShown += (s.dim - this.dimShown) * Math.min(1, dt / 0.4);
 
     this.glow *= Math.exp(-dt / GLOW_DECAY_S);
     const target = s.alive ? Math.min(1.6, 0.45 + 0.45 * s.brightness + this.glow + 0.35 * s.focus) : 0.12;
@@ -123,12 +133,14 @@ export class OrbView {
     this.shown += Math.max(-maxStep, Math.min(maxStep, target - this.shown));
 
     const b = this.shown;
+    // Another currency is soloed: step back (applied last, so it always shows).
+    const keep = 1 - 0.6 * this.dimShown;
     this.core.scale.setScalar(0.35 + 0.65 * w);
-    this.coreMat.color.copy(this.baseColor).multiplyScalar(0.35 + 0.65 * Math.min(1, b));
+    this.coreMat.color.copy(this.baseColor).multiplyScalar((0.35 + 0.65 * Math.min(1, b)) * keep);
     if (!s.alive) this.coreMat.color.lerp(this.tmp.setRGB(0.25, 0.27, 0.32), 0.6);
-    this.haloMat.opacity = w * Math.min(0.85, 0.12 + 0.5 * b);
+    this.haloMat.opacity = w * Math.min(0.85, 0.12 + 0.5 * b) * keep;
     this.halo.scale.setScalar(LAYOUT.orbRadius * (3.5 + 2.5 * Math.min(1, b)));
-    this.labelMat.opacity = 0.35 + 0.65 * w;
+    this.labelMat.opacity = (0.35 + 0.65 * w) * (1 - 0.45 * this.dimShown);
   }
 
   private drawLabel(code: string): void {
@@ -175,66 +187,9 @@ export function createGuides(angles: number[]): LineSegments {
   return lines;
 }
 
-/** Floating info card shown above a soloed orb. */
-export class InfoCard {
-  readonly mesh: Mesh;
-  private readonly canvas = document.createElement('canvas');
-  private readonly tex: CanvasTexture;
-  private lastKey = '';
-
-  constructor() {
-    this.canvas.width = 640;
-    this.canvas.height = 200;
-    this.tex = new CanvasTexture(this.canvas);
-    this.tex.colorSpace = SRGBColorSpace;
-    const mat = new MeshBasicMaterial({ map: this.tex, transparent: true, depthWrite: false, toneMapped: false });
-    this.mesh = new Mesh(new PlaneGeometry(0.2, 0.0625), mat);
-    this.mesh.raycast = () => {};
-    this.mesh.visible = false;
-    this.mesh.renderOrder = 10;
-  }
-
-  /** Redraws only when the text changes (cheap; called a few times a second). */
-  show(line1: string, line2: string, accent: number): void {
-    this.mesh.visible = true;
-    const key = line1 + '|' + line2;
-    if (key === this.lastKey) return;
-    this.lastKey = key;
-    const ctx = this.canvas.getContext('2d')!;
-    ctx.clearRect(0, 0, 640, 200);
-    ctx.fillStyle = 'rgba(6,10,20,0.92)';
-    roundRect(ctx, 4, 4, 632, 192, 28);
-    ctx.fill();
-    ctx.strokeStyle = '#' + new Color(accent).getHexString();
-    ctx.lineWidth = 6;
-    ctx.stroke();
-    ctx.textAlign = 'center';
-    ctx.fillStyle = '#ffffff';
-    ctx.font = 'bold 62px system-ui, sans-serif';
-    ctx.fillText(line1, 320, 80);
-    ctx.font = '50px system-ui, sans-serif';
-    ctx.fillStyle = '#e8ecf4';
-    ctx.fillText(line2, 320, 156);
-    this.tex.needsUpdate = true;
-  }
-
-  hide(): void {
-    this.mesh.visible = false;
-  }
-}
-
-function roundRect(ctx: CanvasRenderingContext2D, x: number, y: number, w: number, h: number, r: number) {
-  ctx.beginPath();
-  ctx.moveTo(x + r, y);
-  ctx.arcTo(x + w, y, x + w, y + h, r);
-  ctx.arcTo(x + w, y + h, x, y + h, r);
-  ctx.arcTo(x, y + h, x, y, r);
-  ctx.arcTo(x, y, x + w, y, r);
-  ctx.closePath();
-}
-
 let haloTex: CanvasTexture | null = null;
-function haloTexture(): CanvasTexture {
+/** Shared soft round glow texture (orb halos, trail sparks). */
+export function haloTexture(): CanvasTexture {
   if (haloTex) return haloTex;
   const c = document.createElement('canvas');
   c.width = c.height = 128;
