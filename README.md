@@ -1,25 +1,27 @@
 # Currency Time Machine
 
-**Sit back. From 1948 to today, the world's money plays in front of you as light, sound and history.**
+**Travel through time. Meet the people, explore the events, and discover how currencies changed.**
 
 A hands-only, seated WebXR experience for Meta Quest, built with the Immersive Web SDK (IWSDK).
-Three layers float in front of you, all driven by one clock:
+Pick any year from 1948 to today. **Tock**, a small guide robot, sets the dial, and a tunnel of gold and
+cyan light carries you there. Then the year plays out in front of you on three layers, all driven by one
+clock:
 
-1. **Historical Events** (top): the era you are in; at four major moments, photographs of the city at the
-   time, the people who made the decisions, the policies and the date.
-2. **Multi-Currency Timeline** (middle): nine glowing lines flowing from right to left, each currency's change
-   in value against the US dollar over the last 12 months, on one shared scale.
-3. **Interactive World Currency Map** (bottom): a holographic world map with each currency's home, its code
-   and the same change, lighting up where history is happening.
+1. **The year stage** (top): the year and its era, who governed the places that mattered (with portraits),
+   each event on its date, and at the end a summary of the year.
+2. **Multi-Currency Timeline** (middle): January to December, each currency's change in value against the
+   US dollar since the year's first week, drawn as time passes, on one shared scale. The guide lights the
+   currencies it is talking about; the others step back.
+3. **Interactive World Currency Map** (bottom): each currency's home, its code and the same change; the
+   robot points at the places it introduces, and you can pinch any of them to open its leaders.
 
-Time fast-forwards from the quiet fixed-rate world of 1948, through the 1971 break between the dollar and
-gold, the coordinated push on the dollar in 1985, the Asian currency crisis, the birth of the euro and the 2008
-crisis, until the present catches up with you and today's real exchange rates appear. Look straight ahead and
-you see at once **where** money is moving, **which** currencies move, **how much**, and **why**.
+Every name, date and number is checked: leaders' terms against Wikidata and Wikipedia, events against
+their sources, and every exchange-rate figure is computed from the weekly data, never typed in.
 
 - Play: https://currency-time-machine.pages.dev (open in the Meta Quest browser and tap Enter VR)
-- Length: about 4 minutes; pause, resume or jump between eras at any time
-- Input: hands only (pinch and poke). Controllers also work, but are never required.
+- **Year Journey** (default): about 1.5 to 2 minutes per year; go to the previous or next year, or any other.
+- **Full Journey**: the whole story from 1948 to today in about 4 minutes, with the guide in the background.
+- Input: hands only (pinch and poke). Controllers, a mouse or a keyboard also work, but are never required.
 
 Exchange rate data: Frankfurter (frankfurter.dev)
 
@@ -29,18 +31,95 @@ Exchange rate data: Frankfurter (frankfurter.dev)
 
 | You do | What happens |
 | --- | --- |
-| Put on the headset and enter VR | 1948 begins at once. No menus, no tutorial screen. |
-| **Pinch** (or **poke**) **Pause** on the small panel at your lap | Time, sound, lines and map stop together; pinch again to resume. |
-| Pinch or poke **1948 / 1971 / 1990 / 2008 / 2020** | Jump to that era: the chart shows that moment's past year at once. |
-| **Pinch a currency on the map** (its marker or label) **or on the chart** (its label at the right) | Solo: its line comes first and the others fade (never vanish), its home region glows, and its voice comes forward in the mix. The chart header gives its change over the year and since its data began. Pinch again to release. |
-| Pinch the **Historical Events** band while a city is shown | People and their roles, policies, the place and the sources. Time eases almost to a stop while you read; pinch again to continue. |
-| Pinch **Voice** | Captions are also read aloud. |
-| At the end, pinch **Replay** | Start again from 1948. |
+| Choose **Year Journey** (or **Full Journey**) on the start screen and enter VR | Tock says hello (about 15 s; **Skip intro** at any time). Subtitles are always on; **Guide voice** reads them aloud. |
+| Turn the dial: **-10 / -1 / +1 / +10**, a decade, or a famous year (**1971, 1985, 1997, 2008, 2022**) | The year's verified events are previewed (date, places, currencies to watch). The same dial is on the panel at your lap. |
+| Pinch **Start Travel** | The time tunnel: rings of light and the years running back to your year (about 3 s; **Skip** jumps to the arrival). You never move. |
+| Watch the year | The guide introduces the world, then the leaders of two or three places, then each event on its date; the line of the currency in question is lit and the robot points at its home on the map. The year stops at each of these moments while the guide speaks. |
+| **Pinch a country's marker on the map** (or a currency's label on the chart) | That place opens: its leaders this year, how it is governed, and its currency so far. The guide pauses. Pinch it again to go on. |
+| Pinch **All** | Show all nine currencies at full strength (the guide's spotlight off). |
+| At the end of the year | The summary: events, places, policymakers, and the ranking of the year's changes. **Explore another year, Previous year, Next year, Replay this year, Full Journey.** |
+| **Pause**, **Voice**, **Skip**, **Calm** on the lap panel | Pause and resume, speech on/off, skip a line, and reduced motion for the tunnel. |
 
-The hand panel is within about 40 cm (pinch or touch); the three bands are 1.1 to 1.4 m away and are
-pinched from where you sit. There is no walking, no turning around and no artificial movement of the world.
+On a PC: click the buttons with the mouse, or use the keyboard: `[` `]` change the year by one, `-` `=`
+by ten, Enter starts the travel (or goes to the next year), Escape skips, Space pauses.
 
-Without a headset, use **Watch in browser** on the start screen and click instead of pinching.
+## Year Journey
+
+### The guide robot
+
+Tock is made in code from a few simple shapes (no external model): a pearl body with a matcap shading
+generated at load, a dark visor with glowing eyes, an antenna with a gold "time" light, two side rings and two
+floating hands. It is about 15 cm tall, floats beside the panels on your left (never in front of your face)
+and shows what it is doing:
+
+| Mood | How it shows |
+| --- | --- |
+| Idle | slow float, gentle sway, a blink every few seconds |
+| Talking | the mouth light moves with the line, a small nod, the antenna glows |
+| Pointing | turns toward a map marker, reaches out, and a soft beam joins its hand to the marker |
+| Excited | happy eye arcs, a livelier bob, faster side rings (an event, an arrival) |
+| Traveling | leans into the tunnel, thruster bright |
+| Thinking | looks up and aside, three dots breathe above its head (while you choose a year) |
+
+Its voice is the browser's speech synthesis (English; the script's strings are in one place for
+translation). Speech starts only after a user action, subtitles never depend on it, and while it speaks the
+music steps back so the words stay clear.
+
+### The time tunnel
+
+Sixteen thin rings of gold and cyan light come out of the depth toward you, with streaks of light, drifting
+motes, years passing on the rings, and the year counter running to your destination. The camera never moves:
+the rings move, and they fade before they get near, so nothing sweeps through the edge of your vision. The
+robot and the lap panel stay put as fixed reference points, and a still ring frames the view. There is no
+white flash; the arrival is a soft warm glow. **Calm motion** keeps the rings still and runs a slow wave of
+light through them instead. It lasts about 3 seconds and can be skipped.
+
+### How a year is told
+
+1. **The world**: the year, its era, the two or three places to watch (from the year's events, then the
+   biggest movers).
+2. **The leaders**: for each place, who held office during the year (two names when it changed hands) and,
+   for central banks, who led them; each place by its own system (presidents, prime ministers, chancellors,
+   the Swiss Federal Council, the Communist Party's leader and the Premier; the euro area is the European
+   Central Bank, not one head of government). West Germany and Germany are told apart.
+3. **The events**: each verified event at its date, with a gong, a marker on the chart and the lines it
+   touched lit; the four great moments also open their Historical Portal (city photographs, decision makers).
+4. **The currencies**: the sharpest eight-week stretch of the year while it happens, then the year's result.
+5. **The summary**: events, places, policymakers and the year's changes, ranked.
+
+The five featured years (1971, 1985, 1997, 2008, 2022) have their own opening line; any number in it is
+computed from the data. Every other year works the same way from the data alone, and says so when it has
+no verified event.
+
+### Measuring a year
+
+- The year runs from its **first weekly observation** (on or after 1 January) to its **last** (on or before
+  31 December), and the app names both dates. Nothing is interpolated across New Year.
+- Change is the change in a currency's **value against the US dollar**: (rate at the start / rate at the end
+  - 1). A stronger yen means fewer yen per dollar: a positive number.
+- A currency whose data begins inside the year (JPY in 1969) is measured from its first week and is
+  **not ranked** with the others. 1948 begins in June (the data's first week). The latest year is
+  **year to date**, and nothing after the last observation is shown.
+- The chart draws each line only up to the playhead: the year is never shown ahead of time.
+
+### Where the facts come from
+
+| What | Source and check |
+| --- | --- |
+| Leaders (23 offices, 1948 to today) | Wikidata "position held" with start and end dates (`npm run leaders`). Each term is cross-checked against the person's English Wikipedia infobox; 190+ terms agree, the rest are Wikidata-only and listed for review. Periods with no recorded holder show "no verified record". Gaps filled by name are verified the same way. Report: [docs/leaders-verification.md](docs/leaders-verification.md). |
+| Portraits | The person's Wikidata image, used only with an accepted license (public domain, CC0, CC BY, CC BY-SA), with its credit on screen. |
+| Events (61, 1948 to 2026) | Written in `content/annual-events.json`; `npm run events` keeps an event only if one of its sources contains its date and keywords. When the sources give only the month or the year, the app shows no more than that. Report: [docs/events-verification.md](docs/events-verification.md). |
+| Exchange rates | Frankfurter composite rates, weekly (see Data). |
+
+### Contest-safe build (Rule 17)
+
+The official rules of the Meta VR Start Developer Competition 2026 (section 17) restrict references to and
+depictions of identifiable people other than the entrant. Showing historical leaders by name and portrait is
+central to this design, but **the organizers' written permission has not been confirmed**. Until it is,
+`npm run build:contest` makes a build that shows **no names or portraits of real people**: the guide speaks
+of offices, not names, the panels show offices and terms only, the Historical Portals keep their places and
+policies, and the names and portraits are removed from the built files. The public site and the demo video
+must be made from this build unless the organizers confirm in writing.
 
 ## The three bands
 
@@ -273,27 +352,46 @@ Designed in from the start, not added at the end:
 ## How it is built
 
 - **Immersive Web SDK 1.1** (Meta) on three.js: an ECS app (`ExperienceSystem`) with IWSDK's input stack.
-  The map markers and labels, the chart labels and the hand panel carry `RayInteractable` (pinch) and
-  `PokeInteractable` (touch); presses arrive as the `Pressed` tag and UIKit `click` events. The hand panel
-  is written in UIKitML. Solo and event emphasis are one shared state read by the chart, the map and the sound.
+  The map markers and labels, the chart labels, the Year Journey's buttons and the hand panel carry
+  `RayInteractable` (pinch) and `PokeInteractable` (touch); presses arrive as the `Pressed` tag (buttons
+  light up with `Hovered`) and UIKit `click` events. The hand panel is written in UIKitML. Solo, the guide's
+  spotlight and event emphasis are one shared state read by the chart, the map and the sound.
+- **One clock.** The Year Journey plays one year through the same `PlaybackClock` as the Full Journey, in a
+  window (`setWindow`) it can never leave, and stops at the guide's beats (`stopAt`). The phases (intro,
+  select, warp, review, summary, Full Journey, today) are one state machine in `experience.ts`; changing
+  year clears the subtitles, speech, portals and spotlight, so nothing from another year lingers.
 - **Sound** is fully procedural Web Audio: one `PannerNode` (HRTF) per currency, additive and FM voices
   built from `PeriodicWave`s, a generated reverb impulse, and a drone chord. It shares three.js's
   `AudioContext`, so the `AudioListener` IWSDK attaches to your head drives the spatialization.
 - **Visuals** are procedural: nine dynamic ribbon meshes (about 54 points each) with an additive glow shader,
   unlit spheres with halos, a 2,500-point dot map recolored in place, canvas-texture labels redrawn only when
   their text changes, a shader sky and a point cloud of motes. Geometry and textures are created once and
-  reused; nothing is allocated per frame for them. No dynamic lights, no shadows, no post effects. Aimed at
-  72 fps on Quest 3 (measured at 60 fps in the desktop emulator; not yet measured on a headset).
+  reused; nothing is allocated per frame for them. No dynamic lights, no shadows, no post effects. The robot
+  is about 20 small meshes with matcap and unlit materials; the time tunnel is 16 thin ring meshes, one line
+  set and one point cloud, hidden when not in use. Aimed at 72 fps on Quest 3 (measured at 56 to 60 fps in
+  the desktop emulator; not yet measured on a headset).
 
 ```
 scripts/build_history.py   Frankfurter -> public/data/history.json + snapshot.json (Python, tested)
 scripts/build_map.py       Natural Earth -> public/data/world-map.json (Equal Earth dots + coastlines)
 scripts/build_media.py     verified people, portraits and city photos -> public/data/history-content.json
+scripts/build_leaders.py   Wikidata + Wikipedia -> public/data/leaders.json, portraits (every year's leaders)
+scripts/build_events.py    content/annual-events.json, checked against sources -> public/data/annual-events.json
+scripts/strip_people.py    the contest-safe build: removes names and portraits from dist/
 scripts/simulate-pacing.ts how long each era and event takes with the current pacing
 functions/api/today.ts     Cloudflare Pages Function for today's rates (cached, with fallback)
 src/index.ts               boot: World.create, load data, start screen
 src/config.ts              currencies, the three bands' placement (BANDS), chart/map sizes, voice positions
-src/experience.ts          the conductor: one clock -> events band, chart, map and sound; solo; today ending
+src/experience.ts          the conductor: phases, one clock -> top band, chart, map, robot and sound
+src/guide/guide-scripts.ts what the guide says for any year, and when (pure, tested)
+src/playback/year-journey.ts  walks a year's beats on the clock; the tunnel's year counter (pure, tested)
+src/data/annual-currency.ts   a year's window, annual changes, ranking, sharpest move (pure, tested)
+src/data/annual-history.ts    regions and systems, leaders in a year, the year's events (pure, tested)
+src/visual/guide-robot.ts     Tock, the guide robot
+src/visual/time-machine-tunnel.ts  the time tunnel
+src/visual/year-selector.ts   the year selector and the subtitle strip
+src/visual/year-stage.ts      the top band during a year: world, leaders, event, summary
+src/visual/ui-button.ts       pinchable canvas buttons
 src/data/chart-series.ts   common-base % change, shared y-range, gridlines, label spreading (pure, tested)
 src/data/world-map.ts      projection, currency anchors, labels, DEM/euro area over time (pure, tested)
 src/data/eras.ts           the eras shown between events
@@ -308,8 +406,8 @@ src/visual/glow.ts         shared glowing ribbons, sparks, line sets and text pl
 src/visual/trail-sampling.ts  samples a 52-week window from the weekly data (pure, tested)
 src/playback/portal-director.ts  when a portal opens, highlights and closes (pure, tested)
 public/ui/hand-panel.uikitml  the hand panel
-tests/                     pytest for the data, media and map pipelines; node:test for the chart, map,
-                           layout, portals, history content, trails and the Pages Function
+tests/                     pytest for the data, media, map, leaders and events pipelines; node:test for the
+                           year math, guide script, runner, chart, map, layout, portals, trails, Pages Function
 ```
 
 ## Development
@@ -323,17 +421,21 @@ npm test           # pytest (data, media, map pipelines) + node:test (chart, map
 npm run data       # re-download history and rebuild public/data/history.json + snapshot.json
 npm run map        # rebuild the world map from Natural Earth
 npm run media      # re-verify people and rebuild portraits and city photos
+npm run leaders    # rebuild every year's leaders from Wikidata (cross-checked with Wikipedia) + portraits
+npm run events     # re-check the Year Journey's events against their sources
 npm run pacing     # print when each event happens in the time-lapse
 npm run build      # production build into dist/
+npm run build:contest  # the same without any real person's name or portrait (Rule 17)
 ```
 
-In the emulator, enter XR, then switch the input to hands to try pinch and poke. Point a hand at a map
-marker or a chart label and pinch to solo that currency.
+In the emulator, enter XR, then switch the input to hands to try pinch and poke. Point a hand at a button,
+a map marker or a chart label and pinch. (Keep the emulated hand away from the lap panel, or its ray hits the
+panel first.)
 
-Dev builds only (not in production): keys `1`-`5` jump to the chapters, `g h j k l b n m ,` solo CAD to AUD,
-`p` pauses, `0` / `6` / `7` jump before the 1985 moment / the Asian crisis / the 2022 yen slide, `8` goes to
-the last weeks, `9` replays, and `c` lifts the frame-time cap (useful when a backgrounded emulator window is
-throttled to 1 fps). Handy for checking scenes and recording clips.
+Dev builds only (not in production): `y` opens the year selector, `9` starts the Full Journey, keys `1`-`5`
+jump to its chapters, `g h j k l b n m ,` pinch CAD to AUD and `u` the US dollar's marker, `p` pauses,
+`0` / `6` / `7` jump before the 1985 moment / the Asian crisis / the 2022 yen slide, `8` goes to the last
+weeks, and `c` lifts the frame-time cap (useful when a backgrounded emulator window is throttled to 1 fps).
 
 ### Deploy (Cloudflare Pages)
 
@@ -351,6 +453,7 @@ never loads media from other sites at runtime):
 | Asset | Source and license |
 | --- | --- |
 | World map (land, countries) | Natural Earth 1:110m, public domain |
+| Leaders' portraits (195) | Wikimedia Commons via Wikidata, each with its license (public domain, CC0, CC BY, CC BY-SA), author and source: see [docs/leaders-verification.md](docs/leaders-verification.md); shown with their credit |
 | City photographs and portraits | Wikimedia Commons, each with its own license (public domain, CC0, CC BY, CC BY-SA, KOGL Type 1), author and source: see [docs/portal-assets.md](docs/portal-assets.md) and [docs/history-verification.md](docs/history-verification.md) |
 
 | Component | License |
