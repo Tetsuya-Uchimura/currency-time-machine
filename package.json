@@ -13,7 +13,8 @@
     "typecheck": "tsc --noEmit",
     "build": "vite build",
     "preview": "vite preview",
-    "test": "python -m pytest -q && node --test tests/today.test.ts tests/trails.test.ts tests/portals.test.ts",
+    "test": "python -m pytest -q && node --test tests/today.test.ts tests/trails.test.ts tests/portals.test.ts tests/history.test.ts",
+    "media": "python scripts/build_media.py",
     "data": "python scripts/build_history.py",
     "pacing": "node scripts/simulate-pacing.ts"
   },

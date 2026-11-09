@@ -29,6 +29,7 @@ import { Orb, PortalTarget } from './components.js';
 import { BASE_CURRENCY, LAYOUT, SLOTS, strengthToHeight, TRAIL } from './config.js';
 import { CHAPTERS, EVENTS, FLOAT_START, HINT_TEXT, type HistoryEvent } from './data/events.js';
 import { PORTAL_SCENES } from './data/portals.js';
+import { CURRENCY_WORDS, readoutLine, type HistoryContent } from './data/history-content.js';
 import { Timeline } from './data/timeline.js';
 import { loadToday, type TodayData } from './data/today.js';
 import { DEFAULT_PACING, PlaybackClock, slowDownsFor } from './playback/clock.js';
@@ -115,6 +116,7 @@ export class ExperienceSystem extends createSystem({
   private infoTimer = 0;
   /** Today's rates have been applied to the trails (morph done once). */
   private todayApplied = false;
+  private readoutTimer = 0;
 
   // Reused per-frame objects (no allocations in update()).
   private readonly voiceInputs: VoiceInput[] = SLOTS.map(() => ({ alive: false, degree: 0, vol: 0 }));
@@ -154,7 +156,7 @@ export class ExperienceSystem extends createSystem({
    * emulator can be driven by automation and demo clips are easy to set up.
    *   1-5 chapters   g h j k l b n m , solo CAD..AUD   p pause
    *   6 before the Asian crisis   7 before the 2022 yen slide   0 before the 1985 moment
-   *   8 near the end   9 replay   c no frame-time cap (throttled emulator)
+   *   8 near the end   9 replay   c no frame-time cap (throttled emulator)   v portal card
    * (W/A/S/D and the arrows are left alone: the emulator moves the head with them.)
    */
   private devKeys(): void {
@@ -166,6 +168,7 @@ export class ExperienceSystem extends createSystem({
       else if (soloKeys.includes(k)) this.toggleSolo(soloKeys.indexOf(k));
       else if (k === 'p' && this.phase === 'playing') this.setPaused(!this.clock.paused);
       else if (k === 'c') this.devRealtime = !this.devRealtime;
+      else if (k === 'v') this.portals.toggleDetails();
       else if (k === '8') this.jumpTo(this.timeline.count - 40);
       else if (k === '9') this.start();
       else if (k === '6') this.jumpTo(this.timeline.indexOf('1997-08-01'));
@@ -177,7 +180,7 @@ export class ExperienceSystem extends createSystem({
   }
 
   /** Builds the world once data and panels are available. Called from index.ts. */
-  async setup(timeline: Timeline): Promise<void> {
+  async setup(timeline: Timeline, content: HistoryContent | null = null): Promise<void> {
     this.timeline = timeline;
     this.floatStartIndex = timeline.indexOf(FLOAT_START);
     this.clock = new PlaybackClock(timeline.count - 1, {
@@ -243,7 +246,7 @@ export class ExperienceSystem extends createSystem({
         return { at, lead: MAJOR_LEAD, closeBy };
       }),
     );
-    this.portals = new HistoricalPortals(PORTAL_SCENES, (t) => this.world.renderer.initTexture(t));
+    this.portals = new HistoricalPortals(PORTAL_SCENES, content, (t) => this.world.renderer.initTexture(t));
     const portalEntity = this.world.createTransformEntity(this.portals.root, { parent: this.rig });
     const portalHit = this.world.createTransformEntity(this.portals.hit, { parent: portalEntity });
     portalHit.addComponent(PortalTarget);
@@ -286,6 +289,7 @@ export class ExperienceSystem extends createSystem({
     this.resetMoments(0);
     this.director.seek(0);
     this.portals.hideDetails();
+    this.clock.rate = 1;
     this.phase = 'playing';
     this.lastDecade = -1;
     this.lastYear = -1;
@@ -445,6 +449,9 @@ export class ExperienceSystem extends createSystem({
     this.syncListener();
 
     if (this.phase === 'playing' && !this.clock.paused) {
+      // An open history card eases time almost to a stop (and back).
+      const rateTarget = this.portals.showingDetails ? 0.12 : 1;
+      this.clock.rate += (rateTarget - this.clock.rate) * Math.min(1, dt / 0.5);
       this.clock.advance(dt);
       this.fireMoments();
       if (this.clock.ended) this.enterToday();
@@ -583,7 +590,8 @@ export class ExperienceSystem extends createSystem({
   /** Open, animate and close the Historical Portals. */
   private updatePortals(dt: number, p: number, flowing: boolean): void {
     const playing = this.phase === 'playing';
-    const st = this.director.update(p, dt, playing && flowing);
+    // While its card is open, the window waits for the user.
+    const st = this.director.update(p, dt, playing && flowing && !this.portals.showingDetails);
     const index = playing ? st.index : -1;
     if (index >= 0 && st.justOpened) {
       const scene = PORTAL_SCENES[index];
@@ -604,6 +612,33 @@ export class ExperienceSystem extends createSystem({
       flowing: playing && flowing,
       laneVisible: this.trails.laneVisibility,
     });
+    this.readoutTimer -= dt;
+    if (this.readoutTimer <= 0) {
+      this.readoutTimer = 0.25;
+      this.updateReadout(p);
+    }
+  }
+
+  /**
+   * "What happened": for the window's currencies, the rate on the decision's
+   * date and at the playhead (live). Before the date, only the current rate.
+   */
+  private updateReadout(p: number): void {
+    const i = this.portals.displayedIndex;
+    const c = this.portals.contentOf(i);
+    if (!c) return;
+    const at = this.timeline.indexOf(c.date);
+    const lines: string[] = [];
+    for (const slot of c.currencies.slice(0, 2)) {
+      const k = SLOTS.findIndex((m) => m.slot === slot);
+      if (k < 0) continue;
+      const s = this.timeline.slots[k];
+      if (p < s.first || at < s.first) continue;
+      const rateAt = (idx: number) => s.firstRate / Math.exp(Timeline.sample(s.strength, idx));
+      const word = CURRENCY_WORDS[this.timeline.codeAt(k, p)] ?? slot;
+      lines.push(readoutLine(word, rateAt(at), rateAt(p), p >= at));
+    }
+    this.portals.setReadout(lines);
   }
 
   // -------------------------------------------------------------------------

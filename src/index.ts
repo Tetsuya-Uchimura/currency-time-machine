@@ -8,6 +8,7 @@
 import { World } from '@iwsdk/core';
 import projectOptions from 'virtual:iwsdk-project';
 import { SLOTS } from './config.js';
+import { loadHistoryContent } from './data/history-content.js';
 import { loadTimeline } from './data/timeline.js';
 import { ExperienceSystem } from './experience.js';
 
@@ -20,7 +21,11 @@ async function main(): Promise<void> {
   const world = await World.create(document.getElementById('scene-container') as HTMLDivElement, projectOptions);
   world.registerSystem(ExperienceSystem, { priority: 10 });
   const experience = world.getSystem(ExperienceSystem)!;
-  await experience.setup(await loadTimeline(SLOTS.map((s) => s.slot)));
+  const [timeline, content] = await Promise.all([
+    loadTimeline(SLOTS.map((s) => s.slot)),
+    loadHistoryContent(import.meta.env.BASE_URL),
+  ]);
+  await experience.setup(timeline, content);
 
   const hideOverlay = () => overlay?.classList.add('hidden');
   if (status) status.textContent = '';

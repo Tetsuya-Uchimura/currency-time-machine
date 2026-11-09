@@ -4,15 +4,15 @@
  * A portal is a "window onto the era": a city scene that rises behind the
  * orbs as one of four major moments approaches and fades once it has passed.
  *
- * Visuals: only assets whose rights were verified item by item may be used
- * (see docs/portal-assets.md). Until a photograph is verified, every scene
- * uses a code-generated city impression, and the window says so on screen
- * ("Artistic impression, not a photograph"). A photo entry with any other
- * verification status is ignored at runtime and the impression is shown.
+ * Visuals: the photographs, people and policies come from the verified
+ * content file (public/data/history-content.json, built by
+ * scripts/build_media.py). The `visual` below is the fallback: a
+ * code-generated city impression, labelled on screen "Artistic impression,
+ * not a photograph", shown when no verified photo is available or loads.
  *
- * Text rules (competition rules + accuracy): no named people, no brands or
- * logos, no causal claims beyond the record; numbers come from the bundled
- * Frankfurter data and were checked in tests/portals.test.ts.
+ * Text rules (accuracy): no causal claims beyond the record; numbers come
+ * from the bundled Frankfurter data and are checked in tests/portals.test.ts.
+ * Captions name no people; the people appear in the window's cards.
  */
 
 /** Code-generated city impressions (src/visual/city-painter.ts). */

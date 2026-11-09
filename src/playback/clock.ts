@@ -63,6 +63,8 @@ export class PlaybackClock {
   paused = false;
   /** True once the clock has reached the last week ("today"). */
   ended = false;
+  /** Extra speed factor (1 = normal); eased down while a history card is open. */
+  rate = 1;
 
   private readonly lastIndex: number;
   private readonly pacing: PacingConfig;
@@ -91,8 +93,9 @@ export class PlaybackClock {
     const prev = this.position;
     if (this.paused || this.ended) return prev;
     // Midpoint integration keeps pacing stable at any frame rate.
-    const mid = this.position + 0.5 * dt * this.speedAt(this.position);
-    this.position += dt * this.speedAt(mid);
+    const t = dt * this.rate;
+    const mid = this.position + 0.5 * t * this.speedAt(this.position);
+    this.position += t * this.speedAt(mid);
     if (this.position >= this.lastIndex) {
       this.position = this.lastIndex;
       this.ended = true;
