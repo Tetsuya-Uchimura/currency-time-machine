@@ -54,11 +54,11 @@ export const EVENTS: HistoryEvent[] = [
     slow: { width: 70, depth: 0.55 },
   },
   {
-    id: 'nixon',
+    id: 'gold-break',
     date: '1971-08-20',
     tier: 'major',
     label: 'August 1971',
-    text: 'The United States stops exchanging dollars for gold. The anchor is gone.',
+    text: "The dollar's link to gold breaks. A new monetary era begins.",
     focus: ['JPY', 'EUR', 'CHF'],
   },
   {
@@ -78,11 +78,11 @@ export const EVENTS: HistoryEvent[] = [
     focus: ['CNY', 'KRW'],
   },
   {
-    id: 'plaza',
+    id: 'dollar-adjustment',
     date: '1985-09-27',
     tier: 'major',
     label: 'September 1985',
-    text: 'Five nations agree to push the dollar down. The yen and the mark soar.',
+    text: 'Major economies coordinate to weaken the dollar. The yen strengthens in the years that follow.',
     focus: ['JPY', 'EUR'],
   },
   {
@@ -98,7 +98,7 @@ export const EVENTS: HistoryEvent[] = [
     date: '1997-12-12',
     tier: 'major',
     label: '1997',
-    text: 'A currency crisis sweeps across Asia. The Korean won loses almost half its value.',
+    text: 'Currency turmoil spreads across Asia. The Korean won loses much of its value.',
     focus: ['KRW'],
   },
   {
@@ -114,7 +114,7 @@ export const EVENTS: HistoryEvent[] = [
     date: '2008-10-17',
     tier: 'major',
     label: '2008',
-    text: 'A global financial crisis. Investors run to the dollar and the yen.',
+    text: 'A global financial crisis sends shockwaves through currency markets.',
     focus: ['JPY', 'KRW', 'AUD', 'GBP'],
   },
   {
@@ -166,7 +166,7 @@ export const CHAPTERS: Chapter[] = [
   { id: 'now', label: '2020', date: '2019-11-01' },
 ];
 
-/** Date when the fixed-rate "era of silence" ends (Nixon Shock). */
+/** Date when the fixed-rate "era of silence" ends (the dollar-gold break). */
 export const FLOAT_START = '1971-08-13';
 
 /** One-line onboarding hint, shown once before the first major event. */
