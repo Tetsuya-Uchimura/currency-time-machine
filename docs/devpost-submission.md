@@ -28,8 +28,9 @@ orbs come alive: each currency rises when it strengthens and sinks when it weake
 voice from its own direction, and plays faster when its market is restless, while its light trail keeps
 the shape of the past year flowing away behind it. The 1985 push on the dollar, the Asian
 crisis, the birth of the euro and the 2008 crisis arrive as storms of sound and light; at four of these
-moments a window onto the era opens behind the orbs, a city of that time (Washington, Tokyo, Seoul, New York)
-glowing like a hologram while the real moves play out in front of it. Finally the clock
+moments a window onto the era opens behind the orbs: photographs of the city at the time (Washington, Tokyo,
+Seoul, New York), the people who made the decisions, and a live readout of the rates, while the real moves
+play out in front of it. Finally the clock
 catches up with the present and today's real exchange rates appear, so the ending is different every day.
 
 Pinch a currency to hear it alone and open its light lane: its last twelve months, larger, with the change. Pinch the small panel at your lap to pause or jump between eras.
@@ -56,7 +57,7 @@ breathe; and designing light that reacts to sound without ever flashing.
 Choosing your own home currency as your position, more voices (more currencies), a calm "listen to today"
 mode, and haptic pulses on major moments.
 
-(about 485 words)
+(about 495 words)
 
 ## How we implemented hand interactions
 

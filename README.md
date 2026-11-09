@@ -93,11 +93,21 @@ Four major moments open a window onto a city of their time, far behind everythin
 behind the orbs at 0.6 m, the solo lane at 0.95 m and the captions at 1.1 m, and below the caption board),
 so the light trails float in front of the era's streets without anything being hidden.
 
+Each window answers three questions at once:
+
+- **Where:** photographs of the city at the time, one across the window and a second floating in front of it
+  (real depth), with the city, country and period in the title plate.
+- **Who and why:** portrait cards of the main decision makers with their office at the time. Pinch the window
+  for everyone involved, what each did, the policies, and the sources. Time eases almost to a stop while
+  the card is open.
+- **What happened:** a live line per affected currency, "Yen 242 → 153 per USD (+58% vs USD)": the rate on the
+  decision's date and at the playhead, updated as time flows on (before the date, only the current rate).
+
 | Moment | City and era | Trails highlighted |
 | --- | --- | --- |
 | Aug 1971, the dollar-gold break | Washington, D.C., early 1970s | JPY, DEM, CHF |
-| Sep 1985, a coordinated push on the dollar | Tokyo, mid-1980s | JPY, DEM |
-| Dec 1997, the Asian currency crisis | Seoul, late 1990s | KRW |
+| Sep 1985, a coordinated push on the dollar | Tokyo, 1984-1987 (the meeting itself was in New York) | JPY, DEM |
+| Dec 1997, the Asian currency crisis | Seoul, 1996-1998 | KRW |
 | Oct 2008, the global financial crisis | New York, around 2008 | JPY, KRW, AUD, GBP |
 
 - **Two clocks kept apart.** The window opens with the caption, a little before the event (the
@@ -107,16 +117,24 @@ so the light trails float in front of the era's streets without anything being h
 - **Cinematic, never flashy.** A thin outline draws itself from the top, the city fades in, then the title.
   Leaving, color and brightness drain first, then the outline. Each window is on screen for about 6 to 10
   seconds and is always gone before the next caption, so scenes of different eras never mix.
-- **Depth.** The scene is three separate layers (sky, city, foreground) at slightly different depths, with
-  motes drifting in front: a gentle, honest parallax when you move your head. Nothing moves the camera.
+- **Depth.** The backdrop photo, the floating photo, the title and the cards sit at different depths, with
+  motes drifting in front: a gentle, honest parallax when you move your head. Photos are never warped.
+  Nothing moves the camera.
 - **Pause, jumps, Replay.** Pausing freezes the window and its timers. A jump or Replay clears the open
   window at once (with a short fade) and shows the right one if you land just before a moment.
 - **The solo lane has priority.** While a currency's lane is open, the window dims and its title steps aside.
-- **Images and rights.** No photograph is used yet. Every window is a **code-generated city impression**
-  (generic silhouettes: no people, no text, no logos) and says so on screen: "Artistic impression, not a
-  photograph". A photograph can be added later only after its rights, people and logos have been checked
-  item by item, as a local optimized file; anything not marked verified is ignored at runtime. See
-  [docs/portal-assets.md](docs/portal-assets.md).
+- **Verified facts, licensed images.** `npm run media` (`scripts/build_media.py`) builds the content from
+  `content/history.json`: it checks that each person held the stated office on the date (Wikidata, or the
+  English Wikipedia infobox where Wikidata has no dated record), takes their portrait from Wikidata, reads
+  every image's license from Wikimedia Commons (public domain, CC0, CC BY, CC BY-SA, KOGL Type 1 only; no
+  NC/ND), and stores optimized local WebP files (portraits 288 px, city photos at most 1024 px). People it
+  cannot verify are left out; people without a portrait get a plain initials plate, never a stand-in face.
+  If the photos cannot be loaded, the window falls back to a code-generated city impression labelled
+  "Artistic impression, not a photograph". Records: [docs/history-verification.md](docs/history-verification.md)
+  (generated) and [docs/portal-assets.md](docs/portal-assets.md).
+- **Competition rules: open issue.** The windows show real, identifiable people (names and portraits) and
+  real streets. Rule 17 of the competition restricts depicting identifiable people other than the entrant.
+  **This has not been cleared with the organizers** and must be confirmed with them before submission.
 
 ### The historical moments
 
