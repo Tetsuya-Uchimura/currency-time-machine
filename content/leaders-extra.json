@@ -1,0 +1,27 @@
+{
+  "_comment": "Holders missing from Wikidata's dated records (gaps in docs/leaders-verification.md). Each is checked by scripts/build_leaders.py: the person must have held the office on `day` according to Wikidata or their English Wikipedia infobox, which also gives the term's dates. Unverified names are left out.",
+  "people": [
+    { "office": "cn-premier", "search": "Zhao Ziyang", "day": "1985-06-01" },
+    { "office": "in-rbi", "search": "H. V. R. Iengar", "day": "1960-01-01" },
+    { "office": "in-rbi", "search": "P. C. Bhattacharya", "day": "1965-01-01" },
+    { "office": "in-rbi", "search": "L. K. Jha", "day": "1968-06-01" },
+    { "office": "in-rbi", "search": "S. Jagannathan", "day": "1972-06-01" },
+    { "office": "in-rbi", "search": "K. R. Puri", "day": "1976-06-01" },
+    { "office": "in-rbi", "search": "I. G. Patel", "day": "1979-06-01" },
+    { "office": "in-rbi", "search": "C. Rangarajan", "day": "1995-01-01" },
+    { "office": "in-rbi", "search": "Y. V. Reddy", "day": "2005-06-01" },
+    { "office": "in-rbi", "search": "Duvvuri Subbarao", "day": "2010-06-01" },
+    { "office": "cn-pboc", "search": "Dai Xianglong", "day": "1998-06-01" },
+    { "office": "cn-pboc", "search": "Li Guixian", "day": "1990-06-01" },
+    { "office": "cn-pboc", "search": "Chen Muhua", "day": "1986-06-01" },
+    { "office": "ch-snb", "search": "Fritz Leutwiler", "day": "1980-06-01" },
+    { "office": "ch-snb", "search": "Pierre Languetin", "day": "1986-06-01" },
+    { "office": "ch-snb", "search": "Markus Lusser", "day": "1992-06-01" },
+    { "office": "ch-snb", "search": "Jean-Pierre Roth", "day": "2005-06-01" },
+    { "office": "ch-snb", "search": "Edwin Stopper", "day": "1970-06-01" },
+    { "office": "au-rba", "search": "H. C. Coombs", "day": "1965-06-01" },
+    { "office": "kr-president", "search": "Heo Jeong", "day": "1960-06-01" },
+    { "office": "kr-president", "search": "Han Duck-soo", "day": "2025-04-15" },
+    { "office": "kr-president", "search": "Lee Ju-ho", "day": "2025-05-15" }
+  ]
+}

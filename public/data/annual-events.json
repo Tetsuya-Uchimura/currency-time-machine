@@ -1,0 +1,1346 @@
+{
+ "checked": "2026-11-10",
+ "events": [
+  {
+   "id": "dm-born",
+   "date": "1948-06-20",
+   "title": "The Deutsche Mark is born",
+   "city": "Frankfurt",
+   "country": "Western zones of Germany",
+   "regions": [
+    "DEU"
+   ],
+   "currencies": [
+    "EUR"
+   ],
+   "summary": "A currency reform replaces the Reichsmark with the Deutsche Mark in the western zones of Germany.",
+   "sources": [
+    {
+     "title": "Deutsche Mark",
+     "url": "https://en.wikipedia.org/wiki/Deutsche_Mark"
+    }
+   ]
+  },
+  {
+   "id": "yen-360",
+   "date": "1949-04-25",
+   "title": "The yen is fixed at 360 per dollar",
+   "city": "Tokyo",
+   "country": "Japan",
+   "regions": [
+    "JPN"
+   ],
+   "currencies": [
+    "JPY"
+   ],
+   "summary": "Japan sets a single exchange rate of 360 yen to the US dollar, which holds until 1971.",
+   "sources": [
+    {
+     "title": "Japanese yen",
+     "url": "https://en.wikipedia.org/wiki/Japanese_yen"
+    }
+   ]
+  },
+  {
+   "id": "sterling-1949",
+   "date": "1949-09-19",
+   "title": "Britain devalues the pound",
+   "city": "London",
+   "country": "United Kingdom",
+   "regions": [
+    "GBR",
+    "DEU",
+    "IND",
+    "AUS",
+    "CAN"
+   ],
+   "currencies": [
+    "GBP",
+    "EUR",
+    "INR",
+    "AUD",
+    "CAD"
+   ],
+   "summary": "The pound is devalued by about 30%, to 2.80 dollars. Many other currencies follow within days.",
+   "sources": [
+    {
+     "title": "Pound sterling",
+     "url": "https://en.wikipedia.org/wiki/Pound_sterling"
+    }
+   ]
+  },
+  {
+   "id": "cad-float-1950",
+   "date": "1950-09-30",
+   "title": "Canada lets its dollar float",
+   "city": "Ottawa",
+   "country": "Canada",
+   "regions": [
+    "CAN"
+   ],
+   "currencies": [
+    "CAD"
+   ],
+   "summary": "Canada stops fixing its dollar and lets the market set its price.",
+   "sources": [
+    {
+     "title": "September 1950",
+     "url": "https://en.wikipedia.org/wiki/September_1950"
+    }
+   ]
+  },
+  {
+   "id": "bundesbank",
+   "date": "1957-08-01",
+   "title": "The Bundesbank is founded",
+   "city": "Frankfurt",
+   "country": "West Germany",
+   "regions": [
+    "DEU"
+   ],
+   "currencies": [
+    "EUR"
+   ],
+   "summary": "West Germany's new central bank, the Deutsche Bundesbank, takes over from the Bank deutscher Laender.",
+   "sources": [
+    {
+     "title": "Deutsche Bundesbank",
+     "url": "https://en.wikipedia.org/wiki/Deutsche_Bundesbank"
+    }
+   ]
+  },
+  {
+   "id": "rba",
+   "date": "1960-01-14",
+   "title": "The Reserve Bank of Australia opens",
+   "city": "Sydney",
+   "country": "Australia",
+   "regions": [
+    "AUS"
+   ],
+   "currencies": [
+    "AUD"
+   ],
+   "summary": "Australia's central banking moves to a new institution, the Reserve Bank of Australia.",
+   "sources": [
+    {
+     "title": "Reserve Bank of Australia",
+     "url": "https://en.wikipedia.org/wiki/Reserve_Bank_of_Australia"
+    }
+   ]
+  },
+  {
+   "id": "dm-1961",
+   "date": "1961-03-06",
+   "title": "The Mark is revalued",
+   "city": "Bonn",
+   "country": "West Germany",
+   "regions": [
+    "DEU"
+   ],
+   "currencies": [
+    "EUR"
+   ],
+   "summary": "West Germany raises the value of the Deutsche Mark against the dollar.",
+   "sources": [
+    {
+     "title": "March 1961",
+     "url": "https://en.wikipedia.org/wiki/March_1961"
+    }
+   ]
+  },
+  {
+   "id": "cad-peg-1962",
+   "date": "1962-05-02",
+   "title": "Canada fixes its dollar again",
+   "city": "Ottawa",
+   "country": "Canada",
+   "regions": [
+    "CAN"
+   ],
+   "currencies": [
+    "CAD"
+   ],
+   "summary": "Canada returns to a fixed rate, at 92.5 US cents.",
+   "sources": [
+    {
+     "title": "May 1962",
+     "url": "https://en.wikipedia.org/wiki/May_1962"
+    }
+   ]
+  },
+  {
+   "id": "aud-1966",
+   "date": "1966-02-14",
+   "title": "The Australian dollar is introduced",
+   "city": "Canberra",
+   "country": "Australia",
+   "regions": [
+    "AUS"
+   ],
+   "currencies": [
+    "AUD"
+   ],
+   "summary": "Australia switches to decimal currency: the Australian dollar replaces the Australian pound.",
+   "sources": [
+    {
+     "title": "Australian dollar",
+     "url": "https://en.wikipedia.org/wiki/Australian_dollar"
+    }
+   ]
+  },
+  {
+   "id": "inr-1966",
+   "date": "1966-06-06",
+   "title": "India devalues the rupee",
+   "city": "New Delhi",
+   "country": "India",
+   "regions": [
+    "IND"
+   ],
+   "currencies": [
+    "INR"
+   ],
+   "summary": "India lowers the official value of the rupee against the dollar.",
+   "sources": [
+    {
+     "title": "Indian rupee",
+     "url": "https://en.wikipedia.org/wiki/Indian_rupee"
+    }
+   ]
+  },
+  {
+   "id": "sterling-1967",
+   "date": "1967-11-18",
+   "title": "Britain devalues the pound again",
+   "city": "London",
+   "country": "United Kingdom",
+   "regions": [
+    "GBR"
+   ],
+   "currencies": [
+    "GBP"
+   ],
+   "summary": "The pound is devalued from 2.80 to 2.40 dollars.",
+   "sources": [
+    {
+     "title": "Pound sterling",
+     "url": "https://en.wikipedia.org/wiki/Pound_sterling"
+    }
+   ]
+  },
+  {
+   "id": "gold-pool",
+   "date": "1968-03-14",
+   "title": "The London gold market closes",
+   "city": "Washington, D.C.",
+   "country": "United States",
+   "regions": [
+    "USA",
+    "GBR"
+   ],
+   "currencies": [
+    "GBP"
+   ],
+   "summary": "The United States asks Britain to close the London gold market; a two-tier gold market follows.",
+   "sources": [
+    {
+     "title": "London Gold Pool",
+     "url": "https://en.wikipedia.org/wiki/London_Gold_Pool"
+    }
+   ]
+  },
+  {
+   "id": "dm-1969",
+   "date": "1969-10-24",
+   "title": "The Mark is revalued again",
+   "city": "Bonn",
+   "country": "West Germany",
+   "regions": [
+    "DEU"
+   ],
+   "currencies": [
+    "EUR"
+   ],
+   "summary": "West Germany raises the value of the Deutsche Mark against the dollar a second time.",
+   "sources": [
+    {
+     "title": "October 1969",
+     "url": "https://en.wikipedia.org/wiki/October_1969"
+    }
+   ]
+  },
+  {
+   "id": "cad-float-1970",
+   "date": "1970-05-31",
+   "title": "Canada floats its dollar again",
+   "city": "Ottawa",
+   "country": "Canada",
+   "regions": [
+    "CAN"
+   ],
+   "currencies": [
+    "CAD"
+   ],
+   "summary": "Canada lets its dollar float once more.",
+   "sources": [
+    {
+     "title": "May 1970",
+     "url": "https://en.wikipedia.org/wiki/May_1970"
+    }
+   ]
+  },
+  {
+   "id": "dm-float-1971",
+   "date": "1971-05-10",
+   "title": "The Mark floats",
+   "city": "Bonn",
+   "country": "West Germany",
+   "regions": [
+    "DEU"
+   ],
+   "currencies": [
+    "EUR",
+    "CHF"
+   ],
+   "summary": "After heavy buying of Marks, West Germany stops holding its fixed rate and lets the Mark float.",
+   "sources": [
+    {
+     "title": "Willy Brandt",
+     "url": "https://en.wikipedia.org/wiki/Willy_Brandt"
+    }
+   ]
+  },
+  {
+   "id": "gold-break",
+   "date": "1971-08-15",
+   "title": "The dollar-gold break",
+   "city": "Washington, D.C.",
+   "country": "United States",
+   "regions": [
+    "USA",
+    "JPN",
+    "DEU"
+   ],
+   "currencies": [
+    "JPY",
+    "EUR",
+    "CHF"
+   ],
+   "summary": "The United States stops converting dollars into gold for foreign governments. The fixed-rate system begins to break apart.",
+   "sources": [
+    {
+     "title": "Nixon shock",
+     "url": "https://en.wikipedia.org/wiki/Nixon_shock"
+    }
+   ]
+  },
+  {
+   "id": "yen-float-1971",
+   "date": "1971-08-28",
+   "title": "Japan lets the yen float",
+   "city": "Tokyo",
+   "country": "Japan",
+   "regions": [
+    "JPN"
+   ],
+   "currencies": [
+    "JPY"
+   ],
+   "summary": "After two weeks of holding 360 yen to the dollar, Japan lets the yen float.",
+   "sources": [
+    {
+     "title": "August 1971",
+     "url": "https://en.wikipedia.org/wiki/August_1971"
+    }
+   ]
+  },
+  {
+   "id": "smithsonian",
+   "date": "1971-12-01",
+   "title": "The Smithsonian Agreement",
+   "city": "Washington, D.C.",
+   "country": "United States",
+   "regions": [
+    "USA",
+    "JPN",
+    "DEU",
+    "GBR"
+   ],
+   "currencies": [
+    "JPY",
+    "EUR",
+    "GBP",
+    "CHF"
+   ],
+   "summary": "The Group of Ten agrees on new fixed rates: the dollar is devalued and other currencies are revalued.",
+   "precision": "month",
+   "sources": [
+    {
+     "title": "Smithsonian Agreement",
+     "url": "https://en.wikipedia.org/wiki/Smithsonian_Agreement"
+    }
+   ]
+  },
+  {
+   "id": "gbp-float-1972",
+   "date": "1972-06-23",
+   "title": "Britain floats the pound",
+   "city": "London",
+   "country": "United Kingdom",
+   "regions": [
+    "GBR"
+   ],
+   "currencies": [
+    "GBP"
+   ],
+   "summary": "Britain stops defending its fixed rate and lets the pound float.",
+   "sources": [
+    {
+     "title": "Anthony Barber",
+     "url": "https://en.wikipedia.org/wiki/Anthony_Barber"
+    }
+   ]
+  },
+  {
+   "id": "usd-1973",
+   "date": "1973-02-14",
+   "title": "The dollar falls again; the yen floats",
+   "city": "Washington, D.C.",
+   "country": "United States",
+   "regions": [
+    "USA",
+    "JPN"
+   ],
+   "currencies": [
+    "JPY",
+    "EUR"
+   ],
+   "summary": "After a second devaluation of the dollar, Japan and much of Europe let their currencies float.",
+   "sources": [
+    {
+     "title": "Nixon shock",
+     "url": "https://en.wikipedia.org/wiki/Nixon_shock"
+    }
+   ]
+  },
+  {
+   "id": "oil-1973",
+   "date": "1973-10-16",
+   "title": "The oil price shock",
+   "city": "Kuwait City",
+   "country": "Kuwait",
+   "regions": [
+    "USA",
+    "JPN",
+    "GBR"
+   ],
+   "currencies": [
+    "JPY",
+    "GBP"
+   ],
+   "summary": "Gulf oil producers announce a sharp rise in the price of oil; production cuts and an embargo follow.",
+   "sources": [
+    {
+     "title": "1973 oil crisis",
+     "url": "https://en.wikipedia.org/wiki/1973_oil_crisis"
+    }
+   ]
+  },
+  {
+   "id": "china-reform",
+   "date": "1978-12-18",
+   "title": "China begins reform and opening up",
+   "city": "Beijing",
+   "country": "China",
+   "regions": [
+    "CHN"
+   ],
+   "currencies": [
+    "CNY"
+   ],
+   "summary": "A Communist Party meeting starts China's economic reforms and opening to the world.",
+   "sources": [
+    {
+     "title": "Chinese economic reform",
+     "url": "https://en.wikipedia.org/wiki/Chinese_economic_reform"
+    }
+   ]
+  },
+  {
+   "id": "ems-1979",
+   "date": "1979-03-13",
+   "title": "The European Monetary System begins",
+   "city": "Brussels",
+   "country": "European Community",
+   "regions": [
+    "DEU"
+   ],
+   "currencies": [
+    "EUR"
+   ],
+   "summary": "Several European countries agree to keep their currencies within bands against each other.",
+   "sources": [
+    {
+     "title": "European Monetary System",
+     "url": "https://en.wikipedia.org/wiki/European_Monetary_System"
+    },
+    {
+     "title": "European Exchange Rate Mechanism",
+     "url": "https://en.wikipedia.org/wiki/European_Exchange_Rate_Mechanism"
+    }
+   ]
+  },
+  {
+   "id": "volcker-1979",
+   "date": "1979-10-06",
+   "title": "The Fed turns to fight inflation",
+   "city": "Washington, D.C.",
+   "country": "United States",
+   "regions": [
+    "USA"
+   ],
+   "currencies": [
+    "EUR",
+    "JPY",
+    "CHF"
+   ],
+   "summary": "The Federal Reserve changes how it runs monetary policy to bring down high inflation; interest rates rise sharply.",
+   "sources": [
+    {
+     "title": "History of Federal Open Market Committee actions",
+     "url": "https://en.wikipedia.org/wiki/History_of_Federal_Open_Market_Committee_actions"
+    },
+    {
+     "title": "Early 1980s recession in the United States",
+     "url": "https://en.wikipedia.org/wiki/Early_1980s_recession_in_the_United_States"
+    },
+    {
+     "title": "October 1979",
+     "url": "https://en.wikipedia.org/wiki/October_1979"
+    }
+   ]
+  },
+  {
+   "id": "aud-float",
+   "date": "1983-12-09",
+   "title": "Australia floats its dollar",
+   "city": "Canberra",
+   "country": "Australia",
+   "regions": [
+    "AUS"
+   ],
+   "currencies": [
+    "AUD"
+   ],
+   "summary": "Australia lets the market set the value of its dollar.",
+   "sources": [
+    {
+     "title": "Australian dollar",
+     "url": "https://en.wikipedia.org/wiki/Australian_dollar"
+    }
+   ]
+  },
+  {
+   "id": "dollar-adjustment",
+   "date": "1985-09-22",
+   "title": "The Plaza Accord",
+   "city": "New York",
+   "country": "United States",
+   "regions": [
+    "USA",
+    "JPN",
+    "DEU",
+    "GBR"
+   ],
+   "currencies": [
+    "JPY",
+    "EUR",
+    "GBP"
+   ],
+   "summary": "Five major economies agree at the Plaza Hotel to act together against a strong dollar.",
+   "sources": [
+    {
+     "title": "Plaza Accord",
+     "url": "https://en.wikipedia.org/wiki/Plaza_Accord"
+    }
+   ]
+  },
+  {
+   "id": "louvre",
+   "date": "1987-02-22",
+   "title": "The Louvre Accord",
+   "city": "Paris",
+   "country": "France",
+   "regions": [
+    "USA",
+    "JPN",
+    "DEU"
+   ],
+   "currencies": [
+    "JPY",
+    "EUR"
+   ],
+   "summary": "Six major economies agree to steady the dollar after its long fall.",
+   "sources": [
+    {
+     "title": "Louvre Accord",
+     "url": "https://en.wikipedia.org/wiki/Louvre_Accord"
+    }
+   ]
+  },
+  {
+   "id": "black-monday",
+   "date": "1987-10-19",
+   "title": "Black Monday",
+   "city": "New York",
+   "country": "United States",
+   "regions": [
+    "USA",
+    "AUS",
+    "GBR"
+   ],
+   "currencies": [
+    "AUD",
+    "GBP"
+   ],
+   "summary": "Stock markets around the world crash in a single day.",
+   "sources": [
+    {
+     "title": "Black Monday (1987)",
+     "url": "https://en.wikipedia.org/wiki/Black_Monday_(1987)"
+    }
+   ]
+  },
+  {
+   "id": "berlin-wall",
+   "date": "1989-11-09",
+   "title": "The Berlin Wall falls",
+   "city": "Berlin",
+   "country": "East and West Germany",
+   "regions": [
+    "DEU"
+   ],
+   "currencies": [
+    "EUR"
+   ],
+   "summary": "East Germany opens its border. Within a year the two German states unite.",
+   "sources": [
+    {
+     "title": "Fall of the Berlin Wall",
+     "url": "https://en.wikipedia.org/wiki/Fall_of_the_Berlin_Wall"
+    }
+   ]
+  },
+  {
+   "id": "gmu-1990",
+   "date": "1990-07-01",
+   "title": "German monetary union",
+   "city": "Berlin",
+   "country": "Germany",
+   "regions": [
+    "DEU"
+   ],
+   "currencies": [
+    "EUR"
+   ],
+   "summary": "The Deutsche Mark becomes the currency of East Germany too, three months before unification.",
+   "sources": [
+    {
+     "title": "German reunification",
+     "url": "https://en.wikipedia.org/wiki/German_reunification"
+    },
+    {
+     "title": "Deutsche Mark",
+     "url": "https://en.wikipedia.org/wiki/Deutsche_Mark"
+    }
+   ]
+  },
+  {
+   "id": "reunification",
+   "date": "1990-10-03",
+   "title": "Germany is reunified",
+   "city": "Berlin",
+   "country": "Germany",
+   "regions": [
+    "DEU"
+   ],
+   "currencies": [
+    "EUR"
+   ],
+   "summary": "East and West Germany become one country.",
+   "sources": [
+    {
+     "title": "German reunification",
+     "url": "https://en.wikipedia.org/wiki/German_reunification"
+    }
+   ]
+  },
+  {
+   "id": "uk-erm-1990",
+   "date": "1990-10-08",
+   "title": "Britain joins the ERM",
+   "city": "London",
+   "country": "United Kingdom",
+   "regions": [
+    "GBR"
+   ],
+   "currencies": [
+    "GBP"
+   ],
+   "summary": "The pound joins Europe's Exchange Rate Mechanism, which limits how far it may move against other European currencies.",
+   "sources": [
+    {
+     "title": "Black Wednesday",
+     "url": "https://en.wikipedia.org/wiki/Black_Wednesday"
+    }
+   ]
+  },
+  {
+   "id": "india-1991",
+   "date": "1991-07-24",
+   "title": "India opens its economy",
+   "city": "New Delhi",
+   "country": "India",
+   "regions": [
+    "IND"
+   ],
+   "currencies": [
+    "INR"
+   ],
+   "summary": "In a balance-of-payments crisis, India devalues the rupee and its budget begins wide economic reforms.",
+   "sources": [
+    {
+     "title": "Economic liberalisation in India",
+     "url": "https://en.wikipedia.org/wiki/Economic_liberalisation_in_India"
+    },
+    {
+     "title": "1991 Indian economic crisis",
+     "url": "https://en.wikipedia.org/wiki/1991_Indian_economic_crisis"
+    }
+   ]
+  },
+  {
+   "id": "black-wednesday",
+   "date": "1992-09-16",
+   "title": "Black Wednesday",
+   "city": "London",
+   "country": "United Kingdom",
+   "regions": [
+    "GBR"
+   ],
+   "currencies": [
+    "GBP"
+   ],
+   "summary": "Under heavy selling, Britain takes the pound out of the Exchange Rate Mechanism.",
+   "sources": [
+    {
+     "title": "Black Wednesday",
+     "url": "https://en.wikipedia.org/wiki/Black_Wednesday"
+    }
+   ]
+  },
+  {
+   "id": "thai-float",
+   "date": "1997-07-02",
+   "title": "Thailand floats the baht",
+   "city": "Bangkok",
+   "country": "Thailand",
+   "regions": [
+    "KOR",
+    "JPN"
+   ],
+   "currencies": [
+    "KRW"
+   ],
+   "summary": "Thailand stops defending the baht. The crisis spreads across East and Southeast Asia.",
+   "sources": [
+    {
+     "title": "1997 Asian financial crisis",
+     "url": "https://en.wikipedia.org/wiki/1997_Asian_financial_crisis"
+    }
+   ]
+  },
+  {
+   "id": "asian-crisis",
+   "date": "1997-12-03",
+   "title": "Korea agrees an IMF rescue",
+   "city": "Seoul",
+   "country": "South Korea",
+   "regions": [
+    "KOR"
+   ],
+   "currencies": [
+    "KRW"
+   ],
+   "summary": "South Korea signs a rescue agreement with the International Monetary Fund as the won falls.",
+   "sources": [
+    {
+     "title": "South Korean International Monetary Fund Agreement, 1997",
+     "url": "https://en.wikipedia.org/wiki/South_Korean_International_Monetary_Fund_Agreement,_1997"
+    },
+    {
+     "title": "Kim Young-sam",
+     "url": "https://en.wikipedia.org/wiki/Kim_Young-sam"
+    }
+   ]
+  },
+  {
+   "id": "ecb-1998",
+   "date": "1998-06-01",
+   "title": "The European Central Bank is founded",
+   "city": "Frankfurt",
+   "country": "Euro area",
+   "regions": [
+    "EA",
+    "DEU"
+   ],
+   "currencies": [
+    "EUR"
+   ],
+   "summary": "The central bank for the coming euro opens in Frankfurt.",
+   "sources": [
+    {
+     "title": "European Central Bank",
+     "url": "https://en.wikipedia.org/wiki/European_Central_Bank"
+    }
+   ]
+  },
+  {
+   "id": "russia-1998",
+   "date": "1998-08-17",
+   "title": "Russia defaults",
+   "city": "Moscow",
+   "country": "Russia",
+   "regions": [
+    "USA"
+   ],
+   "currencies": [
+    "JPY",
+    "AUD"
+   ],
+   "summary": "Russia devalues the ruble and defaults on its debt, unsettling markets worldwide.",
+   "sources": [
+    {
+     "title": "1998 Russian financial crisis",
+     "url": "https://en.wikipedia.org/wiki/1998_Russian_financial_crisis"
+    }
+   ]
+  },
+  {
+   "id": "euro",
+   "date": "1999-01-01",
+   "title": "The euro is launched",
+   "city": "Frankfurt",
+   "country": "Euro area",
+   "regions": [
+    "EA",
+    "DEU"
+   ],
+   "currencies": [
+    "EUR"
+   ],
+   "summary": "Eleven countries adopt the euro for markets and banks; notes and coins follow in 2002.",
+   "sources": [
+    {
+     "title": "Euro",
+     "url": "https://en.wikipedia.org/wiki/Euro"
+    }
+   ]
+  },
+  {
+   "id": "boj-qe-2001",
+   "date": "2001-03-19",
+   "title": "Japan begins quantitative easing",
+   "city": "Tokyo",
+   "country": "Japan",
+   "regions": [
+    "JPN"
+   ],
+   "currencies": [
+    "JPY"
+   ],
+   "summary": "The Bank of Japan starts buying assets on a large scale to fight deflation.",
+   "sources": [
+    {
+     "title": "Quantitative easing",
+     "url": "https://en.wikipedia.org/wiki/Quantitative_easing"
+    }
+   ]
+  },
+  {
+   "id": "euro-cash",
+   "date": "2002-01-01",
+   "title": "Euro notes and coins arrive",
+   "city": "Frankfurt",
+   "country": "Euro area",
+   "regions": [
+    "EA"
+   ],
+   "currencies": [
+    "EUR"
+   ],
+   "summary": "Euro banknotes and coins replace the national currencies in everyday use.",
+   "sources": [
+    {
+     "title": "Euro",
+     "url": "https://en.wikipedia.org/wiki/Euro"
+    }
+   ]
+  },
+  {
+   "id": "china-2005",
+   "date": "2005-07-21",
+   "title": "China loosens the yuan's peg",
+   "city": "Beijing",
+   "country": "China",
+   "regions": [
+    "CHN"
+   ],
+   "currencies": [
+    "CNY"
+   ],
+   "summary": "China revalues the yuan and moves from a fixed dollar peg to a managed float.",
+   "sources": [
+    {
+     "title": "Renminbi",
+     "url": "https://en.wikipedia.org/wiki/Renminbi"
+    }
+   ]
+  },
+  {
+   "id": "credit-crunch",
+   "date": "2007-08-09",
+   "title": "The credit crunch begins",
+   "city": "Paris",
+   "country": "France",
+   "regions": [
+    "USA",
+    "EA"
+   ],
+   "currencies": [
+    "JPY",
+    "AUD"
+   ],
+   "summary": "A large European bank freezes funds exposed to US mortgages, and lending between banks seizes up.",
+   "sources": [
+    {
+     "title": "2007–2008 financial crisis",
+     "url": "https://en.wikipedia.org/wiki/2007%E2%80%932008_financial_crisis"
+    },
+    {
+     "title": "Subprime mortgage crisis",
+     "url": "https://en.wikipedia.org/wiki/Subprime_mortgage_crisis"
+    }
+   ]
+  },
+  {
+   "id": "lehman",
+   "date": "2008-09-15",
+   "title": "Lehman Brothers collapses",
+   "city": "New York",
+   "country": "United States",
+   "regions": [
+    "USA",
+    "GBR",
+    "KOR",
+    "AUS"
+   ],
+   "currencies": [
+    "GBP",
+    "KRW",
+    "AUD",
+    "JPY"
+   ],
+   "summary": "A major US investment bank files for bankruptcy, and the financial crisis goes global.",
+   "sources": [
+    {
+     "title": "Bankruptcy of Lehman Brothers",
+     "url": "https://en.wikipedia.org/wiki/Bankruptcy_of_Lehman_Brothers"
+    }
+   ]
+  },
+  {
+   "id": "gfc",
+   "date": "2008-10-08",
+   "title": "Central banks cut rates together",
+   "city": "Washington, D.C.",
+   "country": "United States",
+   "regions": [
+    "USA",
+    "GBR",
+    "EA",
+    "CHE",
+    "CAN"
+   ],
+   "currencies": [
+    "JPY",
+    "KRW",
+    "AUD",
+    "GBP"
+   ],
+   "summary": "Six central banks, among them the Federal Reserve and the European Central Bank, cut interest rates in a joint move.",
+   "sources": [
+    {
+     "title": "2007–2008 financial crisis",
+     "url": "https://en.wikipedia.org/wiki/2007%E2%80%932008_financial_crisis"
+    }
+   ]
+  },
+  {
+   "id": "snb-floor",
+   "date": "2011-09-06",
+   "title": "Switzerland caps the franc",
+   "city": "Zurich",
+   "country": "Switzerland",
+   "regions": [
+    "CHE"
+   ],
+   "currencies": [
+    "CHF",
+    "EUR"
+   ],
+   "summary": "The Swiss National Bank sets a minimum of 1.20 francs per euro to stop the franc rising.",
+   "sources": [
+    {
+     "title": "Swiss franc",
+     "url": "https://en.wikipedia.org/wiki/Swiss_franc"
+    },
+    {
+     "title": "Swiss National Bank",
+     "url": "https://en.wikipedia.org/wiki/Swiss_National_Bank"
+    }
+   ]
+  },
+  {
+   "id": "whatever-it-takes",
+   "date": "2012-07-26",
+   "title": "\"Whatever it takes\"",
+   "city": "London",
+   "country": "United Kingdom",
+   "regions": [
+    "EA"
+   ],
+   "currencies": [
+    "EUR"
+   ],
+   "summary": "The ECB's president says it will do whatever it takes to preserve the euro.",
+   "sources": [
+    {
+     "title": "European Central Bank",
+     "url": "https://en.wikipedia.org/wiki/European_Central_Bank"
+    }
+   ]
+  },
+  {
+   "id": "boj-qqe-2013",
+   "date": "2013-04-04",
+   "title": "Japan's big monetary easing",
+   "city": "Tokyo",
+   "country": "Japan",
+   "regions": [
+    "JPN"
+   ],
+   "currencies": [
+    "JPY"
+   ],
+   "summary": "The Bank of Japan launches a new, much larger program of asset purchases.",
+   "sources": [
+    {
+     "title": "Abenomics",
+     "url": "https://en.wikipedia.org/wiki/Abenomics"
+    }
+   ]
+  },
+  {
+   "id": "chf-shock",
+   "date": "2015-01-15",
+   "title": "The franc cap is dropped",
+   "city": "Zurich",
+   "country": "Switzerland",
+   "regions": [
+    "CHE"
+   ],
+   "currencies": [
+    "CHF"
+   ],
+   "summary": "The Swiss National Bank abandons its minimum rate against the euro, and the franc jumps.",
+   "sources": [
+    {
+     "title": "Swiss franc",
+     "url": "https://en.wikipedia.org/wiki/Swiss_franc"
+    },
+    {
+     "title": "Swiss National Bank",
+     "url": "https://en.wikipedia.org/wiki/Swiss_National_Bank"
+    }
+   ]
+  },
+  {
+   "id": "china-2015",
+   "date": "2015-08-11",
+   "title": "China devalues the yuan",
+   "city": "Beijing",
+   "country": "China",
+   "regions": [
+    "CHN"
+   ],
+   "currencies": [
+    "CNY",
+    "AUD"
+   ],
+   "summary": "China changes how its daily reference rate is set, and the yuan falls by the most in two decades.",
+   "sources": [
+    {
+     "title": "Renminbi",
+     "url": "https://en.wikipedia.org/wiki/Renminbi"
+    }
+   ]
+  },
+  {
+   "id": "brexit",
+   "date": "2016-06-23",
+   "title": "The Brexit vote",
+   "city": "London",
+   "country": "United Kingdom",
+   "regions": [
+    "GBR"
+   ],
+   "currencies": [
+    "GBP"
+   ],
+   "summary": "The United Kingdom votes to leave the European Union, and the pound falls sharply.",
+   "sources": [
+    {
+     "title": "2016 United Kingdom European Union membership referendum",
+     "url": "https://en.wikipedia.org/wiki/2016_United_Kingdom_European_Union_membership_referendum"
+    }
+   ]
+  },
+  {
+   "id": "trade-war",
+   "date": "2018-07-06",
+   "title": "US-China tariffs begin",
+   "city": "Washington, D.C.",
+   "country": "United States",
+   "regions": [
+    "USA",
+    "CHN"
+   ],
+   "currencies": [
+    "CNY",
+    "KRW",
+    "AUD"
+   ],
+   "summary": "The United States and China put tariffs on each other's goods.",
+   "sources": [
+    {
+     "title": "China–United States trade war",
+     "url": "https://en.wikipedia.org/wiki/China%E2%80%93United_States_trade_war"
+    }
+   ]
+  },
+  {
+   "id": "pandemic",
+   "date": "2020-03-11",
+   "title": "A pandemic is declared",
+   "city": "Geneva",
+   "country": "Switzerland",
+   "regions": [
+    "USA",
+    "AUS",
+    "GBR",
+    "KOR"
+   ],
+   "currencies": [
+    "AUD",
+    "GBP",
+    "KRW"
+   ],
+   "summary": "The World Health Organization declares COVID-19 a pandemic. Investors rush into dollars for a few weeks.",
+   "sources": [
+    {
+     "title": "Tedros Adhanom Ghebreyesus",
+     "url": "https://en.wikipedia.org/wiki/Tedros_Adhanom_Ghebreyesus"
+    }
+   ]
+  },
+  {
+   "id": "yen-intervention-2022",
+   "date": "2022-01-01",
+   "title": "Japan buys yen to slow its fall",
+   "city": "Tokyo",
+   "country": "Japan",
+   "regions": [
+    "JPN"
+   ],
+   "currencies": [
+    "JPY"
+   ],
+   "summary": "Japan's government intervenes in the currency market to slow the yen's fall; it does so again in 2024.",
+   "precision": "year",
+   "sources": [
+    {
+     "title": "Japanese yen",
+     "url": "https://en.wikipedia.org/wiki/Japanese_yen"
+    }
+   ]
+  },
+  {
+   "id": "ukraine-2022",
+   "date": "2022-02-24",
+   "title": "Russia invades Ukraine",
+   "city": "Kyiv",
+   "country": "Ukraine",
+   "regions": [
+    "EA"
+   ],
+   "currencies": [
+    "EUR"
+   ],
+   "summary": "Russia's full-scale invasion of Ukraine drives energy prices up, above all in Europe.",
+   "sources": [
+    {
+     "title": "Russian invasion of Ukraine",
+     "url": "https://en.wikipedia.org/wiki/Russian_invasion_of_Ukraine"
+    }
+   ]
+  },
+  {
+   "id": "fed-2022",
+   "date": "2022-03-16",
+   "title": "The Fed starts raising rates",
+   "city": "Washington, D.C.",
+   "country": "United States",
+   "regions": [
+    "USA",
+    "JPN"
+   ],
+   "currencies": [
+    "JPY",
+    "EUR",
+    "GBP"
+   ],
+   "summary": "The Federal Reserve raises interest rates for the first time since 2018 and keeps raising them through the year.",
+   "sources": [
+    {
+     "title": "2021–2023 inflation surge",
+     "url": "https://en.wikipedia.org/wiki/2021%E2%80%932023_inflation_surge"
+    },
+    {
+     "title": "Jerome Powell",
+     "url": "https://en.wikipedia.org/wiki/Jerome_Powell"
+    }
+   ]
+  },
+  {
+   "id": "mini-budget",
+   "date": "2022-09-23",
+   "title": "The UK mini-budget",
+   "city": "London",
+   "country": "United Kingdom",
+   "regions": [
+    "GBR"
+   ],
+   "currencies": [
+    "GBP"
+   ],
+   "summary": "Large unfunded tax cuts shake markets, and the pound falls to a record low against the dollar days later.",
+   "sources": [
+    {
+     "title": "September 2022 United Kingdom mini-budget",
+     "url": "https://en.wikipedia.org/wiki/September_2022_United_Kingdom_mini-budget"
+    }
+   ]
+  },
+  {
+   "id": "svb-2023",
+   "date": "2023-03-10",
+   "title": "Silicon Valley Bank fails",
+   "city": "Santa Clara",
+   "country": "United States",
+   "regions": [
+    "USA",
+    "CHE"
+   ],
+   "currencies": [
+    "CHF"
+   ],
+   "summary": "A large US bank collapses, and fears spread to other banks.",
+   "sources": [
+    {
+     "title": "Collapse of Silicon Valley Bank",
+     "url": "https://en.wikipedia.org/wiki/Collapse_of_Silicon_Valley_Bank"
+    }
+   ]
+  },
+  {
+   "id": "boj-2024",
+   "date": "2024-03-19",
+   "title": "Japan ends negative rates",
+   "city": "Tokyo",
+   "country": "Japan",
+   "regions": [
+    "JPN"
+   ],
+   "currencies": [
+    "JPY"
+   ],
+   "summary": "The Bank of Japan raises interest rates for the first time in 17 years, ending negative rates.",
+   "sources": [
+    {
+     "title": "Kazuo Ueda",
+     "url": "https://en.wikipedia.org/wiki/Kazuo_Ueda"
+    }
+   ]
+  },
+  {
+   "id": "tariffs-2025",
+   "date": "2025-04-02",
+   "title": "Sweeping US tariffs",
+   "city": "Washington, D.C.",
+   "country": "United States",
+   "regions": [
+    "USA",
+    "CHN",
+    "CAN"
+   ],
+   "currencies": [
+    "CNY",
+    "CAD",
+    "JPY",
+    "CHF",
+    "EUR"
+   ],
+   "summary": "The United States announces broad new tariffs on imports from most countries.",
+   "sources": [
+    {
+     "title": "Liberation Day tariffs",
+     "url": "https://en.wikipedia.org/wiki/Liberation_Day_tariffs"
+    }
+   ]
+  },
+  {
+   "id": "yen-2026",
+   "date": "2026-07-01",
+   "precision": "month",
+   "title": "A joint move to support the yen",
+   "city": "Tokyo",
+   "country": "Japan",
+   "regions": [
+    "JPN",
+    "USA"
+   ],
+   "currencies": [
+    "JPY"
+   ],
+   "summary": "The United States and Japan intervene together in the currency market to strengthen the yen.",
+   "sources": [
+    {
+     "title": "2026 U.S.–Japan yen intervention",
+     "url": "https://en.wikipedia.org/wiki/2026_U.S.%E2%80%93Japan_yen_intervention"
+    }
+   ]
+  }
+ ]
+}
