@@ -3,13 +3,14 @@
 **Sit back. From 1948 to today, the world's money plays around you as sound and light.**
 
 A hands-only, seated WebXR experience for Meta Quest, built with the Immersive Web SDK (IWSDK).
-Nine currencies float around you as glowing orbs. Time fast-forwards from the quiet fixed-rate
+Nine currencies float around you as glowing orbs, each trailing a ribbon of light drawn from its own past
+year. Time fast-forwards from the quiet fixed-rate
 world of 1948, through the Nixon Shock, the Plaza Accord, the birth of the euro and the 2008 crisis,
 until the present catches up with you and today's real exchange rates appear.
 
 It is not a chart to read. It is a way to *feel* how the balance of power between currencies has shifted.
 
-- Play: _(Cloudflare Pages URL, added after deployment)_
+- Play: https://currency-time-machine.pages.dev (open in the Meta Quest browser and tap Enter VR)
 - Length: about 4 minutes; pause, resume or jump between eras at any time
 - Input: hands only (pinch and poke). Controllers also work, but are never required.
 
@@ -24,7 +25,7 @@ Exchange rate data: Frankfurter (frankfurter.dev)
 | Put on the headset and enter VR | 1948 begins at once. No menus, no tutorial screen. |
 | **Pinch** (or **poke**) **Pause** on the small panel at your lap | Time and sound fade out smoothly; pinch again to resume. |
 | Pinch or poke **1948 / 1971 / 1990 / 2008 / 2020** | Jump to that era. |
-| **Pinch a glowing orb** (from afar, or touch it) | Solo: that currency comes forward in the mix and a card shows its name and its change against the US dollar. Pinch again to release. |
+| **Pinch a glowing orb** (from afar, or touch it) | Solo: that currency comes forward in the mix, the others step back, and its **light lane** opens: its past 12 months, larger and auto-zoomed, with its change over the year and since its data began. Pinch again to release. |
 | Pinch **Voice** | Captions are also read aloud. |
 | At the end, pinch **Replay** | Start again from 1948. |
 
@@ -44,6 +45,7 @@ on an arc around you, arranged west to east like a map: CAD, GBP, DEM/EUR, CHF, 
 | Short-term momentum (half-year change) | **Brightness** | |
 | Speed of change (smoothed weekly moves) | A soft glow on each note | **Note density and loudness** |
 | Market-wide turbulence (all currencies) | Sky hue and number of motes | **Drone tension, filter brightness, reverb** |
+| The past year (weekly data) | A **light trail** behind each orb: time flows to the left, the orb is the present; the ribbon is thicker where the currency moved fast | |
 | The currency's identity | Color, label and fixed position | Its own **timbre**, heard **from the orb's direction** (HRTF spatial audio) |
 
 - **The era of silence (1948-1971):** rates were fixed, so the orbs sit still and only soft sustained
@@ -52,7 +54,33 @@ on an arc around you, arranged west to east like a map: CAD, GBP, DEM/EUR, CHF, 
 - **Major moments** slow time down, ring a low gong and warm the sky. **Minor moments** only show a caption.
 - **Today:** the clock catches up with the present. Each currency plays once, left to right, followed by a
   rising or falling grace note that says whether it gained or lost against the dollar since the previous
-  business day. Because the ending uses live rates, it is different every day you open it.
+  business day. Because the ending uses live rates, it is different every day you open it. Each trail ends
+  at its own currency's latest date; when those dates differ, or when the saved copy is used because live
+  rates are unavailable, the caption says so (with the time the copy was fetched).
+
+### Temporal light trails
+
+Each orb is the tip of time: behind it (to its left) a ribbon of light shows the currency's last 52 weeks,
+and as time moves on the shape flows away to the left while new moves are born at the orb.
+
+- **Drawn from the data, not recorded.** Every frame the ribbon is sampled straight from the weekly history
+  at the playback position, so it always covers exactly one year at any playback speed or frame rate, shows
+  the right history immediately after a jump, and never invents values: its vertices are the weekly data
+  points themselves, and weeks before a currency's data begins are simply not drawn.
+- **One scale.** The compact trails use the same height scale as the orbs, so the right end of each ribbon
+  is exactly where its orb is, and trails can be compared with each other.
+- **Light lane (on pinch).** The expanded view is auto-zoomed to fit the year, and always says so with its
+  range (for example "Auto-zoom: full height = +/-13%"); the zoom glides, never jumps. A dashed line marks
+  where the year started; year ticks scroll with the data.
+- **Markers and sparks.** A warm marker is pinned to the date of each event on the currencies it touched,
+  so the moves that followed are drawn right after it. Each note leaves a small spark at the orb that
+  drifts away with the history, and faint beads every quarter make the flow visible even when rates are flat.
+- **Jumps and replay.** Pause freezes the trails; a chapter jump makes trails and orbs glide to the new time
+  (no blanking, no flash); Replay clears captions, markers, highlights and the solo lane.
+- **Sound and light in sync.** Lights answer a note when it is actually heard (its scheduled audio time),
+  not when it was booked, so even the ending's roll call lights each orb with its own note.
+- **Light for Quest.** One small dynamic ribbon per trail (about 54 points) with an additive glow shader,
+  plus point sprites; no post-processing, nothing allocated per frame for geometry.
 
 ### The historical moments
 
@@ -110,13 +138,16 @@ Designed in from the start, not added at the end:
   density encodes volatility, the drone's tension encodes market stress, a gong marks major moments, a soft
   chime marks each new decade, and the ending's grace notes say up or down.
 - **Optional spoken captions** (Voice button) using the browser's speech synthesis.
-- **Never color alone.** Height, brightness, label, position and sound all carry the same information. The
-  palette is based on Okabe-Ito, a color-vision-deficiency-safe palette.
+- **Never color alone.** Height, brightness, label, position and sound all carry the same information, and
+  each trail's shape shows the direction of change. The palette is based on Okabe-Ito, a
+  color-vision-deficiency-safe palette.
 - **Large, high-contrast captions** (about 3.6 cm text at 1.1 m, white on near-black) with a year always on
   screen. Captions show for 6 to 7.5 s (at least 3.5 s even when the next one is waiting) and stay put
   while paused.
 - **Photosensitivity-safe light.** Brightness changes are slew-rate limited, glows fade slowly, notes per orb
-  are capped below 3 per second, and the sky changes over seconds. Nothing flashes 3 or more times per second.
+  are capped below 3 per second, and the sky changes over seconds. Trail highlights rise over about half a
+  second and lanes cross-fade. Nothing flashes 3 or more times per second.
+- **No moving world.** The trails scroll inside their small ribbons only; the camera and the scene never move.
 - **Comfortable sound.** Pentatonic scale (no clashes), a gentle compressor, smooth fades on pause and jumps,
   and no sudden volume jumps.
 - **Quick to start, easy to stop.** It starts on entering VR and pauses automatically when the system menu
@@ -143,9 +174,11 @@ src/experience.ts          the conductor: clock, events, captions, solo, today e
 src/data/                  timeline math, events and chapters, today loader
 src/playback/clock.ts      time-lapse pacing (era speeds + slow-downs)
 src/audio/                 sound engine, pentatonic scale, timbres
-src/visual/                orbs, guides, info card, sky and motes
+src/visual/                orbs, guides, sky and motes, light trails (trails.ts) and their pure math
+                           (trail-sampling.ts, unit tested)
+src/audio/note-queue.ts    releases note events when they are heard (sound/light sync)
 public/ui/*.uikitml        caption board and hand panel
-tests/                     pytest for the data pipeline, node:test for the function
+tests/                     pytest for the data pipeline, node:test for the function and the trails
 ```
 
 ## Development
@@ -162,6 +195,10 @@ npm run build      # production build into dist/
 ```
 
 In the emulator, enter XR, then switch the input to hands to try pinch and poke.
+
+Dev builds only (not in production): keys `1`-`5` jump to the chapters, `g h j k l b n m ,` solo CAD to AUD,
+`p` pauses, `0` / `6` / `7` jump before the Plaza Accord / the Asian crisis / the 2022 yen slide, `8` goes to
+the last weeks and `9` replays. Handy for checking scenes and recording clips.
 
 ### Deploy (Cloudflare Pages)
 

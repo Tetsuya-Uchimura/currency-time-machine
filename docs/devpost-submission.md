@@ -1,7 +1,7 @@
 # Devpost submission draft
 
 **Track:** Entertainment / **Category:** New Experience
-**Play:** <Cloudflare Pages URL> / **Code:** <GitHub URL> / **Video:** <YouTube URL>
+**Play:** https://currency-time-machine.pages.dev / **Code:** https://github.com/Tetsuya-Uchimura/currency-time-machine / **Video:** <YouTube URL>
 
 ## Tagline (max 140 characters)
 
@@ -21,14 +21,16 @@ rather than by reading a chart.
 ### What it does
 
 You sit down and history starts: it is 1948. Around you float the currencies of the world as glowing orbs,
-arranged west to east like a map. You stand in the place of the US dollar. Time fast-forwards. In the
+arranged west to east like a map, each trailing a ribbon of light drawn from its own past year. You stand
+in the place of the US dollar. Time fast-forwards. In the
 fixed-rate era almost nothing moves, and you hear calm. In 1971 the dollar's link to gold is cut and the
 orbs come alive: each currency rises when it strengthens and sinks when it weakens, sings with its own
-voice from its own direction, and plays faster when its market is restless. The Plaza Accord, the Asian
+voice from its own direction, and plays faster when its market is restless, while its light trail keeps
+the shape of the past year flowing away behind it. The Plaza Accord, the Asian
 crisis, the birth of the euro and the 2008 crisis arrive as storms of sound and light. Finally the clock
 catches up with the present and today's real exchange rates appear, so the ending is different every day.
 
-Pinch a currency to hear it alone. Pinch the small panel at your lap to pause or jump between eras.
+Pinch a currency to hear it alone and open its light lane: its last twelve months, larger, with the change. Pinch the small panel at your lap to pause or jump between eras.
 Everything works with one hand, seated, in about four minutes.
 
 ### How we built it
@@ -52,7 +54,7 @@ breathe; and designing light that reacts to sound without ever flashing.
 Choosing your own home currency as your position, more voices (more currencies), a calm "listen to today"
 mode, and haptic pulses on major moments.
 
-(about 400 words)
+(about 440 words)
 
 ## How we implemented hand interactions
 
