@@ -96,3 +96,16 @@ export const LANE = {
   halfWidthBase: 0.005,
   halfWidthVol: 0.006,
 };
+
+/** Historical Portals: behind the orbs (0.6), lane (0.95) and captions (1.1). */
+export const PORTAL = {
+  z: 1.9,
+  /**
+   * Centered at eye level: the top stays below the caption board, and the
+   * city's skyline (lower part of the scene) sits behind the row of orbs, so
+   * the light trails float in front of the era's streets.
+   */
+  y: -0.03,
+  width: 1.6,
+  height: 0.9,
+};
