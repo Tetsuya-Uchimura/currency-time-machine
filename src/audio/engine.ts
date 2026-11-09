@@ -21,6 +21,7 @@
  */
 import { AudioContext as ThreeAudioContext } from '@iwsdk/core';
 import type { TimbreId } from '../config.js';
+import { NoteQueue } from './note-queue.js';
 import { degreeToHz } from './scale.js';
 import { TIMBRES, type Timbre } from './timbres.js';
 
@@ -67,6 +68,9 @@ export class SoundEngine {
   private built = false;
   private solo = -1;
   private noteListener: NoteListener | null = null;
+  /** Booked notes waiting until they are actually heard (see dispatchDue). */
+  private readonly pending = new NoteQueue();
+  private readonly emit = (i: number, v: number, when: number) => this.noteListener?.(i, v, when);
   private suspendTimer: number | undefined;
   paused = false;
   /** Number of notes scheduled so far (dev diagnostics). */
@@ -76,8 +80,20 @@ export class SoundEngine {
     this.ctx = ThreeAudioContext.getContext() as AudioContext;
   }
 
+  /**
+   * Listen for notes. The callback fires when a note becomes audible (its
+   * scheduled context time, plus output latency), not when it is booked, so
+   * lights answering a note stay in sync even for notes booked seconds ahead.
+   */
   onNote(listener: NoteListener): void {
     this.noteListener = listener;
+  }
+
+  /** Release notes whose start time has been reached. Called every frame. */
+  private dispatchDue(): void {
+    if (!this.built || this.pending.size === 0) return;
+    const latency = Math.min(0.2, Math.max(0, this.ctx.outputLatency || this.ctx.baseLatency || 0));
+    this.pending.drain(this.ctx.currentTime - latency, this.emit);
   }
 
   /** Must be called from a user gesture (click/pinch/XR entry) at least once. */
@@ -208,6 +224,7 @@ export class SoundEngine {
    * @param flowing false while paused/ended (no new notes)
    */
   update(inputs: VoiceInput[], turbulence: number, floatBlend: number, flowing: boolean): void {
+    this.dispatchDue();
     if (!this.running) return;
     const ctx = this.ctx;
     const now = ctx.currentTime;
@@ -291,7 +308,7 @@ export class SoundEngine {
     osc.start(when);
     osc.stop(end + 0.05);
     this.noteCount++;
-    this.noteListener?.(i, velocity, when);
+    this.pending.push(i, velocity, when);
   }
 
   /** Low gong for major historical moments (non-positional, wrapped in reverb). */
