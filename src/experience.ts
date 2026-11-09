@@ -25,13 +25,16 @@ import {
 import { Narration } from './a11y/narration.js';
 import { SoundEngine, type VoiceInput } from './audio/engine.js';
 import { strengthToSteps } from './audio/scale.js';
-import { Orb } from './components.js';
+import { Orb, PortalTarget } from './components.js';
 import { BASE_CURRENCY, LAYOUT, SLOTS, strengthToHeight, TRAIL } from './config.js';
 import { CHAPTERS, EVENTS, FLOAT_START, HINT_TEXT, type HistoryEvent } from './data/events.js';
+import { PORTAL_SCENES } from './data/portals.js';
 import { Timeline } from './data/timeline.js';
 import { loadToday, type TodayData } from './data/today.js';
 import { DEFAULT_PACING, PlaybackClock, slowDownsFor } from './playback/clock.js';
+import { PortalDirector } from './playback/portal-director.js';
 import { Ambience } from './visual/ambience.js';
+import { HistoricalPortals } from './visual/historical-portals.js';
 import { createGuides, OrbView, type OrbState } from './visual/orbs.js';
 import type { TrailTail } from './visual/trail-sampling.js';
 import { TrailField } from './visual/trails.js';
@@ -48,10 +51,20 @@ interface Caption {
 
 interface Moment {
   event: HistoryEvent;
-  /** Week index at which the caption appears. */
+  /** Week index of the event's actual date. */
+  at: number;
+  /** Week index at which the caption appears (a little before `at`). */
   trigger: number;
   fired: boolean;
+  /** The playhead has reached the actual date (the gong rings here). */
+  dated: boolean;
+  /** This event has a Historical Portal (which then owns the sky tint). */
+  portal: boolean;
 }
+
+/** Weeks before a major event at which its caption (and portal) appear. */
+const MAJOR_LEAD = 16;
+const MINOR_LEAD = 3;
 
 /** Shortest a caption stays when another is waiting, and its natural length. */
 const CAPTION_TIMES = { major: [4.5, 7.5], minor: [3.5, 6], hint: [5, 7] } as const;
@@ -59,6 +72,7 @@ const FOCUS_HOLD_S = 5;
 
 export class ExperienceSystem extends createSystem({
   pressedOrbs: { required: [Orb, Pressed] },
+  pressedPortal: { required: [PortalTarget, Pressed] },
 }) {
   private ready = false;
   private phase: Phase = 'idle';
@@ -72,6 +86,8 @@ export class ExperienceSystem extends createSystem({
   private rig!: Entity;
   private orbs: OrbView[] = [];
   private trails!: TrailField;
+  private portals!: HistoricalPortals;
+  private director!: PortalDirector;
   private ambience!: Ambience;
   private captionPanel!: UIKitMLAsset;
   private handPanel!: UIKitMLAsset;
@@ -92,6 +108,10 @@ export class ExperienceSystem extends createSystem({
   private anchorDelay = 0;
   private audioPosTimer = 0;
   private debugTimer = 5;
+  private debugFrames = 0;
+  /** Dev only: no dt cap (screenshots from a throttled emulator window). */
+  private devRealtime = false;
+  private debugSince = 0;
   private infoTimer = 0;
   /** Today's rates have been applied to the trails (morph done once). */
   private todayApplied = false;
@@ -114,6 +134,10 @@ export class ExperienceSystem extends createSystem({
       this.queries.pressedOrbs.subscribe('qualify', (entity) => {
         this.toggleSolo(entity.getValue(Orb, 'slotIndex') ?? -1);
       }),
+      this.queries.pressedPortal.subscribe('qualify', () => {
+        void this.audio?.unlock();
+        this.portals?.toggleDetails();
+      }),
       this.world.visibilityState.subscribe((state) => this.onVisibility(state)),
     );
     const onHidden = () => {
@@ -129,8 +153,8 @@ export class ExperienceSystem extends createSystem({
    * Dev only (stripped from production builds): keyboard shortcuts so the
    * emulator can be driven by automation and demo clips are easy to set up.
    *   1-5 chapters   g h j k l b n m , solo CAD..AUD   p pause
-   *   6 before the Asian crisis   7 before the 2022 yen slide   0 before the Plaza
-   *   8 near the end   9 replay
+   *   6 before the Asian crisis   7 before the 2022 yen slide   0 before the 1985 moment
+   *   8 near the end   9 replay   c no frame-time cap (throttled emulator)
    * (W/A/S/D and the arrows are left alone: the emulator moves the head with them.)
    */
   private devKeys(): void {
@@ -141,11 +165,12 @@ export class ExperienceSystem extends createSystem({
       if (k >= '1' && k <= '5') this.jumpTo(this.timeline.indexOf(CHAPTERS[Number(k) - 1].date));
       else if (soloKeys.includes(k)) this.toggleSolo(soloKeys.indexOf(k));
       else if (k === 'p' && this.phase === 'playing') this.setPaused(!this.clock.paused);
+      else if (k === 'c') this.devRealtime = !this.devRealtime;
       else if (k === '8') this.jumpTo(this.timeline.count - 40);
       else if (k === '9') this.start();
       else if (k === '6') this.jumpTo(this.timeline.indexOf('1997-08-01'));
       else if (k === '7') this.jumpTo(this.timeline.indexOf('2022-01-07'));
-      else if (k === '0') this.jumpTo(this.timeline.indexOf('1985-06-07'));
+      else if (k === '0') this.jumpTo(this.timeline.indexOf('1985-04-26'));
     };
     window.addEventListener('keydown', onKey);
     this.cleanupFuncs.push(() => window.removeEventListener('keydown', onKey));
@@ -163,8 +188,9 @@ export class ExperienceSystem extends createSystem({
     this.moments = EVENTS.map((event) => {
       const at = timeline.indexOf(event.date);
       // Majors: caption appears as the slow-down begins. Minors: just before.
-      const lead = event.tier === 'major' ? 16 : 3;
-      return { event, trigger: Math.max(0, at - lead), fired: false };
+      const lead = event.tier === 'major' ? MAJOR_LEAD : MINOR_LEAD;
+      const portal = PORTAL_SCENES.some((sc) => sc.eventId === event.id);
+      return { event, at, trigger: Math.max(0, at - lead), fired: false, dated: false, portal };
     });
     this.hintIndex = timeline.indexOf('1951-06-01');
     this.focus = SLOTS.map(() => 0);
@@ -208,6 +234,21 @@ export class ExperienceSystem extends createSystem({
     );
     this.world.createTransformEntity(this.trails.root, { parent: this.rig });
 
+    // Historical Portals: windows onto the era, far behind everything else.
+    this.director = new PortalDirector(
+      PORTAL_SCENES.map((sc) => {
+        const at = timeline.indexOf(sc.eventDate);
+        // The next caption after this event (any tier) closes the window.
+        const closeBy = Math.min(...this.moments.filter((m) => m.at > at + 0.5).map((m) => m.trigger));
+        return { at, lead: MAJOR_LEAD, closeBy };
+      }),
+    );
+    this.portals = new HistoricalPortals(PORTAL_SCENES, (t) => this.world.renderer.initTexture(t));
+    const portalEntity = this.world.createTransformEntity(this.portals.root, { parent: this.rig });
+    const portalHit = this.world.createTransformEntity(this.portals.hit, { parent: portalEntity });
+    portalHit.addComponent(PortalTarget);
+    portalHit.addComponent(RayInteractable); // 1.7 m away: pinch from afar
+
     // Caption board: ahead and above the orbs, large type.
     this.captionPanel = await this.world.assets.instantiate<UIKitMLAsset>('caption-panel');
     // High enough that even the strongest orb (CHF) never overlaps it.
@@ -243,6 +284,8 @@ export class ExperienceSystem extends createSystem({
     this.clock.paused = false;
     this.clock.seek(0);
     this.resetMoments(0);
+    this.director.seek(0);
+    this.portals.hideDetails();
     this.phase = 'playing';
     this.lastDecade = -1;
     this.lastYear = -1;
@@ -355,6 +398,8 @@ export class ExperienceSystem extends createSystem({
     this.trailTails.fill(null);
     this.todayApplied = false;
     this.clock.seek(index);
+    this.director.seek(this.clock.position);
+    this.portals.hideDetails();
     this.clock.paused = false;
     this.audio.setPaused(false);
     this.autoPaused = false;
@@ -368,7 +413,13 @@ export class ExperienceSystem extends createSystem({
   }
 
   private resetMoments(index: number): void {
-    for (const m of this.moments) m.fired = m.trigger < index - 0.5;
+    // A moment counts as past only once its actual date is behind us: jumping
+    // in between the caption's early trigger and the date (e.g. the 1971
+    // chapter) still shows the caption, and the gong still rings on the date.
+    for (const m of this.moments) {
+      m.fired = m.at < index - 0.5;
+      m.dated = m.fired;
+    }
     this.hintShown = this.hintShown || index > this.hintIndex;
   }
 
@@ -388,7 +439,8 @@ export class ExperienceSystem extends createSystem({
 
   update(delta: number): void {
     if (!this.ready) return;
-    const dt = Math.min(delta, 0.1);
+    // (Dev: 'c' lifts the cap so a throttled, backgrounded emulator still plays in real time.)
+    const dt = Math.min(delta, this.devRealtime ? 1 : 0.1);
     this.anchorIfNeeded(dt);
     this.syncListener();
 
@@ -411,6 +463,7 @@ export class ExperienceSystem extends createSystem({
     const turb = this.phase === 'today' ? 0.15 : Timeline.sample(this.timeline.turbulence, p);
     const floatBlend = Math.min(1, Math.max(0, (p - this.floatStartIndex + 20) / 40));
     this.trails.update(dt, { heads: this.trailHeads, tails: this.trailTails, focus: this.focus, turbulence: turb });
+    this.updatePortals(dt, p, flowing);
     // Each orb rides exactly on the head of its trail.
     for (let i = 0; i < this.orbStates.length; i++) this.orbStates[i].height = this.trails.headY(i);
     this.audio.update(this.voiceInputs, turb, floatBlend, flowing);
@@ -432,14 +485,19 @@ export class ExperienceSystem extends createSystem({
 
   /** Dev only: lets us confirm the (inaudible to CI) audio graph is alive. */
   private logDiagnostics(dt: number, p: number): void {
+    this.debugFrames++;
     this.debugTimer -= dt;
     if (this.debugTimer > 0) return;
     this.debugTimer = 5;
+    const now = performance.now();
+    const fps = (this.debugFrames * 1000) / Math.max(1, now - this.debugSince);
+    this.debugFrames = 0;
+    this.debugSince = now;
     const l = this.audio.ctx.listener;
     const year = this.timeline.dateAt(p).getUTCFullYear();
     const line =
       `[ctm] phase=${this.phase} year=${year} paused=${this.clock.paused} audio=${this.audio.ctx.state} ` +
-      `notes=${this.audio.noteCount} listener=(${l.positionX.value.toFixed(2)},${l.positionY.value.toFixed(2)},${l.positionZ.value.toFixed(2)})`;
+      `notes=${this.audio.noteCount} fps=${fps.toFixed(0)} portal=${this.portals.debug} listener=(${l.positionX.value.toFixed(2)},${l.positionY.value.toFixed(2)},${l.positionZ.value.toFixed(2)})`;
     console.info(line);
     // Also mirror into a hidden status element (readable by automation snapshots).
     let el = document.getElementById('ctm-debug');
@@ -503,11 +561,49 @@ export class ExperienceSystem extends createSystem({
         this.trails.markEvent(i, at);
       }
       if (e.tier === 'major') {
-        this.audio.gong();
-        this.ambience.markEvent();
+        // Portal events tint the sky when their window opens (same moment).
+        if (!m.portal) this.ambience.markEvent();
         this.trails.boostAll();
       }
     }
+    // The actual date of a major event: the gong rings and the currencies it
+    // touched are highlighted again, as the real moves begin.
+    for (const m of this.moments) {
+      if (m.dated || p < m.at || m.event.tier !== 'major') continue;
+      m.dated = true;
+      this.audio.gong();
+      this.trails.boostAll();
+      for (const slot of m.event.focus) {
+        const i = SLOTS.findIndex((s) => s.slot === slot);
+        if (i >= 0) this.focus[i] = 1;
+      }
+    }
+  }
+
+  /** Open, animate and close the Historical Portals. */
+  private updatePortals(dt: number, p: number, flowing: boolean): void {
+    const playing = this.phase === 'playing';
+    const st = this.director.update(p, dt, playing && flowing);
+    const index = playing ? st.index : -1;
+    if (index >= 0 && st.justOpened) {
+      const scene = PORTAL_SCENES[index];
+      this.audio.shimmer();
+      this.ambience.markEvent(scene.tint);
+      for (const slot of scene.affectedSlots) {
+        const i = SLOTS.findIndex((s) => s.slot === slot);
+        if (i >= 0) this.focus[i] = Math.max(this.focus[i], 0.8);
+      }
+    }
+    // Prepare the next window's textures well before it is needed.
+    if (playing) this.portals.prefetch(this.director.upcoming(p, 120));
+    this.portals.update(dt, {
+      index,
+      appear: st.appear,
+      highlight: st.highlight,
+      out: st.out,
+      flowing: playing && flowing,
+      laneVisible: this.trails.laneVisibility,
+    });
   }
 
   // -------------------------------------------------------------------------

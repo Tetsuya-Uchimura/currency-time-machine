@@ -332,6 +332,28 @@ export class SoundEngine {
     }
   }
 
+  /** A Historical Portal opens: a slow, airy three-note shimmer (very soft). */
+  shimmer(): void {
+    if (!this.running) return;
+    const ctx = this.ctx;
+    const t = ctx.currentTime + 0.05;
+    [10, 12, 14].forEach((degree, k) => {
+      const osc = ctx.createOscillator();
+      osc.type = 'sine';
+      osc.frequency.value = degreeToHz(degree);
+      const g = ctx.createGain();
+      const s = t + k * 0.32;
+      g.gain.setValueAtTime(0, s);
+      g.gain.linearRampToValueAtTime(0.014, s + 0.45);
+      g.gain.exponentialRampToValueAtTime(0.0001, s + 3.2);
+      osc.connect(g);
+      g.connect(this.bus);
+      g.connect(this.reverbSend);
+      osc.start(s);
+      osc.stop(s + 3.3);
+    });
+  }
+
   /** Soft high chime marking each new decade: an audio-only sense of time. */
   decadeChime(): void {
     if (!this.running) return;

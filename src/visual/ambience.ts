@@ -36,6 +36,7 @@ export class Ambience {
   private eventTarget = 0;
   private readonly top = new Color();
   private readonly bottom = new Color();
+  private readonly tint = EVENT_TINT.clone();
 
   constructor() {
     this.skyMat = new ShaderMaterial({
@@ -89,9 +90,10 @@ export class Ambience {
     this.motes.raycast = () => {};
   }
 
-  /** A major event: warm the sky for a while (fades over ~6 s). */
-  markEvent(): void {
+  /** A major event: tint the sky for a while (fades over ~6 s). */
+  markEvent(tint?: number): void {
     this.eventTarget = 1;
+    this.tint.set(tint ?? EVENT_TINT);
   }
 
   update(dt: number, turbulence: number): void {
@@ -101,7 +103,7 @@ export class Ambience {
     this.eventTarget = Math.max(0, this.eventTarget - dt / 6);
 
     const t = this.turb;
-    this.top.copy(CALM_TOP).lerp(STORM_TOP, t).lerp(EVENT_TINT, this.event * 0.45);
+    this.top.copy(CALM_TOP).lerp(STORM_TOP, t).lerp(this.tint, this.event * 0.45);
     this.bottom.copy(CALM_BOTTOM).lerp(STORM_BOTTOM, t);
     (this.skyMat.uniforms.top.value as Color).copy(this.top);
     (this.skyMat.uniforms.bottom.value as Color).copy(this.bottom);

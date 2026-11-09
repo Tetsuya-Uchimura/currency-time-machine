@@ -542,6 +542,12 @@ export class TrailField {
     return windowChange(this.samples[i]);
   }
 
+  /** 0..1 how visible the solo lane is (the portal yields to it). */
+  get laneVisibility(): number {
+    const a = this.lane.visible ? this.laneAlpha : 0;
+    return a * a * (3 - 2 * a);
+  }
+
   get expandedSlot(): number {
     return this.laneTarget;
   }
