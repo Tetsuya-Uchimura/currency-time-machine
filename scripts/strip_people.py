@@ -6,8 +6,8 @@ from a built site (dist/), so they are not even shipped.
 names or portraits), then runs this on dist/:
   - data/leaders.json        names emptied, portraits removed (offices and dates stay)
   - data/history-content.json  people removed from every event card
-  - data/annual-events.json  source titles and links removed (some articles are
-                             named after people); the count stays
+  - data/annual-events.json  source titles and links removed (some articles and
+                             statements are named after people); publishers stay
   - media/leaders/, media/people/   deleted
 City photographs (places, no identifiable people as subjects) are kept.
 
@@ -42,7 +42,8 @@ def strip(dist: Path) -> dict:
     if events.exists():
         data = json.loads(events.read_text(encoding="utf-8"))
         for e in data["events"]:
-            e["sources"] = [{"title": "Wikipedia", "url": ""} for _ in e["sources"]]
+            # Publishers stay (the app names them); titles and links go (some name people).
+            e["sources"] = [{"publisher": s.get("publisher", "Wikipedia"), "title": "", "url": "", "primary": bool(s.get("primary"))} for s in e["sources"]]
         events.write_text(json.dumps(data, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
     for sub in ("leaders", "people"):
         d = dist / "media" / sub

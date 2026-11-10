@@ -1,0 +1,652 @@
+{
+  "_comment": "What the featured years (1971, 1985, 1997, 2008, 2022) say outside the event list: the portals' summaries, policies and people (content/history.json), the portal scenes (src/data/portals.ts) and the guide's openings (src/guide/guide-scripts.ts). `text` is the wording as reviewed: tests fail when the app's text changes without a new review. `evidence`: quotes from content/sources.json (checked by scripts/review_featured.py), rate figures recomputed from H.10 (scripts/check_rates.py), and the office checks of scripts/build_media.py. Events have their own evidence in content/annual-events.json.",
+  "items": [
+    {
+      "target": "history:gold-break:summary",
+      "text": "On 15 August 1971 the United States suspended the convertibility of the dollar into gold, ending the Bretton Woods system of fixed exchange rates. Japan let the yen float from 28 August.",
+      "evidence": [
+        {
+          "source": "nixon-1971-08-15",
+          "quote": "Address to the Nation Outlining a New Economic Policy: \"The Challenge of Peace.\" August 15, 1971"
+        },
+        {
+          "source": "nixon-1971-08-15",
+          "quote": "suspend temporarily the convertibility of the dollar into gold or other reserve assets"
+        },
+        {
+          "source": "mof-policy-history-1972-1990",
+          "quote": "This was the end of the Bretton Woods international monetary system, 27 years after it was established, in July 1944"
+        },
+        {
+          "source": "mof-policy-history-1972-1990",
+          "quote": "so that world currencies provisionally went into the floating exchange rate system (on August 28, for Japan)"
+        }
+      ]
+    },
+    {
+      "target": "history:gold-break:policies:0",
+      "text": "Suspension of the dollar's convertibility into gold",
+      "evidence": [
+        {
+          "source": "nixon-1971-08-15",
+          "quote": "suspend temporarily the convertibility of the dollar into gold or other reserve assets"
+        }
+      ]
+    },
+    {
+      "target": "history:gold-break:policies:1",
+      "text": "A temporary 10% surcharge on imports",
+      "evidence": [
+        {
+          "source": "nixon-1971-08-15",
+          "quote": "As a temporary measure, I am today imposing an additional tax of 10 percent on goods imported into the United States."
+        }
+      ]
+    },
+    {
+      "target": "history:gold-break:policies:2",
+      "text": "A 90-day freeze on wages and prices",
+      "evidence": [
+        {
+          "source": "nixon-1971-08-15",
+          "quote": "I am today ordering a freeze on all prices and wages throughout the United States for a period of 90 days."
+        }
+      ]
+    },
+    {
+      "target": "history:gold-break:people:nixon",
+      "text": "Announced the measures in an address to the nation on 15 August 1971.",
+      "evidence": [
+        {
+          "source": "nixon-1971-08-15",
+          "quote": "Address to the Nation Outlining a New Economic Policy: \"The Challenge of Peace.\" August 15, 1971"
+        },
+        {
+          "office": "Holder of this office on the date: Wikidata or the English Wikipedia infobox, checked by scripts/build_media.py (docs/history-verification.md)"
+        }
+      ]
+    },
+    {
+      "target": "history:gold-break:people:connally",
+      "text": "Chaired the Group of Ten meeting of 17 and 18 December 1971 in Washington, which reached the Smithsonian Agreement.",
+      "evidence": [
+        {
+          "source": "nixon-1971-12-18",
+          "quote": "The Group of Ten met in Washington, D.C., December 17-18, 1971, under the chairmanship of Secretary of the Treasury John B. Connally."
+        },
+        {
+          "office": "Holder of this office on the date: Wikidata or the English Wikipedia infobox, checked by scripts/build_media.py (docs/history-verification.md)"
+        }
+      ]
+    },
+    {
+      "target": "history:gold-break:people:burns",
+      "text": "Took part in the Camp David meetings of August 1971 at which the measures were prepared.",
+      "evidence": [
+        {
+          "source": "fedhistory-gold-convertibility",
+          "quote": "including Federal Reserve Chairman Arthur Burns , Treasury Secretary John Connally, and Undersecretary for International Monetary Affairs Paul Volcker (later Federal Reserve Chairman) met at the presidential retreat at Camp David and created a new economic plan."
+        },
+        {
+          "source": "wp-nixon-shock",
+          "quote": "On the afternoon of Friday, August 13, 1971, Nixon, Burns, Connally, Volcker, and twelve other high-ranking White House and Treasury advisors met secretly at Camp David"
+        },
+        {
+          "office": "Holder of this office on the date: Wikidata or the English Wikipedia infobox, checked by scripts/build_media.py (docs/history-verification.md)"
+        }
+      ]
+    },
+    {
+      "target": "history:gold-break:people:sato",
+      "text": "Prime Minister when Japan let the yen float, on 28 August 1971.",
+      "evidence": [
+        {
+          "source": "mof-policy-history-1972-1990",
+          "quote": "so that world currencies provisionally went into the floating exchange rate system (on August 28, for Japan)"
+        },
+        {
+          "office": "Holder of this office on the date: Wikidata or the English Wikipedia infobox, checked by scripts/build_media.py (docs/history-verification.md)"
+        }
+      ]
+    },
+    {
+      "target": "portal-scene:gold-break",
+      "text": "In August 1971 the United States suspended the convertibility of the dollar into gold, so other governments could no longer exchange their dollars for gold. By 1973 fixed exchange rates had given way to floating ones: the yen went from about 357 to about 280 per dollar.",
+      "evidence": [
+        {
+          "source": "nixon-1971-08-15",
+          "quote": "suspend temporarily the convertibility of the dollar into gold or other reserve assets"
+        },
+        {
+          "source": "wp-nixon-shock",
+          "quote": "such that foreign governments could no longer exchange their dollars for gold, thereby ending the Bretton Woods system"
+        },
+        {
+          "rates": "portal scene 1971"
+        }
+      ]
+    },
+    {
+      "target": "story:1971",
+      "text": "1971. For more than twenty years, most major currencies have been fixed to the dollar, and the dollar to gold. This is the year that system breaks.",
+      "evidence": [
+        {
+          "source": "mof-policy-history-1972-1990",
+          "quote": "This was the end of the Bretton Woods international monetary system, 27 years after it was established, in July 1944"
+        }
+      ],
+      "note": "'Most major currencies': Canada's dollar floated from 1950 to 1962 and again from 1970 (see the 1950 and 1970 events)."
+    },
+    {
+      "target": "history:dollar-adjustment:summary",
+      "text": "On 22 September 1985 the finance ministers and central bank governors of five major economies met in New York and said a further orderly rise of other currencies against the dollar was desirable. The dollar fell after the announcement, although it had already peaked in early 1985.",
+      "evidence": [
+        {
+          "source": "g5-1985-09-22",
+          "quote": "Ministers of Finance and Central Bank Governors of France, the Federal Republic of Germany, Japan. the United Kingdom, and the United States met today, September 22,1985"
+        },
+        {
+          "source": "g5-1985-09-22",
+          "quote": "some further orderly appreciation of the main non-dollar currencies against the dollar is desirable"
+        },
+        {
+          "source": "wp-plaza-accord",
+          "quote": "the finance ministers and central bank governors of the United States, France, Germany, Japan and Great Britain met at the Plaza Hotel in New York City"
+        },
+        {
+          "source": "wp-plaza-accord",
+          "quote": "The following Monday, when the meeting was made public, the dollar fell"
+        },
+        {
+          "rates": "1985 portal: USD peak"
+        }
+      ]
+    },
+    {
+      "target": "history:dollar-adjustment:policies:0",
+      "text": "Joint statement of the G5: United States, Japan, West Germany, France and the United Kingdom",
+      "evidence": [
+        {
+          "source": "g5-1985-09-22",
+          "quote": "Ministers of Finance and Central Bank Governors of France, the Federal Republic of Germany, Japan. the United Kingdom, and the United States met today, September 22,1985"
+        }
+      ]
+    },
+    {
+      "target": "history:dollar-adjustment:policies:1",
+      "text": "Readiness to cooperate more closely to encourage the rise of other currencies",
+      "evidence": [
+        {
+          "source": "g5-1985-09-22",
+          "quote": "They stand ready to cooperate more closely to encourage this when to do so would be helpful"
+        }
+      ]
+    },
+    {
+      "target": "history:dollar-adjustment:policies:2",
+      "text": "Intervention in currency markets to lower the dollar",
+      "evidence": [
+        {
+          "source": "wp-plaza-accord",
+          "quote": "to depreciate the U.S. dollar in relation to the French franc, the German Deutsche Mark, the Japanese yen and the British pound sterling by intervening in currency markets"
+        }
+      ]
+    },
+    {
+      "target": "history:dollar-adjustment:people:baker",
+      "text": "Attended as US Secretary of the Treasury, one of the five finance ministers.",
+      "evidence": [
+        {
+          "source": "g5-1985-09-22",
+          "quote": "Ministers of Finance and Central Bank Governors of France, the Federal Republic of Germany, Japan. the United Kingdom, and the United States met today, September 22,1985"
+        },
+        {
+          "office": "Holder of this office on the date: Wikidata or the English Wikipedia infobox, checked by scripts/build_media.py (docs/history-verification.md)"
+        }
+      ]
+    },
+    {
+      "target": "history:dollar-adjustment:people:takeshita",
+      "text": "Represented Japan at the meeting.",
+      "evidence": [
+        {
+          "source": "g5-1985-09-22",
+          "quote": "Ministers of Finance and Central Bank Governors of France, the Federal Republic of Germany, Japan. the United Kingdom, and the United States met today, September 22,1985"
+        },
+        {
+          "office": "Holder of this office on the date: Wikidata or the English Wikipedia infobox, checked by scripts/build_media.py (docs/history-verification.md)"
+        }
+      ]
+    },
+    {
+      "target": "history:dollar-adjustment:people:volcker",
+      "text": "Attended as head of the US central bank.",
+      "evidence": [
+        {
+          "source": "g5-1985-09-22",
+          "quote": "Ministers of Finance and Central Bank Governors of France, the Federal Republic of Germany, Japan. the United Kingdom, and the United States met today, September 22,1985"
+        },
+        {
+          "office": "Holder of this office on the date: Wikidata or the English Wikipedia infobox, checked by scripts/build_media.py (docs/history-verification.md)"
+        }
+      ]
+    },
+    {
+      "target": "history:dollar-adjustment:people:sumita",
+      "text": "Attended for the Bank of Japan.",
+      "evidence": [
+        {
+          "source": "g5-1985-09-22",
+          "quote": "Ministers of Finance and Central Bank Governors of France, the Federal Republic of Germany, Japan. the United Kingdom, and the United States met today, September 22,1985"
+        },
+        {
+          "office": "Holder of this office on the date: Wikidata or the English Wikipedia infobox, checked by scripts/build_media.py (docs/history-verification.md)"
+        }
+      ]
+    },
+    {
+      "target": "history:dollar-adjustment:people:stoltenberg",
+      "text": "Represented West Germany at the meeting.",
+      "evidence": [
+        {
+          "source": "g5-1985-09-22",
+          "quote": "Ministers of Finance and Central Bank Governors of France, the Federal Republic of Germany, Japan. the United Kingdom, and the United States met today, September 22,1985"
+        },
+        {
+          "office": "Holder of this office on the date: Wikidata or the English Wikipedia infobox, checked by scripts/build_media.py (docs/history-verification.md)"
+        }
+      ]
+    },
+    {
+      "target": "history:dollar-adjustment:people:pohl",
+      "text": "Attended for the Bundesbank.",
+      "evidence": [
+        {
+          "source": "g5-1985-09-22",
+          "quote": "Ministers of Finance and Central Bank Governors of France, the Federal Republic of Germany, Japan. the United Kingdom, and the United States met today, September 22,1985"
+        },
+        {
+          "office": "Holder of this office on the date: Wikidata or the English Wikipedia infobox, checked by scripts/build_media.py (docs/history-verification.md)"
+        }
+      ]
+    },
+    {
+      "target": "portal-scene:dollar-adjustment",
+      "text": "In September 1985 five major economies said a further rise of other currencies against the dollar was desirable, and stood ready to cooperate to encourage it. Over the next two years the yen went from about 242 to about 127 per dollar, and the mark from about 2.9 to about 1.6.",
+      "evidence": [
+        {
+          "source": "g5-1985-09-22",
+          "quote": "some further orderly appreciation of the main non-dollar currencies against the dollar is desirable"
+        },
+        {
+          "source": "g5-1985-09-22",
+          "quote": "They stand ready to cooperate more closely to encourage this when to do so would be helpful"
+        },
+        {
+          "rates": "portal scene 1985"
+        }
+      ]
+    },
+    {
+      "target": "story:1985",
+      "text": "1985. The dollar is strong. Since 1980 the Mark has lost {mark}% of its value against it, and the yen {yen}%. In September, five major economies say other currencies should rise against it, and stand ready to cooperate.",
+      "evidence": [
+        {
+          "source": "g5-1985-09-22",
+          "quote": "Ministers of Finance and Central Bank Governors of France, the Federal Republic of Germany, Japan. the United Kingdom, and the United States met today, September 22,1985"
+        },
+        {
+          "source": "g5-1985-09-22",
+          "quote": "They stand ready to cooperate more closely to encourage this when to do so would be helpful"
+        },
+        {
+          "rates": "1985 opening"
+        }
+      ],
+      "note": "The two percentages are computed by the app from the data; the cross-check recomputes them from H.10."
+    },
+    {
+      "target": "history:asian-crisis:summary",
+      "text": "From July 1997 several Asian currencies fell sharply as capital left the region. South Korea announced on 21 November 1997 that it would seek IMF support, and a rescue program was agreed on 3 December. Between June and the end of December the won fell from about 888 to about 1,700 per dollar.",
+      "evidence": [
+        {
+          "source": "wp-asian-crisis-1997",
+          "quote": "It began in Thailand in July 1997 before spreading to several other countries"
+        },
+        {
+          "source": "wp-asian-crisis-1997",
+          "quote": "Capital flight ensued almost immediately"
+        },
+        {
+          "source": "imf-nb-97-25",
+          "quote": "Published: November 21, 1997"
+        },
+        {
+          "source": "imf-nb-97-25",
+          "quote": "welcomed the Korean authorities’ announcement that they intend to enter into a financial arrangement with the IMF"
+        },
+        {
+          "source": "imf-nb-97-27",
+          "quote": "Date and location: December 3, 1997, Seoul."
+        },
+        {
+          "source": "imf-nb-97-27",
+          "quote": "The IMF team and the Korean authorities concluded discussions on a strong economic program"
+        },
+        {
+          "rates": "1997 portal: KRW"
+        }
+      ]
+    },
+    {
+      "target": "history:asian-crisis:policies:0",
+      "text": "IMF stand-by arrangement for Korea, approved on 4 December 1997",
+      "evidence": [
+        {
+          "source": "imf-pr-97-55",
+          "quote": "Published: December 4, 1997"
+        },
+        {
+          "source": "imf-pr-97-55",
+          "quote": "IMF approved a three-year stand-by credit equivalent to SDR 15.5 billion"
+        }
+      ]
+    },
+    {
+      "target": "history:asian-crisis:policies:1",
+      "text": "Higher interest rates and restructuring of the financial sector under the program",
+      "evidence": [
+        {
+          "source": "imf-loi-korea-1997-12-03",
+          "quote": "allowed to rise sufficiently and will be maintained at that level or higher as needed to stabilize markets"
+        },
+        {
+          "source": "imf-loi-korea-1997-12-03",
+          "quote": "a comprehensive strategy to restructure and recapitalize the financial sector"
+        }
+      ]
+    },
+    {
+      "target": "history:asian-crisis:policies:2",
+      "text": "A flexible exchange rate: by 18 December 1997 the won was floating freely",
+      "evidence": [
+        {
+          "source": "imf-nb-97-30",
+          "quote": "Published: December 18, 1997"
+        },
+        {
+          "source": "imf-nb-97-30",
+          "quote": "The won is now freely floating."
+        }
+      ]
+    },
+    {
+      "target": "history:asian-crisis:people:kimys",
+      "text": "President when Korea sought and agreed the IMF program.",
+      "evidence": [
+        {
+          "source": "imf-nb-97-25",
+          "quote": "welcomed the Korean authorities’ announcement that they intend to enter into a financial arrangement with the IMF"
+        },
+        {
+          "source": "imf-nb-97-27",
+          "quote": "Date and location: December 3, 1997, Seoul."
+        },
+        {
+          "office": "Holder of this office on the date: Wikidata or the English Wikipedia infobox, checked by scripts/build_media.py (docs/history-verification.md)"
+        }
+      ]
+    },
+    {
+      "target": "history:asian-crisis:people:limcy",
+      "text": "Signed Korea's letter of intent to the IMF on 3 December 1997, as Minister of Finance and Economy.",
+      "evidence": [
+        {
+          "source": "imf-loi-korea-1997-12-03",
+          "quote": "Seoul, Korea December 3, 1997 Mr. Michel Camdessus Managing Director International Monetary Fund"
+        },
+        {
+          "source": "imf-loi-korea-1997-12-03",
+          "quote": "/s/ Chang-Yuel Lim Deputy Prime Minister and Minister of Finance and Economy"
+        },
+        {
+          "office": "Holder of this office on the date: Wikidata or the English Wikipedia infobox, checked by scripts/build_media.py (docs/history-verification.md)"
+        }
+      ]
+    },
+    {
+      "target": "history:asian-crisis:people:leeks",
+      "text": "Signed Korea's letter of intent to the IMF on 3 December 1997, as Governor of the Bank of Korea.",
+      "evidence": [
+        {
+          "source": "imf-loi-korea-1997-12-03",
+          "quote": "Seoul, Korea December 3, 1997 Mr. Michel Camdessus Managing Director International Monetary Fund"
+        },
+        {
+          "source": "imf-loi-korea-1997-12-03",
+          "quote": "/s/ Kyung-shik Lee Governor Bank of Korea"
+        },
+        {
+          "office": "Holder of this office on the date: Wikidata or the English Wikipedia infobox, checked by scripts/build_media.py (docs/history-verification.md)"
+        }
+      ]
+    },
+    {
+      "target": "history:asian-crisis:people:camdessus",
+      "text": "Headed the IMF, whose board approved the program for Korea on 4 December 1997.",
+      "evidence": [
+        {
+          "source": "imf-pr-97-55",
+          "quote": "Published: December 4, 1997"
+        },
+        {
+          "source": "imf-pr-97-55",
+          "quote": "IMF approved a three-year stand-by credit equivalent to SDR 15.5 billion"
+        },
+        {
+          "office": "Holder of this office on the date: Wikidata or the English Wikipedia infobox, checked by scripts/build_media.py (docs/history-verification.md)"
+        }
+      ]
+    },
+    {
+      "target": "portal-scene:asian-crisis",
+      "text": "From mid-1997, money flowed out of several East and Southeast Asian economies and their currencies fell. The won went from about 888 to about 1,700 per dollar by the end of 1997, then recovered part of the loss in 1998.",
+      "evidence": [
+        {
+          "source": "wp-asian-crisis-1997",
+          "quote": "It began in Thailand in July 1997 before spreading to several other countries"
+        },
+        {
+          "source": "wp-asian-crisis-1997",
+          "quote": "Capital flight ensued almost immediately"
+        },
+        {
+          "rates": "1997 portal: KRW"
+        },
+        {
+          "rates": "portal scene 1997"
+        }
+      ]
+    },
+    {
+      "target": "story:1997",
+      "text": "1997. From the middle of this year, money flows out of several East and Southeast Asian economies, and their currencies fall. Watch South Korea.",
+      "evidence": [
+        {
+          "source": "wp-asian-crisis-1997",
+          "quote": "It began in Thailand in July 1997 before spreading to several other countries"
+        },
+        {
+          "source": "wp-asian-crisis-1997",
+          "quote": "Capital flight ensued almost immediately"
+        },
+        {
+          "source": "wp-asian-crisis-1997",
+          "quote": "As the crisis spread, other Southeast Asian countries and later Japan and South Korea saw slumping currencies"
+        }
+      ]
+    },
+    {
+      "target": "history:gfc:summary",
+      "text": "In September and October 2008 a financial crisis that began in the United States spread around the world. Between late June and late November the won fell from about 1,040 to about 1,470 per dollar, and the Australian dollar lost about a third of its value against the dollar.",
+      "evidence": [
+        {
+          "source": "wp-gfc-2008",
+          "quote": "The 2008 financial crisis was a major worldwide financial crisis which started in the United States."
+        },
+        {
+          "rates": "2008 portal"
+        }
+      ]
+    },
+    {
+      "target": "history:gfc:policies:0",
+      "text": "Troubled Asset Relief Program, enacted on 3 October 2008",
+      "evidence": [
+        {
+          "source": "fraser-crisis-timeline",
+          "quote": "October 3, 2008 | H.R. 1424 | Public Law 110-343 Congress passes and President Bush signs into law the Emergency Economic Stabilization Act of 2008 (Public Law 110-343), which establishes the $700 billion Troubled Asset Relief Program (TARP)."
+        }
+      ]
+    },
+    {
+      "target": "history:gfc:policies:1",
+      "text": "Coordinated interest-rate cut by six central banks on 8 October 2008",
+      "evidence": [
+        {
+          "source": "fed-2008-10-08",
+          "quote": "October 08, 2008 FOMC statement: Federal Reserve and other central banks announce reductions in policy interest rates"
+        },
+        {
+          "source": "fed-2008-10-08",
+          "quote": "the Bank of Canada, the Bank of England, the European Central Bank, the Federal Reserve, Sveriges Riksbank, and the Swiss National Bank are today announcing reductions in policy interest rates"
+        }
+      ]
+    },
+    {
+      "target": "history:gfc:policies:2",
+      "text": "Dollar swap lines from the Federal Reserve to other central banks, including the Bank of Korea on 29 October 2008",
+      "evidence": [
+        {
+          "source": "fraser-crisis-timeline",
+          "quote": "October 29, 2008 | Federal Reserve Press Release The FOMC also establishes swap lines with the Banco Central do Brasil, Banco de Mexico, Bank of Korea, and the Monetary Authority of Singapore for up to $30 billion each."
+        }
+      ]
+    },
+    {
+      "target": "history:gfc:policies:3",
+      "text": "Bank of Japan rate cut to 0.3% on 31 October 2008",
+      "evidence": [
+        {
+          "source": "boj-semiannual-fy2008h2",
+          "quote": "The Policy Board then lowered the Bank's target for the uncollateralized overnight call rate at the MPM on October 31, and encouraged it to remain at around 0.3 percent."
+        }
+      ]
+    },
+    {
+      "target": "history:gfc:people:bush43",
+      "text": "Signed the Emergency Economic Stabilization Act, which created the Troubled Asset Relief Program, on 3 October 2008.",
+      "evidence": [
+        {
+          "source": "fraser-crisis-timeline",
+          "quote": "October 3, 2008 | H.R. 1424 | Public Law 110-343 Congress passes and President Bush signs into law the Emergency Economic Stabilization Act of 2008 (Public Law 110-343), which establishes the $700 billion Troubled Asset Relief Program (TARP)."
+        },
+        {
+          "office": "Holder of this office on the date: Wikidata or the English Wikipedia infobox, checked by scripts/build_media.py (docs/history-verification.md)"
+        }
+      ]
+    },
+    {
+      "target": "history:gfc:people:paulson",
+      "text": "His Treasury Department sent Congress draft legislation for the rescue program on 20 September 2008.",
+      "evidence": [
+        {
+          "source": "fraser-crisis-timeline",
+          "quote": "September 20, 2008 | Treasury Department Press Release | Draft Legislation The U.S. Treasury Department submits draft legislation to Congress for authority to purchase troubled assets."
+        },
+        {
+          "office": "Holder of this office on the date: Wikidata or the English Wikipedia infobox, checked by scripts/build_media.py (docs/history-verification.md)"
+        }
+      ]
+    },
+    {
+      "target": "history:gfc:people:bernanke",
+      "text": "The Federal Reserve joined the coordinated rate cut of 8 October and extended dollar swap lines to other central banks.",
+      "evidence": [
+        {
+          "source": "fed-2008-10-08",
+          "quote": "October 08, 2008 FOMC statement: Federal Reserve and other central banks announce reductions in policy interest rates"
+        },
+        {
+          "source": "fed-2008-10-08",
+          "quote": "the Bank of Canada, the Bank of England, the European Central Bank, the Federal Reserve, Sveriges Riksbank, and the Swiss National Bank are today announcing reductions in policy interest rates"
+        },
+        {
+          "source": "fraser-crisis-timeline",
+          "quote": "October 29, 2008 | Federal Reserve Press Release The FOMC also establishes swap lines with the Banco Central do Brasil, Banco de Mexico, Bank of Korea, and the Monetary Authority of Singapore for up to $30 billion each."
+        },
+        {
+          "office": "Holder of this office on the date: Wikidata or the English Wikipedia infobox, checked by scripts/build_media.py (docs/history-verification.md)"
+        }
+      ]
+    },
+    {
+      "target": "history:gfc:people:shirakawa",
+      "text": "The Bank of Japan cut its policy rate to 0.3% on 31 October 2008.",
+      "evidence": [
+        {
+          "source": "boj-semiannual-fy2008h2",
+          "quote": "The Policy Board then lowered the Bank's target for the uncollateralized overnight call rate at the MPM on October 31, and encouraged it to remain at around 0.3 percent."
+        },
+        {
+          "office": "Holder of this office on the date: Wikidata or the English Wikipedia infobox, checked by scripts/build_media.py (docs/history-verification.md)"
+        }
+      ]
+    },
+    {
+      "target": "portal-scene:gfc",
+      "text": "In autumn 2008 a financial crisis that began in the United States spread around the world. The yen rose against the dollar, the won fell from about 1,040 to about 1,470 per dollar, and the Australian dollar lost about a third of its value against it.",
+      "evidence": [
+        {
+          "source": "wp-gfc-2008",
+          "quote": "The 2008 financial crisis was a major worldwide financial crisis which started in the United States."
+        },
+        {
+          "rates": "2008 portal"
+        },
+        {
+          "rates": "portal scene 2008"
+        }
+      ]
+    },
+    {
+      "target": "story:2008",
+      "text": "2008. A financial crisis that began in the United States is about to spread around the world.",
+      "evidence": [
+        {
+          "source": "wp-gfc-2008",
+          "quote": "The 2008 financial crisis was a major worldwide financial crisis which started in the United States."
+        }
+      ]
+    },
+    {
+      "target": "story:2022",
+      "text": "2022. Prices rise fast around the world, and central banks raise interest rates. Watch the yen.",
+      "evidence": [
+        {
+          "source": "wp-inflation-2021",
+          "quote": "a worldwide surge in inflation began in mid-2021 and lasted until mid-2022"
+        },
+        {
+          "source": "wp-inflation-2021",
+          "quote": "at least 75 central banks around the world have aggressively increased interest rates"
+        },
+        {
+          "source": "fed-2022-03-16",
+          "quote": "the Committee decided to raise the target range for the federal funds rate to 1/4 to 1/2 percent"
+        }
+      ],
+      "note": "'Watch the yen': the guide's pointer; the yen's 2022 moves are in the year's data and the 2022 events."
+    }
+  ]
+}

@@ -9,7 +9,7 @@
     "city": "Washington, D.C.",
     "country": "United States"
    },
-   "summary": "On 15 August 1971 the United States stopped converting dollars into gold for foreign governments. Within days most major currencies began to move against the dollar; Japan let the yen float from 28 August.",
+   "summary": "On 15 August 1971 the United States suspended the convertibility of the dollar into gold, ending the Bretton Woods system of fixed exchange rates. Japan let the yen float from 28 August.",
    "policies": [
     "Suspension of the dollar's convertibility into gold",
     "A temporary 10% surcharge on imports",
@@ -25,7 +25,7 @@
      "key": "nixon",
      "name": "Richard Nixon",
      "role": "President of the United States",
-     "involvement": "Announced the measures in a televised address on 15 August 1971.",
+     "involvement": "Announced the measures in an address to the nation on 15 August 1971.",
      "verified": {
       "source": "Wikidata",
       "qid": "Q9588",
@@ -46,7 +46,7 @@
      "key": "connally",
      "name": "John Connally",
      "role": "US Secretary of the Treasury",
-     "involvement": "Led the US side in the currency talks that followed, which ended in the Smithsonian Agreement of December 1971.",
+     "involvement": "Chaired the Group of Ten meeting of 17 and 18 December 1971 in Washington, which reached the Smithsonian Agreement.",
      "verified": {
       "source": "Wikidata",
       "qid": "Q311293",
@@ -67,7 +67,7 @@
      "key": "burns",
      "name": "Arthur F. Burns",
      "role": "Chair of the Federal Reserve",
-     "involvement": "Took part in the Camp David meetings of 13 to 15 August 1971 at which the measures were prepared.",
+     "involvement": "Took part in the Camp David meetings of August 1971 at which the measures were prepared.",
      "verified": {
       "source": "Wikidata",
       "qid": "Q284230",
@@ -88,7 +88,7 @@
      "key": "sato",
      "name": "Eisaku Sato",
      "role": "Prime Minister of Japan",
-     "involvement": "His government kept the yen at 360 per dollar for about two weeks, then let it float on 28 August 1971.",
+     "involvement": "Prime Minister when Japan let the yen float, on 28 August 1971.",
      "verified": {
       "source": "Wikidata",
       "qid": "Q179871",
@@ -145,10 +145,11 @@
     "country": "Japan",
     "note": "The agreement was made at a meeting in New York."
    },
-   "summary": "On 22 September 1985 the finance ministers and central bank governors of five major economies met in New York and said a further orderly rise of other currencies against the dollar was desirable. The dollar's fall that followed is widely associated with the agreement, although the dollar had already peaked in early 1985.",
+   "summary": "On 22 September 1985 the finance ministers and central bank governors of five major economies met in New York and said a further orderly rise of other currencies against the dollar was desirable. The dollar fell after the announcement, although it had already peaked in early 1985.",
    "policies": [
     "Joint statement of the G5: United States, Japan, West Germany, France and the United Kingdom",
-    "Coordinated intervention in currency markets"
+    "Readiness to cooperate more closely to encourage the rise of other currencies",
+    "Intervention in currency markets to lower the dollar"
    ],
    "currencies": [
     "JPY",
@@ -159,7 +160,7 @@
      "key": "baker",
      "name": "James A. Baker III",
      "role": "US Secretary of the Treasury",
-     "involvement": "Hosted the meeting of the five countries in New York.",
+     "involvement": "Attended as US Secretary of the Treasury, one of the five finance ministers.",
      "verified": {
       "source": "Wikidata",
       "qid": "Q223151",
@@ -313,11 +314,11 @@
     "city": "Seoul",
     "country": "South Korea"
    },
-   "summary": "From July 1997 several Asian currencies fell sharply as foreign capital left the region. South Korea asked the IMF for support on 21 November 1997 and a rescue program was agreed on 3 December. Between June and late December the won fell from about 888 to about 1,743 per dollar.",
+   "summary": "From July 1997 several Asian currencies fell sharply as capital left the region. South Korea announced on 21 November 1997 that it would seek IMF support, and a rescue program was agreed on 3 December. Between June and the end of December the won fell from about 888 to about 1,700 per dollar.",
    "policies": [
     "IMF stand-by arrangement for Korea, approved on 4 December 1997",
     "Higher interest rates and restructuring of the financial sector under the program",
-    "The won's daily trading band was widened in November and removed in December 1997"
+    "A flexible exchange rate: by 18 December 1997 the won was floating freely"
    ],
    "currencies": [
     "KRW"
@@ -327,7 +328,7 @@
      "key": "kimys",
      "name": "Kim Young-sam",
      "role": "President of South Korea",
-     "involvement": "In office when Korea requested and agreed the IMF program.",
+     "involvement": "President when Korea sought and agreed the IMF program.",
      "verified": {
       "source": "Wikidata",
       "qid": "Q165210",
@@ -348,7 +349,7 @@
      "key": "leeks",
      "name": "Lee Kyung-shik",
      "role": "Governor of the Bank of Korea",
-     "involvement": "Headed the central bank during the crisis.",
+     "involvement": "Signed Korea's letter of intent to the IMF on 3 December 1997, as Governor of the Bank of Korea.",
      "verified": {
       "source": "Wikidata",
       "qid": "Q16090696",
@@ -418,7 +419,7 @@
     "city": "New York",
     "country": "United States"
    },
-   "summary": "In September and October 2008 a banking crisis that began in the United States spread around the world. Investors moved into the dollar and the yen: between late June and late November the won fell from about 1,040 to about 1,470 per dollar, and the Australian dollar lost about a third of its value against the dollar.",
+   "summary": "In September and October 2008 a financial crisis that began in the United States spread around the world. Between late June and late November the won fell from about 1,040 to about 1,470 per dollar, and the Australian dollar lost about a third of its value against the dollar.",
    "policies": [
     "Troubled Asset Relief Program, enacted on 3 October 2008",
     "Coordinated interest-rate cut by six central banks on 8 October 2008",
@@ -457,7 +458,7 @@
      "key": "paulson",
      "name": "Henry Paulson",
      "role": "US Secretary of the Treasury",
-     "involvement": "Proposed the 700-billion-dollar rescue program to Congress in September 2008.",
+     "involvement": "His Treasury Department sent Congress draft legislation for the rescue program on 20 September 2008.",
      "verified": {
       "source": "Wikidata",
       "qid": "Q311025",

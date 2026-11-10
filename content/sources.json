@@ -1,0 +1,201 @@
+{
+  "_comment": "Sources used as evidence by content/annual-events.json and content/featured-review.json. kind: html (a web page), pdf, mof-feio (the Ministry of Finance Japan's CSV of every intervention since April 1991), wikipedia (English Wikipedia, plain text). primary: an official record or document of the body that acted; false: a secondary account. Checked by scripts/build_events.py and scripts/review_featured.py.",
+  "sources": {
+    "nixon-1971-08-15": {
+      "publisher": "The American Presidency Project (UC Santa Barbara)",
+      "title": "Address to the Nation Outlining a New Economic Policy: \"The Challenge of Peace.\" (August 15, 1971)",
+      "url": "https://www.presidency.ucsb.edu/documents/address-the-nation-outlining-new-economic-policy-the-challenge-peace",
+      "kind": "html",
+      "primary": true
+    },
+    "nixon-1971-12-18": {
+      "publisher": "The American Presidency Project (UC Santa Barbara)",
+      "title": "Remarks Announcing a Monetary Agreement Following a Meeting of the Group of Ten (December 18, 1971)",
+      "url": "https://www.presidency.ucsb.edu/documents/remarks-announcing-monetary-agreement-following-meeting-the-group-ten",
+      "kind": "html",
+      "primary": true
+    },
+    "frus-1969-76-v03-d151": {
+      "publisher": "Office of the Historian, U.S. Department of State",
+      "title": "Foreign Relations of the United States, 1969-1976, Volume III, Document 151 (Editorial Note)",
+      "url": "https://history.state.gov/historicaldocuments/frus1969-76v03/d151",
+      "kind": "html",
+      "primary": true
+    },
+    "mof-policy-history-1972-1990": {
+      "publisher": "Ministry of Finance Japan, Policy Research Institute",
+      "title": "Policy History of the Ministry of Finance 1972-1990, Chapter 1, Section 3: External Economic Policy",
+      "url": "https://www.mof.go.jp/english/pri/publication/policy_1972-1990/Chapter1-3.pdf",
+      "kind": "pdf",
+      "primary": true
+    },
+    "g5-1985-09-22": {
+      "publisher": "G7 Information Centre, University of Toronto (text of the official announcement)",
+      "title": "Announcement of the Ministers of Finance and Central Bank Governors of France, Germany, Japan, the United Kingdom, and the United States (Plaza Accord), September 22, 1985",
+      "url": "http://www.g8.utoronto.ca/finance/fm850922.htm",
+      "kind": "html",
+      "primary": true
+    },
+    "imf-nb-97-12": {
+      "publisher": "International Monetary Fund",
+      "title": "News Brief: IMF Welcomes Thailand's Exchange Rate Action (July 2, 1997)",
+      "url": "https://www.imf.org/external/np/sec/nb/1997/nb9712.htm",
+      "kind": "html",
+      "primary": true
+    },
+    "imf-nb-97-25": {
+      "publisher": "International Monetary Fund",
+      "title": "News Brief: Camdessus Welcomes Korea's Request for IMF Assistance (November 21, 1997)",
+      "url": "https://www.imf.org/external/np/sec/nb/1997/nb9725.htm",
+      "kind": "html",
+      "primary": true
+    },
+    "imf-nb-97-27": {
+      "publisher": "International Monetary Fund",
+      "title": "News Brief: Camdessus Welcomes Conclusion of Talks with Korea on IMF Program (December 3, 1997)",
+      "url": "https://www.imf.org/external/np/sec/nb/1997/nb9727.htm",
+      "kind": "html",
+      "primary": true
+    },
+    "imf-loi-korea-1997-12-03": {
+      "publisher": "International Monetary Fund",
+      "title": "Korea: Letter of Intent and Memorandum on the Economic Program (December 3, 1997)",
+      "url": "https://www.imf.org/external/np/loi/120397.htm",
+      "kind": "html",
+      "primary": true
+    },
+    "imf-pr-97-55": {
+      "publisher": "International Monetary Fund",
+      "title": "Press Release No. 97/55: IMF Approves SDR 15.5 Billion Stand-by Credit for Korea (December 4, 1997)",
+      "url": "https://www.imf.org/external/np/sec/pr/1997/pr9755.htm",
+      "kind": "html",
+      "primary": true
+    },
+    "imf-nb-97-30": {
+      "publisher": "International Monetary Fund",
+      "title": "News Brief: IMF Executive Board Completes 1st Review of Korean Program (December 18, 1997)",
+      "url": "https://www.imf.org/external/np/sec/nb/1997/nb9730.htm",
+      "kind": "html",
+      "primary": true
+    },
+    "fraser-crisis-timeline": {
+      "publisher": "Federal Reserve Bank of St. Louis (FRASER)",
+      "title": "The Financial Crisis: A Timeline of Events and Policy Actions",
+      "url": "https://fraser.stlouisfed.org/timeline/financial-crisis",
+      "kind": "html",
+      "primary": true
+    },
+    "fed-2008-10-08": {
+      "publisher": "Board of Governors of the Federal Reserve System",
+      "title": "FOMC statement: Federal Reserve and other central banks announce reductions in policy interest rates (October 8, 2008)",
+      "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20081008a.htm",
+      "kind": "html",
+      "primary": true
+    },
+    "boj-semiannual-fy2008h2": {
+      "publisher": "Bank of Japan",
+      "title": "Semiannual Report on Currency and Monetary Control (Summary), Second Half of Fiscal 2008",
+      "url": "https://www.boj.or.jp/en/mopo/diet/d_report/hanki09b.htm",
+      "kind": "html",
+      "primary": true
+    },
+    "un-news-2022-02-24": {
+      "publisher": "UN News (United Nations)",
+      "title": "As Security Council meets on Ukraine crisis, Russia announces start of 'special military operation' (24 February 2022)",
+      "url": "https://news.un.org/en/story/2022/02/1112592",
+      "kind": "html",
+      "primary": true
+    },
+    "fed-2022-03-16": {
+      "publisher": "Board of Governors of the Federal Reserve System",
+      "title": "Federal Reserve issues FOMC statement (March 16, 2022)",
+      "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20220316a.htm",
+      "kind": "html",
+      "primary": true
+    },
+    "hmt-growth-plan-2022": {
+      "publisher": "HM Treasury (GOV.UK)",
+      "title": "The Growth Plan 2022: documents",
+      "url": "https://www.gov.uk/government/publications/the-growth-plan-2022-documents",
+      "kind": "html",
+      "primary": true
+    },
+    "mof-feio": {
+      "publisher": "Ministry of Finance Japan",
+      "title": "Foreign Exchange Intervention Operations: historical data (daily, from April 1991)",
+      "url": "https://www.mof.go.jp/english/policy/international_policy/reference/feio/foreign_exchange_intervention_operations.csv",
+      "kind": "mof-feio",
+      "primary": true
+    },
+    "mof-statement-2026-08-03": {
+      "publisher": "Ministry of Finance Japan",
+      "title": "Statement by the Minister of Finance, Japan (August 3, 2026)",
+      "url": "https://www.mof.go.jp/english/public_relations/statement/others/20260803073000.html",
+      "kind": "html",
+      "primary": true
+    },
+    "wp-plaza-accord": {
+      "publisher": "Wikipedia",
+      "title": "Plaza Accord",
+      "url": "https://en.wikipedia.org/wiki/Plaza_Accord",
+      "kind": "wikipedia",
+      "primary": false
+    },
+    "wp-asian-crisis-1997": {
+      "publisher": "Wikipedia",
+      "title": "1997 Asian financial crisis",
+      "url": "https://en.wikipedia.org/wiki/1997_Asian_financial_crisis",
+      "kind": "wikipedia",
+      "primary": false
+    },
+    "wp-lehman-bankruptcy": {
+      "publisher": "Wikipedia",
+      "title": "Bankruptcy of Lehman Brothers",
+      "url": "https://en.wikipedia.org/wiki/Bankruptcy_of_Lehman_Brothers",
+      "kind": "wikipedia",
+      "primary": false
+    },
+    "wp-russian-invasion-2022": {
+      "publisher": "Wikipedia",
+      "title": "Russian invasion of Ukraine",
+      "url": "https://en.wikipedia.org/wiki/Russian_invasion_of_Ukraine",
+      "kind": "wikipedia",
+      "primary": false
+    },
+    "wp-mini-budget-2022": {
+      "publisher": "Wikipedia",
+      "title": "September 2022 United Kingdom mini-budget",
+      "url": "https://en.wikipedia.org/wiki/September_2022_United_Kingdom_mini-budget",
+      "kind": "wikipedia",
+      "primary": false
+    },
+    "fedhistory-gold-convertibility": {
+      "publisher": "Federal Reserve History (Federal Reserve System)",
+      "title": "Nixon Ends Convertibility of US Dollars to Gold and Announces Wage/Price Controls",
+      "url": "https://www.federalreservehistory.org/essays/gold-convertibility-ends",
+      "kind": "html",
+      "primary": false
+    },
+    "wp-nixon-shock": {
+      "publisher": "Wikipedia",
+      "title": "Nixon shock",
+      "url": "https://en.wikipedia.org/wiki/Nixon_shock",
+      "kind": "wikipedia",
+      "primary": false
+    },
+    "wp-gfc-2008": {
+      "publisher": "Wikipedia",
+      "title": "2007–2008 financial crisis",
+      "url": "https://en.wikipedia.org/wiki/2007%E2%80%932008_financial_crisis",
+      "kind": "wikipedia",
+      "primary": false
+    },
+    "wp-inflation-2021": {
+      "publisher": "Wikipedia",
+      "title": "2021–2023 inflation surge",
+      "url": "https://en.wikipedia.org/wiki/2021%E2%80%932023_inflation_surge",
+      "kind": "wikipedia",
+      "primary": false
+    }
+  }
+}
