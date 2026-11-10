@@ -295,6 +295,28 @@ down to the map, so they stay easy to tell apart.
   at its own currency's latest date; when those dates differ, or when the saved copy is used because live
   rates are unavailable, the caption says so (with the time the copy was fetched).
 
+**When history stands still.** The data music follows the history clock: when the clock stops (choosing a
+year, while Tock explains, the summary) no note is played and every currency's sustained tone holds its
+pitch, so the drone and the pads would hold one chord for as long as the guide speaks. The sound therefore
+has modes (src/audio/mix.ts), chosen from the journey's state, not from each spoken sentence:
+
+| Mode | When | Sound |
+| --- | --- | --- |
+| Selection | choosing a year, the intro | a quiet ambient bed, sparse soft bells, a faint data bed |
+| Warp | the time tunnel | the tunnel's rush over a low bed; the data music fades out |
+| Flowing | the year (or the Full Journey) plays | the data music exactly as above; no bed |
+| Guide | Tock explains a beat, a place opened by a pinch, the arrival | the bed; the drone and pads fade to a whisper, less reverb |
+| Summary | the year in review, today | the bed, sparse bells, a faint data bed |
+| Paused | the user pauses | everything fades out and the audio is suspended; it resumes as it was |
+
+The **ambient bed** is original and made in code from the same scale: four soft voices cycling through eight
+chords on the audio clock (a new chord every 8 s, crossfaded over 3 s), so it keeps moving while the
+history clock stands still. Every change moves at least two voices and no voice holds a pitch for more than
+two chords; a slow filter sweep keeps it breathing. While Tock speaks, the data music, the bed **and the
+reverb return** step down together (fast), are held through the short pauses between sentences, and come
+back slowly. Effects (the gong, the tunnel, chimes) have their own bus and are not ducked. Mode changes are
+slow fades both ways (about 1 to 2.5 s), so the music never jumps when the year starts or stops flowing.
+
 ### Historical Portals (the top band at major moments)
 
 Each portal answers three questions at once:
@@ -470,7 +492,8 @@ src/data/world-map.ts      projection, currency anchors, labels, DEM/euro area o
 src/data/eras.ts           the eras shown between events
 src/data/                  timeline math, events and chapters, history content, today loader
 src/playback/clock.ts      time-lapse pacing (era speeds + slow-downs): the single source of time
-src/audio/                 sound engine, pentatonic scale, timbres, note queue (sound/light sync)
+src/audio/                 sound engine, pentatonic scale, timbres, note queue (sound/light sync);
+                           mix.ts: the sound's modes, their mix and the ambient bed's chords (pure, tested)
 src/visual/multi-currency-chart.ts  the middle band
 src/visual/world-currency-map.ts    the bottom band
 src/visual/era-panel.ts             the top band between events

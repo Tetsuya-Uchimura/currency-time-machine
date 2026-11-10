@@ -55,6 +55,7 @@ import {
 } from '@iwsdk/core';
 import { Narration, type Delivery } from './a11y/narration.js';
 import { SoundEngine, type VoiceInput } from './audio/engine.js';
+import type { SoundMode } from './audio/mix.js';
 import { strengthToSteps } from './audio/scale.js';
 import { Orb, PortalTarget, UiTarget } from './components.js';
 import {
@@ -261,6 +262,7 @@ export class ExperienceSystem extends createSystem({
   /** Dev only: no dt cap (screenshots from a throttled emulator window). */
   private devRealtime = false;
   private debugSince = 0;
+  private lastSnd: SoundMode | '' = '';
   private infoTimer = 0;
   /** Today's rates have been applied to the chart (glide done once). */
   private todayApplied = false;
@@ -1461,7 +1463,15 @@ export class ExperienceSystem extends createSystem({
     this.map.update(dt, this.mapFrame);
     this.updatePortals(dt, p, flowing);
 
-    this.audio.update(this.voiceInputs, turb, floatBlend, flowing);
+    const snd = this.soundMode();
+    if (import.meta.env.DEV && snd !== this.lastSnd) {
+      console.info(`[ctm-snd] ${performance.now().toFixed(0)} ${this.lastSnd} -> ${snd}`);
+      this.lastSnd = snd;
+    }
+    this.audio.setMode(snd);
+    // New notes only while the music is the data's: never under the guide's explanation (the clock may
+    // still be easing to its stop), never in the tunnel or the summary.
+    this.audio.update(this.voiceInputs, turb, floatBlend, flowing && snd === 'flowing');
     this.ambience.update(dt, turb);
     // The mouth moves with the voice when one is working, else for the line's reading time.
     this.quietFor = this.narration.speaking ? 0 : this.quietFor + dt;
@@ -1500,6 +1510,35 @@ export class ExperienceSystem extends createSystem({
     }
     this.updateChartHeader(dt, p);
     if (import.meta.env.DEV) this.logDiagnostics(dt, p);
+  }
+
+  /**
+   * The sound's mode (src/audio/mix.ts). The guide's whole explanation decides it (a beat from its start
+   * to its end, a pinched place, the arrival line), never a single spoken sentence; a user's pause is
+   * its own state (the output fades and comes back as it was).
+   */
+  private soundMode(): SoundMode {
+    if (this.clock.paused && this.pausable) return 'paused';
+    switch (this.phase) {
+      case 'idle':
+      case 'intro':
+      case 'select':
+        return 'selection';
+      case 'warp':
+        return 'warp';
+      case 'review': {
+        const r = this.visit?.runner;
+        // (Also while the clock stands at the next beat, waiting for an earlier line to end.)
+        const waiting = !!r && r.index < r.beats.length && this.clock.position >= r.stopAt - 1e-6;
+        const explaining = (r?.holding ?? false) || waiting || this.explore !== null || this.arrivalPending || this.narration.speaking;
+        return explaining ? 'guide' : 'flowing';
+      }
+      case 'summary':
+      case 'today':
+        return 'summary';
+      default:
+        return 'flowing';
+    }
   }
 
   /** The Year Journey's clock, beats and phases. */
@@ -1611,7 +1650,7 @@ export class ExperienceSystem extends createSystem({
     const line =
       `[ctm] mode=${this.mode} phase=${this.phase} year=${year} beat=${beat} paused=${this.clock.paused} audio=${this.audio.ctx.state} ` +
       `voice="${this.narration.voiceName || '-'}" speech=${this.narration.state} live=${this.narration.live} rec=${this.narration.recordings} lang=${getLang()} line="${(this.guideLine?.en ?? '').slice(0, 40)}" ` +
-      `notes=${this.audio.noteCount} fps=${fps.toFixed(0)} solo=${this.solo} portal=${this.portals.debug} pct=${pcts} ` +
+      `snd=${this.audio.currentMode} nodes=${this.audio.activeNodes} ${this.audio.meterText()} notes=${this.audio.noteCount} fps=${fps.toFixed(0)} solo=${this.solo} portal=${this.portals.debug} pct=${pcts} ` +
       `listener=(${l.positionX.value.toFixed(2)},${l.positionY.value.toFixed(2)},${l.positionZ.value.toFixed(2)})`;
     console.info(line);
     // Also mirror into a hidden status element (readable by automation snapshots).

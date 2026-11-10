@@ -5,7 +5,17 @@
  *   per currency:  pluck notes + pad -> lowpass -> voiceGain -> PannerNode(HRTF) -> bus
  *                                                       \-> reverb send
  *   global:        drone chord (tension follows turbulence) -> bus
- *   bus -> reverb (generated impulse) -> master -> compressor -> speakers
+ *   ambient bed:   two chord layers (crossfaded) + soft bells -> lowpass -> ambient -> master
+ *   effects:       gong, shimmer, chimes, the tunnel, blips -> fx -> master
+ *   bus, ambient, fx -> reverb send -> reverb (generated impulse) -> wet -> master
+ *   master -> compressor -> speakers
+ *
+ * Modes (src/audio/mix.ts): how much of the data music, the ambient bed and
+ * the reverb sound while choosing a year, in the tunnel, while the year
+ * flows, while the guide explains, and in the summary. The ambient bed moves
+ * on the audio clock (its own chord changes), so the music never freezes
+ * when the history clock stands still. The voice ducks the music bus, the
+ * bed and the reverb return together (not the effects: a gong stays a gong).
  *
  * We share three.js' AudioContext so the AudioListener that IWSDK attaches to
  * the player's head drives our PannerNodes: each currency is heard from its
@@ -21,6 +31,7 @@
  */
 import { AudioContext as ThreeAudioContext } from '@iwsdk/core';
 import type { TimbreId } from '../config.js';
+import { CHORD_S, CROSSFADE_S, DUCK, FADE, bellDegree, chordAt, duckLevel, mixOf, smooth, type SoundMode } from './mix.js';
 import { NoteQueue } from './note-queue.js';
 import { degreeToHz } from './scale.js';
 import { TIMBRES, type Timbre } from './timbres.js';
@@ -30,6 +41,10 @@ const PULSE_S = 60 / 84 / 2;
 const LOOKAHEAD_S = 0.06;
 /** Volatility at which a voice plays about 0.6 notes per second. */
 const VOL_REF = 0.006;
+/** The ambient bed's level at full (each of its four voices, before the filter). */
+const AMBIENT_LEVEL = 0.05;
+/** Relative loudness of the bed's voices: bass, then the three upper voices. */
+const AMBIENT_VOICES = [0.9, 0.6, 0.5, 0.42];
 
 export interface VoiceInput {
   alive: boolean;
@@ -54,6 +69,8 @@ interface Voice {
 
 export type NoteListener = (slotIndex: number, velocity: number, when: number) => void;
 
+const MIX_START = mixOf('selection');
+
 export class SoundEngine {
   readonly ctx: AudioContext;
   private master!: GainNode;
@@ -72,6 +89,24 @@ export class SoundEngine {
   private readonly pending = new NoteQueue();
   private readonly emit = (i: number, v: number, when: number) => this.noteListener?.(i, v, when);
   private suspendTimer: number | undefined;
+  private fx!: GainNode;
+  private ambient!: GainNode;
+  private layers: { gain: GainNode; oscs: OscillatorNode[] }[] = [];
+  private activeLayer = 0;
+  private chordStep = -1;
+  private nextChordAt = 0;
+  private bellAt = 0;
+  private bellCount = 0;
+  private mode: SoundMode = 'selection';
+  private beforePause: Exclude<SoundMode, 'paused'> = 'selection';
+  /** Smoothed levels (JS side, so mode changes and the duck never jump). */
+  private readonly level = { drone: MIX_START.drone, pad: MIX_START.pad, ambient: MIX_START.ambient, reverb: MIX_START.reverb, duck: 1 };
+  private lastUpdate = -1;
+  private speaking = false;
+  private quietSince = -1e9;
+  private live = 0;
+  /** Dev builds: level meters on the data music, the bed and the output. */
+  private meters: { bus: AnalyserNode; bed: AnalyserNode; out: AnalyserNode } | null = null;
   paused = false;
   /** Number of notes scheduled so far (dev diagnostics). */
   noteCount = 0;
@@ -142,6 +177,48 @@ export class SoundEngine {
     convolver.connect(this.reverbWet);
     this.reverbWet.connect(this.master);
 
+    // Effects (gong, shimmer, chimes, tunnel, blips): their own bus, not ducked by the voice.
+    this.fx = ctx.createGain();
+    this.fx.gain.value = 1;
+    this.fx.connect(this.master);
+
+    // Ambient bed: two layers of four voices; a new chord fades in on the silent layer while the
+    // other fades out (no pitch ever glides). A slow wobble on the filter keeps it breathing.
+    const bedFilter = ctx.createBiquadFilter();
+    bedFilter.type = 'lowpass';
+    bedFilter.frequency.value = 1100;
+    bedFilter.Q.value = 0.3;
+    const wobble = ctx.createOscillator();
+    wobble.frequency.value = 0.045;
+    const wobbleDepth = ctx.createGain();
+    wobbleDepth.gain.value = 320;
+    wobble.connect(wobbleDepth).connect(bedFilter.frequency);
+    wobble.start();
+    this.ambient = ctx.createGain();
+    this.ambient.gain.value = 0;
+    bedFilter.connect(this.ambient);
+    this.ambient.connect(this.master);
+    const bedSend = ctx.createGain();
+    bedSend.gain.value = 0.5;
+    this.ambient.connect(bedSend).connect(this.reverbSend);
+    const bedWave = ctx.createPeriodicWave(new Float32Array([0, 1, 0.22, 0.07, 0.025]), new Float32Array(5));
+    for (let l = 0; l < 2; l++) {
+      const gain = ctx.createGain();
+      gain.gain.value = 0;
+      gain.connect(bedFilter);
+      const oscs = AMBIENT_VOICES.map((level, k) => {
+        const osc = ctx.createOscillator();
+        osc.setPeriodicWave(bedWave);
+        osc.detune.value = (k % 2 ? 1 : -1) * 3 * (l + 1); // a touch of width between the layers
+        const g = ctx.createGain();
+        g.gain.value = level * AMBIENT_LEVEL;
+        osc.connect(g).connect(gain);
+        osc.start();
+        return osc;
+      });
+      this.layers.push({ gain, oscs });
+    }
+
     // Drone: D2 + A2 always, F#3 (sweet) fading to E3/B3 (tense) with turbulence.
     this.droneFilter = ctx.createBiquadFilter();
     this.droneFilter.type = 'lowpass';
@@ -205,6 +282,29 @@ export class SoundEngine {
       });
     }
     this.nextPulse = ctx.currentTime + PULSE_S;
+    if (import.meta.env?.DEV) {
+      const meter = (from: AudioNode) => {
+        const a = ctx.createAnalyser();
+        a.fftSize = 2048;
+        from.connect(a);
+        return a;
+      };
+      this.meters = { bus: meter(this.bus), bed: meter(this.ambient), out: meter(this.master) };
+    }
+  }
+
+  /** Dev diagnostics: RMS levels in dB of the data music, the ambient bed and the output; the bed's chord. */
+  meterText(): string {
+    if (!this.meters) return '-';
+    const buf = new Float32Array(2048);
+    const db = (a: AnalyserNode) => {
+      a.getFloatTimeDomainData(buf);
+      let sum = 0;
+      for (const x of buf) sum += x * x;
+      const rms = Math.sqrt(sum / buf.length);
+      return rms > 1e-6 ? (20 * Math.log10(rms)).toFixed(0) : '-inf';
+    };
+    return `data:${db(this.meters.bus)}dB bed:${db(this.meters.bed)}dB out:${db(this.meters.out)}dB chord:${this.chordStep}`;
   }
 
   /** Update a voice's 3D position (world/listener space, meters). */
@@ -230,16 +330,21 @@ export class SoundEngine {
     const ctx = this.ctx;
     const now = ctx.currentTime;
     const u = turbulence;
+    const lv = this.mixLevels(now);
 
-    // Drone: calm -> tense, warm -> bright, spacious -> washed.
-    const droneLevel = 0.045 * (1 - 0.3 * floatBlend);
+    // Drone: calm -> tense, warm -> bright, spacious -> washed (scaled by the mode).
+    const droneLevel = 0.045 * (1 - 0.3 * floatBlend) * lv.drone;
     const tense = Math.min(1, u * 1.4);
     const targets = [droneLevel, droneLevel * 0.8, droneLevel * 0.55 * (1 - tense), droneLevel * 0.5 * tense, droneLevel * 0.4 * tense];
-    this.droneGains.forEach((g, i) => g.gain.setTargetAtTime(targets[i], now, 1.2));
+    this.droneGains.forEach((g, i) => g.gain.setTargetAtTime(targets[i], now, 0.5));
     this.droneFilter.frequency.setTargetAtTime(320 + 1400 * u, now, 1.5);
-    this.reverbWet.gain.setTargetAtTime(0.32 + 0.2 * u, now, 2);
+    // The reverb return follows the mode and the voice too: no tail left ringing under the guide.
+    this.reverbWet.gain.setTargetAtTime((0.32 + 0.2 * u) * lv.reverb * lv.duck, now, 0.25);
+    this.bus.gain.setTargetAtTime(0.9 * lv.duck, now, 0.12);
+    this.ambient.gain.setTargetAtTime(lv.ambient * lv.duck, now, 0.12);
+    this.updateBed(now);
 
-    const padLevel = 0.03 * (1 - 0.55 * floatBlend);
+    const padLevel = 0.03 * (1 - 0.55 * floatBlend) * lv.pad;
     inputs.forEach((inp, i) => {
       const v = this.voices[i];
       if (!v) return;
@@ -248,7 +353,7 @@ export class SoundEngine {
         v.padOsc.frequency.setTargetAtTime(degreeToHz(inp.degree - 5), now, 0.25);
         v.padDegree = inp.degree;
       }
-      v.padGain.gain.setTargetAtTime(inp.alive ? padLevel : 0, now, inp.alive && !v.alive ? 1.2 : 0.4);
+      v.padGain.gain.setTargetAtTime(inp.alive ? padLevel : 0, now, inp.alive && !v.alive ? 1.2 : 0.3);
       if (inp.alive && !v.alive && flowing) this.scheduleNote(i, inp.degree, 0.35, now + 0.05, 0.3);
       v.alive = inp.alive;
       v.filter.frequency.setTargetAtTime(v.timbre.cutoff * (0.7 + 0.7 * u), now, 0.8);
@@ -274,6 +379,89 @@ export class SoundEngine {
       }
       this.nextPulse += PULSE_S;
     }
+  }
+
+  /**
+   * The sound mode (src/audio/mix.ts): set every frame by the experience from its
+   * phase and the guide's state; only a change does anything.
+   */
+  setMode(mode: SoundMode): void {
+    if (mode === this.mode) return;
+    if (this.mode !== 'paused') this.beforePause = this.mode;
+    this.mode = mode;
+  }
+
+  get currentMode(): SoundMode {
+    return this.mode;
+  }
+
+  /** Short-lived sound nodes still playing (notes, effects): steady over a long session. */
+  get activeNodes(): number {
+    return this.live;
+  }
+
+  /** The smoothed mix at `now`: the mode's levels and the voice's duck, never jumping. */
+  private mixLevels(now: number): { drone: number; pad: number; ambient: number; reverb: number; duck: number } {
+    const dt = this.lastUpdate < 0 ? 0 : Math.min(0.25, Math.max(0, now - this.lastUpdate));
+    this.lastUpdate = now;
+    const m = mixOf(this.mode, this.beforePause);
+    const l = this.level;
+    l.drone = smooth(l.drone, m.drone, dt, FADE.dataOut, FADE.dataIn);
+    l.pad = smooth(l.pad, m.pad, dt, FADE.dataOut, FADE.dataIn);
+    l.reverb = smooth(l.reverb, m.reverb, dt, FADE.dataOut, FADE.dataIn);
+    l.ambient = smooth(l.ambient, m.ambient, dt, FADE.ambientOut, FADE.ambientIn);
+    l.duck = smooth(l.duck, duckLevel(this.speaking, now, this.quietSince), dt, DUCK.attackS, DUCK.releaseS);
+    return l;
+  }
+
+  /** The ambient bed: a new chord every CHORD_S on the audio clock (it moves while history stands still). */
+  private updateBed(now: number): void {
+    if (now >= this.nextChordAt) {
+      this.chordStep++;
+      this.nextChordAt = now + CHORD_S;
+      const chord = chordAt(this.chordStep);
+      const fresh = this.layers[1 - this.activeLayer];
+      const old = this.layers[this.activeLayer];
+      this.activeLayer = 1 - this.activeLayer;
+      // The new layer is silent: set its pitches outright, then fade it in over the old one.
+      fresh.oscs.forEach((o, k) => o.frequency.setValueAtTime(degreeToHz(chord[k]), now));
+      for (const [layer, to, s] of [[fresh, 1, CROSSFADE_S], [old, 0, CROSSFADE_S + 0.6]] as const) {
+        const g = layer.gain.gain;
+        g.cancelScheduledValues(now);
+        g.setValueAtTime(g.value, now);
+        g.linearRampToValueAtTime(to, now + s);
+      }
+    }
+    // Sparse soft bells on the chord, only while nothing is being explained and the bed is up.
+    const m = mixOf(this.mode, this.beforePause);
+    if (m.bells && this.level.ambient > 0.5 && !this.speaking && now >= this.bellAt) {
+      this.bellAt = now + 3.5 + Math.random() * 3;
+      this.bell(bellDegree(this.chordStep, this.bellCount++), now + 0.05);
+    } else if (!m.bells && this.bellAt < now + 2) this.bellAt = now + 2;
+  }
+
+  private bell(degree: number, t: number): void {
+    const ctx = this.ctx;
+    const osc = ctx.createOscillator();
+    osc.type = 'sine';
+    osc.frequency.value = degreeToHz(degree);
+    const g = ctx.createGain();
+    g.gain.setValueAtTime(0, t);
+    g.gain.linearRampToValueAtTime(0.011, t + 0.25);
+    g.gain.exponentialRampToValueAtTime(0.0001, t + 3.5);
+    osc.connect(g).connect(this.ambient);
+    this.track(osc);
+    osc.start(t);
+    osc.stop(t + 3.6);
+  }
+
+  /** Count a short-lived source until it has played (see activeNodes). */
+  private track(node: AudioScheduledSourceNode): void {
+    this.live++;
+    node.onended = () => {
+      this.live--;
+      node.disconnect();
+    };
   }
 
   /** Schedule one pluck/bell note on voice i. */
@@ -303,9 +491,11 @@ export class SoundEngine {
       modGain.gain.setValueAtTime(f * tb.fmIndex, when);
       modGain.gain.exponentialRampToValueAtTime(f * tb.fmIndex * 0.02 + 0.01, when + tb.fmDecay + 0.01);
       mod.connect(modGain).connect(osc.frequency);
+      this.track(mod);
       mod.start(when);
       mod.stop(end + 0.05);
     }
+    this.track(osc);
     osc.start(when);
     osc.stop(end + 0.05);
     this.noteCount++;
@@ -326,8 +516,9 @@ export class SoundEngine {
       g.gain.linearRampToValueAtTime(level, t + 0.08);
       g.gain.exponentialRampToValueAtTime(0.0001, t + 6);
       osc.connect(g);
-      g.connect(this.bus);
+      g.connect(this.fx);
       g.connect(this.reverbSend);
+      this.track(osc);
       osc.start(t);
       osc.stop(t + 6.1);
     }
@@ -348,8 +539,9 @@ export class SoundEngine {
       g.gain.linearRampToValueAtTime(0.014, s + 0.45);
       g.gain.exponentialRampToValueAtTime(0.0001, s + 3.2);
       osc.connect(g);
-      g.connect(this.bus);
+      g.connect(this.fx);
       g.connect(this.reverbSend);
+      this.track(osc);
       osc.start(s);
       osc.stop(s + 3.3);
     });
@@ -370,8 +562,9 @@ export class SoundEngine {
       g.gain.linearRampToValueAtTime(0.022, s + 0.01);
       g.gain.exponentialRampToValueAtTime(0.0001, s + 1.4);
       osc.connect(g);
-      g.connect(this.bus);
+      g.connect(this.fx);
       g.connect(this.reverbSend);
+      this.track(osc);
       osc.start(s);
       osc.stop(s + 1.5);
     });
@@ -410,12 +603,14 @@ export class SoundEngine {
   }
 
   /**
-   * Narration ducking: while the guide speaks, the music bus steps back so the
-   * voice stays clear (and comes back smoothly afterwards).
+   * Narration ducking: while the guide speaks, the music bus, the ambient bed
+   * and the reverb return step back so the voice stays clear. They come back
+   * only after a short hold (a pause between two sentences does not let the
+   * music swell) and slowly (see DUCK in mix.ts; applied in update).
    */
   duck(on: boolean): void {
-    if (!this.built) return;
-    this.bus.gain.setTargetAtTime(on ? 0.32 : 0.9, this.ctx.currentTime, on ? 0.12 : 0.6);
+    if (this.speaking && !on) this.quietSince = this.built ? this.ctx.currentTime : 0;
+    this.speaking = on;
   }
 
   /** A short, soft two-note blip: the guide robot's "beep" and button feedback. */
@@ -433,7 +628,8 @@ export class SoundEngine {
       g.gain.linearRampToValueAtTime(0.03, s + 0.012);
       g.gain.exponentialRampToValueAtTime(0.0001, s + 0.22);
       osc.connect(g);
-      g.connect(this.bus);
+      g.connect(this.fx);
+      this.track(osc);
       osc.start(s);
       osc.stop(s + 0.25);
     });
@@ -469,8 +665,9 @@ export class SoundEngine {
     g.gain.linearRampToValueAtTime(0, end + 0.3);
     noise.connect(band);
     band.connect(g);
-    g.connect(this.bus);
+    g.connect(this.fx);
     g.connect(this.reverbSend);
+    this.track(noise);
     noise.start(t);
     noise.stop(end + 0.4);
     for (const [from, to, level] of [[14, 2, 0.02], [9, -3, 0.016]] as const) {
@@ -483,8 +680,9 @@ export class SoundEngine {
       og.gain.linearRampToValueAtTime(level, t + 0.4);
       og.gain.linearRampToValueAtTime(0, end + 0.2);
       osc.connect(og);
-      og.connect(this.bus);
+      og.connect(this.fx);
       og.connect(this.reverbSend);
+      this.track(osc);
       osc.start(t);
       osc.stop(end + 0.3);
     }

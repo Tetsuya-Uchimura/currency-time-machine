@@ -14,7 +14,7 @@
     "build": "vite build",
     "build:contest": "vite build --mode contest && python scripts/strip_people.py dist",
     "preview": "vite preview",
-    "test": "python -m pytest -q && node --test tests/today.test.ts tests/trails.test.ts tests/portals.test.ts tests/history.test.ts tests/chart.test.ts tests/map.test.ts tests/layout.test.ts tests/annual.test.ts tests/guide.test.ts tests/narration.test.ts tests/i18n.test.ts",
+    "test": "python -m pytest -q && node --test tests/today.test.ts tests/trails.test.ts tests/portals.test.ts tests/history.test.ts tests/chart.test.ts tests/map.test.ts tests/layout.test.ts tests/annual.test.ts tests/guide.test.ts tests/narration.test.ts tests/i18n.test.ts tests/audio.test.ts",
     "media": "python scripts/build_media.py",
     "map": "python scripts/build_map.py",
     "leaders": "python scripts/build_leaders.py",
