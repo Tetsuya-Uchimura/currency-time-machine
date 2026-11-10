@@ -16,8 +16,9 @@ Outputs (all committed, so the app never calls these services at runtime):
   docs/history-verification.md       the evidence: offices, dates, licenses
 
 Only these licenses are accepted: public domain, CC0, CC BY, CC BY-SA,
-KOGL Type 1 (Korea Open Government License, attribution). Anything else is
-skipped and reported.
+KOGL Type 1, OGL (UK Open Government Licence), GODL-India, GFDL,
+"Attribution" and "Copyrighted free use": all allow reuse with attribution,
+which the app shows with every image. Anything else is skipped and reported.
 
 Usage:  python scripts/build_media.py [--refresh]
 Standard library + Pillow. Requests are spaced politely and cached in
@@ -56,7 +57,12 @@ COMMONS = "https://commons.wikimedia.org/w/api.php"
 DELAY_S = 0.6
 
 # No NC (non-commercial) or ND (no derivatives): we crop and re-encode.
-ALLOWED_LICENSES = re.compile(r"^(public domain|pd\b|cc0|cc[ -]by(-sa)?(\s|$)|kogl type 1)", re.I)
+# Free licenses that allow reuse with attribution (the app shows author, license and source with every image).
+# Fair use / non-free files are never accepted.
+ALLOWED_LICENSES = re.compile(
+    r"^(public domain|pd\b|cc0|cc[ -]by(-sa)?(\s|$)|kogl type 1|ogl\b|godl-india|gfdl|attribution$|copyrighted free use)",
+    re.I,
+)
 
 PORTRAIT_PX = 288
 PLACE_MAX_W = 1024
@@ -449,8 +455,9 @@ def write_report(events) -> None:
         "  in the person's English Wikipedia infobox (the source is named per row). People who could not be",
         "  verified are not shown in the app.",
         "- **Images:** portraits are the images Wikidata lists for the person (P18); city photos were chosen by hand.",
-        "  Every image's license was read from Wikimedia Commons; only public domain, CC0, CC BY, CC BY-SA and",
-        "  KOGL Type 1 are accepted. Images are stored locally as optimized WebP files.",
+        "  Every image's license was read from Wikimedia Commons; only public domain, CC0, CC BY, CC BY-SA,",
+        "  KOGL Type 1, OGL, GODL-India, GFDL, Attribution and Copyrighted free use (all reusable with attribution,",
+        "  shown with every image) are accepted. Images are stored locally as optimized WebP files.",
         "- **Not verified here:** the wording of each person's involvement and of the policies is our own summary",
         "  of the public record; it is not checked automatically. Rate figures are checked against the bundled",
         "  data by `tests/history.test.ts`.",

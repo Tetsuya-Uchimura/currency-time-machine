@@ -26,9 +26,9 @@ def test_held_on_needs_a_start_and_respects_the_end():
 
 
 def test_license_allowlist():
-    for ok in ["Public domain", "CC BY 2.0", "CC BY-SA 3.0 de", "CC0", "KOGL Type 1", "CC BY 4.0"]:
+    for ok in ["Public domain", "CC BY 2.0", "CC BY-SA 3.0 de", "CC0", "KOGL Type 1", "CC BY 4.0", "OGL 3", "GODL-India", "GFDL 1.2", "Attribution", "Copyrighted free use"]:
         assert bm.license_ok(ok), ok
-    for bad in ["", "Fair use", "GFDL", "All rights reserved", "CC BY-NC 2.0", "CC BY-ND 4.0"]:
+    for bad in ["", "Fair use", "Non-free", "All rights reserved", "CC BY-NC 2.0", "CC BY-ND 4.0", "Attribution-NonCommercial"]:
         assert not bm.license_ok(bad), bad
 
 

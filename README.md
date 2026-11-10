@@ -107,7 +107,7 @@ no verified event.
 | What | Source and check |
 | --- | --- |
 | Leaders (23 offices, 1948 to today) | Wikidata "position held" with start and end dates (`npm run leaders`). Each term is cross-checked against the person's English Wikipedia infobox; 190+ terms agree, the rest are Wikidata-only and listed for review. Periods with no recorded holder show "no verified record". Gaps filled by name are verified the same way. Report: [docs/leaders-verification.md](docs/leaders-verification.md). |
-| Portraits | The person's Wikidata image, used only with an accepted license (public domain, CC0, CC BY, CC BY-SA), with its credit on screen. |
+| Portraits | The person's Wikidata image, used only with a free license that allows reuse with attribution (public domain, CC0, CC BY, CC BY-SA, OGL, GODL-India, GFDL, Attribution), with its credit on screen. |
 | Events (61, 1948 to 2026) | Written in `content/annual-events.json`; `npm run events` keeps an event only if one of its sources contains its date and keywords. When the sources give only the month or the year, the app shows no more than that. Report: [docs/events-verification.md](docs/events-verification.md). |
 | Exchange rates | Frankfurter composite rates, weekly (see Data). |
 
@@ -262,7 +262,7 @@ Each portal answers three questions at once:
 - **Verified facts, licensed images.** `npm run media` (`scripts/build_media.py`) builds the content from
   `content/history.json`: it checks that each person held the stated office on the date (Wikidata, or the
   English Wikipedia infobox where Wikidata has no dated record), takes their portrait from Wikidata, reads
-  every image's license from Wikimedia Commons (public domain, CC0, CC BY, CC BY-SA, KOGL Type 1 only; no
+  every image's license from Wikimedia Commons (public domain, CC0, CC BY, CC BY-SA, KOGL Type 1, OGL, GODL-India, GFDL, Attribution only; no
   NC/ND), and stores optimized local WebP files (portraits 288 px, city photos at most 1024 px). People it
   cannot verify are left out; people without a portrait get a plain initials plate, never a stand-in face.
   If the photos cannot be loaded, the portal falls back to a code-generated city impression labelled
@@ -453,7 +453,7 @@ never loads media from other sites at runtime):
 | Asset | Source and license |
 | --- | --- |
 | World map (land, countries) | Natural Earth 1:110m, public domain |
-| Leaders' portraits (195) | Wikimedia Commons via Wikidata, each with its license (public domain, CC0, CC BY, CC BY-SA), author and source: see [docs/leaders-verification.md](docs/leaders-verification.md); shown with their credit |
+| Leaders' portraits (218) | Wikimedia Commons via Wikidata, each with its license (public domain, CC0, CC BY, CC BY-SA, OGL, GODL-India, GFDL, Attribution, Copyrighted free use), author and source: see [docs/leaders-verification.md](docs/leaders-verification.md); shown with their credit |
 | City photographs and portraits | Wikimedia Commons, each with its own license (public domain, CC0, CC BY, CC BY-SA, KOGL Type 1), author and source: see [docs/portal-assets.md](docs/portal-assets.md) and [docs/history-verification.md](docs/history-verification.md) |
 
 | Component | License |

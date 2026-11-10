@@ -58,14 +58,14 @@ and the term is listed at the end for review.
 - 1993-11-04 to 2003-12-12: Jean Chrétien ([Q128543](https://www.wikidata.org/wiki/Q128543)) [both], portrait CC BY 2.0
 - 2003-12-12 to 2006-02-06: Paul Martin ([Q128529](https://www.wikidata.org/wiki/Q128529)) [both], portrait CC BY-SA 2.0
 - 2006-02-06 to 2015-11-04: Stephen Harper ([Q206](https://www.wikidata.org/wiki/Q206)) [both], portrait CC BY-SA 2.0
-- 2015-11-04 to 2025-03-14: Justin Trudeau ([Q3099714](https://www.wikidata.org/wiki/Q3099714)) [both]
+- 2015-11-04 to 2025-03-14: Justin Trudeau ([Q3099714](https://www.wikidata.org/wiki/Q3099714)) [both], portrait Attribution
 - 2025-03-14 to present: Mark Carney ([Q192533](https://www.wikidata.org/wiki/Q192533)) [both], portrait CC BY-SA 4.0
 
 ## Governor of the Bank of Canada ([Q26186076](https://www.wikidata.org/wiki/Q26186076))
 
 - 1934-09-08 to 1954-12-31: Graham Towers ([Q2423265](https://www.wikidata.org/wiki/Q2423265)) [both]
-- 1955-01-01 to 1961-07-13: James Coyne ([Q3160995](https://www.wikidata.org/wiki/Q3160995)) [both]
-- 1961-07-01 to 1973-02-01: Louis Rasminsky ([Q6688034](https://www.wikidata.org/wiki/Q6688034)) [wikidata]
+- 1955-01-01 to 1961-07-13: James Coyne ([Q3160995](https://www.wikidata.org/wiki/Q3160995)) [both], portrait Attribution
+- 1961-07-01 to 1973-02-01: Louis Rasminsky ([Q6688034](https://www.wikidata.org/wiki/Q6688034)) [wikidata], portrait Attribution
 - 1973-02-01 to 1987-02-01: Gerald Bouey ([Q15525030](https://www.wikidata.org/wiki/Q15525030)) [both]
 - 1987-02-01 to 1994-02-01: John Crow ([Q6227768](https://www.wikidata.org/wiki/Q6227768)) [both]
 - 1994-02-01 to 2001-01-31: Gordon Thiessen ([Q3110930](https://www.wikidata.org/wiki/Q3110930)) [both]
@@ -88,14 +88,14 @@ and the term is listed at the end for review.
 - 1979-05-04 to 1990-11-28: Margaret Thatcher ([Q7416](https://www.wikidata.org/wiki/Q7416)) [both], portrait CC0
 - 1990-11-28 to 1997-05-02: John Major ([Q9559](https://www.wikidata.org/wiki/Q9559)) [both], portrait Public domain
 - 1997-05-02 to 2007-06-27: Tony Blair ([Q9545](https://www.wikidata.org/wiki/Q9545)) [both], portrait CC BY 4.0
-- 2007-06-27 to 2010-05-11: Gordon Brown ([Q10648](https://www.wikidata.org/wiki/Q10648)) [both]
-- 2010-05-11 to 2016-07-13: David Cameron ([Q192](https://www.wikidata.org/wiki/Q192)) [both]
+- 2007-06-27 to 2010-05-11: Gordon Brown ([Q10648](https://www.wikidata.org/wiki/Q10648)) [both], portrait OGL 3
+- 2010-05-11 to 2016-07-13: David Cameron ([Q192](https://www.wikidata.org/wiki/Q192)) [both], portrait OGL 3
 - 2016-07-13 to 2019-07-24: Theresa May ([Q264766](https://www.wikidata.org/wiki/Q264766)) [both], portrait CC BY 3.0
-- 2019-07-24 to 2022-09-06: Boris Johnson ([Q180589](https://www.wikidata.org/wiki/Q180589)) [both]
-- 2022-09-06 to 2022-10-25: Liz Truss ([Q272201](https://www.wikidata.org/wiki/Q272201)) [both]
-- 2022-10-25 to 2024-07-05: Rishi Sunak ([Q20055561](https://www.wikidata.org/wiki/Q20055561)) [both]
-- 2024-07-05 to 2026-07-20: Keir Starmer ([Q6383803](https://www.wikidata.org/wiki/Q6383803)) [both]
-- 2026-07-20 to present: Andy Burnham ([Q269909](https://www.wikidata.org/wiki/Q269909)) [both]
+- 2019-07-24 to 2022-09-06: Boris Johnson ([Q180589](https://www.wikidata.org/wiki/Q180589)) [both], portrait OGL 3
+- 2022-09-06 to 2022-10-25: Liz Truss ([Q272201](https://www.wikidata.org/wiki/Q272201)) [both], portrait OGL 3
+- 2022-10-25 to 2024-07-05: Rishi Sunak ([Q20055561](https://www.wikidata.org/wiki/Q20055561)) [both], portrait OGL 3
+- 2024-07-05 to 2026-07-20: Keir Starmer ([Q6383803](https://www.wikidata.org/wiki/Q6383803)) [both], portrait OGL 3
+- 2026-07-20 to present: Andy Burnham ([Q269909](https://www.wikidata.org/wiki/Q269909)) [both], portrait OGL 3
 
 ## Governor of the Bank of England ([Q2579905](https://www.wikidata.org/wiki/Q2579905))
 
@@ -134,7 +134,7 @@ and the term is listed at the end for review.
 - 1980-01-01 to 1991-08-01: Karl Otto Pöhl ([Q97051](https://www.wikidata.org/wiki/Q97051)) [wikidata], portrait CC BY-SA 3.0 de
 - 1991-08-01 to 1993-09-30: Helmut Schlesinger ([Q96812](https://www.wikidata.org/wiki/Q96812)) [both], portrait CC BY-SA 3.0 de
 - 1993-09-30 to 1999-09-01: Hans Tietmeyer ([Q75748](https://www.wikidata.org/wiki/Q75748)) [both], portrait CC BY-SA 3.0 de
-- 1999-09-01 to 2004-04-16: Ernst Welteke ([Q100800](https://www.wikidata.org/wiki/Q100800)) [both]
+- 1999-09-01 to 2004-04-16: Ernst Welteke ([Q100800](https://www.wikidata.org/wiki/Q100800)) [both], portrait Copyrighted free use
 - 2004-04-30 to 2011-04-30: Axel A. Weber ([Q64689](https://www.wikidata.org/wiki/Q64689)) [both], portrait CC BY 4.0
 - 2011-05-01 to 2021-12-31: Jens Weidmann ([Q693829](https://www.wikidata.org/wiki/Q693829)) [wikidata], portrait CC BY 2.0
 - 2022-01-01 to present: Joachim Nagel ([Q1690335](https://www.wikidata.org/wiki/Q1690335)) [both], portrait CC BY 4.0
@@ -241,35 +241,35 @@ and the term is listed at the end for review.
 ## Prime Minister of India ([Q192711](https://www.wikidata.org/wiki/Q192711))
 
 - 1947-08-15 to 1964-05-27: Jawaharlal Nehru ([Q1047](https://www.wikidata.org/wiki/Q1047)) [both], portrait Public domain
-- 1964-05-27 to 1964-06-09: Gulzarilal Nanda ([Q317769](https://www.wikidata.org/wiki/Q317769)) [wikidata]
-- 1964-06-09 to 1966-01-11: Lal Bahadur Shastri ([Q244689](https://www.wikidata.org/wiki/Q244689)) [both]
-- 1966-01-11 to 1966-01-24: Gulzarilal Nanda ([Q317769](https://www.wikidata.org/wiki/Q317769)) [wikidata]
-- 1966-01-24 to 1977-03-24: Indira Gandhi ([Q1149](https://www.wikidata.org/wiki/Q1149)) [wikidata]
+- 1964-05-27 to 1964-06-09: Gulzarilal Nanda ([Q317769](https://www.wikidata.org/wiki/Q317769)) [wikidata], portrait GODL-India
+- 1964-06-09 to 1966-01-11: Lal Bahadur Shastri ([Q244689](https://www.wikidata.org/wiki/Q244689)) [both], portrait GODL-India
+- 1966-01-11 to 1966-01-24: Gulzarilal Nanda ([Q317769](https://www.wikidata.org/wiki/Q317769)) [wikidata], portrait GODL-India
+- 1966-01-24 to 1977-03-24: Indira Gandhi ([Q1149](https://www.wikidata.org/wiki/Q1149)) [wikidata], portrait GODL-India
 - 1977-03-24 to 1979-07-28: Morarji Desai ([Q218661](https://www.wikidata.org/wiki/Q218661)) [both], portrait Public domain
-- 1979-07-28 to 1980-01-14: Charan Singh ([Q319824](https://www.wikidata.org/wiki/Q319824)) [both]
-- 1980-01-14 to 1984-10-31: Indira Gandhi ([Q1149](https://www.wikidata.org/wiki/Q1149)) [both]
+- 1979-07-28 to 1980-01-14: Charan Singh ([Q319824](https://www.wikidata.org/wiki/Q319824)) [both], portrait GODL-India
+- 1980-01-14 to 1984-10-31: Indira Gandhi ([Q1149](https://www.wikidata.org/wiki/Q1149)) [both], portrait GODL-India
 - 1984-10-31 to 1989-12-02: Rajiv Gandhi ([Q4593](https://www.wikidata.org/wiki/Q4593)) [both], portrait CC BY-SA 3.0 nl
 - 1989-12-02 to 1990-11-10: V. P. Singh ([Q315338](https://www.wikidata.org/wiki/Q315338)) [both], portrait CC BY 4.0
-- 1990-11-10 to 1991-06-21: Chandra Shekhar ([Q334279](https://www.wikidata.org/wiki/Q334279)) [both]
+- 1990-11-10 to 1991-06-21: Chandra Shekhar ([Q334279](https://www.wikidata.org/wiki/Q334279)) [both], portrait GODL-India
 - 1991-06-21 to 1996-05-16: P. V. Narasimha Rao ([Q275146](https://www.wikidata.org/wiki/Q275146)) [both], portrait CC BY 4.0
-- 1996-05-16 to 1996-06-01: Atal Bihari Vajpayee ([Q233289](https://www.wikidata.org/wiki/Q233289)) [both]
-- 1996-06-01 to 1997-04-21: H. D. Deve Gowda ([Q377870](https://www.wikidata.org/wiki/Q377870)) [both]
+- 1996-05-16 to 1996-06-01: Atal Bihari Vajpayee ([Q233289](https://www.wikidata.org/wiki/Q233289)) [both], portrait GODL-India
+- 1996-06-01 to 1997-04-21: H. D. Deve Gowda ([Q377870](https://www.wikidata.org/wiki/Q377870)) [both], portrait GFDL 1.2
 - 1997-04-21 to 1998-03-19: Inder Kumar Gujral ([Q248484](https://www.wikidata.org/wiki/Q248484)) [both], portrait CC BY-SA 3.0
-- 1998-03-19 to 2004-05-19: Atal Bihari Vajpayee ([Q233289](https://www.wikidata.org/wiki/Q233289)) [both]
-- 2004-05-22 to 2014-05-26: Manmohan Singh ([Q41914](https://www.wikidata.org/wiki/Q41914)) [both]
-- 2014-05-26 to present: Narendra Modi ([Q1058](https://www.wikidata.org/wiki/Q1058)) [both]
+- 1998-03-19 to 2004-05-19: Atal Bihari Vajpayee ([Q233289](https://www.wikidata.org/wiki/Q233289)) [both], portrait GODL-India
+- 2004-05-22 to 2014-05-26: Manmohan Singh ([Q41914](https://www.wikidata.org/wiki/Q41914)) [both], portrait GODL-India
+- 2014-05-26 to present: Narendra Modi ([Q1058](https://www.wikidata.org/wiki/Q1058)) [both], portrait GODL-India
 
 ## Governor of the Reserve Bank of India ([Q14536141](https://www.wikidata.org/wiki/Q14536141))
 
 - 1943-08-11 to 1949-06-30: Chintaman Dwarkanath Deshmukh ([Q3763779](https://www.wikidata.org/wiki/Q3763779)) [wikidata], portrait Public domain
 - 1949-07-01 to 1957-01-14: Benegal Rama Rau ([Q3380621](https://www.wikidata.org/wiki/Q3380621)) [both], portrait Public domain
 - 1957-01-14 to 1957-02-28: K. G. Ambegaonkar ([Q6323338](https://www.wikidata.org/wiki/Q6323338)) [wikidata]
-- 1982-09-15 to 1985-01-15: Manmohan Singh ([Q41914](https://www.wikidata.org/wiki/Q41914)) [both]
+- 1982-09-15 to 1985-01-15: Manmohan Singh ([Q41914](https://www.wikidata.org/wiki/Q41914)) [both], portrait GODL-India
 - 1985-02-04 to 1990-12-22: R. N. Malhotra ([Q7273871](https://www.wikidata.org/wiki/Q7273871)) [wikidata]
 - 1990-12-22 to 1992-12-21: S. Venkitaramanan ([Q7387970](https://www.wikidata.org/wiki/Q7387970)) [both]
-- 1997-01-01 to 2003-09-06: Bimal Jalan ([Q4913680](https://www.wikidata.org/wiki/Q4913680)) [wikidata]
+- 1997-01-01 to 2003-09-06: Bimal Jalan ([Q4913680](https://www.wikidata.org/wiki/Q4913680)) [wikidata], portrait GODL-India
 - 2013-09-04 to 2016-09-04: Raghuram Rajan ([Q981496](https://www.wikidata.org/wiki/Q981496)) [both], portrait Public domain
-- 2016-09-04 to present: Urjit Patel ([Q14623534](https://www.wikidata.org/wiki/Q14623534)) [wikidata]
+- 2016-09-04 to present: Urjit Patel ([Q14623534](https://www.wikidata.org/wiki/Q14623534)) [wikidata], portrait GODL-India
 
 - **Gap:** 1957-02-28 to 1982-09-15 (no holder recorded)
 - **Gap:** 1992-12-21 to 1997-01-01 (no holder recorded)
@@ -299,7 +299,7 @@ and the term is listed at the end for review.
 - 1998-03-17 to 2003-03-16: Zhu Rongji ([Q18285](https://www.wikidata.org/wiki/Q18285)) [wikidata], portrait KOGL Type 1
 - 2003-03-16 to 2013-03-15: Wen Jiabao ([Q16628](https://www.wikidata.org/wiki/Q16628)) [wikidata], portrait CC BY-SA 2.0
 - 2013-03-15 to 2023-03-11: Li Keqiang ([Q18111](https://www.wikidata.org/wiki/Q18111)) [both], portrait Public domain
-- 2023-03-11 to present: Li Qiang ([Q4414390](https://www.wikidata.org/wiki/Q4414390)) [both]
+- 2023-03-11 to present: Li Qiang ([Q4414390](https://www.wikidata.org/wiki/Q4414390)) [both], portrait Attribution
 
 - **Gap:** 1980-09-10 to 1988-04-12 (no holder recorded)
 
@@ -499,29 +499,3 @@ and the term is listed at the end for review.
 - Edwin Stopper (Chair of the Swiss National Bank, 1970-06-01): no dated record of a matching office ('swiss national bank') in Wikidata or the English Wikipedia infobox
 - H. C. Coombs (Governor of the Reserve Bank of Australia, 1965-06-01): no dated record of a matching office ('reserve bank of australia') in Wikidata or the English Wikipedia infobox
 - Heo Jeong (President of South Korea, 1960-06-01): no dated record of a matching office ('president of (south )?korea') in Wikidata or the English Wikipedia infobox
-
-## Portraits not used (license)
-
-- James Coyne (Q3160995): license not accepted: Attribution
-- Louis Rasminsky (Q6688034): license not accepted: Attribution
-- Justin Trudeau (Q3099714): license not accepted: Attribution
-- Li Qiang (Q4414390): license not accepted: Attribution
-- Ernst Welteke (Q100800): license not accepted: Copyrighted free use
-- Gulzarilal Nanda (Q317769): license not accepted: GODL-India
-- Lal Bahadur Shastri (Q244689): license not accepted: GODL-India
-- Indira Gandhi (Q1149): license not accepted: GODL-India
-- Charan Singh (Q319824): license not accepted: GODL-India
-- Chandra Shekhar (Q334279): license not accepted: GODL-India
-- Atal Bihari Vajpayee (Q233289): license not accepted: GODL-India
-- H. D. Deve Gowda (Q377870): license not accepted: GFDL 1.2
-- Manmohan Singh (Q41914): license not accepted: GODL-India
-- Narendra Modi (Q1058): license not accepted: GODL-India
-- Bimal Jalan (Q4913680): license not accepted: GODL-India
-- Urjit Patel (Q14623534): license not accepted: GODL-India
-- Gordon Brown (Q10648): license not accepted: OGL 3
-- David Cameron (Q192): license not accepted: OGL 3
-- Boris Johnson (Q180589): license not accepted: OGL 3
-- Liz Truss (Q272201): license not accepted: OGL 3
-- Rishi Sunak (Q20055561): license not accepted: OGL 3
-- Keir Starmer (Q6383803): license not accepted: OGL 3
-- Andy Burnham (Q269909): license not accepted: OGL 3
