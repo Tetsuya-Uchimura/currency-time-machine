@@ -611,6 +611,11 @@ export class ExperienceSystem extends createSystem({
     this.updatePanel();
   }
 
+  /** The sound engine (the BGM audition panel drives it directly). */
+  get sound(): SoundEngine {
+    return this.audio;
+  }
+
   /** Called from a user gesture before entering XR so audio may start. */
   unlockAudio(): void {
     if (this.ready) void this.audio.unlock();
@@ -1119,8 +1124,8 @@ export class ExperienceSystem extends createSystem({
     if (mood) this.robot.mood = mood;
     if (line) {
       if (import.meta.env.DEV) console.info(`[ctm-say] ${performance.now().toFixed(0)} ${line.en.slice(0, 50)}`);
+      // (No electronic blip before each line: the voice starts by itself, and the music steps back for it.)
       this.narration.speak(line.en, delivery);
-      this.audio.blip(true);
     }
   }
 

@@ -56,3 +56,5 @@ data-raw/
 # Cloudflare / wrangler local state
 .wrangler/
 .dev.vars
+# BGM preview renders (audition panel, dev server)
+audition/

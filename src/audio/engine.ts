@@ -5,16 +5,17 @@
  *   per currency:  pluck notes + pad -> lowpass -> voiceGain -> PannerNode(HRTF) -> bus
  *                                                       \-> reverb send
  *   global:        drone chord (tension follows turbulence) -> bus
- *   ambient bed:   two chord layers (crossfaded) + soft bells -> lowpass -> ambient -> master
+ *   ambient music: a composed piece (src/audio/score.ts, played by bed.ts) -> ambient -> master
  *   effects:       gong, shimmer, chimes, the tunnel, blips -> fx -> master
  *   bus, ambient, fx -> reverb send -> reverb (generated impulse) -> wet -> master
  *   master -> compressor -> speakers
  *
  * Modes (src/audio/mix.ts): how much of the data music, the ambient bed and
  * the reverb sound while choosing a year, in the tunnel, while the year
- * flows, while the guide explains, and in the summary. The ambient bed moves
- * on the audio clock (its own chord changes), so the music never freezes
- * when the history clock stands still. The voice ducks the music bus, the
+ * flows, while the guide explains, and in the summary. The ambient music
+ * moves on the audio clock (its own chords and melody), so the music never
+ * freezes when the history clock stands still. Three pieces can be chosen
+ * (setStyle: cinematic, piano, cosmic; the audition panel compares them). The voice ducks the music bus, the
  * bed and the reverb return together (not the effects: a gong stays a gong).
  *
  * We share three.js' AudioContext so the AudioListener that IWSDK attaches to
@@ -31,7 +32,10 @@
  */
 import { AudioContext as ThreeAudioContext } from '@iwsdk/core';
 import type { TimbreId } from '../config.js';
-import { CHORD_S, CROSSFADE_S, DUCK, FADE, bellDegree, chordAt, duckLevel, mixOf, smooth, type SoundMode } from './mix.js';
+import { AmbientBed } from './bed.js';
+import { makeImpulse } from './impulse.js';
+import { DUCK, FADE, duckLevel, mixOf, smooth, type SoundMode } from './mix.js';
+import type { BgmStyle } from './score.js';
 import { NoteQueue } from './note-queue.js';
 import { degreeToHz } from './scale.js';
 import { TIMBRES, type Timbre } from './timbres.js';
@@ -41,10 +45,8 @@ const PULSE_S = 60 / 84 / 2;
 const LOOKAHEAD_S = 0.06;
 /** Volatility at which a voice plays about 0.6 notes per second. */
 const VOL_REF = 0.006;
-/** The ambient bed's level at full (each of its four voices, before the filter). */
-const AMBIENT_LEVEL = 0.05;
-/** Relative loudness of the bed's voices: bass, then the three upper voices. */
-const AMBIENT_VOICES = [0.9, 0.6, 0.5, 0.42];
+/** The ambient music's level at full, against the data music (tuned on rendered files). */
+const AMBIENT_LEVEL = 0.25;
 
 export interface VoiceInput {
   alive: boolean;
@@ -91,13 +93,11 @@ export class SoundEngine {
   private suspendTimer: number | undefined;
   private fx!: GainNode;
   private ambient!: GainNode;
-  private layers: { gain: GainNode; oscs: OscillatorNode[] }[] = [];
-  private activeLayer = 0;
-  private chordStep = -1;
-  private nextChordAt = 0;
-  private bellAt = 0;
-  private bellCount = 0;
+  private bed: AmbientBed | null = null;
+  private bedStyle: BgmStyle = 'cinematic';
   private mode: SoundMode = 'selection';
+  /** The audition panel can hold a mode (null: the experience decides). */
+  forcedMode: SoundMode | null = null;
   private beforePause: Exclude<SoundMode, 'paused'> = 'selection';
   /** Smoothed levels (JS side, so mode changes and the duck never jump). */
   private readonly level = { drone: MIX_START.drone, pad: MIX_START.pad, ambient: MIX_START.ambient, reverb: MIX_START.reverb, duck: 1 };
@@ -182,42 +182,13 @@ export class SoundEngine {
     this.fx.gain.value = 1;
     this.fx.connect(this.master);
 
-    // Ambient bed: two layers of four voices; a new chord fades in on the silent layer while the
-    // other fades out (no pitch ever glides). A slow wobble on the filter keeps it breathing.
-    const bedFilter = ctx.createBiquadFilter();
-    bedFilter.type = 'lowpass';
-    bedFilter.frequency.value = 1100;
-    bedFilter.Q.value = 0.3;
-    const wobble = ctx.createOscillator();
-    wobble.frequency.value = 0.045;
-    const wobbleDepth = ctx.createGain();
-    wobbleDepth.gain.value = 320;
-    wobble.connect(wobbleDepth).connect(bedFilter.frequency);
-    wobble.start();
+    // Ambient music (a composed piece on the audio clock), under its own level: modes and the voice's duck.
     this.ambient = ctx.createGain();
     this.ambient.gain.value = 0;
-    bedFilter.connect(this.ambient);
     this.ambient.connect(this.master);
-    const bedSend = ctx.createGain();
-    bedSend.gain.value = 0.5;
-    this.ambient.connect(bedSend).connect(this.reverbSend);
-    const bedWave = ctx.createPeriodicWave(new Float32Array([0, 1, 0.22, 0.07, 0.025]), new Float32Array(5));
-    for (let l = 0; l < 2; l++) {
-      const gain = ctx.createGain();
-      gain.gain.value = 0;
-      gain.connect(bedFilter);
-      const oscs = AMBIENT_VOICES.map((level, k) => {
-        const osc = ctx.createOscillator();
-        osc.setPeriodicWave(bedWave);
-        osc.detune.value = (k % 2 ? 1 : -1) * 3 * (l + 1); // a touch of width between the layers
-        const g = ctx.createGain();
-        g.gain.value = level * AMBIENT_LEVEL;
-        osc.connect(g).connect(gain);
-        osc.start();
-        return osc;
-      });
-      this.layers.push({ gain, oscs });
-    }
+    this.bed = new AmbientBed(ctx, this.bedStyle, (n) => this.track(n));
+    this.bed.output.connect(this.ambient);
+    this.bed.send.connect(this.reverbSend);
 
     // Drone: D2 + A2 always, F#3 (sweet) fading to E3/B3 (tense) with turbulence.
     this.droneFilter = ctx.createBiquadFilter();
@@ -304,7 +275,7 @@ export class SoundEngine {
       const rms = Math.sqrt(sum / buf.length);
       return rms > 1e-6 ? (20 * Math.log10(rms)).toFixed(0) : '-inf';
     };
-    return `data:${db(this.meters.bus)}dB bed:${db(this.meters.bed)}dB out:${db(this.meters.out)}dB chord:${this.chordStep}`;
+    return `data:${db(this.meters.bus)}dB bed:${db(this.meters.bed)}dB out:${db(this.meters.out)}dB bgm:${this.bedStyle}/${this.bedPosition.chord}`;
   }
 
   /** Update a voice's 3D position (world/listener space, meters). */
@@ -341,7 +312,7 @@ export class SoundEngine {
     // The reverb return follows the mode and the voice too: no tail left ringing under the guide.
     this.reverbWet.gain.setTargetAtTime((0.32 + 0.2 * u) * lv.reverb * lv.duck, now, 0.25);
     this.bus.gain.setTargetAtTime(0.9 * lv.duck, now, 0.12);
-    this.ambient.gain.setTargetAtTime(lv.ambient * lv.duck, now, 0.12);
+    this.ambient.gain.setTargetAtTime(AMBIENT_LEVEL * lv.ambient * lv.duck, now, 0.12);
     this.updateBed(now);
 
     const padLevel = 0.03 * (1 - 0.55 * floatBlend) * lv.pad;
@@ -386,6 +357,7 @@ export class SoundEngine {
    * phase and the guide's state; only a change does anything.
    */
   setMode(mode: SoundMode): void {
+    mode = this.forcedMode ?? mode;
     if (mode === this.mode) return;
     if (this.mode !== 'paused') this.beforePause = this.mode;
     this.mode = mode;
@@ -414,45 +386,27 @@ export class SoundEngine {
     return l;
   }
 
-  /** The ambient bed: a new chord every CHORD_S on the audio clock (it moves while history stands still). */
+  /** The ambient music: its notes are scheduled ahead on the audio clock; under the voice, only the core ones. */
   private updateBed(now: number): void {
-    if (now >= this.nextChordAt) {
-      this.chordStep++;
-      this.nextChordAt = now + CHORD_S;
-      const chord = chordAt(this.chordStep);
-      const fresh = this.layers[1 - this.activeLayer];
-      const old = this.layers[this.activeLayer];
-      this.activeLayer = 1 - this.activeLayer;
-      // The new layer is silent: set its pitches outright, then fade it in over the old one.
-      fresh.oscs.forEach((o, k) => o.frequency.setValueAtTime(degreeToHz(chord[k]), now));
-      for (const [layer, to, s] of [[fresh, 1, CROSSFADE_S], [old, 0, CROSSFADE_S + 0.6]] as const) {
-        const g = layer.gain.gain;
-        g.cancelScheduledValues(now);
-        g.setValueAtTime(g.value, now);
-        g.linearRampToValueAtTime(to, now + s);
-      }
-    }
-    // Sparse soft bells on the chord, only while nothing is being explained and the bed is up.
-    const m = mixOf(this.mode, this.beforePause);
-    if (m.bells && this.level.ambient > 0.5 && !this.speaking && now >= this.bellAt) {
-      this.bellAt = now + 3.5 + Math.random() * 3;
-      this.bell(bellDegree(this.chordStep, this.bellCount++), now + 0.05);
-    } else if (!m.bells && this.bellAt < now + 2) this.bellAt = now + 2;
+    const bed = this.bed;
+    if (!bed) return;
+    bed.sparse = mixOf(this.mode, this.beforePause).melody === 'core' || this.speaking;
+    bed.update(now);
   }
 
-  private bell(degree: number, t: number): void {
-    const ctx = this.ctx;
-    const osc = ctx.createOscillator();
-    osc.type = 'sine';
-    osc.frequency.value = degreeToHz(degree);
-    const g = ctx.createGain();
-    g.gain.setValueAtTime(0, t);
-    g.gain.linearRampToValueAtTime(0.011, t + 0.25);
-    g.gain.exponentialRampToValueAtTime(0.0001, t + 3.5);
-    osc.connect(g).connect(this.ambient);
-    this.track(osc);
-    osc.start(t);
-    osc.stop(t + 3.6);
+  /** Choose the ambient piece (cinematic, piano, cosmic): the old one fades, the new one starts. */
+  setStyle(style: BgmStyle): void {
+    this.bedStyle = style;
+    this.bed?.setStyle(style);
+  }
+
+  get style(): BgmStyle {
+    return this.bedStyle;
+  }
+
+  /** Where the ambient piece is (the audition panel). */
+  get bedPosition(): { chord: string; index: number; verse: number } {
+    return this.bed?.position ?? { chord: '-', index: -1, verse: 0 };
   }
 
   /** Count a short-lived source until it has played (see activeNodes). */
@@ -610,6 +564,7 @@ export class SoundEngine {
    */
   duck(on: boolean): void {
     if (this.speaking && !on) this.quietSince = this.built ? this.ctx.currentTime : 0;
+    if (this.speaking !== on) this.bed?.setSpeaking(on);
     this.speaking = on;
   }
 
@@ -705,21 +660,4 @@ function makeWave(ctx: AudioContext, partials: number[]): PeriodicWave {
   const imag = new Float32Array(partials.length + 1);
   partials.forEach((a, k) => (imag[k + 1] = a));
   return ctx.createPeriodicWave(real, imag);
-}
-
-/** Stereo noise burst with an exponential tail: a soft, airy hall. */
-function makeImpulse(ctx: AudioContext, seconds: number, decay: number): AudioBuffer {
-  const len = Math.floor(ctx.sampleRate * seconds);
-  const buf = ctx.createBuffer(2, len, ctx.sampleRate);
-  for (let ch = 0; ch < 2; ch++) {
-    const data = buf.getChannelData(ch);
-    let lp = 0;
-    for (let i = 0; i < len; i++) {
-      const t = i / ctx.sampleRate;
-      // One-pole low-pass on the noise darkens the tail (less harsh).
-      lp += 0.35 * (Math.random() * 2 - 1 - lp);
-      data[i] = lp * Math.exp(-t / decay) * (t < 0.01 ? t / 0.01 : 1);
-    }
-  }
-  return buf;
 }

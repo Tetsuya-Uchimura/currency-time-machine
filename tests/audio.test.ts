@@ -6,7 +6,7 @@
  */
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
-import { bellDegree, CHORD_S, chordAt, CROSSFADE_S, DUCK, duckLevel, FADE, MIX, mixOf, PROGRESSION, smooth, voicesMoved, type SoundMode } from '../src/audio/mix.ts';
+import { DUCK, duckLevel, FADE, MIX, mixOf, smooth, type SoundMode } from '../src/audio/mix.ts';
 
 /** Simulate the engine's smoothed levels through a list of [mode, seconds] at 60 fps. */
 function simulate(steps: [SoundMode, number][], start: SoundMode = 'flowing') {
@@ -33,18 +33,18 @@ function simulate(steps: [SoundMode, number][], start: SoundMode = 'flowing') {
 
 test('guide: the data music (drone, a pad per currency) almost leaves; the moving bed carries the explanation', () => {
   assert.ok(MIX.guide.drone <= 0.15 && MIX.guide.pad <= 0.1, 'held tones down to a whisper');
-  assert.equal(MIX.guide.ambient, 1);
+  assert.ok(MIX.guide.ambient >= 0.7 && MIX.guide.ambient <= 1);
   assert.ok(MIX.guide.reverb < MIX.flowing.reverb, 'less reverb tail under the voice');
-  assert.equal(MIX.guide.bells, false, 'no bells over the voice');
+  assert.equal(MIX.guide.melody, 'core', 'only the core notes over the voice');
   // After 4 s of explanation the held data tones are below a fifth of their level.
   const tr = simulate([['flowing', 3], ['guide', 4]]);
   const end = tr[tr.length - 1];
   assert.ok(end.drone < 0.2 && end.pad < 0.2, `drone ${end.drone.toFixed(2)}, pad ${end.pad.toFixed(2)}`);
-  assert.ok(end.ambient > 0.75);
+  assert.ok(end.ambient > 0.6);
 });
 
 test('flowing: the data music exactly as designed, no bed', () => {
-  assert.deepEqual(MIX.flowing, { drone: 1, pad: 1, ambient: 0, reverb: 1, bells: false });
+  assert.deepEqual({ ...MIX.flowing, melody: undefined }, { drone: 1, pad: 1, ambient: 0, reverb: 1, melody: undefined });
 });
 
 test('pause is its own state: it keeps the mix it paused in (the output fades instead)', () => {
@@ -84,7 +84,7 @@ test('a short flow between two beats does not empty the room or flood it', () =>
   // Beats a few weeks apart: 2 s of flowing between two explanations.
   const tr = simulate([['guide', 10], ['flowing', 2], ['guide', 0.1]]);
   const gap = tr.filter((x) => x.mode === 'flowing');
-  assert.ok(Math.min(...gap.map((x) => x.ambient)) > 0.4, 'the bed recedes slowly');
+  assert.ok(Math.min(...gap.map((x) => x.ambient)) > 0.4 * MIX.guide.ambient, 'the bed recedes slowly');
   assert.ok(Math.max(...gap.map((x) => x.drone)) < 0.8, 'the data music rises slowly');
 });
 
@@ -110,25 +110,8 @@ test("the voice's duck holds through the pause between two sentences, then relea
   assert.ok(maxDuring < DUCK.level + 0.02, `the music never swells between sentences (max ${maxDuring.toFixed(3)})`);
 });
 
-test('the bed moves: every chord change moves at least two voices, no voice holds a pitch for more than two chords', () => {
-  const n = PROGRESSION.length;
-  for (let i = 0; i < n; i++) {
-    const a = chordAt(i);
-    const b = chordAt(i + 1);
-    const c = chordAt(i + 2);
-    assert.ok(voicesMoved(a, b) >= 2, `chord ${i} -> ${i + 1}`);
-    for (let v = 0; v < 4; v++) assert.ok(!(a[v] === b[v] && b[v] === c[v]), `voice ${v} held from chord ${i}`);
-    assert.ok(a[0] < Math.min(...a.slice(1)), 'the bass is the lowest voice');
-    for (const d of a) assert.ok(d >= -5 && d <= 19, 'inside the app scale range');
-  }
-  assert.ok(CHORD_S >= 2 * CROSSFADE_S, 'each chord is heard settled before the next');
-  assert.ok(n * CHORD_S >= 60, 'the cycle is at least a minute');
-  assert.deepEqual(chordAt(-1), chordAt(n - 1));
-});
-
-test('bells: on the current chord, an octave up; only while choosing or in the summary', () => {
-  for (let k = 0; k < 6; k++) assert.ok(chordAt(3).slice(1).map((d) => d + 5).includes(bellDegree(3, k)));
-  assert.equal(MIX.selection.bells, true);
-  assert.equal(MIX.summary.bells, true);
-  assert.equal(MIX.flowing.bells, false);
+test('the full piece while choosing a year and in the summary; its core notes under the voice', () => {
+  assert.equal(MIX.selection.melody, 'all');
+  assert.equal(MIX.summary.melody, 'all');
+  assert.equal(MIX.guide.melody, 'core');
 });

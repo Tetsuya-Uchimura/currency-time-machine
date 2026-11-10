@@ -12,6 +12,7 @@ import { loadAnnualData } from './data/annual-history.js';
 import { loadHistoryContent } from './data/history-content.js';
 import { loadTimeline } from './data/timeline.js';
 import { ExperienceSystem, type JourneyMode } from './experience.js';
+import { STYLES, type BgmStyle } from './audio/score.js';
 import { getLang, onLangChange, setLang, setTextCatalog, t, type Lang } from './i18n/i18n.js';
 import { loadWorldMap } from './visual/world-currency-map.js';
 
@@ -70,6 +71,7 @@ async function main(): Promise<void> {
     loadTranslations(import.meta.env.BASE_URL),
   ]);
   await experience.setup(timeline, content, worldMap, annual, import.meta.env.BASE_URL);
+  initMusic(experience);
   // Start-screen options, read inside the click (a user gesture: audio and speech may start).
   const options = () => ({
     mode: ((document.querySelector('input[name="mode"]:checked') as HTMLInputElement | null)?.value ?? 'year') as JourneyMode,
@@ -102,6 +104,32 @@ async function main(): Promise<void> {
     if (state !== 'non-immersive') hideOverlay();
   });
   if (watch) watch.disabled = false;
+}
+
+/**
+ * The ambient piece: `?bgm=A|B|C` (or cinematic, piano, cosmic), else the one last chosen in the audition
+ * panel on this browser, else A. `?audition` (any build) or `O` (dev) opens the audition panel.
+ */
+function initMusic(experience: ExperienceSystem): void {
+  const params = new URLSearchParams(location.search);
+  const asked = (params.get('bgm') ?? '').toLowerCase();
+  const byLetter: Record<string, BgmStyle> = { a: 'cinematic', b: 'piano', c: 'cosmic' };
+  let style: BgmStyle | undefined = byLetter[asked] ?? STYLES.find((s) => s === asked);
+  if (!style) {
+    try {
+      style = STYLES.find((s) => s === localStorage.getItem('ctm-bgm'));
+    } catch {
+      /* private mode */
+    }
+  }
+  if (style) experience.sound.setStyle(style);
+  const open = () => void import('./dev/audition.js').then((m) => m.toggleAudition(experience.sound));
+  if (params.has('audition')) open();
+  if (import.meta.env.DEV) {
+    window.addEventListener('keydown', (e) => {
+      if (e.key.toLowerCase() === 'o' && !e.ctrlKey && !e.metaKey && !e.altKey) open();
+    });
+  }
 }
 
 main().catch((err) => {

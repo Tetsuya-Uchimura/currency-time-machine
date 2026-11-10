@@ -302,20 +302,27 @@ has modes (src/audio/mix.ts), chosen from the journey's state, not from each spo
 
 | Mode | When | Sound |
 | --- | --- | --- |
-| Selection | choosing a year, the intro | a quiet ambient bed, sparse soft bells, a faint data bed |
+| Selection | choosing a year, the intro | the ambient piece in full, a faint data bed |
 | Warp | the time tunnel | the tunnel's rush over a low bed; the data music fades out |
 | Flowing | the year (or the Full Journey) plays | the data music exactly as above; no bed |
-| Guide | Tock explains a beat, a place opened by a pinch, the arrival | the bed; the drone and pads fade to a whisper, less reverb |
-| Summary | the year in review, today | the bed, sparse bells, a faint data bed |
+| Guide | Tock explains a beat, a place opened by a pinch, the arrival | the ambient piece's core notes; the drone and pads fade to a whisper, less reverb |
+| Summary | the year in review, today | the ambient piece in full, a faint data bed |
 | Paused | the user pauses | everything fades out and the audio is suspended; it resumes as it was |
 
-The **ambient bed** is original and made in code from the same scale: four soft voices cycling through eight
-chords on the audio clock (a new chord every 8 s, crossfaded over 3 s), so it keeps moving while the
-history clock stands still. Every change moves at least two voices and no voice holds a pitch for more than
-two chords; a slow filter sweep keeps it breathing. While Tock speaks, the data music, the bed **and the
-reverb return** step down together (fast), are held through the short pauses between sentences, and come
-back slowly. Effects (the gong, the tunnel, chimes) have their own bus and are not ducked. Mode changes are
-slow fades both ways (about 1 to 2.5 s), so the music never jumps when the year starts or stops flowing.
+The **ambient music** is original, written out note by note in src/audio/score.ts, and played on the
+audio clock (src/audio/bed.ts), so it keeps moving while the history clock stands still. There are three
+pieces in D major, the key of the currencies' scale: **A Cinematic Ambient** (the default: a warm pad, a
+soft piano answering each chord), **B Gentle Piano** (a short melody over a broken-chord left hand) and
+**C Cosmic Atmosphere** (slow open chords, sparse stars with an echo). Compare them with `?audition`
+(a panel with A / B / C, held modes, a narration test and 48 s WAV renders), or pick one with
+`?bgm=A|B|C`. Details and measurements: [docs/bgm.md](docs/bgm.md).
+
+While Tock speaks, the data music, the ambient music **and the reverb return** step down together (fast),
+are held through the short pauses between sentences, and come back slowly. The ambient music also dips
+its 2.5 kHz band, where the voice's clarity lies, and plays only its core notes. Effects (the gong, the
+tunnel, chimes) have their own bus and are not ducked. No sound marks the start of a line. Mode changes
+are slow fades both ways (about 1 to 2.5 s), so the music never jumps when the year starts or stops
+flowing.
 
 ### Historical Portals (the top band at major moments)
 
@@ -493,7 +500,9 @@ src/data/eras.ts           the eras shown between events
 src/data/                  timeline math, events and chapters, history content, today loader
 src/playback/clock.ts      time-lapse pacing (era speeds + slow-downs): the single source of time
 src/audio/                 sound engine, pentatonic scale, timbres, note queue (sound/light sync);
-                           mix.ts: the sound's modes, their mix and the ambient bed's chords (pure, tested)
+                           mix.ts: the sound's modes and their mix (pure, tested);
+                           score.ts: the three ambient pieces (pure, tested); bed.ts plays them;
+                           render.ts: WAV previews (offline); src/dev/audition.ts: the audition panel
 src/visual/multi-currency-chart.ts  the middle band
 src/visual/world-currency-map.ts    the bottom band
 src/visual/era-panel.ts             the top band between events
