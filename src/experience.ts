@@ -66,6 +66,8 @@ import {
 import { annualChanges, formatRate, rateAt, ranking, shortDate, signedPct, yearSpan, yearWindow, type YearWindow } from './data/annual-currency.js';
 import {
   eventDateText,
+  observationNote,
+  sourcesNote,
   eventsInYear,
   featuredRegions,
   isDated,
@@ -1074,7 +1076,7 @@ export class ExperienceSystem extends createSystem({
         return { name: regionName(r, iso), code: this.codeOn(slot, iso), color: k >= 0 ? css(SLOTS[k].color) : '#fff1c8' };
       }),
       events: v.events.map((e) => ({ date: eventDateText(e), title: e.title })),
-      note: `Exchange rates: weekly observations, ${shortDate(this.isoOf(v.window.first))} to ${shortDate(this.isoOf(v.window.last))}${v.window.ongoing ? ' (year to date)' : ''}. Events checked against their sources.`,
+      note: `Exchange rates: weekly observations (Fridays), ${shortDate(this.isoOf(v.window.first))} to ${shortDate(this.isoOf(v.window.last))}${v.window.ongoing ? ' (year to date)' : ''}. ${eventsNote(v.events)}`,
     };
   }
 
@@ -1138,6 +1140,12 @@ export class ExperienceSystem extends createSystem({
     };
   }
 
+  /** The weekly observation the year stops at for an event: the first on or after its day (null: none yet). */
+  private observedIso(e: AnnualEvent): string | null {
+    const k = Math.ceil(this.timeline.indexOf(e.date) - 1e-9);
+    return k >= 0 && k < this.timeline.count ? this.isoOf(k) : null;
+  }
+
   private eventView(e: AnnualEvent): StageView {
     return {
       kind: 'event',
@@ -1152,7 +1160,9 @@ export class ExperienceSystem extends createSystem({
       }),
       places: `Places: ${e.regions.map((r) => regionName(r, e.date)).join(', ')}`,
       // (Contest-safe build: some source articles are named after people, so only their count is shown.)
-      sources: `${SHOW_PEOPLE ? e.sources.map((s) => `Wikipedia, "${s.title}"`).join('; ') : `${e.sources.length} Wikipedia article${e.sources.length > 1 ? 's' : ''}, checked for this date`}${e.precision && e.precision !== 'day' ? ` (the sources give the ${e.precision} only)` : ''}`,
+      // Publishers only (never article titles, which may name people): the same in both builds.
+      sources: sourcesNote(e),
+      observed: observationNote(e, this.observedIso(e)),
     };
   }
 
@@ -1207,7 +1217,14 @@ export class ExperienceSystem extends createSystem({
     else this.robot.point(null);
     if (b.part === 'world') this.stage.show(this.worldView());
     else if (b.part === 'leaders' && b.region) this.showRegion(b.region);
-    else if (b.part === 'event' && b.eventId) {
+    else if (b.part === 'event' && b.eventId && b.undated) {
+      // No day in the sources: the card only (no portal, no gong, no marker on the chart).
+      const e = v.events.find((x) => x.id === b.eventId);
+      if (e) {
+        this.stageRegion = null;
+        this.stage.show(this.eventView(e));
+      }
+    } else if (b.part === 'event' && b.eventId) {
       const e = v.events.find((x) => x.id === b.eventId);
       const scene = PORTAL_SCENES.findIndex((sc) => sc.eventId === b.eventId);
       if (scene >= 0) this.openPortal(scene);
@@ -1586,8 +1603,11 @@ export class ExperienceSystem extends createSystem({
       const word = CURRENCY_WORDS[this.timeline.codeAt(k, p)] ?? slot;
       // "On the date" is the last weekly observation on or before it: the
       // decision day itself may fall between observations (even on a Sunday),
-      // and no rate is invented for it.
-      lines.push(readoutLine(word, rate(Math.floor(at + 1e-9)), rate(p), p >= at));
+      // and no rate is invented for it. In the Year Journey the time stops on
+      // observations, so both are named by their dates ("Sep 20 → Sep 27").
+      const k0 = Math.floor(at + 1e-9);
+      const dates = this.mode === 'year' ? { event: shortDate(this.isoOf(k0)), now: shortDate(this.isoOf(Math.round(p))) } : undefined;
+      lines.push(readoutLine(word, rate(k0), rate(p), p >= at, dates));
     }
     this.portals.setReadout(lines);
   }
@@ -1829,6 +1849,17 @@ function css(color: number): string {
 }
 
 /** A few words for a chart marker: the event's title, shortened. */
+/** How the year's events were checked: "2 events reviewed against quoted sources; 1 matched automatically." */
+function eventsNote(events: AnnualEvent[]): string {
+  if (!events.length) return 'No verified events this year.';
+  const reviewed = events.filter((e) => e.status === 'reviewed').length;
+  const matched = events.length - reviewed;
+  const parts = [];
+  if (reviewed) parts.push(`${reviewed} event${reviewed > 1 ? 's' : ''} reviewed against quoted sources`);
+  if (matched) parts.push(`${matched} matched automatically to a Wikipedia passage`);
+  return `${parts.join('; ')}.`;
+}
+
 function shortTitle(title: string): string {
   const t = title.replace(/^The /, '').replace(/^"|"$/g, '');
   return t.length > 26 ? t.slice(0, 25).replace(/\s+\S*$/, '') + '…' : t;

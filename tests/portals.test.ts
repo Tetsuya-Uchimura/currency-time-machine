@@ -68,7 +68,11 @@ test('detail numbers match the bundled data', () => {
   near(rate('EUR', '1985-09-20'), 2.9, 0.05); // DEM units before 1999
   near(rate('EUR', '1987-12-25'), 1.6, 0.05);
   near(rate('KRW', '1997-06-27'), 888, 5);
-  near(rate('KRW', '1997-12-26'), 1743, 10);
+  // "about 1,700 by the end of 1997": the last weekly observation (26 December, a day the won swung by hundreds;
+  // see docs/rates-crosscheck.md) is 1,743; H.10 gives 1,695 for 31 December.
+  near(rate('KRW', '1997-12-26'), 1700, 50);
+  assert.ok(rate('KRW', '1998-12-25') < rate('KRW', '1997-12-26'), 'the won recovered part of the loss in 1998');
+  assert.ok(rate('JPY', '2008-11-28') < rate('JPY', '2008-06-27'), 'the yen rose against the dollar in autumn 2008');
   near(rate('KRW', '2008-06-27'), 1040, 10);
   near(rate('KRW', '2008-11-28'), 1470, 10);
   const audLoss = 1 - rate('AUD', '2008-07-18') / rate('AUD', '2008-10-24');

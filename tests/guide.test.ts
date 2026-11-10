@@ -12,6 +12,7 @@ import { eventsInYear, featuredRegions, leadersInYear, REGIONS, regionName, type
 import { eraAt } from '../src/data/eras.ts';
 import { Timeline, type HistoryFile } from '../src/data/timeline.ts';
 import { buildYearScript, FEATURED_YEARS, lineSeconds, STORIES, STRINGS, summaryLine, type Beat, type YearContext } from '../src/guide/guide-scripts.ts';
+import { PORTAL_SCENES } from '../src/data/portals.ts';
 import { DEFAULT_PACING, PlaybackClock } from '../src/playback/clock.ts';
 import { warpYearAt, YearRunner } from '../src/playback/year-journey.ts';
 
@@ -202,5 +203,48 @@ test('the robot never sits in front of the face, and stays within reach of a gla
     assert.ok(Math.abs(yaw) > 15 || pitch < -8, `not straight ahead (${yaw.toFixed(0)}, ${pitch.toFixed(0)})`);
     assert.ok(Math.abs(yaw) < 45 && Math.abs(pitch) < 25, 'in view');
     assert.ok(Math.hypot(x, y, z) >= 0.6, 'not too close');
+  }
+});
+
+test('events without a day get no moment of their own: told at the end of the year, said to be undated', () => {
+  const ctx = context(1950);
+  const undated = ctx.events.filter((e) => e.precision === 'year' || e.precision === 'month');
+  assert.ok(undated.length >= 1, 'the 1950 Canadian float has the year only');
+  const beats = buildYearScript(ctx);
+  for (const e of undated) {
+    assert.ok(!beats.some((b) => b.eventId === e.id && !b.undated), `${e.id} is not staged on a date`);
+  }
+  const b = beats.find((x) => x.id === 'undated')!;
+  assert.equal(b.at, ctx.window.last);
+  assert.equal(b.undated, true);
+  assert.match(b.text, /^Also in 1950, on a date our sources do not give: /);
+  // A month-only event is staged on no day either (a synthetic one).
+  const m: AnnualEvent = { ...undated[0], id: 'm', date: '1950-06-01', precision: 'month' };
+  const beats2 = buildYearScript({ ...ctx, events: [m] });
+  assert.deepEqual(beats2.filter((x) => x.part === 'event').map((x) => [x.id, x.at]), [['undated', ctx.window.last]]);
+  assert.match(beats2.find((x) => x.id === 'undated')!.text, /^Also in June, on a day our sources do not give/);
+});
+
+test('2022: the yen interventions of 22 September and 21 October are moments of the year', () => {
+  const ctx = context(2022);
+  const beats = buildYearScript(ctx);
+  const sep = beats.find((b) => b.eventId === 'yen-intervention-2022')!;
+  assert.equal(iso(sep.at), '2022-09-23'); // the first weekly observation after Thursday 22 September
+  assert.match(sep.text, /^September 22: Japan buys yen\./);
+  const oct = beats.find((b) => b.eventId === 'yen-intervention-2022-10')!;
+  assert.equal(iso(oct.at), '2022-10-21');
+});
+
+test('reviewed wording: the portal scenes and openings are the texts in content/featured-review.json', () => {
+  const review = json<{ items: { target: string; text: string }[] }>('../content/featured-review.json').items;
+  const get = (t: string) => review.find((x) => x.target === t)?.text;
+  for (const scene of PORTAL_SCENES) assert.equal(scene.detail, get(`portal-scene:${scene.eventId}`), scene.eventId);
+  for (const y of FEATURED_YEARS) {
+    const reviewed = get(`story:${y}`)!;
+    const said = STORIES[y].opening(context(y));
+    if (y === 1985) {
+      const re = new RegExp(`^${reviewed.replace(/[.*+?^${}()|[\]\\]/g, '\\$&').replace('\\{mark\\}', '\\d+').replace('\\{yen\\}', '\\d+')}$`);
+      assert.match(said, re);
+    } else assert.equal(said, reviewed, `${y}`);
   }
 });

@@ -89,10 +89,19 @@ export function formatRate(r: number): string {
  *   "Yen 242 → 198 per USD (+22% vs USD)"
  * `atEvent` and `now` are units of the currency per 1 USD.
  */
-export function readoutLine(word: string, atEvent: number, now: number, reached: boolean): string {
-  if (!reached) return `${word} ${formatRate(now)} per USD`;
+export function readoutLine(
+  word: string,
+  atEvent: number,
+  now: number,
+  reached: boolean,
+  /** Dates of the two weekly observations ("Sep 20"), so the event's date is not mistaken for the rate's. */
+  dates?: { event: string; now: string },
+): string {
+  const nowText = dates ? ` (${dates.now})` : '';
+  if (!reached) return `${word} ${formatRate(now)}${nowText} per USD`;
   const pct = (atEvent / now - 1) * 100;
   const sign = pct >= 0 ? '+' : '-';
   const p = Math.abs(pct) < 9.95 ? Math.abs(pct).toFixed(1) : Math.abs(pct).toFixed(0);
-  return `${word} ${formatRate(atEvent)} → ${formatRate(now)} per USD (${sign}${p}% vs USD)`;
+  const eventText = dates ? ` (${dates.event})` : '';
+  return `${word} ${formatRate(atEvent)}${eventText} → ${formatRate(now)}${nowText} per USD (${sign}${p}% vs USD)`;
 }

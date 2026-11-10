@@ -33,6 +33,8 @@ export interface Beat {
   region?: RegionId;
   /** ...or this event. */
   eventId?: string;
+  /** An event whose sources give no day: told without a moment, marker or gong of its own. */
+  undated?: boolean;
   /** Slots lit on the chart and the map (others dim). */
   focus: string[];
   /** Map marker the robot points at ('USD' or a slot id). */
@@ -139,7 +141,7 @@ export const STORIES: Record<number, YearStory> = {
   1971: {
     featured: ['USA', 'JPN', 'DEU'],
     opening: () =>
-      '1971. For more than twenty years, currencies have been fixed to the dollar, and the dollar to gold. This is the year that system breaks.',
+      '1971. For more than twenty years, most major currencies have been fixed to the dollar, and the dollar to gold. This is the year that system breaks.',
   },
   1985: {
     featured: ['USA', 'JPN', 'DEU'],
@@ -150,7 +152,7 @@ export const STORIES: Record<number, YearStory> = {
         mark !== null && yen !== null && mark < 0 && yen < 0
           ? ` Since 1980 the Mark has lost ${Math.abs(mark).toFixed(0)}% of its value against it, and the yen ${Math.abs(yen).toFixed(0)}%.`
           : '';
-      return `1985. The dollar is strong.${since} In September, five major economies decide to act together.`;
+      return `1985. The dollar is strong.${since} In September, five major economies say other currencies should rise against it, and stand ready to cooperate.`;
     },
   },
   1997: {
@@ -160,11 +162,11 @@ export const STORIES: Record<number, YearStory> = {
   },
   2008: {
     featured: ['USA', 'GBR', 'KOR'],
-    opening: () => '2008. A banking crisis that began in the United States is about to spread around the world.',
+    opening: () => '2008. A financial crisis that began in the United States is about to spread around the world.',
   },
   2022: {
     featured: ['USA', 'JPN', 'GBR'],
-    opening: () => '2022. Prices rise fast around the world, and central banks start raising interest rates. Watch the yen.',
+    opening: () => '2022. Prices rise fast around the world, and central banks raise interest rates. Watch the yen.',
   },
 };
 
@@ -208,8 +210,19 @@ export function leaderSentence(ctx: YearContext, r: RegionId): string {
   return `${lead}: ${parts.join('; ')}.`;
 }
 
+/** Events whose sources give no day, told once the year is over: "Also in 1950, on a day our sources don't give: ..." */
+function undatedText(ctx: YearContext, events: AnnualEvent[]): string {
+  return events
+    .map((e) =>
+      e.precision === 'month'
+        ? `Also in ${monthOf(e.date)}, on a day our sources do not give: ${e.title}. ${e.summary}`
+        : `Also in ${ctx.year}, on a date our sources do not give: ${e.title}. ${e.summary}`,
+    )
+    .join(' ');
+}
+
 function eventText(ctx: YearContext, e: AnnualEvent): string {
-  const date = e.precision === 'month' ? `In ${monthOf(e.date)}` : e.precision === 'year' ? 'This year' : `${monthOf(e.date)} ${Number(e.date.slice(8, 10))}`;
+  const date = `${monthOf(e.date)} ${Number(e.date.slice(8, 10))}`;
   let text = `${date}: ${e.title}. ${e.summary}`;
   const people = ctx.showPeople ? (ctx.eventPeople?.(e.id) ?? []).slice(0, 2) : [];
   if (people.length) text += ` Among those involved: ${list(people)}.`;
@@ -281,11 +294,11 @@ export function buildYearScript(ctx: YearContext): Beat[] {
     });
   });
 
-  // C. Dated events, at their dates. Month-precision events at the start of their month.
-  const dated = ctx.events.filter((e) => e.precision !== 'year').slice(0, 5);
+  // C. Dated events, at the first weekly observation on or after their day. Events whose sources give only the
+  // month or the year get no moment of their own (see "undated" below): staging them on the 1st would invent a day.
+  const dated = ctx.events.filter((e) => (e.precision ?? 'day') === 'day').slice(0, 5);
   for (const e of dated) {
-    const at = e.precision === 'month' ? ctx.indexOf(e.date) : ctx.indexOf(e.date);
-    const k = clamp(Math.ceil(at - 1e-9));
+    const k = clamp(Math.ceil(ctx.indexOf(e.date) - 1e-9));
     const focus = e.currencies.filter((c) => c !== 'USD');
     beats.push({
       id: `event-${e.id}`,
@@ -330,6 +343,24 @@ export function buildYearScript(ctx: YearContext): Beat[] {
     });
   }
 
+  // C2. Events without a day: told together at the end of the year, said to be undated, with no stop of their own.
+  const undated = ctx.events.filter((e) => (e.precision ?? 'day') !== 'day').slice(0, 2);
+  if (undated.length) {
+    const e = undated[0];
+    beats.push({
+      id: 'undated',
+      at: w.last,
+      part: 'event',
+      text: undatedText(ctx, undated),
+      mood: 'thinking',
+      eventId: e.id,
+      undated: true,
+      region: e.regions[0],
+      focus: e.currencies.filter((c) => c !== 'USD'),
+      point: e.regions[0] ? ctx.regionSlot(e.regions[0]) : undefined,
+    });
+  }
+
   // D3. The year's result, at its last week.
   const { up, down } = extremes(ctx);
   const resultFocus = [up?.slot, down?.slot].filter((s): s is string => !!s);
@@ -349,7 +380,8 @@ export function buildYearScript(ctx: YearContext): Beat[] {
 
 /** The guide's closing words over the summary panel (well under 30 seconds). */
 export function summaryLine(ctx: YearContext): string {
-  const titles = ctx.events.slice(0, 2).map((e) => e.title.replace(/^"|"$/g, ''));
+  // (A title inside the sentence starts in lower case: 'and the Fed starts raising rates'.)
+  const titles = ctx.events.slice(0, 2).map((e, k) => e.title.replace(/^"|"$/g, '').replace(/^The /, k > 0 ? 'the ' : 'The '));
   const head = titles.length ? `That was ${ctx.year}: ${list(titles)}.` : `That was ${ctx.year}.`;
   return `${head} ${resultSentence(ctx)} Where shall we go next?`;
 }

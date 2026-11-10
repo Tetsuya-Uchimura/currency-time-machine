@@ -68,7 +68,7 @@ export const PORTAL_SCENES: PortalScene[] = [
     period: 'early 1970s',
     title: 'The dollar-gold break',
     detail:
-      'In August 1971 the United States stopped exchanging dollars for gold with other governments. ' +
+      'In August 1971 the United States suspended the convertibility of the dollar into gold, so other governments could no longer exchange their dollars for gold. ' +
       'By 1973 fixed exchange rates had given way to floating ones: the yen went from about 357 to about 280 per dollar.',
     visual: { kind: 'impression', style: 'washington-1971' },
     affectedSlots: ['JPY', 'EUR', 'CHF'],
@@ -83,7 +83,7 @@ export const PORTAL_SCENES: PortalScene[] = [
     period: 'mid-1980s',
     title: 'A coordinated push on the dollar',
     detail:
-      'In September 1985 five major economies agreed to act together against a strong dollar. ' +
+      'In September 1985 five major economies said a further rise of other currencies against the dollar was desirable, and stood ready to cooperate to encourage it. ' +
       'Over the next two years the yen went from about 242 to about 127 per dollar, and the mark from about 2.9 to about 1.6.',
     visual: { kind: 'impression', style: 'tokyo-1985' },
     affectedSlots: ['JPY', 'EUR'],
@@ -99,7 +99,7 @@ export const PORTAL_SCENES: PortalScene[] = [
     title: 'The Asian currency crisis',
     detail:
       'From mid-1997, money flowed out of several East and Southeast Asian economies and their currencies fell. ' +
-      'The won went from about 888 to about 1,743 per dollar by the end of 1997, then recovered part of the loss in 1998.',
+      'The won went from about 888 to about 1,700 per dollar by the end of 1997, then recovered part of the loss in 1998.',
     visual: { kind: 'impression', style: 'seoul-1997' },
     affectedSlots: ['KRW'],
     tint: 0x3a1420,
@@ -113,8 +113,8 @@ export const PORTAL_SCENES: PortalScene[] = [
     period: 'around 2008',
     title: 'The global financial crisis',
     detail:
-      'In autumn 2008 a banking crisis that began in the United States spread around the world. ' +
-      'Investors moved into the dollar and the yen; the won fell from about 1,040 to about 1,470 per dollar, ' +
+      'In autumn 2008 a financial crisis that began in the United States spread around the world. ' +
+      'The yen rose against the dollar, the won fell from about 1,040 to about 1,470 per dollar, ' +
       'and the Australian dollar lost about a third of its value against it.',
     visual: { kind: 'impression', style: 'newyork-2008' },
     affectedSlots: ['JPY', 'KRW', 'AUD', 'GBP'],

@@ -12,6 +12,9 @@ import { annualChanges, rateAt, ranking, sharpestMove, yearSpan, yearWindow } fr
 import {
   eventsInYear,
   featuredRegions,
+  isDated,
+  observationNote,
+  sourcesNote,
   leadersInYear,
   REGIONS,
   regionName,
@@ -163,7 +166,8 @@ test('political systems are described as they are (no president for everyone)', 
 test('events: verified, dated within their year, never after the data', () => {
   assert.ok(events.length >= 40);
   for (const e of events) {
-    assert.ok(e.sources.length > 0 && e.sources.every((s) => s.url.startsWith('https://')), `${e.id} has sources`);
+    assert.ok(e.sources.length > 0 && e.sources.every((s) => /^https?:\/\//.test(s.url)), `${e.id} has sources`);
+    assert.ok(e.status === 'reviewed' || e.status === 'matched', `${e.id} says how it was checked`);
     assert.match(e.date, /^\d{4}-\d{2}-\d{2}$/);
   }
   const y85 = eventsInYear(events, 1985, lastIso);
@@ -188,4 +192,48 @@ test('featured places: from the year’s events first, then the biggest movers',
   assert.ok(f.length >= 1 && f.length <= 3);
   assert.equal(f[0], 'GBR', 'Black Wednesday');
   assert.ok(!featuredRegions(ev, moves, '1992-07-01').includes('EA'), 'no euro area before 1999');
+});
+
+test('featured years: every event reviewed against a primary source, with a day', () => {
+  for (const y of [1971, 1985, 1997, 2008, 2022]) {
+    for (const e of eventsInYear(events, y, lastIso)) {
+      assert.equal(e.status, 'reviewed', e.id);
+      assert.ok(isDated(e), `${e.id} has a day`);
+      assert.ok(e.sources.some((s) => s.primary), `${e.id} has a primary source`);
+    }
+  }
+  const y22 = eventsInYear(events, 2022, lastIso);
+  assert.ok(y22.some((e) => e.date === '2022-09-22' && /buys yen/.test(e.title)), 'the 22 September 2022 intervention');
+  assert.ok(y22.some((e) => e.date === '2022-10-21'), 'the 21 October 2022 intervention');
+  const y71 = eventsInYear(events, 1971, lastIso);
+  assert.ok(y71.some((e) => e.date === '1971-12-18' && /Smithsonian/.test(e.title)), 'the Smithsonian Agreement on its day');
+});
+
+test('2026: the joint intervention on 31 July, from the Ministry of Finance', () => {
+  const e = events.find((x) => x.id === 'yen-2026')!;
+  assert.equal(e.date, '2026-07-31');
+  assert.equal(e.precision, undefined);
+  assert.equal(e.status, 'reviewed');
+  assert.ok(e.sources.some((s) => s.publisher === 'Ministry of Finance Japan' && s.primary));
+});
+
+test('event date vs weekly observation: said plainly', () => {
+  const plaza = events.find((x) => x.id === 'dollar-adjustment')!;
+  const k = Math.ceil(tl.indexOf(plaza.date) - 1e-9);
+  assert.equal(iso(k), '1985-09-27'); // the Plaza meeting was on a Sunday: the next Friday's rates
+  assert.equal(
+    observationNote(plaza, iso(k)),
+    'Event on Sunday, September 22. Exchange rates are weekly: the year stops at the first observation after it, Friday, September 27.',
+  );
+  const sameDay = events.find((x) => x.id === 'yen-intervention-2022-10')!; // a Friday
+  assert.match(observationNote(sameDay, iso(Math.ceil(tl.indexOf(sameDay.date) - 1e-9))), /observation of the same day, Friday, October 21/);
+  const undated = events.find((x) => x.precision === 'year')!;
+  assert.match(observationNote(undated, null), /year only.*does not stop.*no marker/);
+});
+
+test('sources line: primary publishers for reviewed events, a plain warning for matched ones', () => {
+  const korea = events.find((x) => x.id === 'asian-crisis')!;
+  assert.match(sourcesNote(korea), /^Reviewed against quoted sources: International Monetary Fund \(primary\)/);
+  const matched = events.find((x) => x.status === 'matched')!;
+  assert.match(sourcesNote(matched), /^Matched automatically: .*not reviewed by hand/);
 });

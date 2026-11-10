@@ -57,5 +57,7 @@ test('readout: before the date only the current rate, after it the change', () =
   assert.equal(readoutLine('Yen', 241.6, 153.2, true), 'Yen 242 → 153 per USD (+58% vs USD)');
   assert.equal(readoutLine('Won', 888, 1743, true), 'Won 888 → 1,743 per USD (-49% vs USD)');
   assert.equal(readoutLine('Mark', 2.889, 2.7, true), 'Mark 2.89 → 2.70 per USD (+7.0% vs USD)');
+  // Year Journey: the two observations are named, so the event's day is not taken for the rate's.
+  assert.equal(readoutLine('Yen', 241.6, 219.4, true, { event: 'Sep 20', now: 'Sep 27' }), 'Yen 242 (Sep 20) → 219 (Sep 27) per USD (+10% vs USD)');
   assert.equal(formatRate(0.6771), '0.677');
 });

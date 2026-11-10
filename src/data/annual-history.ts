@@ -177,7 +177,19 @@ export interface AnnualEvent {
   regions: RegionId[];
   currencies: string[];
   summary: string;
-  sources: { title: string; url: string }[];
+  /**
+   * reviewed: checked against quotes from named (mostly primary) sources; matched: only an automatic check that
+   * a Wikipedia passage has the date and keywords (scripts/build_events.py).
+   */
+  status?: 'reviewed' | 'matched';
+  sources: EventSource[];
+}
+
+export interface EventSource {
+  publisher?: string;
+  title: string;
+  url: string;
+  primary?: boolean;
 }
 
 /** Events of a year that the data has reached (nothing after the last observation). */
@@ -195,6 +207,43 @@ export function eventDateText(e: AnnualEvent): string {
 /** Only day-precision events get a dated marker and a moment in the timeline. */
 export function isDated(e: AnnualEvent): boolean {
   return (e.precision ?? 'day') === 'day';
+}
+
+/** What the sources do not give, for an event without a day ('' for a dated one). */
+export function undatedNote(e: AnnualEvent): string {
+  if (e.precision === 'year') return 'Our sources give the year only, not the date.';
+  if (e.precision === 'month') return 'Our sources give the month only, not the day.';
+  return '';
+}
+
+/** The weekday and date of an ISO day: "Friday, September 27". */
+export function weekdayDate(iso: string): string {
+  const d = new Date(`${iso}T00:00:00Z`);
+  const day = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'][d.getUTCDay()];
+  return `${day}, ${MONTHS[d.getUTCMonth()]} ${d.getUTCDate()}`;
+}
+
+/**
+ * How an event's date relates to the weekly rates: the year stops at the first observation on or after the
+ * event, which is usually a few days later. `observedIso` is that observation's date.
+ */
+export function observationNote(e: AnnualEvent, observedIso: string | null): string {
+  if (!isDated(e)) return `${undatedNote(e)} The year does not stop for it, and the chart has no marker.`;
+  if (!observedIso) return 'No exchange-rate observation after this date yet.';
+  if (observedIso === e.date) return `Exchange rates are weekly: the year stops at the observation of the same day, ${weekdayDate(observedIso)}.`;
+  return `Event on ${weekdayDate(e.date)}. Exchange rates are weekly: the year stops at the first observation after it, ${weekdayDate(observedIso)}.`;
+}
+
+/** The sources line of an event: who it was checked against, and how. */
+export function sourcesNote(e: AnnualEvent): string {
+  const names = [...new Set(e.sources.map((s) => s.publisher ?? 'Wikipedia'))];
+  if (e.status === 'reviewed') {
+    const primary = [...new Set(e.sources.filter((s) => s.primary).map((s) => s.publisher ?? ''))].filter(Boolean);
+    const other = names.filter((n) => !primary.includes(n));
+    return `Reviewed against quoted sources: ${primary.length ? `${primary.join('; ')} (primary)` : ''}${primary.length && other.length ? '; ' : ''}${other.join('; ')}`;
+  }
+  const what = e.precision === 'year' ? 'this year' : e.precision === 'month' ? 'this month' : 'this date';
+  return `Matched automatically: a passage of ${names.join('; ')} gives ${what} (not reviewed by hand)`;
 }
 
 /**

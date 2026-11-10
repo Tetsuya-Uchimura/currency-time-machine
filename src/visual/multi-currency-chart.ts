@@ -84,7 +84,11 @@ export interface ChartEvent {
 const MAX_GRID = 9;
 const MONTH_LETTERS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 const MAX_YEARS = 3;
-const MAX_EVENT_MARKS = 3;
+const MAX_EVENT_MARKS = 6;
+/** Event labels: plane width (m), and up to three rows for events close together. */
+const EVENT_LABEL_W = 0.2;
+const EVENT_LABEL_ROWS = 3;
+const EVENT_LABEL_ROW_H = 0.024;
 const WHITE = new Color(1, 1, 1);
 const EVENT_COLOR = new Color(1, 0.86, 0.55);
 const GLOW_DECAY_S = 0.9;
@@ -640,14 +644,22 @@ export class MultiCurrencyChart {
 
     this.eventLines.begin();
     let ev = 0;
+    // Labels of nearby events go on separate rows, so two close events never print over each other.
+    const rowX: number[] = [];
     for (let j = this.events.length - 1; j >= 0 && ev < MAX_EVENT_MARKS; j--) {
       const e = this.events[j];
       const age = yr ? (e.t < yr.axis0 || e.t >= yr.axis1 ? -1 : (now - e.t) / W) : (now - e.t) / W;
       if (age < 0 || (!yr && age > 1)) continue; // future events are never shown early
       const x = xAt(e.t);
-      this.eventLines.add(x, -Hh, x, Hh - 0.03, 0.0015);
+      const lx = Math.min(R - 0.1, Math.max(L + 0.1, x));
+      let row = rowX.findIndex((px) => Math.abs(px - lx) >= EVENT_LABEL_W);
+      if (row < 0) row = Math.min(rowX.length, EVENT_LABEL_ROWS - 1);
+      rowX[row] = lx;
+      const top = Hh - 0.03 - row * EVENT_LABEL_ROW_H;
+      this.eventLines.add(x, -Hh, x, top, 0.0015);
       const label = this.eventLabels[ev++];
-      label.mesh.position.x = Math.min(R - 0.1, Math.max(L + 0.1, x));
+      label.mesh.position.x = lx;
+      label.mesh.position.y = Hh - 0.016 - row * EVENT_LABEL_ROW_H;
       label.mat.opacity = yr ? 0.9 : 0.9 * Math.min(1, (1 - age) * 5);
       label.draw(e.label, (ctx, w, h) => {
         ctx.font = `bold ${Math.round(h * 0.72)}px system-ui, sans-serif`;

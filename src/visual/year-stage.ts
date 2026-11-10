@@ -41,7 +41,7 @@ export type StageView =
       currency: { code: string; color: string; lines: string[] } | null;
       peopleHidden: boolean;
     }
-  | { kind: 'event'; year: number; date: string; title: string; place: string; summary: string; currencies: { code: string; color: string }[]; places: string; sources: string }
+  | { kind: 'event'; year: number; date: string; title: string; place: string; summary: string; currencies: { code: string; color: string }[]; places: string; sources: string; observed: string }
   | {
       kind: 'summary';
       year: number;
@@ -331,7 +331,9 @@ function drawEvent(ctx: CanvasRenderingContext2D, w: number, h: number, v: Extra
   heading(ctx, 'CURRENCIES TO WATCH', 860, 250, 20, '#9fd8ff', 700);
   for (const c of v.currencies) x = chip(ctx, c.code, c.color, x, 300);
   para(ctx, v.places, 860, 352, 1150, 22, 1, '#a9c4e4');
-  para(ctx, `Source: ${v.sources}`, 32, h - 22, w - 64, 19, 1, '#7f93b3');
+  // The event's date and the rates' date are different things: say which week the bands show.
+  para(ctx, v.observed, 32, h - 86, 800, 24, 2, '#e8f0fb');
+  para(ctx, `Source: ${v.sources}`, 32, h - 22, w - 64, 21, 1, '#9fb3d1');
 }
 
 function drawSummary(ctx: CanvasRenderingContext2D, w: number, h: number, v: Extract<StageView, { kind: 'summary' }>): void {
