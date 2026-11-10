@@ -4,8 +4,10 @@
  * scripts/build_media.py from content/history.json; only facts that passed
  * verification and images whose license was checked are in the file.
  *
- * No imports, so the pure helpers can be unit tested with node:test.
+ * Pure (only the i18n templates), so the helpers can be unit tested with node:test.
  */
+
+import { t, type Lang } from '../i18n/i18n.ts';
 
 export interface MediaCredit {
   src: string;
@@ -96,12 +98,14 @@ export function readoutLine(
   reached: boolean,
   /** Dates of the two weekly observations ("Sep 20"), so the event's date is not mistaken for the rate's. */
   dates?: { event: string; now: string },
+  lang: Lang = 'en',
 ): string {
-  const nowText = dates ? ` (${dates.now})` : '';
-  if (!reached) return `${word} ${formatRate(now)}${nowText} per USD`;
+  const paren = (d: string) => (lang === 'ja' ? `（${d}）` : ` (${d})`);
+  const nowText = dates ? paren(dates.now) : '';
+  if (!reached) return t('portal.readoutAt', { word, rate: formatRate(now), date: nowText }, lang);
   const pct = (atEvent / now - 1) * 100;
   const sign = pct >= 0 ? '+' : '-';
   const p = Math.abs(pct) < 9.95 ? Math.abs(pct).toFixed(1) : Math.abs(pct).toFixed(0);
-  const eventText = dates ? ` (${dates.event})` : '';
-  return `${word} ${formatRate(atEvent)}${eventText} → ${formatRate(now)}${nowText} per USD (${sign}${p}% vs USD)`;
+  const eventText = dates ? paren(dates.event) : '';
+  return t('portal.readout', { word, from: formatRate(atEvent), fromDate: eventText, to: formatRate(now), toDate: nowText, pct: `${sign}${p}` }, lang);
 }

@@ -301,6 +301,19 @@ export class TextPlane {
     this.mesh.renderOrder = 5;
   }
 
+  /** The canvas's 2D context (for measuring text before drawing). */
+  get context(): CanvasRenderingContext2D {
+    return this.canvas.getContext('2d')!;
+  }
+
+  get width(): number {
+    return this.canvas.width;
+  }
+
+  get height(): number {
+    return this.canvas.height;
+  }
+
   /** Redraw only when the content changes. */
   draw(key: string, paint: (ctx: CanvasRenderingContext2D, w: number, h: number) => void): void {
     if (key === this.key) return;

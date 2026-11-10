@@ -41,6 +41,7 @@ import {
   SpriteMaterial,
   Vector3,
 } from '@iwsdk/core';
+import { getLang, t as tt } from '../i18n/i18n.js';
 import { CHART } from '../config.js';
 import { changeSeries, changeText, chartRange, niceTicks, spreadLabels, tickLabel, type ChangeBase } from '../data/chart-series.js';
 import { haloTexture, noRaycast, Ribbon, Segments, SparkCloud, TextPlane, Track } from './glow.js';
@@ -83,6 +84,8 @@ export interface ChartEvent {
 
 const MAX_GRID = 9;
 const MONTH_LETTERS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+/** A month's axis label in the display language ("Sep" / "9月"). */
+const monthLabel = (k: number) => (getLang() === 'ja' ? `${k + 1}月` : MONTH_LETTERS[k]);
 const MAX_YEARS = 3;
 const MAX_EVENT_MARKS = 6;
 /** Event labels: plane width (m), and up to three rows for events close together. */
@@ -278,16 +281,10 @@ export class MultiCurrencyChart {
     for (let k = 0; k < 12; k++) {
       const t = new TextPlane(0.06, 0.022, 44);
       t.mesh.position.y = -Hh - 0.02;
-      t.draw(MONTH_LETTERS[k], (ctx, w, h) => {
-        ctx.font = `${Math.round(h * 0.74)}px system-ui, sans-serif`;
-        ctx.textAlign = 'center';
-        ctx.textBaseline = 'middle';
-        ctx.fillStyle = '#c9d3e8';
-        ctx.fillText(MONTH_LETTERS[k], w / 2, h / 2);
-      });
       this.monthLabels.push(t);
       this.root.add(t.mesh);
     }
+    this.drawMonths();
     for (let k = 0; k < MAX_EVENT_MARKS; k++) {
       const t = new TextPlane(0.2, 0.024, 48);
       t.mesh.position.y = Hh - 0.016;
@@ -359,6 +356,25 @@ export class MultiCurrencyChart {
   /** Window start of line i (week index) and whether it is cut by the data's start. */
   baseOf(i: number): ChangeBase | null {
     return this.bases[i];
+  }
+
+  private drawMonths(): void {
+    this.monthLabels.forEach((t, k) => {
+      const label = monthLabel(k);
+      t.draw(label, (ctx, w, h) => {
+        ctx.font = `${Math.round(h * 0.74)}px system-ui, sans-serif`;
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillStyle = '#c9d3e8';
+        ctx.fillText(label, w / 2, h / 2);
+      });
+    });
+  }
+
+  /** Redraw the axis and the labels in the display language. */
+  relabel(): void {
+    this.drawMonths();
+    this.labelText.fill('');
   }
 
   /** Header text (soloed currency's numbers), set by the experience a few times a second. */
@@ -709,7 +725,7 @@ export class MultiCurrencyChart {
     for (const i of alive) {
       const b = this.bases[i]!;
       const code = f.codes[i] + (b.late ? '*' : '');
-      const off = i === this.clipped ? '  off scale' : '';
+      const off = i === this.clipped ? tt('chart.offScale') : '';
       const value = changeText(b.headPct) + off;
       const key = `${code}|${value}`;
       if (key === this.labelText[i]) continue;
@@ -739,8 +755,8 @@ export class MultiCurrencyChart {
     // Footnote: lines measured from a later start, and a line left off the scale.
     const late = alive.filter((i) => this.bases[i]!.late).map((i) => f.codes[i]);
     const parts: string[] = [];
-    if (late.length) parts.push(`* ${late.join(', ')}: change since its data begins (inside this window)`);
-    if (this.clipped >= 0 && this.bases[this.clipped]) parts.push(`${f.codes[this.clipped]} is off the scale; its label gives the true change`);
+    if (late.length) parts.push(tt('chart.lateNote', { codes: late.join(', ') }));
+    if (this.clipped >= 0 && this.bases[this.clipped]) parts.push(tt('chart.clippedNote', { code: f.codes[this.clipped] }));
     const note = parts.join('   ·   ');
     this.footnote.mat.opacity = note ? 0.85 : 0;
     this.footnote.draw(note, (ctx, w, h) => {

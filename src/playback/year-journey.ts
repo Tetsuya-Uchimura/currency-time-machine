@@ -4,10 +4,18 @@
  *
  * The clock plays the year's weeks; each beat has a week (`at`) where the
  * clock stops (PlaybackClock.stopAt) while the guide speaks it. A beat ends
- * after its minimum time once speech has finished, or at its maximum time
- * (so a silent or stuck speech engine never blocks the journey). Then the
+ * once the voice has finished it (and a short breath after), never before
+ * its minimum time (subtitles must be readable), or at its maximum time (so a
+ * stuck speech engine never blocks the journey). With no voice, the caller's
+ * minimum is the reading time. A new beat never starts over a line that is
+ * still being said (the arrival's "Here we are"), up to `GATE_S`. Then the
  * clock flows on to the next beat. The year never plays past its last week.
  */
+
+/** Longest a beat waits for an earlier line to end before it starts anyway. */
+const GATE_S = 12;
+/** Quiet seconds between a line someone else said and the next beat. */
+const GAP_S = 0.3;
 
 export interface RunnerBeat {
   at: number;
@@ -19,6 +27,8 @@ export interface BeatTimes {
   minS: number;
   /** Seconds after which it ends even if speech is still running. */
   maxS: number;
+  /** Quiet seconds after the voice ends before the beat ends (a breath). Default 0. */
+  tailS?: number;
 }
 
 export class YearRunner<B extends RunnerBeat = RunnerBeat> {
@@ -30,6 +40,9 @@ export class YearRunner<B extends RunnerBeat = RunnerBeat> {
   private age = 0;
   private times: BeatTimes = { minS: 0, maxS: 0 };
   private skipped = false;
+  /** Seconds since the voice last spoke (nothing said yet: no wait). */
+  private quiet = Number.POSITIVE_INFINITY;
+  private gate = 0;
 
   constructor(beats: B[], last: number) {
     this.beats = beats;
@@ -68,18 +81,26 @@ export class YearRunner<B extends RunnerBeat = RunnerBeat> {
    */
   update(dt: number, position: number, speaking: boolean, paused: boolean, timesOf: (b: B) => BeatTimes): B | null {
     if (paused) return null;
+    this.quiet = speaking ? 0 : this.quiet + dt;
     if (this.current) {
       this.age += dt;
       const t = this.times;
-      const done = this.skipped || (this.age >= t.minS && !speaking) || this.age >= t.maxS;
+      const done = this.skipped || (this.age >= t.minS && !speaking && this.quiet >= (t.tailS ?? 0)) || this.age >= t.maxS;
       if (!done) return null;
       this.current = null;
       this.skipped = false;
+      this.gate = 0;
     }
     if (this.next < this.beats.length && position >= Math.min(this.beats[this.next].at, this.last) - 1e-6) {
+      // An earlier line is still being said: let it end, and breathe (within GATE_S).
+      if ((speaking || this.quiet < GAP_S) && this.gate < GATE_S) {
+        this.gate += dt;
+        return null;
+      }
       const b = this.beats[this.next++];
       this.current = b;
       this.age = 0;
+      this.gate = 0;
       this.times = timesOf(b);
       return b;
     }

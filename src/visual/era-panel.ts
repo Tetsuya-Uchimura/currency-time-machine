@@ -14,7 +14,9 @@
  */
 import { Color, Group, Mesh, MeshBasicMaterial, PlaneGeometry, Sprite, SpriteMaterial, AdditiveBlending } from '@iwsdk/core';
 import { BANDS } from '../config.js';
+import { getLang, monthText, t, tr } from '../i18n/i18n.js';
 import { haloTexture, noRaycast, TextPlane } from './glow.js';
+import { wrapText } from './ui-button.js';
 
 export interface Milestone {
   /** Week index of the actual date. */
@@ -25,8 +27,6 @@ export interface Milestone {
   /** Has a Historical Portal (drawn a little larger). */
   portal: boolean;
 }
-
-const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
 export class EraPanel {
   readonly root = new Group();
@@ -75,6 +75,11 @@ export class EraPanel {
     this.root.add(back, this.clock.mesh, this.story.mesh, this.journey.mesh, this.fill, this.dot);
   }
 
+  /** Redraw every text in the display language. */
+  relabel(): void {
+    this.passed = -1;
+  }
+
   /** The caption to show (events, the hint), or null for the era description. */
   setCaption(c: { label: string; text: string; hint?: boolean } | null): void {
     this.caption = c ? { label: c.label, text: c.text, hint: !!c.hint } : null;
@@ -93,9 +98,10 @@ export class EraPanel {
     this.back.opacity = 0.5 * visible;
     for (const t of [this.clock, this.story, this.journey]) t.mat.opacity = visible;
 
-    const year = today ? 'Today' : String(date.getUTCFullYear());
-    const month = today ? '' : MONTHS[date.getUTCMonth()];
-    this.clock.draw(`${year}|${month}|${era.name}`, (ctx, w, h) => {
+    const year = today ? t('era.today') : String(date.getUTCFullYear());
+    const month = today ? '' : monthText(date.toISOString().slice(0, 10));
+    const eraName = tr(era.name);
+    this.clock.draw(`${year}|${month}|${eraName}`, (ctx, w, h) => {
       ctx.textBaseline = 'alphabetic';
       ctx.font = `bold ${Math.round(h * 0.46)}px system-ui, sans-serif`;
       ctx.fillStyle = '#ffffff';
@@ -105,11 +111,12 @@ export class EraPanel {
       ctx.fillText(month, 12, h * 0.68);
       ctx.font = `bold ${Math.round(h * 0.1)}px system-ui, sans-serif`;
       ctx.fillStyle = '#ffd84a';
-      for (const [k, line] of wrap(ctx, era.name, w - 24).slice(0, 2).entries()) ctx.fillText(line, 12, h * (0.85 + k * 0.12));
+      for (const [k, line] of wrap(ctx, eraName, w - 24).slice(0, 2).entries()) ctx.fillText(line, 12, h * (0.85 + k * 0.12));
     });
 
     const c = this.caption;
-    const key = c ? `c|${c.label}|${c.text}|${c.hint}` : `e|${era.text}`;
+    const eraText = tr(era.text);
+    const key = c ? `c|${c.label}|${c.text}|${c.hint}|${getLang()}` : `e|${eraText}`;
     this.story.draw(key, (ctx, w, h) => {
       ctx.textBaseline = 'alphabetic';
       let y = h * 0.2;
@@ -121,17 +128,17 @@ export class EraPanel {
       } else if (c?.hint) {
         ctx.font = `bold ${Math.round(h * 0.11)}px system-ui, sans-serif`;
         ctx.fillStyle = '#9fc2ff';
-        ctx.fillText('How to explore', 8, y);
+        ctx.fillText(t('era.howTo'), 8, y);
         y += h * 0.18;
       } else {
         ctx.font = `bold ${Math.round(h * 0.11)}px system-ui, sans-serif`;
         ctx.fillStyle = '#9fadc6';
-        ctx.fillText('The era', 8, y);
+        ctx.fillText(t('era.era'), 8, y);
         y += h * 0.18;
       }
       ctx.font = `${Math.round(h * 0.125)}px system-ui, sans-serif`;
       ctx.fillStyle = '#f4f6fa';
-      for (const line of wrap(ctx, c ? c.text : era.text, w - 16).slice(0, 4)) {
+      for (const line of wrap(ctx, c ? c.text : eraText, w - 16).slice(0, 4)) {
         ctx.fillText(line, 8, y);
         y += h * 0.165;
       }
@@ -157,7 +164,7 @@ export class EraPanel {
     const ms = this.milestones;
     const passed = this.passed;
     const W = BANDS.events.width - 0.04;
-    this.journey.draw(`j${passed}`, (ctx, w, h) => {
+    this.journey.draw(`j${passed}|${getLang()}`, (ctx, w, h) => {
       const px = (x: number) => ((x + W / 2) / W) * w;
       const x0 = px(this.lineX0);
       const x1 = px(this.lineX1);
@@ -173,7 +180,7 @@ export class EraPanel {
       ctx.font = `${Math.round(h * 0.22)}px system-ui, sans-serif`;
       ctx.fillStyle = '#9fadc6';
       ctx.fillText('1948', x0, h * 0.62);
-      ctx.fillText('Today', x1, h * 0.62);
+      ctx.fillText(t('era.today'), x1, h * 0.62);
       let lastLabel = -Infinity;
       ms.forEach((m, k) => {
         const x = x0 + (x1 - x0) * Math.min(1, m.t / this.last);
@@ -189,7 +196,7 @@ export class EraPanel {
         if (reached && m.portal) {
           ctx.font = `${Math.round(h * 0.18)}px system-ui, sans-serif`;
           ctx.fillStyle = '#e6d3a8';
-          ctx.fillText(m.name, x, h * 0.88);
+          ctx.fillText(tr(m.name), x, h * 0.88);
         }
       });
     });
@@ -205,15 +212,5 @@ export class EraPanel {
 }
 
 function wrap(ctx: CanvasRenderingContext2D, text: string, maxW: number): string[] {
-  const lines: string[] = [];
-  let line = '';
-  for (const word of text.split(' ')) {
-    const next = line ? `${line} ${word}` : word;
-    if (ctx.measureText(next).width > maxW && line) {
-      lines.push(line);
-      line = word;
-    } else line = next;
-  }
-  if (line) lines.push(line);
-  return lines;
+  return wrapText(ctx, text, maxW);
 }

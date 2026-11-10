@@ -6,8 +6,14 @@
  * by scripts/build_events.py), the leaders of the year (scripts/
  * build_leaders.py) and numbers computed from the weekly rates. The five
  * featured years add a short opening of their own; any number in it is
- * computed here, never typed in. Text is English; `STRINGS` holds the fixed
- * lines so another language can be added in one place.
+ * computed here, never typed in.
+ *
+ * Language: every line is English (the voice says it) with its Japanese
+ * review translation built from the same data and the same decisions
+ * (`Beat.ja`): the sentence patterns are in src/i18n/en.ts and ja.ts, data
+ * text (titles, summaries, places, names) goes through `tr`. The beats, their
+ * order and their moments are built once, so both languages tell the same
+ * journey at the same time.
  *
  * A year is told in five parts, in this order:
  *   A world     the year and its era, and the two or three places to watch
@@ -18,6 +24,27 @@
  */
 import type { AnnualChange, SlotLike, YearWindow } from '../data/annual-currency.ts';
 import type { AnnualEvent, OfficeYear, RegionId } from '../data/annual-history.ts';
+import { EN, type Key } from '../i18n/en.ts';
+import { dayText, fmt, fullDateText, listText, monthText, t, tr, type Lang, type Params } from '../i18n/i18n.ts';
+
+/** A line in both languages: `en` is said and shown in English, `ja` is its review translation. */
+export interface Line {
+  en: string;
+  ja: string;
+}
+
+/** A fixed line or pattern from src/i18n in both languages. */
+export function lineOf(key: Key, params?: Params): Line {
+  return { en: t(key, params, 'en'), ja: t(key, params, 'ja') };
+}
+
+/** Build a text in both languages with one function. */
+export function both(f: (lang: Lang) => string): Line {
+  return { en: f('en'), ja: f('ja') };
+}
+
+/** Joins sentences: a space in English, nothing in Japanese. */
+const sp = (lang: Lang) => (lang === 'ja' ? '' : ' ');
 
 export type Mood = 'idle' | 'talking' | 'pointing' | 'excited' | 'traveling' | 'thinking';
 export type Part = 'world' | 'leaders' | 'event' | 'currency' | 'summary';
@@ -27,7 +54,10 @@ export interface Beat {
   /** Week index at which the year's clock stops for this beat. */
   at: number;
   part: Part;
+  /** English: said by the voice, shown in English. */
   text: string;
+  /** The same line in Japanese (review translation, shown only). */
+  ja: string;
   mood: Mood;
   /** The top band shows this region's leaders... */
   region?: RegionId;
@@ -41,61 +71,30 @@ export interface Beat {
   point?: string;
 }
 
+/** The fixed lines in English (the same as src/i18n/en.ts). */
 export const STRINGS = {
-  intro: [
-    'Welcome aboard the Currency Time Machine!',
-    "I'm Tock, your guide to the history of money.",
-    "Pick a year, and we'll travel back to see who shaped the world, what happened, and how currencies changed.",
-  ],
-  select: 'Which year shall we visit? Turn the dial, or pick a famous year. Then press Start Travel.',
-  warp: (year: number) => `Hold on tight! Setting the dial to ${year}...`,
-  arrive: (year: number) => `Here we are: ${year}.`,
-  full: 'The full journey: every year from 1948 to today, in about four minutes. Pinch a currency to hear it alone.',
-  noEvents: 'Our history file has no verified event for this year, so let us watch the currencies themselves.',
-  ongoing: (date: string) => `This year is not over yet: our data runs to ${date}.`,
-  peopleHidden: 'Names and portraits are not shown in this version.',
+  intro: [EN['guide.intro.1'], EN['guide.intro.2'], EN['guide.intro.3']] as string[],
+  select: EN['guide.select'] as string,
+  warp: (year: number) => fmt(EN['guide.warp'], { year }),
+  arrive: (year: number) => fmt(EN['guide.arrive'], { year }),
+  full: EN['guide.full'] as string,
+  noEvents: EN['guide.noEvents'] as string,
+  ongoing: (date: string) => fmt(EN['guide.ongoing'], { date }),
+  peopleHidden: EN['guide.peopleHidden'] as string,
 };
+
+/** The intro's keys, in order. */
+export const INTRO_KEYS: Key[] = ['guide.intro.1', 'guide.intro.2', 'guide.intro.3'];
 
 /** The guide's words for each currency ("the yen", "the Mark"). */
-export const CURRENCY_NAMES: Record<string, string> = {
-  CAD: 'the Canadian dollar',
-  GBP: 'the pound',
-  DEM: 'the Mark',
-  EUR: 'the euro',
-  CHF: 'the Swiss franc',
-  INR: 'the rupee',
-  CNY: 'the yuan',
-  KRW: 'the won',
-  JPY: 'the yen',
-  AUD: 'the Australian dollar',
-};
+export const CURRENCY_NAMES: Record<string, string> = Object.fromEntries(
+  ['CAD', 'GBP', 'DEM', 'EUR', 'CHF', 'INR', 'CNY', 'KRW', 'JPY', 'AUD'].map((c) => [c, EN[`cur.${c}` as Key]]),
+);
 
-/** How a holder is named in a sentence, per office (others use the title). */
-const ROLE: Record<string, { before?: string; after?: string }> = {
-  'us-president': { before: 'President' },
-  'us-fed': { after: 'chairs the Federal Reserve' },
-  'ca-pm': { before: 'Prime Minister' },
-  'ca-boc': { after: 'leads the Bank of Canada' },
-  'uk-pm': { before: 'Prime Minister' },
-  'uk-boe': { after: 'leads the Bank of England' },
-  'de-chancellor': { before: 'Chancellor' },
-  'de-bundesbank': { after: 'leads the Bundesbank' },
-  'ea-ecb': { after: 'leads the European Central Bank' },
-  'ch-president': { after: 'presides over the Federal Council' },
-  'ch-snb': { after: 'leads the Swiss National Bank' },
-  'in-pm': { before: 'Prime Minister' },
-  'in-rbi': { after: 'leads the Reserve Bank of India' },
-  'cn-chairman': { after: 'leads the Communist Party' },
-  'cn-gensec': { after: 'leads the Communist Party' },
-  'cn-premier': { before: 'Premier' },
-  'cn-pboc': { after: "leads the People's Bank of China" },
-  'kr-president': { before: 'President' },
-  'kr-bok': { after: 'leads the Bank of Korea' },
-  'jp-pm': { before: 'Prime Minister' },
-  'jp-boj': { after: 'leads the Bank of Japan' },
-  'au-pm': { before: 'Prime Minister' },
-  'au-rba': { after: 'leads the Reserve Bank of Australia' },
-};
+function currencyWord(code: string, lang: Lang): string {
+  const key = `cur.${code}` as Key;
+  return key in EN ? t(key, undefined, lang) : code;
+}
 
 export interface YearContext {
   year: number;
@@ -126,7 +125,7 @@ export interface YearContext {
 /** A featured year's own opening (numbers computed from `ctx`). */
 interface YearStory {
   featured: RegionId[];
-  opening: (ctx: YearContext) => string;
+  opening: (ctx: YearContext, lang?: Lang) => string;
 }
 
 const changeBetween = (ctx: YearContext, slot: string, fromIso: string, toIndex: number): number | null => {
@@ -140,95 +139,89 @@ const changeBetween = (ctx: YearContext, slot: string, fromIso: string, toIndex:
 export const STORIES: Record<number, YearStory> = {
   1971: {
     featured: ['USA', 'JPN', 'DEU'],
-    opening: () =>
-      '1971. For more than twenty years, most major currencies have been fixed to the dollar, and the dollar to gold. This is the year that system breaks.',
+    opening: (_ctx, lang = 'en') => t('story.1971', undefined, lang),
   },
   1985: {
     featured: ['USA', 'JPN', 'DEU'],
-    opening: (ctx) => {
+    opening: (ctx, lang = 'en') => {
       const mark = changeBetween(ctx, 'EUR', '1980-01-01', ctx.window.first);
       const yen = changeBetween(ctx, 'JPY', '1980-01-01', ctx.window.first);
       const since =
         mark !== null && yen !== null && mark < 0 && yen < 0
-          ? ` Since 1980 the Mark has lost ${Math.abs(mark).toFixed(0)}% of its value against it, and the yen ${Math.abs(yen).toFixed(0)}%.`
+          ? t('story.1985.since', { mark: Math.abs(mark).toFixed(0), yen: Math.abs(yen).toFixed(0) }, lang)
           : '';
-      return `1985. The dollar is strong.${since} In September, five major economies say other currencies should rise against it, and stand ready to cooperate.`;
+      return t('story.1985', { since }, lang);
     },
   },
   1997: {
     featured: ['KOR', 'JPN', 'USA'],
-    opening: () =>
-      '1997. From the middle of this year, money flows out of several East and Southeast Asian economies, and their currencies fall. Watch South Korea.',
+    opening: (_ctx, lang = 'en') => t('story.1997', undefined, lang),
   },
   2008: {
     featured: ['USA', 'GBR', 'KOR'],
-    opening: () => '2008. A financial crisis that began in the United States is about to spread around the world.',
+    opening: (_ctx, lang = 'en') => t('story.2008', undefined, lang),
   },
   2022: {
     featured: ['USA', 'JPN', 'GBR'],
-    opening: () => '2022. Prices rise fast around the world, and central banks raise interest rates. Watch the yen.',
+    opening: (_ctx, lang = 'en') => t('story.2022', undefined, lang),
   },
 };
 
 export const FEATURED_YEARS = [1971, 1985, 1997, 2008, 2022] as const;
 
 /** Words for a slot on a date ("the Mark" before 1999). */
-function word(ctx: YearContext, slot: string, k: number): string {
+function word(ctx: YearContext, slot: string, k: number, lang: Lang = 'en'): string {
   const s = ctx.slots.find((x) => x.slot === slot);
   if (!s) return slot;
   let code = s.segments[0].code;
   for (const seg of s.segments) if (k >= seg.fromIndex) code = seg.code;
-  return CURRENCY_NAMES[code] ?? code;
-}
-
-function list(items: string[]): string {
-  if (items.length <= 1) return items.join('');
-  return `${items.slice(0, -1).join(', ')} and ${items[items.length - 1]}`;
+  return currencyWord(code, lang);
 }
 
 /** One sentence about who governs a region in the year (or how, without names). */
-export function leaderSentence(ctx: YearContext, r: RegionId): string {
-  const name = ctx.regionName(r);
+export function leaderSentence(ctx: YearContext, r: RegionId, lang: Lang = 'en'): string {
+  const name = tr(ctx.regionName(r), lang);
   const offices = ctx.leaders(r);
   if (!ctx.showPeople) {
     // No names: say how the place is governed instead.
     const system = ctx.regionSystem?.(r);
-    if (system) return `${name}. ${system}`;
-    const titles = offices.map((o) => `the ${o.office.title}`);
-    return titles.length ? `In ${name}, look for ${list(titles.slice(0, 2))}.` : `${name}.`;
+    if (system) return t('leaders.system', { name, system: tr(system, lang) }, lang);
+    const titles = offices.map((o) => t('leaders.office', { title: tr(o.office.title, lang) }, lang));
+    return titles.length ? t('leaders.lookFor', { name, titles: listText(titles.slice(0, 2), lang) }, lang) : `${name}${lang === 'ja' ? '。' : '.'}`;
   }
   const parts: string[] = [];
   for (const o of offices.slice(0, 2)) {
     if (!o.terms.length) continue;
-    const role = ROLE[o.office.id] ?? { before: o.office.title };
-    const names = o.terms.map((t) => t.name);
-    const who = names.length > 1 ? `${names[0]}, then ${list(names.slice(1))}` : names[0];
-    parts.push(role.before ? `${role.before} ${who}` : `${who} ${role.after}`);
+    const names = o.terms.map((x) => tr(x.name, lang));
+    const who = names.length > 1 ? t('leaders.then', { first: names[0], rest: listText(names.slice(1), lang) }, lang) : names[0];
+    const key = `role.${o.office.id}` as Key;
+    parts.push(key in EN ? t(key, { who }, lang) : t('role.default', { title: tr(o.office.title, lang), who }, lang));
   }
-  if (!parts.length) return `In ${name}, we have no verified record of who governed this year.`;
-  const lead = r === 'EA' ? 'In the euro area' : r === 'CHE' ? 'In Switzerland, the Federal Council governs together' : `In ${name}`;
-  return `${lead}: ${parts.join('; ')}.`;
+  if (!parts.length) return t('leaders.none', { name }, lang);
+  const joined = parts.join(t('leaders.sep', undefined, lang));
+  if (r === 'EA') return t('leaders.inEuroArea', { parts: joined }, lang);
+  if (r === 'CHE') return t('leaders.inSwitzerland', { parts: joined }, lang);
+  return t('leaders.in', { name, parts: joined }, lang);
 }
 
 /** Events whose sources give no day, told once the year is over: "Also in 1950, on a day our sources don't give: ..." */
-function undatedText(ctx: YearContext, events: AnnualEvent[]): string {
+function undatedText(ctx: YearContext, events: AnnualEvent[], lang: Lang): string {
   return events
     .map((e) =>
       e.precision === 'month'
-        ? `Also in ${monthOf(e.date)}, on a day our sources do not give: ${e.title}. ${e.summary}`
-        : `Also in ${ctx.year}, on a date our sources do not give: ${e.title}. ${e.summary}`,
+        ? t('event.undatedMonth', { month: monthText(e.date, lang), title: tr(e.title, lang), summary: tr(e.summary, lang) }, lang)
+        : t('event.undatedYear', { year: ctx.year, title: tr(e.title, lang), summary: tr(e.summary, lang) }, lang),
     )
-    .join(' ');
+    .join(sp(lang));
 }
 
-function eventText(ctx: YearContext, e: AnnualEvent): string {
-  const date = `${monthOf(e.date)} ${Number(e.date.slice(8, 10))}`;
-  let text = `${date}: ${e.title}. ${e.summary}`;
+function eventText(ctx: YearContext, e: AnnualEvent, lang: Lang): string {
+  let text = t('event.line', { date: dayText(e.date, lang), title: tr(e.title, lang), summary: tr(e.summary, lang) }, lang);
   const people = ctx.showPeople ? (ctx.eventPeople?.(e.id) ?? []).slice(0, 2) : [];
-  if (people.length) text += ` Among those involved: ${list(people)}.`;
+  if (people.length) text += t('event.people', { people: listText(people.map((n) => tr(n, lang)), lang) }, lang);
   const k = Math.round(ctx.indexOf(e.date));
   const watch = e.currencies.filter((c) => c !== 'USD' && ctx.changes[ctx.slots.findIndex((s) => s.slot === c)]).slice(0, 3);
-  if (watch.length) text += ` Watch ${list(watch.map((c) => word(ctx, c, k)))}.`;
+  if (watch.length) text += t('event.watch', { currencies: listText(watch.map((c) => word(ctx, c, k, lang)), lang) }, lang);
   return text;
 }
 
@@ -249,18 +242,18 @@ function pctWords(p: number): string {
 }
 
 /** The year's result in one or two sentences (Part D and the summary). */
-export function resultSentence(ctx: YearContext): string {
+export function resultSentence(ctx: YearContext, lang: Lang = 'en'): string {
   const { up, down } = extremes(ctx);
   const k = ctx.window.last;
-  const span = ctx.window.ongoing ? 'So far this year' : 'Over the year';
-  const parts: string[] = [];
+  const span = t(ctx.window.ongoing ? 'result.soFar' : 'result.overYear', undefined, lang);
   // A "gain" under 1% is not worth naming as the year's winner.
   const bigUp = up && up.pct >= 1 ? up : null;
-  if (bigUp) parts.push(`${word(ctx, bigUp.slot, k)} gained the most against the dollar, ${pctWords(bigUp.pct)}`);
-  if (down) parts.push(`${word(ctx, down.slot, k)} lost the most${bigUp ? '' : ' against the dollar'}, ${pctWords(down.pct)}`);
-  if (!parts.length) return `${span}, the currencies we follow barely moved against the dollar.`;
-  const tail = !bigUp && down ? ' None of the others gained more than 1%.' : '';
-  return `${span}, ${parts.join(', and ')}.${tail}`;
+  const upWords = bigUp ? { up: word(ctx, bigUp.slot, k, lang), upPct: pctWords(bigUp.pct) } : null;
+  const downWords = down ? { down: word(ctx, down.slot, k, lang), downPct: pctWords(down.pct) } : null;
+  if (upWords && downWords) return t('result.both', { span, ...upWords, ...downWords }, lang);
+  if (upWords) return t('result.up', { span, ...upWords }, lang);
+  if (downWords) return t('result.down', { span, ...downWords }, lang);
+  return t('result.flat', { span }, lang);
 }
 
 export function buildYearScript(ctx: YearContext): Beat[] {
@@ -271,13 +264,18 @@ export function buildYearScript(ctx: YearContext): Beat[] {
   const clamp = (k: number) => Math.min(w.last, Math.max(w.first, k));
 
   // A. The world.
-  const opening = story ? story.opening(ctx) : `${ctx.year}. ${ctx.era.name}. ${ctx.era.text}`;
-  const watch = ctx.featured.map((r) => ctx.regionName(r));
-  let worldText = opening;
-  if (!story && watch.length) worldText += ` This year, let's look at ${list(watch)}.`;
-  if (w.ongoing) worldText += ` ${STRINGS.ongoing(fullDate(ctx.lastDate))}`;
-  if (!ctx.events.length) worldText += ` ${STRINGS.noEvents}`;
-  beats.push({ id: 'world', at: w.first, part: 'world', text: worldText, mood: 'excited', focus: featuredSlots });
+  const world = both((lang) => {
+    const opening = story
+      ? story.opening(ctx, lang)
+      : t('guide.opening', { year: ctx.year, era: tr(ctx.era.name, lang), text: tr(ctx.era.text, lang) }, lang);
+    const watch = ctx.featured.map((r) => tr(ctx.regionName(r), lang));
+    let text = opening;
+    if (!story && watch.length) text += sp(lang) + t('guide.lookAt', { places: listText(watch, lang) }, lang);
+    if (w.ongoing) text += sp(lang) + t('guide.ongoing', { date: fullDateText(ctx.lastDate, lang) }, lang);
+    if (!ctx.events.length) text += sp(lang) + t('guide.noEvents', undefined, lang);
+    return text;
+  });
+  beats.push({ id: 'world', at: w.first, part: 'world', text: world.en, ja: world.ja, mood: 'excited', focus: featuredSlots });
 
   // B. Leaders of the featured places, a few weeks apart.
   ctx.featured.forEach((r, k) => {
@@ -286,7 +284,7 @@ export function buildYearScript(ctx: YearContext): Beat[] {
       id: `leaders-${r}`,
       at: clamp(w.first + 1 + 3 * k),
       part: 'leaders',
-      text: leaderSentence(ctx, r),
+      ...texts(both((lang) => leaderSentence(ctx, r, lang))),
       mood: 'pointing',
       region: r,
       focus: slot === 'USD' ? [] : [slot],
@@ -304,7 +302,7 @@ export function buildYearScript(ctx: YearContext): Beat[] {
       id: `event-${e.id}`,
       at: k,
       part: 'event',
-      text: eventText(ctx, e),
+      ...texts(both((lang) => eventText(ctx, e, lang))),
       mood: 'excited',
       eventId: e.id,
       region: e.regions[0],
@@ -321,7 +319,11 @@ export function buildYearScript(ctx: YearContext): Beat[] {
       id: `joins-${s.slot}`,
       at: clamp(s.first),
       part: 'currency',
-      text: `${capital(word(ctx, s.slot, s.first))} joins our data here, at ${rateText(c.rateFrom)} ${c.codeFrom} per US dollar.`,
+      ...texts(
+        both((lang) =>
+          t('joins', { currency: capitalIn(lang, word(ctx, s.slot, s.first, lang)), rate: rateText(c.rateFrom), code: c.codeFrom }, lang),
+        ),
+      ),
       mood: 'pointing',
       focus: [s.slot],
       point: s.slot,
@@ -331,12 +333,19 @@ export function buildYearScript(ctx: YearContext): Beat[] {
   // D2. The sharpest stretch among the places to watch, unless an event is already there.
   const sharp = sharpestAmong(ctx, featuredSlots.length ? featuredSlots : ctx.slots.map((s) => s.slot));
   if (sharp && Math.abs(sharp.pct) >= 3 && !beats.some((b) => b.part === 'event' && Math.abs(b.at - sharp.end) < 5)) {
-    const name = word(ctx, sharp.slot, sharp.end);
     beats.push({
       id: 'sharpest',
       at: clamp(sharp.end),
       part: 'currency',
-      text: `Look at ${name}: in the eight weeks to ${monthOf(isoAt(ctx, sharp.end))}, it ${sharp.pct >= 0 ? 'gained' : 'lost'} ${pctWords(sharp.pct)} against the dollar.`,
+      ...texts(
+        both((lang) =>
+          t(
+            sharp.pct >= 0 ? 'sharpest.gained' : 'sharpest.lost',
+            { currency: word(ctx, sharp.slot, sharp.end, lang), month: monthText(isoAt(ctx, sharp.end), lang), pct: pctWords(sharp.pct) },
+            lang,
+          ),
+        ),
+      ),
       mood: 'pointing',
       focus: [sharp.slot],
       point: sharp.slot,
@@ -351,7 +360,7 @@ export function buildYearScript(ctx: YearContext): Beat[] {
       id: 'undated',
       at: w.last,
       part: 'event',
-      text: undatedText(ctx, undated),
+      ...texts(both((lang) => undatedText(ctx, undated, lang))),
       mood: 'thinking',
       eventId: e.id,
       undated: true,
@@ -368,7 +377,7 @@ export function buildYearScript(ctx: YearContext): Beat[] {
     id: 'result',
     at: w.last,
     part: 'currency',
-    text: resultSentence(ctx),
+    ...texts(both((lang) => resultSentence(ctx, lang))),
     mood: 'pointing',
     focus: resultFocus,
     point: resultFocus[0],
@@ -379,11 +388,23 @@ export function buildYearScript(ctx: YearContext): Beat[] {
 }
 
 /** The guide's closing words over the summary panel (well under 30 seconds). */
-export function summaryLine(ctx: YearContext): string {
+export function summaryLine(ctx: YearContext, lang: Lang = 'en'): string {
   // (A title inside the sentence starts in lower case: 'and the Fed starts raising rates'.)
-  const titles = ctx.events.slice(0, 2).map((e, k) => e.title.replace(/^"|"$/g, '').replace(/^The /, k > 0 ? 'the ' : 'The '));
-  const head = titles.length ? `That was ${ctx.year}: ${list(titles)}.` : `That was ${ctx.year}.`;
-  return `${head} ${resultSentence(ctx)} Where shall we go next?`;
+  const titles = ctx.events
+    .slice(0, 2)
+    .map((e, k) => (lang === 'en' ? e.title.replace(/^"|"$/g, '').replace(/^The /, k > 0 ? 'the ' : 'The ') : tr(e.title, lang)));
+  const head = titles.length ? t('summary.titles', { year: ctx.year, titles: listText(titles, lang) }, lang) : t('summary.plain', { year: ctx.year }, lang);
+  return t('summary.line', { head, result: resultSentence(ctx, lang) }, lang);
+}
+
+/** The summary line in both languages. */
+export function summaryLines(ctx: YearContext): Line {
+  return both((lang) => summaryLine(ctx, lang));
+}
+
+/** Text fields of a beat from a line. */
+function texts(l: Line): { text: string; ja: string } {
+  return { text: l.en, ja: l.ja };
 }
 
 function sharpestAmong(ctx: YearContext, slots: string[]): { slot: string; end: number; pct: number } | null {
@@ -400,16 +421,6 @@ function sharpestAmong(ctx: YearContext, slots: string[]): { slot: string; end: 
   return best;
 }
 
-const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-
-function monthOf(iso: string): string {
-  return MONTHS[Number(iso.slice(5, 7)) - 1];
-}
-
-function fullDate(iso: string): string {
-  return `${monthOf(iso)} ${Number(iso.slice(8, 10))}, ${iso.slice(0, 4)}`;
-}
-
 function isoAt(ctx: YearContext, k: number): string {
   // Week k's date, from the year's axis (7 days per week).
   const days = Math.round((k - ctx.window.axisStart) * 7);
@@ -417,8 +428,8 @@ function isoAt(ctx: YearContext, k: number): string {
   return d.toISOString().slice(0, 10);
 }
 
-function capital(s: string): string {
-  return s.charAt(0).toUpperCase() + s.slice(1);
+function capitalIn(lang: Lang, s: string): string {
+  return lang === 'en' ? s.charAt(0).toUpperCase() + s.slice(1) : s;
 }
 
 function rateText(r: number): string {

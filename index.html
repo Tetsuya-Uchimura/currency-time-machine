@@ -32,6 +32,9 @@
       fieldset label { display: flex; gap: 8px; align-items: center; padding: 10px 14px; border-radius: 12px; border: 1px solid #3a4a6a; cursor: pointer; text-align: left; font-size: 16px; color: #e4e9f3; }
       fieldset label:has(input:checked) { border-color: #ffd84a; background: rgba(255, 216, 74, 0.08); }
       fieldset small { display: block; color: #aab3c5; font-size: 13px; }
+      fieldset.lang { align-items: center; margin: -4px 0 6px; font-size: 15px; color: #d8deea; }
+      fieldset.lang label { padding: 6px 12px; font-size: 15px; }
+      .lang-note { margin: 0 0 18px; }
       .opts { display: flex; gap: 18px; justify-content: center; flex-wrap: wrap; margin: -6px 0 18px; font-size: 15px; color: #d8deea; }
     </style>
   </head>
@@ -40,21 +43,27 @@
     <div id="start-overlay" role="dialog" aria-labelledby="title">
       <div class="card">
         <h1 id="title">Currency Time Machine</h1>
-        <p>Travel through time. Meet the people, explore the events, and discover how currencies changed. Headphones recommended.</p>
+        <p data-i18n="start.lead">Travel through time. Meet the people, explore the events, and discover how currencies changed. Headphones recommended.</p>
         <fieldset aria-label="Journey">
-          <label><input type="radio" name="mode" value="year" checked /> <span>Year Journey<small>Pick a year; a guide robot shows you around (about 2 minutes)</small></span></label>
-          <label><input type="radio" name="mode" value="full" /> <span>Full Journey<small>Every year from 1948 to today (about 4 minutes)</small></span></label>
+          <label><input type="radio" name="mode" value="year" checked /> <span><span data-i18n="start.year">Year Journey</span><small data-i18n="start.yearSub">Pick a year; a guide robot shows you around (about 2 minutes)</small></span></label>
+          <label><input type="radio" name="mode" value="full" /> <span><span data-i18n="start.full">Full Journey</span><small data-i18n="start.fullSub">Every year from 1948 to today (about 4 minutes)</small></span></label>
         </fieldset>
         <div class="opts">
-          <label><input type="checkbox" id="opt-voice" checked /> Guide voice (subtitles always on)</label>
-          <label><input type="checkbox" id="opt-calm" /> Calm motion</label>
+          <label><input type="checkbox" id="opt-voice" checked /> <span data-i18n="start.voice">Guide voice in English (subtitles always on)</span></label>
+          <label><input type="checkbox" id="opt-calm" /> <span data-i18n="start.calm">Calm motion</span></label>
         </div>
+        <fieldset class="lang" aria-labelledby="lang-label">
+          <span id="lang-label" data-i18n="start.language">Language</span>
+          <label><input type="radio" name="lang" value="en" checked /> English</label>
+          <label><input type="radio" name="lang" value="ja" lang="ja" /> 日本語</label>
+        </fieldset>
+        <p class="small lang-note" data-i18n="start.languageNote">Japanese is a review translation of the English subtitles and panels; the voice stays English.</p>
         <div class="buttons">
-          <button id="enter-vr" disabled>Enter VR</button>
-          <button id="watch-browser" disabled>Watch in browser</button>
+          <button id="enter-vr" disabled data-i18n="start.enterVr">Enter VR</button>
+          <button id="watch-browser" disabled data-i18n="start.watch">Watch in browser</button>
         </div>
-        <p class="small" id="start-status">Loading...</p>
-        <p class="small">Exchange rate data: Frankfurter (frankfurter.dev)</p>
+        <p class="small" id="start-status" data-i18n="start.loading">Loading...</p>
+        <p class="small" data-i18n="start.credit">Exchange rate data: Frankfurter (frankfurter.dev)</p>
       </div>
     </div>
     <script type="module" src="/src/index.ts"></script>

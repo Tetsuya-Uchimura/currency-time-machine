@@ -1,0 +1,1173 @@
+{
+ "source": "Wikidata, Japanese label (labels.ja) of each person's item",
+ "names": {
+  "Alain Berset": {
+   "qid": "Q123939",
+   "ja": "アラン・ベルセ"
+  },
+  "Alan Greenspan": {
+   "qid": "Q193635",
+   "ja": "アラン・グリーンスパン"
+  },
+  "Alec Douglas-Home": {
+   "qid": "Q128976",
+   "ja": "アレック・ダグラス＝ヒューム"
+  },
+  "Andrew Bailey": {
+   "qid": "Q4756258",
+   "ja": "アンドリュー・ジョン・ベイリー"
+  },
+  "Andy Burnham": {
+   "qid": "Q269909",
+   "ja": "アンディ・バーナム"
+  },
+  "Angela Merkel": {
+   "qid": "Q567",
+   "ja": "アンゲラ・メルケル"
+  },
+  "Anthony Albanese": {
+   "qid": "Q335697",
+   "ja": "アンソニー・アルバニージー"
+  },
+  "Anthony Eden": {
+   "qid": "Q128995",
+   "ja": "アンソニー・イーデン"
+  },
+  "Arnold Koller": {
+   "qid": "Q115559",
+   "ja": "アーノルド・コラー"
+  },
+  "Arthur F. Burns": {
+   "qid": "Q284230",
+   "ja": "アーサー・バーンズ"
+  },
+  "Arthur Frank Burns": {
+   "qid": "Q284230",
+   "ja": "アーサー・バーンズ"
+  },
+  "Atal Bihari Vajpayee": {
+   "qid": "Q233289",
+   "ja": "アタル・ビハーリー・ヴァージペーイー"
+  },
+  "Axel A. Weber": {
+   "qid": "Q64689",
+   "ja": "アクセル・ヴェーバー"
+  },
+  "Barack Obama": {
+   "qid": "Q76",
+   "ja": "バラク・オバマ"
+  },
+  "Ben Bernanke": {
+   "qid": "Q201795",
+   "ja": "ベン・バーナンキ"
+  },
+  "Ben Chifley": {
+   "qid": "Q23379",
+   "ja": "ベン・チフリー"
+  },
+  "Benegal Rama Rau": {
+   "qid": "Q3380621",
+   "ja": "ベネガル・ラウ"
+  },
+  "Bernie Fraser": {
+   "qid": "Q4894388",
+   "ja": "バーニー・フレイザー"
+  },
+  "Bill Clinton": {
+   "qid": "Q1124",
+   "ja": "ビル・クリントン"
+  },
+  "Bimal Jalan": {
+   "qid": "Q4913680",
+   "ja": "ビマル・ジャラン"
+  },
+  "Bob Hawke": {
+   "qid": "Q269372",
+   "ja": "ボブ・ホーク"
+  },
+  "Bob Johnston": {
+   "qid": "Q4932952",
+   "ja": "ボブ・ジョンストン"
+  },
+  "Boris Johnson": {
+   "qid": "Q180589",
+   "ja": "ボリス・ジョンソン"
+  },
+  "Brian Mulroney": {
+   "qid": "Q128563",
+   "ja": "ブライアン・マルルーニー"
+  },
+  "Cameron Cobbold, 1st Baron Cobbold": {
+   "qid": "Q287608",
+   "ja": "キャメロン・フロマンティール・コボルド"
+  },
+  "Chandra Shekhar": {
+   "qid": "Q334279",
+   "ja": "チャンドラ・シェーカル"
+  },
+  "Charan Singh": {
+   "qid": "Q319824",
+   "ja": "チョードリー・チャラン・シン"
+  },
+  "Chen Muhua": {
+   "qid": "Q701442",
+   "ja": "陳慕華"
+  },
+  "Chintaman Dwarkanath Deshmukh": {
+   "qid": "Q3763779",
+   "ja": "C・D・デシュマク"
+  },
+  "Choi Kyu-hah": {
+   "qid": "Q313350",
+   "ja": "崔圭夏"
+  },
+  "Christine Lagarde": {
+   "qid": "Q484605",
+   "ja": "クリスティーヌ・ラガルド"
+  },
+  "Chun Doo-hwan": {
+   "qid": "Q14362",
+   "ja": "全斗煥"
+  },
+  "Chʻŏr-hwan Chŏn": {
+   "qid": "Q12615345",
+   "ja": "全哲煥"
+  },
+  "Clement Attlee": {
+   "qid": "Q129006",
+   "ja": "クレメント・アトリー"
+  },
+  "Dai Xianglong": {
+   "qid": "Q834484",
+   "ja": "戴相竜"
+  },
+  "David A. Dodge": {
+   "qid": "Q3017779",
+   "ja": "デイビット・A・ドッジ"
+  },
+  "David Cameron": {
+   "qid": "Q192",
+   "ja": "デーヴィッド・キャメロン"
+  },
+  "Didier Burkhalter": {
+   "qid": "Q58280",
+   "ja": "ディディエ・ビュルカルテ"
+  },
+  "Donald Trump": {
+   "qid": "Q22686",
+   "ja": "ドナルド・トランプ"
+  },
+  "Doris Leuthard": {
+   "qid": "Q115442",
+   "ja": "ドリス・ロイトハルト"
+  },
+  "Dwight D. Eisenhower": {
+   "qid": "Q9916",
+   "ja": "ドワイト・D・アイゼンハワー"
+  },
+  "Edward George, Baron George": {
+   "qid": "Q335467",
+   "ja": "エドワード・ジョージ"
+  },
+  "Edward Heath": {
+   "qid": "Q128967",
+   "ja": "エドワード・ヒース"
+  },
+  "Eikichi Araki": {
+   "qid": "Q5102831",
+   "ja": "新木栄吉"
+  },
+  "Eisaku Sato": {
+   "qid": "Q179871",
+   "ja": "佐藤栄作"
+  },
+  "Eisaku Satō": {
+   "qid": "Q179871",
+   "ja": "佐藤栄作"
+  },
+  "Enrico Celio": {
+   "qid": "Q167080",
+   "ja": "エンリコ・チェリオ"
+  },
+  "Ernst Welteke": {
+   "qid": "Q100800",
+   "ja": "エルンスト・ヴェルテケ"
+  },
+  "Eui Hwan Pai": {
+   "qid": "Q12597666",
+   "ja": "裵義煥"
+  },
+  "Eveline Widmer-Schlumpf": {
+   "qid": "Q162767",
+   "ja": "エフェリーネ・ヴィドマー＝シュルンプフ"
+  },
+  "Flavio Cotti": {
+   "qid": "Q118199",
+   "ja": "フラヴィオ・コッティ"
+  },
+  "Friedrich Merz": {
+   "qid": "Q566257",
+   "ja": "フリードリヒ・メルツ"
+  },
+  "Friedrich Traugott Wahlen": {
+   "qid": "Q663178",
+   "ja": "フリードリヒ・トラウゴット・ヴァーレン"
+  },
+  "Fumio Kishida": {
+   "qid": "Q359480",
+   "ja": "岸田文雄"
+  },
+  "G. William Miller": {
+   "qid": "Q939880",
+   "ja": "ウィリアム・ミラー"
+  },
+  "George H. W. Bush": {
+   "qid": "Q23505",
+   "ja": "ジョージ・H・W・ブッシュ"
+  },
+  "George W. Bush": {
+   "qid": "Q207",
+   "ja": "ジョージ・W・ブッシュ"
+  },
+  "Georges-André Chevallaz": {
+   "qid": "Q118201",
+   "ja": "ジョージズ・アンドレ・シェバラズ"
+  },
+  "Gerald Bouey": {
+   "qid": "Q15525030",
+   "ja": "ジェラルド・ブーエ"
+  },
+  "Gerald Ford": {
+   "qid": "Q9582",
+   "ja": "ジェラルド・R・フォード"
+  },
+  "Gerhard Schröder": {
+   "qid": "Q2530",
+   "ja": "ゲアハルト・シュレーダー"
+  },
+  "Gerhard Stoltenberg": {
+   "qid": "Q62214",
+   "ja": "ゲルハルト・シュトルテンベルク"
+  },
+  "Glenn Stevens": {
+   "qid": "Q1813984",
+   "ja": "グレン・スティーヴンス"
+  },
+  "Gordon Brown": {
+   "qid": "Q10648",
+   "ja": "ゴードン・ブラウン"
+  },
+  "Gordon Richardson, Baron Richardson of Duntisbourne": {
+   "qid": "Q1446799",
+   "ja": "ゴードン・リチャードソン"
+  },
+  "Gordon Thiessen": {
+   "qid": "Q3110930",
+   "ja": "ゴードン・ティーセン"
+  },
+  "Gough Whitlam": {
+   "qid": "Q23333",
+   "ja": "ゴフ・ホイットラム"
+  },
+  "Graham Towers": {
+   "qid": "Q2423265",
+   "ja": "グラハム・タワーズ"
+  },
+  "Gulzarilal Nanda": {
+   "qid": "Q317769",
+   "ja": "グルザーリーラール・ナンダー"
+  },
+  "Guy Parmelin": {
+   "qid": "Q121160",
+   "ja": "ギー・パルムラン"
+  },
+  "H. D. Deve Gowda": {
+   "qid": "Q377870",
+   "ja": "デーヴェー・ガウダ"
+  },
+  "Han Duck-soo": {
+   "qid": "Q356666",
+   "ja": "韓悳洙"
+  },
+  "Hans Tietmeyer": {
+   "qid": "Q75748",
+   "ja": "ハンス・ティートマイヤー"
+  },
+  "Hans-Peter Tschudi": {
+   "qid": "Q115548",
+   "ja": "ハンス＝ペーター・チューディ"
+  },
+  "Hans-Rudolf Merz": {
+   "qid": "Q122275",
+   "ja": "ハンス＝ルドルフ・メルツ"
+  },
+  "Harold Holt": {
+   "qid": "Q312722",
+   "ja": "ハロルド・ホルト"
+  },
+  "Harold Macmillan": {
+   "qid": "Q128985",
+   "ja": "ハロルド・マクミラン"
+  },
+  "Harold Wilson": {
+   "qid": "Q128956",
+   "ja": "ハロルド・ウィルソン"
+  },
+  "Harry S. Truman": {
+   "qid": "Q11613",
+   "ja": "ハリー・S・トルーマン"
+  },
+  "Haruhiko Kuroda": {
+   "qid": "Q5244721",
+   "ja": "黒田東彦"
+  },
+  "Haruo Maekawa": {
+   "qid": "Q5385356",
+   "ja": "前川春雄"
+  },
+  "Hayato Ikeda": {
+   "qid": "Q299142",
+   "ja": "池田勇人"
+  },
+  "Helmut Kohl": {
+   "qid": "Q2518",
+   "ja": "ヘルムート・コール"
+  },
+  "Helmut Schlesinger": {
+   "qid": "Q96812",
+   "ja": "ヘルムート・シュレジンガー"
+  },
+  "Helmut Schmidt": {
+   "qid": "Q2516",
+   "ja": "ヘルムート・シュミット"
+  },
+  "Henry Paulson": {
+   "qid": "Q311025",
+   "ja": "ヘンリー・ポールソン"
+  },
+  "Hisato Ichimada": {
+   "qid": "Q5385490",
+   "ja": "一万田尚登"
+  },
+  "Hitoshi Ashida": {
+   "qid": "Q315725",
+   "ja": "芦田均"
+  },
+  "Hu Jintao": {
+   "qid": "Q15029",
+   "ja": "胡錦濤"
+  },
+  "Hu Yaobang": {
+   "qid": "Q99850",
+   "ja": "胡耀邦"
+  },
+  "Hua Guofeng": {
+   "qid": "Q41570",
+   "ja": "華国鋒"
+  },
+  "Hwang Kyo-ahn": {
+   "qid": "Q12625765",
+   "ja": "黄教安"
+  },
+  "Ian Macfarlane": {
+   "qid": "Q11976756",
+   "ja": "イアン・マクファーレン"
+  },
+  "Ichirō Hatoyama": {
+   "qid": "Q333589",
+   "ja": "鳩山一郎"
+  },
+  "Ignazio Cassis": {
+   "qid": "Q117254",
+   "ja": "イニャツィオ・カシス"
+  },
+  "Inder Kumar Gujral": {
+   "qid": "Q248484",
+   "ja": "インドラ・クマール・グジュラール"
+  },
+  "Indira Gandhi": {
+   "qid": "Q1149",
+   "ja": "インディラ・ガンディー"
+  },
+  "James A. Baker III": {
+   "qid": "Q223151",
+   "ja": "ジェイムズ・ベイカー"
+  },
+  "James Callaghan": {
+   "qid": "Q9576",
+   "ja": "ジェームズ・キャラハン"
+  },
+  "James Coyne": {
+   "qid": "Q3160995",
+   "ja": "ジェームズ・コイン"
+  },
+  "Janet Yellen": {
+   "qid": "Q263725",
+   "ja": "ジャネット・イエレン"
+  },
+  "Jawaharlal Nehru": {
+   "qid": "Q1047",
+   "ja": "ジャワハルラール・ネルー"
+  },
+  "Jean Chrétien": {
+   "qid": "Q128543",
+   "ja": "ジャン・クレティエン"
+  },
+  "Jean-Claude Trichet": {
+   "qid": "Q152905",
+   "ja": "ジャン＝クロード・トリシェ"
+  },
+  "Jens Weidmann": {
+   "qid": "Q693829",
+   "ja": "イェンス・ヴァイトマン"
+  },
+  "Jerome Powell": {
+   "qid": "Q6182718",
+   "ja": "ジェローム・パウエル"
+  },
+  "Jiang Zemin": {
+   "qid": "Q16597",
+   "ja": "江沢民"
+  },
+  "Jimmy Carter": {
+   "qid": "Q23685",
+   "ja": "ジミー・カーター"
+  },
+  "Joachim Nagel": {
+   "qid": "Q1690335",
+   "ja": "ヨアヒム・ナーゲル"
+  },
+  "Joe Biden": {
+   "qid": "Q6279",
+   "ja": "ジョー・バイデン"
+  },
+  "Joe Clark": {
+   "qid": "Q128574",
+   "ja": "ジョー・クラーク"
+  },
+  "Johann Schneider-Ammann": {
+   "qid": "Q380063",
+   "ja": "ヨハン・シュナイダー＝アマン"
+  },
+  "John Connally": {
+   "qid": "Q311293",
+   "ja": "ジョン・コナリー"
+  },
+  "John Crow": {
+   "qid": "Q6227768",
+   "ja": "ジョン・クロー"
+  },
+  "John Diefenbaker": {
+   "qid": "Q128614",
+   "ja": "ジョン・ディーフェンベーカー"
+  },
+  "John F. Kennedy": {
+   "qid": "Q9696",
+   "ja": "ジョン・F・ケネディ"
+  },
+  "John Gorton": {
+   "qid": "Q356411",
+   "ja": "ジョン・ゴートン"
+  },
+  "John Howard": {
+   "qid": "Q51330",
+   "ja": "ジョン・ハワード"
+  },
+  "John Major": {
+   "qid": "Q9559",
+   "ja": "ジョン・メージャー"
+  },
+  "John McEwen": {
+   "qid": "Q23386",
+   "ja": "ジョン・マッキュエン"
+  },
+  "John Turner": {
+   "qid": "Q128568",
+   "ja": "ジョン・ターナー"
+  },
+  "Joseph Deiss": {
+   "qid": "Q123823",
+   "ja": "ジョゼフ・ダイス"
+  },
+  "Julia Gillard": {
+   "qid": "Q41563",
+   "ja": "ジュリア・ギラード"
+  },
+  "Junichiro Koizumi": {
+   "qid": "Q130852",
+   "ja": "小泉純一郎"
+  },
+  "Justin Trudeau": {
+   "qid": "Q3099714",
+   "ja": "ジャスティン・トルドー"
+  },
+  "K. G. Ambegaonkar": {
+   "qid": "Q6323338",
+   "ja": "K・G・アンベガンカー"
+  },
+  "Kakuei Tanaka": {
+   "qid": "Q297644",
+   "ja": "田中角栄"
+  },
+  "Karin Keller-Sutter": {
+   "qid": "Q115881",
+   "ja": "カリン・ケラー・ズッター"
+  },
+  "Karl Blessing": {
+   "qid": "Q102433",
+   "ja": "カール・ブレシング"
+  },
+  "Karl Klasen": {
+   "qid": "Q1731927",
+   "ja": "カール・クラーゼン"
+  },
+  "Karl Otto Pöhl": {
+   "qid": "Q97051",
+   "ja": "カール・オットー・ペール"
+  },
+  "Kazuo Ueda": {
+   "qid": "Q11540681",
+   "ja": "植田和男"
+  },
+  "Keir Starmer": {
+   "qid": "Q6383803",
+   "ja": "キア・スターマー"
+  },
+  "Keizō Obuchi": {
+   "qid": "Q313339",
+   "ja": "小渕恵三"
+  },
+  "Kevin Rudd": {
+   "qid": "Q43135",
+   "ja": "ケビン・ラッド"
+  },
+  "Kevin Warsh": {
+   "qid": "Q6397725",
+   "ja": "ケビン・ウォーシュ"
+  },
+  "Kiichi Miyazawa": {
+   "qid": "Q315565",
+   "ja": "宮澤喜一"
+  },
+  "Kim Campbell": {
+   "qid": "Q128553",
+   "ja": "キム・キャンベル"
+  },
+  "Kim Choong-soo": {
+   "qid": "Q495038",
+   "ja": "金仲秀"
+  },
+  "Kim Dae-jung": {
+   "qid": "Q45785",
+   "ja": "金大中"
+  },
+  "Kim Young-sam": {
+   "qid": "Q165210",
+   "ja": "金泳三"
+  },
+  "Konrad Adenauer": {
+   "qid": "Q2492",
+   "ja": "コンラート・アデナウアー"
+  },
+  "Kun Kim": {
+   "qid": "Q27951979",
+   "ja": "金建"
+  },
+  "Kurt Georg Kiesinger": {
+   "qid": "Q2512",
+   "ja": "クルト・ゲオルク・キージンガー"
+  },
+  "Kyung Shik Lee": {
+   "qid": "Q16090696",
+   "ja": "李経植"
+  },
+  "Lal Bahadur Shastri": {
+   "qid": "Q244689",
+   "ja": "ラール・バハードゥル・シャーストリー"
+  },
+  "Lee Jae Myung": {
+   "qid": "Q12612463",
+   "ja": "李在明"
+  },
+  "Lee Ju-ho": {
+   "qid": "Q16091128",
+   "ja": "李周浩"
+  },
+  "Lee Ju-yeol": {
+   "qid": "Q16091117",
+   "ja": "李柱烈"
+  },
+  "Lee Kyung-shik": {
+   "qid": "Q16090696",
+   "ja": "李経植"
+  },
+  "Lee Myung-bak": {
+   "qid": "Q14342",
+   "ja": "李明博"
+  },
+  "Leslie O'Brien, Baron O'Brien of Lothbury": {
+   "qid": "Q6531053",
+   "ja": "レスリー・オブライアン"
+  },
+  "Lester B. Pearson": {
+   "qid": "Q128604",
+   "ja": "レスター・B・ピアソン"
+  },
+  "Li Keqiang": {
+   "qid": "Q18111",
+   "ja": "李克強"
+  },
+  "Li Peng": {
+   "qid": "Q18301",
+   "ja": "李鵬"
+  },
+  "Li Qiang": {
+   "qid": "Q4414390",
+   "ja": "李強"
+  },
+  "Liz Truss": {
+   "qid": "Q272201",
+   "ja": "エリザベス・トラス"
+  },
+  "Louis Rasminsky": {
+   "qid": "Q6688034",
+   "ja": "ルイス・ラスミンスキー"
+  },
+  "Louis St. Laurent": {
+   "qid": "Q128626",
+   "ja": "ルイ・サン＝ローラン"
+  },
+  "Ludwig Erhard": {
+   "qid": "Q2496",
+   "ja": "ルートヴィヒ・エアハルト"
+  },
+  "Lyndon B. Johnson": {
+   "qid": "Q9640",
+   "ja": "リンドン・ジョンソン"
+  },
+  "Makoto Usami": {
+   "qid": "Q5385423",
+   "ja": "宇佐美洵"
+  },
+  "Malcolm Fraser": {
+   "qid": "Q315979",
+   "ja": "マルコム・フレーザー"
+  },
+  "Malcolm Turnbull": {
+   "qid": "Q927550",
+   "ja": "マルコム・ターンブル"
+  },
+  "Manmohan Singh": {
+   "qid": "Q41914",
+   "ja": "マンモハン・シン"
+  },
+  "Mao Zedong": {
+   "qid": "Q5816",
+   "ja": "毛沢東"
+  },
+  "Margaret Thatcher": {
+   "qid": "Q7416",
+   "ja": "マーガレット・サッチャー"
+  },
+  "Mario Draghi": {
+   "qid": "Q294460",
+   "ja": "マリオ・ドラギ"
+  },
+  "Mark Carney": {
+   "qid": "Q192533",
+   "ja": "マーク・カーニー"
+  },
+  "Marriner Stoddard Eccles": {
+   "qid": "Q1902537",
+   "ja": "マリナー・エクルズ"
+  },
+  "Masaaki Shirakawa": {
+   "qid": "Q168716",
+   "ja": "白川方明"
+  },
+  "Masamichi Yamagiwa": {
+   "qid": "Q5385444",
+   "ja": "山際正道"
+  },
+  "Masaru Hayami": {
+   "qid": "Q1047651",
+   "ja": "速水優"
+  },
+  "Masayoshi Ito": {
+   "qid": "Q744989",
+   "ja": "伊東正義"
+  },
+  "Masayoshi Ōhira": {
+   "qid": "Q315568",
+   "ja": "大平正芳"
+  },
+  "Mervyn King": {
+   "qid": "Q1375680",
+   "ja": "マーヴィン・キング"
+  },
+  "Michel Camdessus": {
+   "qid": "Q551363",
+   "ja": "ミシェル・カムドシュ"
+  },
+  "Michele Bullock": {
+   "qid": "Q112491545",
+   "ja": "ミシェル・ブロック"
+  },
+  "Micheline Calmy-Rey": {
+   "qid": "Q122377",
+   "ja": "ミシュリン・カルミー＝レイ"
+  },
+  "Moon Jae-in": {
+   "qid": "Q21001",
+   "ja": "文在寅"
+  },
+  "Morarji Desai": {
+   "qid": "Q218661",
+   "ja": "モラルジー・デーサーイー"
+  },
+  "Morihiro Hosokawa": {
+   "qid": "Q315555",
+   "ja": "細川護熙"
+  },
+  "Moritz Leuenberger": {
+   "qid": "Q115520",
+   "ja": "モーリッツ・ロイエンベルガー"
+  },
+  "Myung Ho Kim": {
+   "qid": "Q16080215",
+   "ja": "金明浩"
+  },
+  "Naoto Kan": {
+   "qid": "Q47846",
+   "ja": "菅直人"
+  },
+  "Narendra Modi": {
+   "qid": "Q1058",
+   "ja": "ナレンドラ・モディ"
+  },
+  "Noboru Takeshita": {
+   "qid": "Q315561",
+   "ja": "竹下登"
+  },
+  "Nobusuke Kishi": {
+   "qid": "Q315572",
+   "ja": "岸信介"
+  },
+  "Olaf Scholz": {
+   "qid": "Q61053",
+   "ja": "オラフ・ショルツ"
+  },
+  "Otmar Emminger": {
+   "qid": "Q1725901",
+   "ja": "オトマール・エミンガー"
+  },
+  "P. V. Narasimha Rao": {
+   "qid": "Q275146",
+   "ja": "ナラシンハ・ラーオ"
+  },
+  "Park Chung-hee": {
+   "qid": "Q14356",
+   "ja": "朴正煕"
+  },
+  "Park Geun-hye": {
+   "qid": "Q138048",
+   "ja": "朴槿恵"
+  },
+  "Park Seung": {
+   "qid": "Q12596812",
+   "ja": "朴昇"
+  },
+  "Pascal Couchepin": {
+   "qid": "Q115513",
+   "ja": "パスカル・クシュパン"
+  },
+  "Paul Keating": {
+   "qid": "Q242654",
+   "ja": "ポール・キーティング"
+  },
+  "Paul Martin": {
+   "qid": "Q128529",
+   "ja": "ポール・マーティン"
+  },
+  "Paul Volcker": {
+   "qid": "Q349785",
+   "ja": "ポール・ボルカー"
+  },
+  "Philip Lowe": {
+   "qid": "Q27922677",
+   "ja": "フィリップ・ロウ"
+  },
+  "Philipp Etter": {
+   "qid": "Q532343",
+   "ja": "フィリップ・エッター"
+  },
+  "Philipp Hildebrand": {
+   "qid": "Q116927",
+   "ja": "フィリップ・ヒルデブランド"
+  },
+  "Pierre Trudeau": {
+   "qid": "Q8619",
+   "ja": "ピエール・トルドー"
+  },
+  "Pyong Do Min": {
+   "qid": "Q12596212",
+   "ja": "閔丙燾"
+  },
+  "R. N. Malhotra": {
+   "qid": "Q7273871",
+   "ja": "R・N・ナルホトラ"
+  },
+  "Raghuram Rajan": {
+   "qid": "Q981496",
+   "ja": "ラグラム・ラジャン"
+  },
+  "Rajiv Gandhi": {
+   "qid": "Q4593",
+   "ja": "ラジーヴ・ガンディー"
+  },
+  "René Felber": {
+   "qid": "Q115611",
+   "ja": "ルネ・フェルバー"
+  },
+  "Rhee Changyong": {
+   "qid": "Q12612865",
+   "ja": "李昌ヨン"
+  },
+  "Richard Nixon": {
+   "qid": "Q9588",
+   "ja": "リチャード・ニクソン"
+  },
+  "Rishi Sunak": {
+   "qid": "Q20055561",
+   "ja": "リシ・スナク"
+  },
+  "Robert Menzies": {
+   "qid": "Q214438",
+   "ja": "ロバート・メンジーズ"
+  },
+  "Robin Leigh-Pemberton, Baron Kingsdown": {
+   "qid": "Q1747305",
+   "ja": "ロバート・リー=ペンバートン"
+  },
+  "Roh Moo-hyun": {
+   "qid": "Q14345",
+   "ja": "盧武鉉"
+  },
+  "Roh Tae-woo": {
+   "qid": "Q242651",
+   "ja": "盧泰愚"
+  },
+  "Ronald Reagan": {
+   "qid": "Q9960",
+   "ja": "ロナルド・レーガン"
+  },
+  "Rowland Baring, 3rd Earl of Cromer": {
+   "qid": "Q4078231",
+   "ja": "ローランド・ベアリング"
+  },
+  "Rudolf Gnägi": {
+   "qid": "Q115533",
+   "ja": "ルドルフ・グネギ"
+  },
+  "Ruth Dreifuss": {
+   "qid": "Q123902",
+   "ja": "ルース・ドレフュス"
+  },
+  "Ryutaro Hashimoto": {
+   "qid": "Q309374",
+   "ja": "橋本龍太郎"
+  },
+  "S. Venkitaramanan": {
+   "qid": "Q7387970",
+   "ja": "S・ヴェンキトラマナン"
+  },
+  "Samuel Schmid": {
+   "qid": "Q115841",
+   "ja": "サミュエル・シュミット"
+  },
+  "Sanae Takaichi": {
+   "qid": "Q1705028",
+   "ja": "高市早苗"
+  },
+  "Satoshi Sumita": {
+   "qid": "Q5385335",
+   "ja": "澄田智"
+  },
+  "Scott Morrison": {
+   "qid": "Q7436908",
+   "ja": "スコット・モリソン"
+  },
+  "Se Ryun Kim": {
+   "qid": "Q10855837",
+   "ja": "金世錬"
+  },
+  "Seongtae Lee": {
+   "qid": "Q16090966",
+   "ja": "李成太"
+  },
+  "Shigeru Ishiba": {
+   "qid": "Q1335527",
+   "ja": "石破茂"
+  },
+  "Shigeru Yoshida": {
+   "qid": "Q301804",
+   "ja": "吉田茂"
+  },
+  "Shinzō Abe": {
+   "qid": "Q132345",
+   "ja": "安倍晋三"
+  },
+  "Simonetta Sommaruga": {
+   "qid": "Q122991",
+   "ja": "シモネッタ・ソマルーガ"
+  },
+  "Sin Byeong-hyeon": {
+   "qid": "Q623927",
+   "ja": "申秉鉉"
+  },
+  "Soon Cho": {
+   "qid": "Q11271326",
+   "ja": "趙淳"
+  },
+  "Stephen Harper": {
+   "qid": "Q206",
+   "ja": "スティーヴン・ハーパー"
+  },
+  "Stephen Poloz": {
+   "qid": "Q15127111",
+   "ja": "スティーブン・ポロズ"
+  },
+  "Syngman Rhee": {
+   "qid": "Q171684",
+   "ja": "李承晩"
+  },
+  "Sōsuke Uno": {
+   "qid": "Q315591",
+   "ja": "宇野宗佑"
+  },
+  "Tadashi Sasaki": {
+   "qid": "Q5385404",
+   "ja": "佐々木直"
+  },
+  "Takeo Fukuda": {
+   "qid": "Q315584",
+   "ja": "福田赳夫"
+  },
+  "Takeo Miki": {
+   "qid": "Q317675",
+   "ja": "三木武夫"
+  },
+  "Tanzan Ishibashi": {
+   "qid": "Q351656",
+   "ja": "石橋湛山"
+  },
+  "Tarō Asō": {
+   "qid": "Q132596",
+   "ja": "麻生太郎"
+  },
+  "Teiichiro Morinaga": {
+   "qid": "Q5385381",
+   "ja": "森永貞一郎"
+  },
+  "Tetsu Katayama": {
+   "qid": "Q335194",
+   "ja": "片山哲"
+  },
+  "Theresa May": {
+   "qid": "Q264766",
+   "ja": "テリーザ・メイ"
+  },
+  "Thomas Catto, 1st Baron Catto": {
+   "qid": "Q7788278",
+   "ja": "トーマス・カット"
+  },
+  "Thomas Jordan": {
+   "qid": "Q2425188",
+   "ja": "トーマス・ジョルダン"
+  },
+  "Tiff Macklem": {
+   "qid": "Q15127104",
+   "ja": "ティフ・マックレム"
+  },
+  "Tomiichi Murayama": {
+   "qid": "Q310126",
+   "ja": "村山富市"
+  },
+  "Tony Abbott": {
+   "qid": "Q348577",
+   "ja": "トニー・アボット"
+  },
+  "Tony Blair": {
+   "qid": "Q9545",
+   "ja": "トニー・ブレア"
+  },
+  "Toshihiko Fukui": {
+   "qid": "Q1045577",
+   "ja": "福井俊彦"
+  },
+  "Toshiki Kaifu": {
+   "qid": "Q315579",
+   "ja": "海部俊樹"
+  },
+  "Tsutomu Hata": {
+   "qid": "Q315720",
+   "ja": "羽田孜"
+  },
+  "Ueli Maurer": {
+   "qid": "Q123979",
+   "ja": "ウエリ・マウラー"
+  },
+  "Urjit Patel": {
+   "qid": "Q14623534",
+   "ja": "ウルジット・パテル"
+  },
+  "V. P. Singh": {
+   "qid": "Q315338",
+   "ja": "ヴィシュワナート・プラタープ・シン"
+  },
+  "Viola Amherd": {
+   "qid": "Q120917",
+   "ja": "ヴィオラ・アムヘルト"
+  },
+  "Walter Scheel": {
+   "qid": "Q2571",
+   "ja": "ヴァルター・シェール"
+  },
+  "Wen Jiabao": {
+   "qid": "Q16628",
+   "ja": "温家宝"
+  },
+  "William Lyon Mackenzie King": {
+   "qid": "Q128633",
+   "ja": "ウィリアム・ライアン・マッケンジー・キング"
+  },
+  "William McChesney Martin": {
+   "qid": "Q1349310",
+   "ja": "ウィリアム・マクチェスニー・マーティン"
+  },
+  "William McMahon": {
+   "qid": "Q356261",
+   "ja": "ウィリアム・マクマホン"
+  },
+  "Willy Brandt": {
+   "qid": "Q2514",
+   "ja": "ヴィリー・ブラント"
+  },
+  "Wim Duisenberg": {
+   "qid": "Q159844",
+   "ja": "ウィム・ドイセンベルク"
+  },
+  "Winston Churchill": {
+   "qid": "Q8016",
+   "ja": "ウィンストン・チャーチル"
+  },
+  "Xi Jinping": {
+   "qid": "Q15031",
+   "ja": "習近平"
+  },
+  "Yasuhiro Nakasone": {
+   "qid": "Q250828",
+   "ja": "中曽根康弘"
+  },
+  "Yasuo Fukuda": {
+   "qid": "Q101137",
+   "ja": "福田康夫"
+  },
+  "Yasuo Matsushita": {
+   "qid": "Q5385313",
+   "ja": "松下康雄"
+  },
+  "Yasushi Mieno": {
+   "qid": "Q4204309",
+   "ja": "三重野康"
+  },
+  "Yi Gang": {
+   "qid": "Q4743711",
+   "ja": "易綱"
+  },
+  "Yong Suh Koo": {
+   "qid": "Q12585501",
+   "ja": "具鎔書"
+  },
+  "Yoo Taik Kim": {
+   "qid": "Q16177539",
+   "ja": "金裕澤"
+  },
+  "Yoon Suk Yeol": {
+   "qid": "Q16090635",
+   "ja": "尹錫悦"
+  },
+  "Yoshihide Suga": {
+   "qid": "Q122465",
+   "ja": "菅義偉"
+  },
+  "Yoshihiko Noda": {
+   "qid": "Q57647",
+   "ja": "野田佳彦"
+  },
+  "Yoshirō Mori": {
+   "qid": "Q233499",
+   "ja": "森喜朗"
+  },
+  "Yukio Hatoyama": {
+   "qid": "Q131077",
+   "ja": "鳩山由紀夫"
+  },
+  "Yun Po-sun": {
+   "qid": "Q192049",
+   "ja": "尹潽善"
+  },
+  "Zenkō Suzuki": {
+   "qid": "Q315551",
+   "ja": "鈴木善幸"
+  },
+  "Zhao Ziyang": {
+   "qid": "Q99829",
+   "ja": "趙紫陽"
+  },
+  "Zhou Enlai": {
+   "qid": "Q17410",
+   "ja": "周恩来"
+  },
+  "Zhou Xiaochuan": {
+   "qid": "Q198026",
+   "ja": "周小川"
+  },
+  "Zhu Rongji": {
+   "qid": "Q18285",
+   "ja": "朱鎔基"
+  }
+ },
+ "missing": [
+  "Adolf Ogi",
+  "Alphons Egli",
+  "Eduard von Steiger",
+  "Ernst Brugger",
+  "Ernst Nobs",
+  "Fritz Honegger",
+  "Hans Hürlimann",
+  "Hans Schaffner",
+  "Hans Streuli",
+  "Jean-Pascal Delamuraz",
+  "Karl Kobelt",
+  "Kaspar Villiger",
+  "Kurt Furgler",
+  "Leon Schlumpf",
+  "Ludwig von Moos",
+  "Markus Feldmann",
+  "Martin Schlegel",
+  "Max Petitpierre",
+  "Nello Celio",
+  "Otto Stich",
+  "Pan Gongsheng",
+  "Paul Chaudet",
+  "Pierre Aubert",
+  "Pierre Graber",
+  "Rodolphe Rubattel",
+  "Roger Bonvin",
+  "Thomas B. McCabe",
+  "Thomas Holenstein",
+  "Willi Ritschard",
+  "Willy Spühler"
+ ]
+}

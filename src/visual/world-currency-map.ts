@@ -52,6 +52,7 @@ import {
   type MapCurrency,
   type WorldMapFile,
 } from '../data/world-map.js';
+import { t, tr } from '../i18n/i18n.js';
 import { haloTexture, noRaycast, Segments, TextPlane } from './glow.js';
 
 export interface MapFrame {
@@ -138,18 +139,30 @@ export class WorldCurrencyMap {
     this.root.add(this.note.mesh);
   }
 
+  private yearMode = false;
+
+  /** Redraw the note and the labels in the display language. */
+  relabel(): void {
+    this.labelKeys.fill('');
+    this.drawNote();
+  }
+
   /** The note under the map says what the numbers measure (52 weeks, or this year). */
   setYearMode(on: boolean): void {
-    const text = on
-      ? "Markers show each currency's home, not where it is traded. Change vs USD since the year's first week."
-      : "Markers show each currency's home, not where it is traded. Change vs USD over the chart's 52 weeks.";
+    this.yearMode = on;
+    this.drawNote();
+  }
+
+  private drawNote(): void {
+    const text = t(this.yearMode ? 'map.noteYear' : 'map.noteFull');
+    const credit = t('map.credit');
     this.note.draw(text, (ctx, w, h) => {
       ctx.textBaseline = 'middle';
       ctx.font = `${Math.round(h * 0.68)}px system-ui, sans-serif`;
       ctx.fillStyle = '#9fb0cc';
       ctx.fillText(text, 6, h / 2);
       ctx.textAlign = 'right';
-      ctx.fillText('Map: Natural Earth', w - 6, h / 2);
+      ctx.fillText(credit, w - 6, h / 2);
     });
   }
 
@@ -390,20 +403,20 @@ export class WorldCurrencyMap {
 
   private drawLabels(f: MapFrame): void {
     this.entries.forEach(({ def, slot }, k) => {
-      const place = placeAt(def, f.date);
+      const place = tr(placeAt(def, f.date));
       let top: string;
       let value = '';
       let bottom = place;
       let color = '#fff1c8';
       if (def.id === 'USD') {
         top = 'USD';
-        value = 'base';
-        bottom = 'United States · the base';
+        value = t('map.base');
+        bottom = t('map.usdPlace');
       } else {
         const pct = f.pct[slot];
         top = f.codes[slot] + (f.late[slot] ? '*' : '');
         color = this.css[slot];
-        if (pct === null) value = `data from ${f.firstYear[slot]}`;
+        if (pct === null) value = t('map.dataFrom', { year: f.firstYear[slot] });
         else value = changeText(pct);
       }
       const key = `${top}|${value}|${bottom}`;

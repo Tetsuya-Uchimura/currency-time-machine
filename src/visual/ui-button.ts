@@ -7,6 +7,7 @@
  * Sizes: at the top band (1.4 m) a 12 cm button is about 5 degrees wide, an
  * easy target for a hand ray.
  */
+import { wrapTokens } from '../i18n/i18n.js';
 import { CanvasTexture, Mesh, MeshBasicMaterial, PlaneGeometry, SRGBColorSpace } from '@iwsdk/core';
 
 /** Actions understood by the experience (UiTarget.action). */
@@ -165,17 +166,16 @@ export function roundRect(ctx: CanvasRenderingContext2D, x: number, y: number, w
   ctx.closePath();
 }
 
-/** Greedy word wrap to a width; at most `maxLines` (the last gets an ellipsis). */
+/** Greedy wrap to a width (words in English, characters in Japanese); at most `maxLines` (the last gets an ellipsis). */
 export function wrapText(ctx: CanvasRenderingContext2D, text: string, maxW: number, maxLines = 99): string[] {
-  const words = text.split(/\s+/).filter(Boolean);
   const lines: string[] = [];
   let line = '';
-  for (const word of words) {
-    const test = line ? `${line} ${word}` : word;
+  for (const tok of wrapTokens(text)) {
+    const test = line ? `${line}${tok.space ? ' ' : ''}${tok.t}` : tok.t;
     if (ctx.measureText(test).width <= maxW || !line) line = test;
     else {
       lines.push(line);
-      line = word;
+      line = tok.t;
     }
   }
   if (line) lines.push(line);

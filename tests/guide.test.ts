@@ -153,8 +153,9 @@ test('runner: stops at each beat, waits for speech within limits, never passes t
   r.update(2, 10, true, false, times);
   assert.ok(!r.holding, 'the maximum ends it even if speech hangs');
   assert.equal(r.stopAt, 20);
-  // Paused: nothing ages.
-  r.update(0.1, 20, false, false, times);
+  // Paused: nothing ages. (The next beat starts after a short quiet gap, 0.3 s.)
+  assert.equal(r.update(0.1, 20, false, false, times), null, 'a breath after the previous line');
+  r.update(0.3, 20, false, false, times);
   r.update(5, 20, false, true, times);
   assert.ok(r.holding);
   r.skip();
@@ -163,6 +164,27 @@ test('runner: stops at each beat, waits for speech within limits, never passes t
   r.update(0.01, 30, false, false, times);
   r.update(1.1, 30, false, false, times);
   assert.ok(r.doneAt(30));
+});
+
+test('runner: a beat waits for an earlier line to be said (up to 12 s), and ends a breath after its own', () => {
+  const r = new YearRunner([{ at: 0, text: 'a' }, { at: 0, text: 'b' }], 10);
+  const times = () => ({ minS: 1, maxS: 60, tailS: 0.45 });
+  // "Here we are" is still being said: the first beat waits.
+  assert.equal(r.update(1, 0, true, false, times), null);
+  assert.equal(r.update(5, 0, true, false, times), null);
+  assert.equal(r.update(0.1, 0, false, false, times), null, 'a breath first');
+  assert.equal(r.update(0.3, 0, false, false, times)?.text, 'a');
+  // Its own line: 20 s of speech is not cut by any estimate.
+  for (let k = 0; k < 20; k++) r.update(1, 0, true, false, times);
+  assert.ok(r.holding, 'still speaking: still holding');
+  r.update(0.2, 0, false, false, times);
+  assert.ok(r.holding, 'a breath after the voice ends');
+  assert.equal(r.update(0.3, 0, false, false, times)?.text, 'b', 'then the next beat');
+  // A line that never ends: the next beat starts anyway after 12 s.
+  const r2 = new YearRunner([{ at: 0, text: 'x' }], 10);
+  let started = null;
+  for (let k = 0; k < 13 && !started; k++) started = r2.update(1, 0, true, false, times);
+  assert.equal(started?.text, 'x');
 });
 
 test('clock window: plays only the year, stops at the guide’s beats, never crosses into the next year', () => {

@@ -8,7 +8,9 @@
     row-dial   -10  -1  [1985]  +1  +10                (Year Journey)
     row-year   Start Travel / Years / All currencies   (Year Journey)
     row-chapters 1948 1971 1990 2008 2020 / Years      (Full Journey)
-    row-mode   Full Journey / Calm motion
+    row-mode   Full Journey / Calm motion / Lang (EN or JA: the display language)
+  The panel's font (MSDF Inter) has Latin glyphs only, so its labels stay
+  English in both display languages; everything else is translated.
 -->
 <style>
   .panel-root {
@@ -59,6 +61,12 @@
 
   .year-label:dark {
     color: #ffe1a0;
+  }
+
+  .mode-button {
+    width: 108;
+    min-width: 0;
+    flex-shrink: 1;
   }
 
   .chapter {
@@ -130,11 +138,14 @@
     <Button id="btn-years2" class="chapter" variant="secondary"><ButtonLabel class="chapter-label">Years</ButtonLabel></Button>
   </div>
   <div class="row" id="row-mode">
-    <Button id="btn-full" class="main-button" variant="secondary">
+    <Button id="btn-full" class="mode-button" variant="secondary">
       <ButtonLabel id="label-full">Full Journey</ButtonLabel>
     </Button>
-    <Button id="btn-calm" class="main-button" variant="secondary">
+    <Button id="btn-calm" class="mode-button" variant="secondary">
       <ButtonLabel id="label-calm">Calm: off</ButtonLabel>
+    </Button>
+    <Button id="btn-lang" class="mode-button" variant="secondary">
+      <ButtonLabel id="label-lang">Lang: EN</ButtonLabel>
     </Button>
   </div>
   <div class="note" id="attribution">Exchange rate data: Frankfurter (frankfurter.dev)</div>

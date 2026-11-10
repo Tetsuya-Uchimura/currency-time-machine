@@ -1,0 +1,1257 @@
+{
+ "_about": {
+  "ja": "Japanese review translation of the app's English data texts, keyed by the English. Built into public/data/i18n-ja.json by npm run i18n; changed English shows as missing."
+ },
+ "\"Whatever it takes\"": {
+  "ja": "「必要なことは何でもする」",
+  "where": "event whatever-it-takes: title"
+ },
+ "A 90-day freeze on wages and prices": {
+  "ja": "賃金と物価の90日間の凍結",
+  "where": "portal gold-break: policy 3"
+ },
+ "A Communist Party meeting starts China's economic reforms and opening to the world.": {
+  "ja": "共産党の会議で、中国の経済改革と対外開放が始まります。",
+  "where": "event china-reform: summary"
+ },
+ "A coordinated push on the dollar": {
+  "ja": "ドルに対する協調行動",
+  "where": "portal dollar-adjustment: title; portal scene dollar-adjustment: title"
+ },
+ "A currency reform replaces the Reichsmark with the Deutsche Mark in the western zones of Germany.": {
+  "ja": "通貨改革により、ドイツ西側占領地区でライヒスマルクがドイツマルクに置き換えられます。",
+  "where": "event dm-born: summary"
+ },
+ "A flexible exchange rate: by 18 December 1997 the won was floating freely": {
+  "ja": "柔軟な為替レート：1997年12月18日までにウォンは完全な変動相場に移行",
+  "where": "portal asian-crisis: policy 3"
+ },
+ "A global financial crisis sends shockwaves through currency markets.": {
+  "ja": "世界的な金融危機が為替市場に衝撃を与えます。",
+  "where": "Full Journey gfc: caption"
+ },
+ "A large European bank freezes funds exposed to US mortgages, and lending between banks seizes up.": {
+  "ja": "欧州の大手銀行が米国の住宅ローン関連のファンドを凍結し、銀行間の貸し借りが滞ります。",
+  "where": "event credit-crunch: summary"
+ },
+ "A large US bank collapses, and fears spread to other banks.": {
+  "ja": "米国の大手銀行が破綻し、不安がほかの銀行にも広がります。",
+  "where": "event svb-2023: summary"
+ },
+ "A pandemic is declared": {
+  "ja": "パンデミックの宣言",
+  "where": "event pandemic: title"
+ },
+ "A temporary 10% surcharge on imports": {
+  "ja": "輸入品への一時的な10%の課徴金",
+  "where": "portal gold-break: policy 2"
+ },
+ "After a second devaluation of the dollar, Japan and much of Europe let their currencies float.": {
+  "ja": "2度目のドル切り下げの後、日本と欧州の多くの国が通貨を変動相場に移します。",
+  "where": "event usd-1973: summary"
+ },
+ "After the gold link": {
+  "ja": "金との連動の終了後",
+  "where": "era name"
+ },
+ "Announced the measures in an address to the nation on 15 August 1971.": {
+  "ja": "1971年8月15日、国民向けの演説でこれらの措置を発表。",
+  "where": "portal gold-break: involvement of Richard Nixon"
+ },
+ "As an inflation-fighting measure, Canada lets its dollar float once more.": {
+  "ja": "インフレ対策として、カナダがカナダドルを再び変動相場に移します。",
+  "where": "event cad-float-1970: summary"
+ },
+ "Asian currency crisis": {
+  "ja": "アジア通貨危機",
+  "where": "Full Journey asian-crisis: chart marker"
+ },
+ "Attended as US Secretary of the Treasury, one of the five finance ministers.": {
+  "ja": "5人の財務相の1人として、米財務長官の立場で出席。",
+  "where": "portal dollar-adjustment: involvement of James A. Baker III"
+ },
+ "Attended as head of the US central bank.": {
+  "ja": "米国の中央銀行の長として出席。",
+  "where": "portal dollar-adjustment: involvement of Paul Volcker"
+ },
+ "Attended for the Bank of Japan.": {
+  "ja": "日本銀行を代表して出席。",
+  "where": "portal dollar-adjustment: involvement of Satoshi Sumita"
+ },
+ "Attended for the Bundesbank.": {
+  "ja": "ドイツ連邦銀行を代表して出席。",
+  "where": "portal dollar-adjustment: involvement of Karl Otto Pöhl"
+ },
+ "August 1971": {
+  "ja": "1971年8月",
+  "where": "Full Journey gold-break: label"
+ },
+ "Australia": {
+  "ja": "オーストラリア",
+  "where": "event rba: country; event aud-1966: country; event aud-float: country; region AUS: name"
+ },
+ "Australia floats its dollar": {
+  "ja": "オーストラリアが豪ドルを変動相場に",
+  "where": "event aud-float: title"
+ },
+ "Australia lets the market set the value of its dollar.": {
+  "ja": "オーストラリアが豪ドルの価値を市場に委ねます。",
+  "where": "event aud-float: summary"
+ },
+ "Australia switches to decimal currency: the Australian dollar replaces the Australian pound.": {
+  "ja": "オーストラリアが十進法の通貨に切り替え、豪ドルがオーストラリア・ポンドに代わります。",
+  "where": "event aud-1966: summary"
+ },
+ "Australia's central banking moves to a new institution, the Reserve Bank of Australia.": {
+  "ja": "オーストラリアの中央銀行業務が、新しい機関であるオーストラリア準備銀行に移ります。",
+  "where": "event rba: summary"
+ },
+ "Australian dollar": {
+  "ja": "豪ドル",
+  "where": "currency name (AUD)"
+ },
+ "Bangkok": {
+  "ja": "バンコク",
+  "where": "event thai-float: city"
+ },
+ "Bank of Japan rate cut to 0.3% on 31 October 2008": {
+  "ja": "2008年10月31日、日本銀行が政策金利を0.3%に引き下げ",
+  "where": "portal gfc: policy 4"
+ },
+ "Beijing": {
+  "ja": "北京",
+  "where": "event china-reform: city; event china-2005: city; event china-2015: city"
+ },
+ "Berlin": {
+  "ja": "ベルリン",
+  "where": "event berlin-wall: city; event gmu-1990: city; event reunification: city"
+ },
+ "Black Monday": {
+  "ja": "ブラックマンデー",
+  "where": "event black-monday: title"
+ },
+ "Black Wednesday": {
+  "ja": "ブラックウェンズデー",
+  "where": "event black-wednesday: title"
+ },
+ "Board of Governors of the Federal Reserve System": {
+  "ja": "米連邦準備制度理事会",
+  "where": "event gfc: source publisher; event fed-2022: source publisher"
+ },
+ "Bonn": {
+  "ja": "ボン",
+  "where": "event dm-float-1971: city"
+ },
+ "Bretton Woods: fixed rates": {
+  "ja": "ブレトンウッズ体制：固定相場",
+  "where": "era name"
+ },
+ "Britain devalues the pound": {
+  "ja": "英国がポンドを切り下げ",
+  "where": "event sterling-1949: title"
+ },
+ "Britain devalues the pound again": {
+  "ja": "英国がポンドを再び切り下げ",
+  "where": "event sterling-1967: title"
+ },
+ "Britain devalues the pound from $2.80 to $2.40.": {
+  "ja": "英国がポンドを2.80ドルから2.40ドルに切り下げます。",
+  "where": "Full Journey sterling-1967: caption"
+ },
+ "Britain floats the pound": {
+  "ja": "英国がポンドを変動相場に",
+  "where": "event gbp-float-1972: title"
+ },
+ "Britain joins the ERM": {
+  "ja": "英国がERMに参加",
+  "where": "event uk-erm-1990: title"
+ },
+ "Britain stops defending its fixed rate and lets the pound float.": {
+  "ja": "英国が固定レートの防衛をやめ、ポンドを変動相場に移します。",
+  "where": "event gbp-float-1972: summary"
+ },
+ "Britain votes to leave the European Union. The pound tumbles.": {
+  "ja": "英国が国民投票でEU離脱を選び、ポンドが急落します。",
+  "where": "Full Journey brexit: caption"
+ },
+ "British pound": {
+  "ja": "英ポンド",
+  "where": "currency name (GBP)"
+ },
+ "Brussels": {
+  "ja": "ブリュッセル",
+  "where": "event ems-1979: city"
+ },
+ "Canada": {
+  "ja": "カナダ",
+  "where": "event cad-float-1950: country; event cad-peg-1962: country; event cad-float-1970: country; region CAN: name"
+ },
+ "Canada fixes its dollar again": {
+  "ja": "カナダがカナダドルを再び固定相場に",
+  "where": "event cad-peg-1962: title"
+ },
+ "Canada floats its dollar again": {
+  "ja": "カナダがカナダドルを再び変動相場に",
+  "where": "event cad-float-1970: title"
+ },
+ "Canada lets its dollar float": {
+  "ja": "カナダがカナダドルを変動相場に",
+  "where": "event cad-float-1950: title"
+ },
+ "Canada returns to a fixed rate, at 92.5 US cents.": {
+  "ja": "カナダが1カナダドル＝92.5米セントの固定レートに戻ります。",
+  "where": "event cad-peg-1962: summary"
+ },
+ "Canadian dollar": {
+  "ja": "カナダドル",
+  "where": "currency name (CAD)"
+ },
+ "Canberra": {
+  "ja": "キャンベラ",
+  "where": "event aud-1966: city; event aud-float: city"
+ },
+ "Central banks cut rates together": {
+  "ja": "中央銀行が協調利下げ",
+  "where": "event gfc: title"
+ },
+ "Chair of the Federal Reserve": {
+  "ja": "連邦準備制度理事会（FRB）議長",
+  "where": "portal gold-break: role of Arthur F. Burns; portal dollar-adjustment: role of Paul Volcker; portal gfc: role of Ben Bernanke; office us-fed"
+ },
+ "Chair of the Swiss National Bank": {
+  "ja": "スイス国立銀行総裁（理事会議長）",
+  "where": "office ch-snb"
+ },
+ "Chaired the Group of Ten meeting of 17 and 18 December 1971 in Washington, which reached the Smithsonian Agreement.": {
+  "ja": "1971年12月17〜18日にワシントンで開かれ、スミソニアン合意に至った10か国グループ（G10）の会合で議長を務める。",
+  "where": "portal gold-break: involvement of John Connally"
+ },
+ "Chairman of the Chinese Communist Party": {
+  "ja": "中国共産党中央委員会主席",
+  "where": "office cn-chairman"
+ },
+ "Chancellor of Germany": {
+  "ja": "ドイツ連邦首相",
+  "where": "office de-chancellor"
+ },
+ "China": {
+  "ja": "中国",
+  "where": "event china-reform: country; event china-2005: country; event china-2015: country; region CHN: name"
+ },
+ "China begins reform and opening up": {
+  "ja": "中国が改革開放を開始",
+  "where": "event china-reform: title"
+ },
+ "China changes how its daily reference rate is set, and the yuan falls by the most in two decades.": {
+  "ja": "中国が毎日の基準値の決め方を変更し、人民元はこの20年で最大の下落となります。",
+  "where": "event china-2015: summary"
+ },
+ "China devalues the yuan": {
+  "ja": "中国が人民元を切り下げ",
+  "where": "event china-2015: title"
+ },
+ "China lifts the yuan's fixed peg to the dollar, with a one-time revaluation.": {
+  "ja": "中国が人民元のドルへの固定（ペッグ）をやめ、1回限りの切り上げを行います。",
+  "where": "event china-2005: summary"
+ },
+ "China loosens the yuan's peg": {
+  "ja": "中国が人民元のペッグを緩和",
+  "where": "event china-2005: title"
+ },
+ "Chinese yuan": {
+  "ja": "人民元",
+  "where": "currency name (CNY)"
+ },
+ "Collective government: the seven-member Federal Council. Its presidency rotates every year.": {
+  "ja": "合議制の政府：7人の連邦参事会が統治します。議長職は毎年交代します。",
+  "where": "region CHE: how it is governed"
+ },
+ "Constitutional monarchy: the Prime Minister leads the government.": {
+  "ja": "立憲君主制：首相が政府を率います。",
+  "where": "region CAN: how it is governed; region GBR: how it is governed; region JPN: how it is governed; region AUS: how it is governed"
+ },
+ "Coordinated interest-rate cut by six central banks on 8 October 2008": {
+  "ja": "2008年10月8日、6つの中央銀行による協調利下げ",
+  "where": "portal gfc: policy 2"
+ },
+ "Countries of the euro area share one currency, the euro, which takes over from the Deutsche Mark. The major currencies keep floating.": {
+  "ja": "ユーロ圏の国々は共通通貨ユーロを使い、ユーロがドイツマルクを引き継ぎます。主要通貨は変動相場のままです。",
+  "where": "era \"Floating rates and the euro\": text"
+ },
+ "Currencies are pegged to the US dollar, and the dollar to gold. Rates move only when a government resets its peg.": {
+  "ja": "各通貨は米ドルに、ドルは金に固定されています。レートが動くのは、政府が固定レートを変更したときだけです。",
+  "where": "era \"Bretton Woods: fixed rates\": text"
+ },
+ "Currency turmoil spreads across Asia. The Korean won loses much of its value.": {
+  "ja": "通貨の混乱がアジア全体に広がり、韓国ウォンが大きく価値を失います。",
+  "where": "Full Journey asian-crisis: caption"
+ },
+ "Deutsche Mark": {
+  "ja": "ドイツマルク",
+  "where": "currency name (EUR)"
+ },
+ "Deutsche Mark launched": {
+  "ja": "ドイツマルク誕生",
+  "where": "Full Journey dm-born: chart marker"
+ },
+ "Dollar swap lines from the Federal Reserve to other central banks, including the Bank of Korea on 29 October 2008": {
+  "ja": "FRBからほかの中央銀行へのドル・スワップ枠（2008年10月29日の韓国銀行向けを含む）",
+  "where": "portal gfc: policy 3"
+ },
+ "Dollar-gold break": {
+  "ja": "ドルと金の分離",
+  "where": "Full Journey gold-break: chart marker"
+ },
+ "East Germany opens its border. Within a year the two German states unite.": {
+  "ja": "東ドイツが国境を開放します。1年以内に東西ドイツは統一します。",
+  "where": "event berlin-wall: summary"
+ },
+ "East and West Germany": {
+  "ja": "東西ドイツ",
+  "where": "event berlin-wall: country"
+ },
+ "East and West Germany become one country.": {
+  "ja": "東西ドイツが1つの国になります。",
+  "where": "event reunification: summary"
+ },
+ "Eleven countries adopt the euro for markets and banks; notes and coins follow in 2002.": {
+  "ja": "11か国が市場と銀行の取引でユーロを導入します。紙幣と硬貨は2002年からです。",
+  "where": "event euro: summary"
+ },
+ "Eleven countries adopt the euro. The Deutsche Mark passes on its light.": {
+  "ja": "11か国がユーロを導入します。ドイツマルクはその光をユーロに引き渡します。",
+  "where": "Full Journey euro: caption"
+ },
+ "Euro": {
+  "ja": "ユーロ",
+  "where": "currency name (EUR)"
+ },
+ "Euro area": {
+  "ja": "ユーロ圏",
+  "where": "event ecb-1998: country; event euro: country; event euro-cash: country; region EA: name"
+ },
+ "Euro banknotes and coins replace the national currencies in everyday use.": {
+  "ja": "ユーロの紙幣と硬貨が、日常の支払いで各国の通貨に代わります。",
+  "where": "event euro-cash: summary"
+ },
+ "Euro launched": {
+  "ja": "ユーロ誕生",
+  "where": "Full Journey euro: chart marker"
+ },
+ "Euro notes and coins arrive": {
+  "ja": "ユーロの紙幣と硬貨が登場",
+  "where": "event euro-cash: title"
+ },
+ "European Community": {
+  "ja": "欧州共同体（EC）",
+  "where": "event ems-1979: country"
+ },
+ "Federal Reserve Bank of St. Louis (FRASER)": {
+  "ja": "セントルイス連邦準備銀行（FRASER）",
+  "where": "event lehman: source publisher"
+ },
+ "Federal parliamentary republic: the Chancellor leads the government.": {
+  "ja": "連邦議会制共和国：連邦首相が政府を率います。",
+  "where": "region DEU: how it is governed"
+ },
+ "Finance Minister of West Germany": {
+  "ja": "西ドイツ財務相",
+  "where": "portal dollar-adjustment: role of Gerhard Stoltenberg"
+ },
+ "Finance ministers and central bank governors of five major economies, meeting at the Plaza Hotel, say a further orderly rise of other currencies against the dollar is desirable.": {
+  "ja": "主要5か国の財務相と中央銀行総裁がプラザホテルで会合し、ドル以外の通貨がドルに対してさらに秩序立って上昇することが望ましいと表明します。",
+  "where": "event dollar-adjustment: summary"
+ },
+ "Fixed exchange rates collapse. Currencies begin to float freely.": {
+  "ja": "固定相場制が崩れ、各通貨が自由に変動し始めます。",
+  "where": "Full Journey float: caption"
+ },
+ "Floating rates": {
+  "ja": "変動相場",
+  "where": "era name"
+ },
+ "Floating rates and the euro": {
+  "ja": "変動相場とユーロ",
+  "where": "era name"
+ },
+ "Franc cap dropped": {
+  "ja": "フラン上限の撤廃",
+  "where": "Full Journey chf-shock: chart marker"
+ },
+ "France": {
+  "ja": "フランス",
+  "where": "event louvre: country; event credit-crunch: country"
+ },
+ "Frankfurt": {
+  "ja": "フランクフルト",
+  "where": "event dm-born: city; event bundesbank: city; event ecb-1998: city; event euro: city"
+ },
+ "From July 1997 several Asian currencies fell sharply as capital left the region. South Korea announced on 21 November 1997 that it would seek IMF support, and a rescue program was agreed on 3 December. Between June and the end of December the won fell from about 888 to about 1,700 per dollar.": {
+  "ja": "1997年7月から、資本が地域から流出し、いくつかのアジア通貨が急落しました。韓国は1997年11月21日にIMFに支援を求めると発表し、12月3日に支援プログラムが合意されました。6月から12月末までに、ウォンは1ドル約888ウォンから約1,700ウォンに下落しました。",
+  "where": "portal asian-crisis: summary"
+ },
+ "From mid-1997, money flowed out of several East and Southeast Asian economies and their currencies fell. The won went from about 888 to about 1,700 per dollar by the end of 1997, then recovered part of the loss in 1998.": {
+  "ja": "1997年半ばから、東アジアと東南アジアのいくつかの経済から資金が流出し、その通貨が下落しました。ウォンは1997年末までに1ドル約888ウォンから約1,700ウォンになり、1998年に下落分の一部を取り戻しました。",
+  "where": "portal scene asian-crisis: detail"
+ },
+ "G7 Information Centre, University of Toronto (text of the official announcement)": {
+  "ja": "トロント大学G7情報センター（公式発表の本文）",
+  "where": "event dollar-adjustment: source publisher"
+ },
+ "General Secretary of the Chinese Communist Party": {
+  "ja": "中国共産党中央委員会総書記",
+  "where": "office cn-gensec"
+ },
+ "Geneva": {
+  "ja": "ジュネーブ",
+  "where": "event pandemic: city"
+ },
+ "German monetary union": {
+  "ja": "ドイツ通貨統合",
+  "where": "event gmu-1990: title"
+ },
+ "Germany": {
+  "ja": "ドイツ",
+  "where": "event gmu-1990: country; event reunification: country; region DEU: name; region DEU: name"
+ },
+ "Germany is reunified": {
+  "ja": "ドイツ再統一",
+  "where": "event reunification: title"
+ },
+ "Global financial crisis": {
+  "ja": "世界金融危機",
+  "where": "Full Journey gfc: chart marker"
+ },
+ "Governor of the Bank of Canada": {
+  "ja": "カナダ銀行総裁",
+  "where": "office ca-boc"
+ },
+ "Governor of the Bank of England": {
+  "ja": "イングランド銀行総裁",
+  "where": "office uk-boe"
+ },
+ "Governor of the Bank of Japan": {
+  "ja": "日本銀行総裁",
+  "where": "portal dollar-adjustment: role of Satoshi Sumita; portal gfc: role of Masaaki Shirakawa; office jp-boj"
+ },
+ "Governor of the Bank of Korea": {
+  "ja": "韓国銀行総裁",
+  "where": "portal asian-crisis: role of Lee Kyung-shik; office kr-bok"
+ },
+ "Governor of the People's Bank of China": {
+  "ja": "中国人民銀行総裁",
+  "where": "office cn-pboc"
+ },
+ "Governor of the Reserve Bank of Australia": {
+  "ja": "オーストラリア準備銀行総裁",
+  "where": "office au-rba"
+ },
+ "Governor of the Reserve Bank of India": {
+  "ja": "インド準備銀行総裁",
+  "where": "office in-rbi"
+ },
+ "Gulf oil producers announce a sharp rise in the price of oil; production cuts and an embargo follow.": {
+  "ja": "湾岸の産油国が原油価格の大幅な引き上げを発表し、続いて減産と禁輸が行われます。",
+  "where": "event oil-1973: summary"
+ },
+ "HM Treasury (GOV.UK)": {
+  "ja": "英国財務省（GOV.UK）",
+  "where": "event mini-budget: source publisher"
+ },
+ "Headed the IMF, whose board approved the program for Korea on 4 December 1997.": {
+  "ja": "IMFのトップ。IMF理事会は1997年12月4日に韓国向けプログラムを承認。",
+  "where": "portal asian-crisis: involvement of Michel Camdessus"
+ },
+ "Higher interest rates and restructuring of the financial sector under the program": {
+  "ja": "プログラムのもとでの金利引き上げと金融部門の再編",
+  "where": "portal asian-crisis: policy 2"
+ },
+ "His Treasury Department sent Congress draft legislation for the rescue program on 20 September 2008.": {
+  "ja": "率いる財務省が、2008年9月20日に救済プログラムの法案を議会に送付。",
+  "where": "portal gfc: involvement of Henry Paulson"
+ },
+ "IMF stand-by arrangement for Korea, approved on 4 December 1997": {
+  "ja": "1997年12月4日に承認された、IMFの韓国向けスタンドバイ取極",
+  "where": "portal asian-crisis: policy 1"
+ },
+ "In August 1971 the United States suspended the convertibility of the dollar into gold, so other governments could no longer exchange their dollars for gold. By 1973 fixed exchange rates had given way to floating ones: the yen went from about 357 to about 280 per dollar.": {
+  "ja": "1971年8月、米国はドルと金の交換を停止し、各国政府は保有するドルを金に交換できなくなりました。1973年までに固定相場は変動相場に移り、円は1ドル約357円から約280円になりました。",
+  "where": "portal scene gold-break: detail"
+ },
+ "In September 1985 five major economies said a further rise of other currencies against the dollar was desirable, and stood ready to cooperate to encourage it. Over the next two years the yen went from about 242 to about 127 per dollar, and the mark from about 2.9 to about 1.6.": {
+  "ja": "1985年9月、主要5か国は、ドル以外の通貨がドルに対してさらに上昇することが望ましいと表明し、それを促すために協力する用意があるとしました。その後の2年間で、円は1ドル約242円から約127円に、マルクは約2.9マルクから約1.6マルクになりました。",
+  "where": "portal scene dollar-adjustment: detail"
+ },
+ "In September and October 2008 a financial crisis that began in the United States spread around the world. Between late June and late November the won fell from about 1,040 to about 1,470 per dollar, and the Australian dollar lost about a third of its value against the dollar.": {
+  "ja": "2008年9月から10月にかけて、米国で始まった金融危機が世界に広がりました。6月下旬から11月下旬までに、ウォンは1ドル約1,040ウォンから約1,470ウォンに下落し、豪ドルはドルに対して価値の約3分の1を失いました。",
+  "where": "portal gfc: summary"
+ },
+ "In a balance-of-payments crisis, India's budget of 24 July begins wide economic reforms.": {
+  "ja": "国際収支危機のなか、7月24日のインドの予算から幅広い経済改革が始まります。",
+  "where": "event india-1991: summary"
+ },
+ "In autumn 2008 a financial crisis that began in the United States spread around the world. The yen rose against the dollar, the won fell from about 1,040 to about 1,470 per dollar, and the Australian dollar lost about a third of its value against it.": {
+  "ja": "2008年秋、米国で始まった金融危機が世界に広がりました。円はドルに対して上昇し、ウォンは1ドル約1,040ウォンから約1,470ウォンに下落し、豪ドルはドルに対して価値の約3分の1を失いました。",
+  "where": "portal scene gfc: detail"
+ },
+ "India": {
+  "ja": "インド",
+  "where": "event inr-1966: country; event india-1991: country; region IND: name; region IND: name"
+ },
+ "India devalues the rupee": {
+  "ja": "インドがルピーを切り下げ",
+  "where": "event inr-1966: title"
+ },
+ "India lowers the official value of the rupee against the dollar.": {
+  "ja": "インドがルピーの対ドル公定レートを引き下げます。",
+  "where": "event inr-1966: summary"
+ },
+ "India opens its economy": {
+  "ja": "インドが経済を開放",
+  "where": "event india-1991: title"
+ },
+ "Indian rupee": {
+  "ja": "インド・ルピー",
+  "where": "currency name (INR)"
+ },
+ "International Monetary Fund": {
+  "ja": "国際通貨基金（IMF）",
+  "where": "event thai-float: source publisher; event asian-crisis: source publisher; event asian-crisis: source publisher"
+ },
+ "Intervention in currency markets to lower the dollar": {
+  "ja": "ドルを引き下げるための為替市場への介入",
+  "where": "portal dollar-adjustment: policy 3"
+ },
+ "January 1999": {
+  "ja": "1999年1月",
+  "where": "Full Journey euro: label"
+ },
+ "January 2015": {
+  "ja": "2015年1月",
+  "where": "Full Journey chf-shock: label"
+ },
+ "Japan": {
+  "ja": "日本",
+  "where": "event yen-360: country; event yen-float-1971: country; event boj-qe-2001: country; event boj-qqe-2013: country"
+ },
+ "Japan and the US buy yen together": {
+  "ja": "日米が協調して円買い",
+  "where": "event yen-2026: title"
+ },
+ "Japan begins quantitative easing": {
+  "ja": "日本が量的緩和を開始",
+  "where": "event boj-qe-2001: title"
+ },
+ "Japan buys yen": {
+  "ja": "日本が円買い介入",
+  "where": "event yen-intervention-2022: title"
+ },
+ "Japan buys yen again": {
+  "ja": "日本が再び円買い介入",
+  "where": "event yen-intervention-2022-10: title"
+ },
+ "Japan lets the yen float": {
+  "ja": "日本が円を変動相場に",
+  "where": "event yen-float-1971: title"
+ },
+ "Japan sets a single exchange rate of 360 yen to the US dollar, which holds until 1971.": {
+  "ja": "日本が1ドル＝360円の単一為替レートを設定し、1971年まで維持されます。",
+  "where": "event yen-360: summary"
+ },
+ "Japan's Ministry of Finance buys yen again: 5.62 trillion yen on 21 October and 0.73 trillion yen on 24 October.": {
+  "ja": "日本の財務省が再び円を買います：10月21日に5.62兆円、10月24日に0.73兆円。",
+  "where": "event yen-intervention-2022-10: summary"
+ },
+ "Japan's Ministry of Finance buys yen in coordination with the US Treasury on 31 July (US Eastern Time). Over 30 July, 31 July and 3 August, Japan buys 15.4 trillion yen in all.": {
+  "ja": "日本の財務省が7月31日（米東部時間）、米財務省と協調して円を買います。7月30日、31日、8月3日の3日間で、日本は合計15.4兆円の円を買います。",
+  "where": "event yen-2026: summary"
+ },
+ "Japan's Ministry of Finance sells dollars and buys yen, 2.84 trillion yen in one day: its first purchase of yen since June 1998.": {
+  "ja": "日本の財務省がドルを売って円を買います。1日で2.84兆円、1998年6月以来の円買いです。",
+  "where": "event yen-intervention-2022: summary"
+ },
+ "Japan's big monetary easing": {
+  "ja": "日本の大規模な金融緩和",
+  "where": "event boj-qqe-2013: title"
+ },
+ "Japanese yen": {
+  "ja": "日本円",
+  "where": "currency name (JPY)"
+ },
+ "Joint statement of the G5: United States, Japan, West Germany, France and the United Kingdom": {
+  "ja": "G5（米国、日本、西ドイツ、フランス、英国）の共同声明",
+  "where": "portal dollar-adjustment: policy 1"
+ },
+ "June 1948": {
+  "ja": "1948年6月",
+  "where": "Full Journey dm-born: label"
+ },
+ "June 2016": {
+  "ja": "2016年6月",
+  "where": "Full Journey brexit: label"
+ },
+ "Korea agrees an IMF rescue": {
+  "ja": "韓国がIMFの支援に合意",
+  "where": "event asian-crisis: title"
+ },
+ "Korean won": {
+  "ja": "韓国ウォン",
+  "where": "currency name (KRW)"
+ },
+ "Kuwait": {
+  "ja": "クウェート",
+  "where": "event oil-1973: country"
+ },
+ "Kuwait City": {
+  "ja": "クウェート市",
+  "where": "event oil-1973: city"
+ },
+ "Kyiv": {
+  "ja": "キーウ",
+  "where": "event ukraine-2022: city"
+ },
+ "Lehman Brothers collapses": {
+  "ja": "リーマン・ブラザーズが破綻",
+  "where": "event lehman: title"
+ },
+ "London": {
+  "ja": "ロンドン",
+  "where": "event sterling-1949: city; event sterling-1967: city; event gbp-float-1972: city; event uk-erm-1990: city"
+ },
+ "Major economies coordinate to weaken the dollar. The yen strengthens in the years that follow.": {
+  "ja": "主要国が協調してドル安を図ります。その後の数年で円高が進みます。",
+  "where": "Full Journey dollar-adjustment: caption"
+ },
+ "Managing Director of the IMF": {
+  "ja": "IMF専務理事",
+  "where": "portal asian-crisis: role of Michel Camdessus"
+ },
+ "March 2020": {
+  "ja": "2020年3月",
+  "where": "Full Journey pandemic: label"
+ },
+ "Meeting at the Smithsonian Institution in Washington, the Group of Ten agrees on new fixed rates: the dollar is devalued against gold, and the yen is set at 308 per dollar.": {
+  "ja": "ワシントンのスミソニアン博物館で会合した10か国グループ（G10）が、新たな固定レートに合意します。ドルは金に対して切り下げられ、円は1ドル＝308円に設定されます。",
+  "where": "event smithsonian: summary"
+ },
+ "Minister of Finance of Japan": {
+  "ja": "大蔵大臣（日本の財務相）",
+  "where": "portal dollar-adjustment: role of Noboru Takeshita"
+ },
+ "Ministry of Finance Japan": {
+  "ja": "財務省（日本）",
+  "where": "event yen-intervention-2022: source publisher; event yen-intervention-2022-10: source publisher; event yen-2026: source publisher; event yen-2026: source publisher"
+ },
+ "Ministry of Finance Japan, Policy Research Institute": {
+  "ja": "財務省 財務総合政策研究所",
+  "where": "event gold-break: source publisher; event yen-float-1971: source publisher; event smithsonian: source publisher"
+ },
+ "Moscow": {
+  "ja": "モスクワ",
+  "where": "event russia-1998: city"
+ },
+ "New Delhi": {
+  "ja": "ニューデリー",
+  "where": "event inr-1966: city; event india-1991: city"
+ },
+ "New York": {
+  "ja": "ニューヨーク",
+  "where": "event dollar-adjustment: city; event black-monday: city; event lehman: city; portal gfc: city"
+ },
+ "No single government: member states keep their own leaders. The European Central Bank sets monetary policy for all.": {
+  "ja": "単一の政府はなく、加盟国はそれぞれの指導者を持ちます。金融政策は欧州中央銀行が全体について決めます。",
+  "where": "region EA: how it is governed"
+ },
+ "Office of the Historian, U.S. Department of State": {
+  "ja": "米国務省 歴史家室",
+  "where": "event dm-float-1971: source publisher"
+ },
+ "On 15 August 1971 the United States suspended the convertibility of the dollar into gold, ending the Bretton Woods system of fixed exchange rates. Japan let the yen float from 28 August.": {
+  "ja": "1971年8月15日、米国はドルと金の交換を停止し、固定相場のブレトンウッズ体制が終わりました。日本は8月28日から円を変動相場に移しました。",
+  "where": "portal gold-break: summary"
+ },
+ "On 22 September 1985 the finance ministers and central bank governors of five major economies met in New York and said a further orderly rise of other currencies against the dollar was desirable. The dollar fell after the announcement, although it had already peaked in early 1985.": {
+  "ja": "1985年9月22日、主要5か国の財務相と中央銀行総裁がニューヨークで会合し、ドル以外の通貨がドルに対してさらに秩序立って上昇することが望ましいと表明しました。発表後ドルは下落しましたが、ドルはすでに1985年初めにピークを迎えていました。",
+  "where": "portal dollar-adjustment: summary"
+ },
+ "One-party state: the Communist Party's leader, and the Premier who heads the government.": {
+  "ja": "一党制国家：共産党の指導者と、政府を率いる国務院総理（首相）。",
+  "where": "region CHN: how it is governed"
+ },
+ "Ottawa": {
+  "ja": "オタワ",
+  "where": "event cad-float-1950: city; event cad-peg-1962: city; event cad-float-1970: city"
+ },
+ "Pandemic dollar rush": {
+  "ja": "パンデミックでドルに殺到",
+  "where": "Full Journey pandemic: chart marker"
+ },
+ "Paris": {
+  "ja": "パリ",
+  "where": "event louvre: city; event credit-crunch: city"
+ },
+ "Parliamentary republic: the Prime Minister leads the government.": {
+  "ja": "議会制共和国：首相が政府を率います。",
+  "where": "region IND: how it is governed"
+ },
+ "Pinch a currency on the map or the chart to hear it alone. Pinch the hand panel to pause or jump in time.": {
+  "ja": "地図かグラフの通貨をつまむと、その通貨の音だけが聞こえます。手元のパネルをつまむと、一時停止や時間の移動ができます。",
+  "where": "Full Journey: hint"
+ },
+ "Pound devalued": {
+  "ja": "ポンド切り下げ",
+  "where": "Full Journey sterling-1967: chart marker"
+ },
+ "Pound leaves the ERM": {
+  "ja": "ポンドがERMを離脱",
+  "where": "Full Journey black-wednesday: chart marker"
+ },
+ "Premier of China": {
+  "ja": "中国国務院総理",
+  "where": "office cn-premier"
+ },
+ "President of South Korea": {
+  "ja": "韓国大統領",
+  "where": "portal asian-crisis: role of Kim Young-sam; office kr-president"
+ },
+ "President of the Bundesbank": {
+  "ja": "ドイツ連邦銀行総裁",
+  "where": "office de-bundesbank"
+ },
+ "President of the Deutsche Bundesbank": {
+  "ja": "ドイツ連邦銀行総裁",
+  "where": "portal dollar-adjustment: role of Karl Otto Pöhl"
+ },
+ "President of the European Central Bank": {
+  "ja": "欧州中央銀行総裁",
+  "where": "office ea-ecb"
+ },
+ "President of the Swiss Confederation": {
+  "ja": "スイス連邦大統領",
+  "where": "office ch-president"
+ },
+ "President of the United States": {
+  "ja": "アメリカ合衆国大統領",
+  "where": "portal gold-break: role of Richard Nixon; portal gfc: role of George W. Bush; office us-president"
+ },
+ "President when Korea sought and agreed the IMF program.": {
+  "ja": "韓国がIMFプログラムを要請し合意したときの大統領。",
+  "where": "portal asian-crisis: involvement of Kim Young-sam"
+ },
+ "Presidential republic: the President leads the government.": {
+  "ja": "大統領制共和国：大統領が政府を率います。",
+  "where": "region KOR: how it is governed"
+ },
+ "Presidential republic: the President leads the government. The Federal Reserve sets interest rates.": {
+  "ja": "大統領制共和国：大統領が政府を率います。金利は連邦準備制度（FRB）が決めます。",
+  "where": "region USA: how it is governed"
+ },
+ "Prime Minister of Australia": {
+  "ja": "オーストラリア首相",
+  "where": "office au-pm"
+ },
+ "Prime Minister of Canada": {
+  "ja": "カナダ首相",
+  "where": "office ca-pm"
+ },
+ "Prime Minister of India": {
+  "ja": "インド首相",
+  "where": "office in-pm"
+ },
+ "Prime Minister of Japan": {
+  "ja": "内閣総理大臣",
+  "where": "portal gold-break: role of Eisaku Sato; office jp-pm"
+ },
+ "Prime Minister of the United Kingdom": {
+  "ja": "英国首相",
+  "where": "office uk-pm"
+ },
+ "Prime Minister when Japan let the yen float, on 28 August 1971.": {
+  "ja": "1971年8月28日に日本が円を変動相場に移したときの首相。",
+  "where": "portal gold-break: involvement of Eisaku Sato"
+ },
+ "Push on the dollar": {
+  "ja": "ドルへの協調行動",
+  "where": "Full Journey dollar-adjustment: chart marker"
+ },
+ "Rates float": {
+  "ja": "変動相場へ",
+  "where": "Full Journey float: chart marker"
+ },
+ "Readiness to cooperate more closely to encourage the rise of other currencies": {
+  "ja": "ほかの通貨の上昇を促すため、より緊密に協力する用意",
+  "where": "portal dollar-adjustment: policy 2"
+ },
+ "Represented Japan at the meeting.": {
+  "ja": "会合で日本を代表。",
+  "where": "portal dollar-adjustment: involvement of Noboru Takeshita"
+ },
+ "Represented West Germany at the meeting.": {
+  "ja": "会合で西ドイツを代表。",
+  "where": "portal dollar-adjustment: involvement of Gerhard Stoltenberg"
+ },
+ "Russia": {
+  "ja": "ロシア",
+  "where": "event russia-1998: country"
+ },
+ "Russia defaults": {
+  "ja": "ロシアが債務不履行",
+  "where": "event russia-1998: title"
+ },
+ "Russia devalues the ruble and defaults on its debt, unsettling markets worldwide.": {
+  "ja": "ロシアがルーブルを切り下げて債務不履行に陥り、世界の市場が動揺します。",
+  "where": "event russia-1998: summary"
+ },
+ "Russia invades Ukraine": {
+  "ja": "ロシアがウクライナに侵攻",
+  "where": "event ukraine-2022: title"
+ },
+ "Russia launches a full-scale invasion of Ukraine, starting the largest war in Europe since the Second World War.": {
+  "ja": "ロシアがウクライナへの全面侵攻を始め、第二次世界大戦以来、欧州で最大の戦争が始まります。",
+  "where": "event ukraine-2022: summary"
+ },
+ "Santa Clara": {
+  "ja": "サンタクララ",
+  "where": "event svb-2023: city"
+ },
+ "Seoul": {
+  "ja": "ソウル",
+  "where": "event asian-crisis: city; portal asian-crisis: city; portal scene asian-crisis: city"
+ },
+ "September 1985": {
+  "ja": "1985年9月",
+  "where": "Full Journey dollar-adjustment: label"
+ },
+ "September 1992": {
+  "ja": "1992年9月",
+  "where": "Full Journey black-wednesday: label"
+ },
+ "Several European countries agree to keep their currencies within bands against each other.": {
+  "ja": "欧州のいくつかの国が、互いの通貨の変動を一定の幅に収めることで合意します。",
+  "where": "event ems-1979: summary"
+ },
+ "Signed Korea's letter of intent to the IMF on 3 December 1997, as Governor of the Bank of Korea.": {
+  "ja": "韓国銀行総裁として、1997年12月3日にIMFへの韓国の趣意書に署名。",
+  "where": "portal asian-crisis: involvement of Lee Kyung-shik"
+ },
+ "Signed the Emergency Economic Stabilization Act, which created the Troubled Asset Relief Program, on 3 October 2008.": {
+  "ja": "2008年10月3日、不良資産救済プログラム（TARP）を創設した緊急経済安定化法に署名。",
+  "where": "portal gfc: involvement of George W. Bush"
+ },
+ "Silicon Valley Bank fails": {
+  "ja": "シリコンバレー銀行が破綻",
+  "where": "event svb-2023: title"
+ },
+ "Six central banks, among them the Federal Reserve and the European Central Bank, cut interest rates in a joint move.": {
+  "ja": "FRBと欧州中央銀行を含む6つの中央銀行が、協調して利下げします。",
+  "where": "event gfc: summary"
+ },
+ "Six major economies agree to steady the dollar after its long fall.": {
+  "ja": "主要6か国が、長く続いた下落の後のドルを安定させることで合意します。",
+  "where": "event louvre: summary"
+ },
+ "South Korea": {
+  "ja": "韓国",
+  "where": "event asian-crisis: country; portal asian-crisis: country; region KOR: name; region KOR: name"
+ },
+ "South Korea agrees a rescue program with the International Monetary Fund as the won falls.": {
+  "ja": "ウォンが下落するなか、韓国が国際通貨基金（IMF）と支援プログラムに合意します。",
+  "where": "event asian-crisis: summary"
+ },
+ "Speculators force the pound out of Europe's exchange-rate system.": {
+  "ja": "投機筋がポンドを欧州の為替相場制度から追い出します。",
+  "where": "Full Journey black-wednesday: caption"
+ },
+ "Stock markets around the world crash in a single day.": {
+  "ja": "世界の株式市場が1日で暴落します。",
+  "where": "event black-monday: summary"
+ },
+ "Suspension of the dollar's convertibility into gold": {
+  "ja": "ドルと金の交換の停止",
+  "where": "portal gold-break: policy 1"
+ },
+ "Sweeping US tariffs": {
+  "ja": "米国の広範な関税",
+  "where": "event tariffs-2025: title"
+ },
+ "Swiss franc": {
+  "ja": "スイスフラン",
+  "where": "currency name (CHF)"
+ },
+ "Switzerland": {
+  "ja": "スイス",
+  "where": "event snb-floor: country; event chf-shock: country; event pandemic: country; region CHE: name"
+ },
+ "Switzerland caps the franc": {
+  "ja": "スイスがフランに上限を設定",
+  "where": "event snb-floor: title"
+ },
+ "Switzerland drops its cap on the franc, which jumps overnight.": {
+  "ja": "スイスがフランの上限を撤廃し、フランは一夜で急騰します。",
+  "where": "Full Journey chf-shock: caption"
+ },
+ "Sydney": {
+  "ja": "シドニー",
+  "where": "event rba: city"
+ },
+ "Thailand": {
+  "ja": "タイ",
+  "where": "event thai-float: country"
+ },
+ "Thailand floats the baht": {
+  "ja": "タイがバーツを変動相場に",
+  "where": "event thai-float: title"
+ },
+ "Thailand moves the baht to a managed float, its value set by the market. The crisis that begins there spreads to other Asian economies, among them South Korea.": {
+  "ja": "タイがバーツを管理変動相場に移し、その価値を市場に委ねます。そこで始まった危機は、韓国を含むほかのアジア経済に広がります。",
+  "where": "event thai-float: summary"
+ },
+ "The American Presidency Project (UC Santa Barbara)": {
+  "ja": "アメリカ大統領プロジェクト（カリフォルニア大学サンタバーバラ校）",
+  "where": "event gold-break: source publisher; event smithsonian: source publisher"
+ },
+ "The Asian currency crisis": {
+  "ja": "アジア通貨危機",
+  "where": "portal asian-crisis: title; portal scene asian-crisis: title"
+ },
+ "The Australian dollar is introduced": {
+  "ja": "豪ドルの導入",
+  "where": "event aud-1966: title"
+ },
+ "The Bank of Japan cut its policy rate to 0.3% on 31 October 2008.": {
+  "ja": "2008年10月31日、日本銀行が政策金利を0.3%に引き下げ。",
+  "where": "portal gfc: involvement of Masaaki Shirakawa"
+ },
+ "The Bank of Japan launches a new, much larger program of asset purchases.": {
+  "ja": "日本銀行が新たな、はるかに大規模な資産買い入れプログラムを始めます。",
+  "where": "event boj-qqe-2013: summary"
+ },
+ "The Bank of Japan starts buying assets on a large scale to fight deflation.": {
+  "ja": "日本銀行がデフレと闘うため、大規模な資産の買い入れを始めます。",
+  "where": "event boj-qe-2001: summary"
+ },
+ "The Berlin Wall falls": {
+  "ja": "ベルリンの壁崩壊",
+  "where": "event berlin-wall: title"
+ },
+ "The Brexit vote": {
+  "ja": "ブレグジットの国民投票",
+  "where": "event brexit: title"
+ },
+ "The Bundesbank is founded": {
+  "ja": "ドイツ連邦銀行の設立",
+  "where": "event bundesbank: title"
+ },
+ "The Chinese yuan and the Korean won enter the picture.": {
+  "ja": "人民元と韓国ウォンが登場します。",
+  "where": "Full Journey asia-arrives: caption"
+ },
+ "The Deutsche Mark becomes the currency of East Germany too, three months before unification.": {
+  "ja": "統一の3か月前、ドイツマルクが東ドイツの通貨にもなります。",
+  "where": "event gmu-1990: summary"
+ },
+ "The Deutsche Mark is born": {
+  "ja": "ドイツマルクの誕生",
+  "where": "event dm-born: title"
+ },
+ "The ECB's president says it will do whatever it takes to preserve the euro.": {
+  "ja": "ECB総裁が、ユーロを守るためなら必要なことは何でもすると述べます。",
+  "where": "event whatever-it-takes: summary"
+ },
+ "The European Central Bank is founded": {
+  "ja": "欧州中央銀行の設立",
+  "where": "event ecb-1998: title"
+ },
+ "The European Central Bank replaces the European Monetary Institute, ready for the euro.": {
+  "ja": "ユーロに備え、欧州中央銀行が欧州通貨機構に代わります。",
+  "where": "event ecb-1998: summary"
+ },
+ "The European Monetary System begins": {
+  "ja": "欧州通貨制度の開始",
+  "where": "event ems-1979: title"
+ },
+ "The Fed starts raising rates": {
+  "ja": "FRBが利上げを開始",
+  "where": "event fed-2022: title"
+ },
+ "The Fed turns to fight inflation": {
+  "ja": "FRBがインフレ退治に転換",
+  "where": "event volcker-1979: title"
+ },
+ "The Federal Reserve changes how it runs monetary policy to bring down high inflation; interest rates rise sharply.": {
+  "ja": "連邦準備制度（FRB）が高インフレを抑えるため金融政策の運営方法を変え、金利が急上昇します。",
+  "where": "event volcker-1979: summary"
+ },
+ "The Federal Reserve joined the coordinated rate cut of 8 October and extended dollar swap lines to other central banks.": {
+  "ja": "FRBは10月8日の協調利下げに加わり、ほかの中央銀行へのドル・スワップ枠を拡大。",
+  "where": "portal gfc: involvement of Ben Bernanke"
+ },
+ "The Federal Reserve raises its target range for interest rates to 1/4 to 1/2 percent and expects further increases.": {
+  "ja": "FRBが政策金利の誘導目標レンジを0.25～0.5%に引き上げ、さらなる利上げを見込みます。",
+  "where": "event fed-2022: summary"
+ },
+ "The Louvre Accord": {
+  "ja": "ルーブル合意",
+  "where": "event louvre: title"
+ },
+ "The Mark floats": {
+  "ja": "マルクが変動相場に",
+  "where": "event dm-float-1971: title"
+ },
+ "The Plaza Accord": {
+  "ja": "プラザ合意",
+  "where": "event dollar-adjustment: title"
+ },
+ "The Reserve Bank of Australia opens": {
+  "ja": "オーストラリア準備銀行の開業",
+  "where": "event rba: title"
+ },
+ "The Smithsonian Agreement": {
+  "ja": "スミソニアン合意",
+  "where": "event smithsonian: title"
+ },
+ "The Swiss National Bank abandons its minimum rate against the euro, and the franc jumps.": {
+  "ja": "スイス国立銀行が対ユーロの下限レートを撤廃し、フランが急騰します。",
+  "where": "event chf-shock: summary"
+ },
+ "The Swiss National Bank sets a minimum of 1.20 francs per euro to stop the franc rising.": {
+  "ja": "スイス国立銀行が、フランの上昇を止めるため1ユーロ＝1.20フランの下限を設定します。",
+  "where": "event snb-floor: summary"
+ },
+ "The UK announces large tax cuts that need more borrowing, with no independent forecast published. The pound falls sharply; by the next trading day it hits an all-time low against the dollar.": {
+  "ja": "英国が、借入の増加を必要とする大規模な減税を、独立機関の見通しを公表しないまま発表します。ポンドは急落し、次の取引日にはドルに対して史上最安値をつけます。",
+  "where": "event mini-budget: summary"
+ },
+ "The UK mini-budget": {
+  "ja": "英国の「ミニ予算」",
+  "where": "event mini-budget: title"
+ },
+ "The US asks to close the London gold market": {
+  "ja": "米国がロンドン金市場の閉鎖を要請",
+  "where": "event gold-pool: title"
+ },
+ "The US financial firm Lehman Brothers files for bankruptcy protection.": {
+  "ja": "米国の金融会社リーマン・ブラザーズが破産法の適用を申請します。",
+  "where": "event lehman: summary"
+ },
+ "The United Kingdom votes to leave the European Union, and the pound falls sharply.": {
+  "ja": "英国がEU離脱を国民投票で決め、ポンドが急落します。",
+  "where": "event brexit: summary"
+ },
+ "The United States and China put tariffs on each other's goods.": {
+  "ja": "米国と中国が互いの製品に関税をかけます。",
+  "where": "event trade-war: summary"
+ },
+ "The United States announces broad new tariffs on imports from most countries.": {
+  "ja": "米国が、ほとんどの国からの輸入品に広範な新関税を発表します。",
+  "where": "event tariffs-2025: summary"
+ },
+ "The United States asks Britain to close the London gold market the following day, to stop heavy demand for gold.": {
+  "ja": "金への大量の需要を止めるため、米国が英国に翌日のロンドン金市場の閉鎖を要請します。",
+  "where": "event gold-pool: summary"
+ },
+ "The United States suspends the convertibility of the dollar into gold. The fixed-rate system begins to break apart.": {
+  "ja": "米国がドルと金の交換を停止します。固定相場の仕組みが崩れ始めます。",
+  "where": "event gold-break: summary"
+ },
+ "The World Health Organization declares COVID-19 a pandemic. Investors rush into dollars for a few weeks.": {
+  "ja": "世界保健機関（WHO）が新型コロナウイルス感染症（COVID-19）のパンデミックを宣言します。投資家は数週間、ドルに殺到します。",
+  "where": "event pandemic: summary"
+ },
+ "The agreement was made at a meeting in New York.": {
+  "ja": "合意はニューヨークでの会合で結ばれました。",
+  "where": "portal dollar-adjustment: where note"
+ },
+ "The credit crunch begins": {
+  "ja": "信用収縮の始まり",
+  "where": "event credit-crunch: title"
+ },
+ "The dollar falls again; the yen floats": {
+  "ja": "ドルが再び下落、円が変動相場に",
+  "where": "event usd-1973: title"
+ },
+ "The dollar no longer converts into gold. Governments try to hold new fixed rates.": {
+  "ja": "ドルはもう金と交換できません。各国政府は新しい固定レートを維持しようとします。",
+  "where": "era \"After the gold link\": text"
+ },
+ "The dollar's link to gold breaks. A new monetary era begins.": {
+  "ja": "ドルと金のつながりが切れ、新しい通貨の時代が始まります。",
+  "where": "Full Journey gold-break: caption"
+ },
+ "The dollar-gold break": {
+  "ja": "ドルと金の分離",
+  "where": "event gold-break: title; portal gold-break: title; portal scene gold-break: title"
+ },
+ "The euro is launched": {
+  "ja": "ユーロの導入",
+  "where": "event euro: title"
+ },
+ "The franc cap is dropped": {
+  "ja": "フランの上限撤廃",
+  "where": "event chf-shock: title"
+ },
+ "The global financial crisis": {
+  "ja": "世界金融危機",
+  "where": "portal gfc: title; portal scene gfc: title"
+ },
+ "The major currencies float: markets set their prices every day. Some others stay managed by their governments.": {
+  "ja": "主要通貨は変動相場です。市場が毎日その価格を決めます。ほかの一部の通貨は、引き続き政府が管理します。",
+  "where": "era \"Floating rates\": text"
+ },
+ "The oil price shock": {
+  "ja": "石油ショック",
+  "where": "event oil-1973: title"
+ },
+ "The pandemic sends investors rushing into dollars, for a few weeks.": {
+  "ja": "パンデミックで、投資家が数週間ドルに殺到します。",
+  "where": "Full Journey pandemic: caption"
+ },
+ "The pound is devalued by about 30%, to 2.80 dollars. Many other currencies follow within days.": {
+  "ja": "ポンドが約30%切り下げられ、2.80ドルになります。数日のうちに、ほかの多くの通貨も続きます。",
+  "where": "event sterling-1949: summary"
+ },
+ "The pound is devalued from 2.80 to 2.40 dollars.": {
+  "ja": "ポンドが2.80ドルから2.40ドルに切り下げられます。",
+  "where": "event sterling-1967: summary"
+ },
+ "The pound joins Europe's Exchange Rate Mechanism, which limits how far it may move against other European currencies.": {
+  "ja": "ポンドが欧州の為替相場メカニズム（ERM）に参加し、ほかの欧州通貨に対する変動幅が制限されます。",
+  "where": "event uk-erm-1990: summary"
+ },
+ "The yen is fixed at 360 per dollar": {
+  "ja": "円が1ドル＝360円に固定",
+  "where": "event yen-360: title"
+ },
+ "The yen joins the stream, held at 360 yen to the dollar since 1949.": {
+  "ja": "円がデータの流れに加わります。円は1949年から1ドル＝360円に固定されています。",
+  "where": "Full Journey yen-joins: caption"
+ },
+ "Tokyo": {
+  "ja": "東京",
+  "where": "event yen-360: city; event yen-float-1971: city; event boj-qe-2001: city; event boj-qqe-2013: city"
+ },
+ "Took part in the Camp David meetings of August 1971 at which the measures were prepared.": {
+  "ja": "措置が準備された1971年8月のキャンプ・デービッドでの会合に参加。",
+  "where": "portal gold-break: involvement of Arthur F. Burns"
+ },
+ "Troubled Asset Relief Program, enacted on 3 October 2008": {
+  "ja": "2008年10月3日に成立した不良資産救済プログラム（TARP）",
+  "where": "portal gfc: policy 1"
+ },
+ "Two weeks after the US move, Japan stops holding the yen at 360 per dollar and lets it float.": {
+  "ja": "米国の措置の2週間後、日本は円を1ドル＝360円に維持するのをやめ、変動相場に移します。",
+  "where": "event yen-float-1971: summary"
+ },
+ "UK votes to leave the EU": {
+  "ja": "英国がEU離脱を決定",
+  "where": "Full Journey brexit: chart marker"
+ },
+ "UN News (United Nations)": {
+  "ja": "国連ニュース（国際連合）",
+  "where": "event ukraine-2022: source publisher"
+ },
+ "US Secretary of the Treasury": {
+  "ja": "米財務長官",
+  "where": "portal gold-break: role of John Connally; portal dollar-adjustment: role of James A. Baker III; portal gfc: role of Henry Paulson"
+ },
+ "US interest rates climb while Japan's stay near zero. The yen slides to its weakest in decades.": {
+  "ja": "米国の金利が上がる一方、日本の金利はゼロ近くにとどまります。円は数十年ぶりの安値まで下落します。",
+  "where": "Full Journey yen-slide: caption"
+ },
+ "US-China tariffs begin": {
+  "ja": "米中の関税が始まる",
+  "where": "event trade-war: title"
+ },
+ "Ukraine": {
+  "ja": "ウクライナ",
+  "where": "event ukraine-2022: country"
+ },
+ "Under heavy selling, Britain takes the pound out of the Exchange Rate Mechanism.": {
+  "ja": "大量の売りを受け、英国がポンドを為替相場メカニズム（ERM）から離脱させます。",
+  "where": "event black-wednesday: summary"
+ },
+ "United Kingdom": {
+  "ja": "英国",
+  "where": "event sterling-1949: country; event sterling-1967: country; event gbp-float-1972: country; event uk-erm-1990: country"
+ },
+ "United States": {
+  "ja": "アメリカ合衆国",
+  "where": "event gold-pool: country; event gold-break: country; event smithsonian: country; event usd-1973: country"
+ },
+ "Unlike the fixed currencies of the Bretton Woods system, the Canadian dollar is left to the market.": {
+  "ja": "ブレトンウッズ体制の固定された通貨と異なり、カナダドルは市場に委ねられます。",
+  "where": "event cad-float-1950: summary"
+ },
+ "Washington, D.C.": {
+  "ja": "ワシントンD.C.",
+  "where": "event gold-pool: city; event gold-break: city; event smithsonian: city; event usd-1973: city"
+ },
+ "West Germany": {
+  "ja": "西ドイツ",
+  "where": "event bundesbank: country; event dm-float-1971: country; region DEU: name; map EUR: place"
+ },
+ "West Germany launches a new currency, the Deutsche Mark. Rates are fixed to the dollar, and the dollar to gold.": {
+  "ja": "西ドイツが新しい通貨ドイツマルクを導入します。レートはドルに、ドルは金に固定されます。",
+  "where": "Full Journey dm-born: caption"
+ },
+ "West Germany's new central bank, the Deutsche Bundesbank, takes over from the Bank deutscher Laender.": {
+  "ja": "西ドイツの新しい中央銀行、ドイツ連邦銀行が、レンダー銀行（Bank deutscher Länder）から業務を引き継ぎます。",
+  "where": "event bundesbank: summary"
+ },
+ "Western zones of Germany": {
+  "ja": "ドイツ西側占領地区",
+  "where": "event dm-born: country; region DEU: name"
+ },
+ "When currency markets reopen on 10 May, West Germany lets the Mark float instead of holding its fixed rate.": {
+  "ja": "為替市場が5月10日に再開すると、西ドイツは固定レートを維持せず、マルクを変動相場に移します。",
+  "where": "event dm-float-1971: summary"
+ },
+ "Wikipedia": {
+  "ja": "Wikipedia",
+  "where": "event dm-born: source publisher; event yen-360: source publisher; event sterling-1949: source publisher; event cad-float-1950: source publisher"
+ },
+ "Yen data begins": {
+  "ja": "円のデータ開始",
+  "where": "Full Journey yen-joins: chart marker"
+ },
+ "Yen slides": {
+  "ja": "円の下落",
+  "where": "Full Journey yen-slide: chart marker"
+ },
+ "Yuan and won data begin": {
+  "ja": "人民元とウォンのデータ開始",
+  "where": "Full Journey asia-arrives: chart marker"
+ },
+ "Zurich": {
+  "ja": "チューリッヒ",
+  "where": "event snb-floor: city; event chf-shock: city"
+ },
+ "around 2008": {
+  "ja": "2008年ごろ",
+  "where": "portal scene gfc: period"
+ },
+ "early 1970s": {
+  "ja": "1970年代初め",
+  "where": "portal scene gold-break: period"
+ },
+ "late 1990s": {
+  "ja": "1990年代後半",
+  "where": "portal scene asian-crisis: period"
+ },
+ "mid-1980s": {
+  "ja": "1980年代半ば",
+  "where": "portal scene dollar-adjustment: period"
+ },
+ "Japan ends negative interest rates": {
+  "ja": "日本がマイナス金利を終了",
+  "where": "event boj-2024: title"
+ },
+ "The Bank of Japan ends its negative interest rate policy and yield curve control, and guides the overnight call rate to around 0 to 0.1 percent.": {
+  "ja": "日本銀行がマイナス金利政策とイールドカーブ・コントロールを終了し、無担保コール翌日物金利を0～0.1%程度に誘導します。",
+  "where": "event boj-2024: summary"
+ },
+ "Bank of Japan": {
+  "ja": "日本銀行",
+  "where": "event boj-2024: source publisher"
+ }
+}

@@ -19,6 +19,8 @@
  * member states keep their own leaders (Germany is shown with its own).
  */
 
+import { dayText, monthText, shortDayText, t, tr, weekdayText, type Lang } from '../i18n/i18n.ts';
+
 export type RegionId = 'USA' | 'CAN' | 'GBR' | 'DEU' | 'EA' | 'CHE' | 'IND' | 'CHN' | 'KOR' | 'JPN' | 'AUS';
 
 export interface RegionInfo {
@@ -156,10 +158,12 @@ export function leadersInYear(file: LeadersFile, region: RegionId, year: number,
 }
 
 /** "since 1982" / "1982 to 1987" / "to Nov 1987" for a term seen from a year. */
-export function termText(t: LeaderTerm, today: string): string {
-  const s = t.start.slice(0, 4);
-  if (t.end === null || t.end > today) return `since ${s}`;
-  return s === t.end.slice(0, 4) ? `${monthName(t.start)} to ${monthName(t.end)} ${s}` : `${s} to ${t.end.slice(0, 4)}`;
+export function termText(t0: LeaderTerm, today: string, lang: Lang = 'en'): string {
+  const s = t0.start.slice(0, 4);
+  if (t0.end === null || t0.end > today) return t('term.since', { year: s }, lang);
+  return s === t0.end.slice(0, 4)
+    ? t('term.months', { from: monthShort(t0.start, lang), to: monthShort(t0.end, lang), year: s }, lang)
+    : t('term.years', { from: s, to: t0.end.slice(0, 4) }, lang);
 }
 
 // ---------------------------------------------------------------------------
@@ -198,52 +202,54 @@ export function eventsInYear(events: AnnualEvent[], year: number, lastDate: stri
 }
 
 /** "September 22" / "December" / "During the year". */
-export function eventDateText(e: AnnualEvent): string {
-  if (e.precision === 'year') return 'During the year';
-  if (e.precision === 'month') return MONTHS[Number(e.date.slice(5, 7)) - 1];
-  return `${MONTHS[Number(e.date.slice(5, 7)) - 1]} ${Number(e.date.slice(8, 10))}`;
+export function eventDateText(e: AnnualEvent, lang: Lang = 'en'): string {
+  if (e.precision === 'year') return t('date.duringYear', undefined, lang);
+  if (e.precision === 'month') return monthText(e.date, lang);
+  return dayText(e.date, lang);
 }
 
-/** Only day-precision events get a dated marker and a moment in the timeline. */
 export function isDated(e: AnnualEvent): boolean {
   return (e.precision ?? 'day') === 'day';
 }
 
 /** What the sources do not give, for an event without a day ('' for a dated one). */
-export function undatedNote(e: AnnualEvent): string {
-  if (e.precision === 'year') return 'Our sources give the year only, not the date.';
-  if (e.precision === 'month') return 'Our sources give the month only, not the day.';
+export function undatedNote(e: AnnualEvent, lang: Lang = 'en'): string {
+  if (e.precision === 'year') return t('undated.year', undefined, lang);
+  if (e.precision === 'month') return t('undated.month', undefined, lang);
   return '';
 }
 
-/** The weekday and date of an ISO day: "Friday, September 27". */
-export function weekdayDate(iso: string): string {
-  const d = new Date(`${iso}T00:00:00Z`);
-  const day = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'][d.getUTCDay()];
-  return `${day}, ${MONTHS[d.getUTCMonth()]} ${d.getUTCDate()}`;
+/** "Sunday, September 22" (the day of the week matters: rates are observed on Fridays). */
+export function weekdayDate(iso: string, lang: Lang = 'en'): string {
+  return weekdayText(iso, lang);
 }
 
 /**
- * How an event's date relates to the weekly rates: the year stops at the first observation on or after the
- * event, which is usually a few days later. `observedIso` is that observation's date.
+ * The line on an event's card that tells the event's date from the rates' date:
+ * the year stops at the first weekly observation on or after the event.
  */
-export function observationNote(e: AnnualEvent, observedIso: string | null): string {
-  if (!isDated(e)) return `${undatedNote(e)} The year does not stop for it, and the chart has no marker.`;
-  if (!observedIso) return 'No exchange-rate observation after this date yet.';
-  if (observedIso === e.date) return `Exchange rates are weekly: the year stops at the observation of the same day, ${weekdayDate(observedIso)}.`;
-  return `Event on ${weekdayDate(e.date)}. Exchange rates are weekly: the year stops at the first observation after it, ${weekdayDate(observedIso)}.`;
+export function observationNote(e: AnnualEvent, observedIso: string | null, lang: Lang = 'en'): string {
+  if (!isDated(e)) return t('obs.undated', { note: undatedNote(e, lang) }, lang);
+  if (!observedIso) return t('obs.none', undefined, lang);
+  if (observedIso === e.date) return t('obs.same', { date: weekdayDate(observedIso, lang) }, lang);
+  return t('obs.after', { event: weekdayDate(e.date, lang), date: weekdayDate(observedIso, lang) }, lang);
 }
 
-/** The sources line of an event: who it was checked against, and how. */
-export function sourcesNote(e: AnnualEvent): string {
+/** How an event was checked, and against whom (publishers only: never article titles, which may name people). */
+export function sourcesNote(e: AnnualEvent, lang: Lang = 'en'): string {
+  const sep = lang === 'ja' ? '、' : '; ';
   const names = [...new Set(e.sources.map((s) => s.publisher ?? 'Wikipedia'))];
   if (e.status === 'reviewed') {
     const primary = [...new Set(e.sources.filter((s) => s.primary).map((s) => s.publisher ?? ''))].filter(Boolean);
     const other = names.filter((n) => !primary.includes(n));
-    return `Reviewed against quoted sources: ${primary.length ? `${primary.join('; ')} (primary)` : ''}${primary.length && other.length ? '; ' : ''}${other.join('; ')}`;
+    const list = [
+      ...(primary.length ? [t('src.primary', { names: primary.map((n) => tr(n, lang)).join(sep) }, lang)] : []),
+      ...other.map((n) => tr(n, lang)),
+    ].join(sep);
+    return t('src.reviewed', { list }, lang);
   }
-  const what = e.precision === 'year' ? 'this year' : e.precision === 'month' ? 'this month' : 'this date';
-  return `Matched automatically: a passage of ${names.join('; ')} gives ${what} (not reviewed by hand)`;
+  const what = t(e.precision === 'year' ? 'src.what.year' : e.precision === 'month' ? 'src.what.month' : 'src.what.date', undefined, lang);
+  return t('src.matched', { names: names.map((n) => tr(n, lang)).join(sep), what }, lang);
 }
 
 /**
@@ -268,10 +274,8 @@ export function featuredRegions(
   return ranked.slice(0, max).map(([r]) => r);
 }
 
-const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-
-function monthName(iso: string): string {
-  return MONTHS[Number(iso.slice(5, 7)) - 1].slice(0, 3);
+function monthShort(iso: string, lang: Lang): string {
+  return lang === 'ja' ? monthText(iso, 'ja') : shortDayText(iso, 'en').split(' ')[0];
 }
 
 export async function loadAnnualData(baseUrl: string): Promise<{ leaders: LeadersFile | null; events: AnnualEvent[] }> {

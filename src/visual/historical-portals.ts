@@ -47,9 +47,11 @@ import {
 } from '@iwsdk/core';
 import { BANDS } from '../config.js';
 import type { HistoryContent, HistoryEventContent, HistoryPhoto } from '../data/history-content.js';
-import { IMPRESSION_NOTE, sceneStyle, type PortalScene } from '../data/portals.js';
+import { sceneStyle, type PortalScene } from '../data/portals.js';
 import { paintCity } from './city-painter.js';
+import { getLang, longDateText, t, tr } from '../i18n/i18n.js';
 import { haloTexture } from './glow.js';
+import { wrapText } from './ui-button.js';
 
 export interface PortalView {
   /** Scene index from the director (-1: none). */
@@ -450,6 +452,19 @@ export class HistoricalPortals {
     if (c?.people.length && !this.people.has(i)) this.people.set(i, await buildCards(c, this.initTexture));
   }
 
+  /** The portrait cards again, in the display language (names and offices). */
+  relabel(): void {
+    for (const i of [...this.people.keys()]) {
+      const c = this.contentOf(i);
+      if (!c) continue;
+      void buildCards(c, this.initTexture).then((p) => {
+        if (!this.people.has(i)) return p.texture?.dispose();
+        this.people.get(i)?.texture?.dispose();
+        this.people.set(i, p);
+      });
+    }
+  }
+
   private paint(i: number): SceneAssets {
     const layers = paintCity(sceneStyle(this.scenes[i]));
     return {
@@ -625,8 +640,8 @@ export class HistoricalPortals {
     const scene = this.scenes[i];
     const c = this.contentOf(i);
     const a = this.assets.get(i);
-    const credits = a?.kind === 'photo' ? a.credits : IMPRESSION_NOTE;
-    const key = `${i}|${credits}|${this.readout.join('|')}`;
+    const credits = a?.kind === 'photo' ? a.credits : t('portal.impression');
+    const key = `${i}|${credits}|${this.readout.join('|')}|${getLang()}`;
     const accent = '#' + this.accent.getHexString();
     this.title.draw(key, (ctx, w, h) => {
       ctx.fillStyle = 'rgba(4,7,14,0.82)';
@@ -636,9 +651,9 @@ export class HistoricalPortals {
       ctx.fillRect(22, 30, 7, h - 60);
       const x = 52;
       const maxW = w - x - 30;
-      const city = (c?.where.city ?? scene.city).toUpperCase();
-      const country = c?.where.country ?? scene.region;
-      const period = c?.portal?.period ?? scene.period;
+      const city = tr(c?.where.city ?? scene.city).toUpperCase();
+      const country = tr(c?.where.country ?? scene.region);
+      const period = tr(c?.portal?.period ?? scene.period);
       let y = 106;
       ctx.font = 'bold 84px system-ui, sans-serif';
       ctx.fillStyle = '#ffffff';
@@ -646,17 +661,17 @@ export class HistoricalPortals {
       y += 58;
       ctx.font = '40px system-ui, sans-serif';
       ctx.fillStyle = accent;
-      ctx.fillText(fit(ctx, `${country}  ·  photos ${period}`, maxW), x, y);
+      ctx.fillText(fit(ctx, t('portal.photos', { country, period }), maxW), x, y);
       y += 74;
       ctx.font = 'bold 52px system-ui, sans-serif';
       ctx.fillStyle = '#f2f5fb';
-      for (const line of wrap(ctx, c?.title ?? scene.title, maxW).slice(0, 2)) {
+      for (const line of wrap(ctx, tr(c?.title ?? scene.title), maxW).slice(0, 2)) {
         ctx.fillText(line, x, y);
         y += 60;
       }
       y += 4;
       // The actual date, then the currencies involved, as on the chart and the map (code + color).
-      const when = c ? longDate(c.date) : scene.period;
+      const when = c ? longDateText(c.date) : tr(scene.period);
       ctx.font = '40px system-ui, sans-serif';
       ctx.fillStyle = '#d6deee';
       ctx.fillText(when, x, y);
@@ -687,7 +702,7 @@ export class HistoricalPortals {
       }
       ctx.font = 'bold 30px system-ui, sans-serif';
       ctx.fillStyle = '#c9d5ec';
-      ctx.fillText('Pinch for people, policies and sources', x, h - 28);
+      ctx.fillText(t('portal.pinch'), x, h - 28);
     });
   }
 
@@ -695,7 +710,7 @@ export class HistoricalPortals {
     const c = this.contentOf(i);
     const scene = this.scenes[i];
     const a = this.assets.get(i);
-    this.detail.draw(`${i}`, (ctx, w, h) => {
+    this.detail.draw(`${i}|${getLang()}`, (ctx, w, h) => {
       ctx.fillStyle = 'rgba(5,8,16,0.97)';
       roundRect(ctx, 0, 0, w, h, 28);
       ctx.fill();
@@ -707,18 +722,18 @@ export class HistoricalPortals {
       const maxW = w - 96;
       ctx.font = 'bold 44px system-ui, sans-serif';
       ctx.fillStyle = '#ffffff';
-      const when = c ? longDate(c.date) : scene.period;
-      ctx.fillText(fit(ctx, `${c?.title ?? scene.title}  ·  ${when}`, maxW), x, y);
+      const when = c ? longDateText(c.date) : tr(scene.period);
+      ctx.fillText(fit(ctx, `${tr(c?.title ?? scene.title)}  ·  ${when}`, maxW), x, y);
       y += 16;
       if (c?.where.note) {
         y += 34;
         ctx.font = 'italic 28px system-ui, sans-serif';
         ctx.fillStyle = '#b8c4dc';
-        ctx.fillText(c.where.note, x, y);
+        ctx.fillText(tr(c.where.note), x, y);
       }
       ctx.font = '30px system-ui, sans-serif';
       ctx.fillStyle = '#e8ecf4';
-      for (const line of wrap(ctx, c?.summary ?? scene.detail, maxW).slice(0, 4)) {
+      for (const line of wrap(ctx, tr(c?.summary ?? scene.detail), maxW).slice(0, 4)) {
         y += 40;
         ctx.fillText(line, x, y);
       }
@@ -726,38 +741,38 @@ export class HistoricalPortals {
         y += 50;
         ctx.font = 'bold 28px system-ui, sans-serif';
         ctx.fillStyle = '#ffe2a0';
-        ctx.fillText('Policies', x, y);
+        ctx.fillText(t('portal.policies'), x, y);
         ctx.font = '27px system-ui, sans-serif';
         ctx.fillStyle = '#e8ecf4';
         for (const p of c.policies.slice(0, 4)) {
           y += 36;
-          ctx.fillText(fit(ctx, `•  ${p}`, maxW), x, y);
+          ctx.fillText(fit(ctx, `•  ${tr(p)}`, maxW), x, y);
         }
       }
       if (c?.people.length) {
         y += 50;
         ctx.font = 'bold 28px system-ui, sans-serif';
         ctx.fillStyle = '#ffe2a0';
-        ctx.fillText('People', x, y);
+        ctx.fillText(t('portal.people'), x, y);
         for (const p of c.people.slice(0, 6)) {
           y += 36;
           ctx.font = 'bold 26px system-ui, sans-serif';
           ctx.fillStyle = '#ffffff';
-          const head = `${p.name}, ${p.role}: `;
+          const head = getLang() === 'ja' ? `${tr(p.name)}（${tr(p.role)}）：` : `${p.name}, ${p.role}: `;
           ctx.fillText(head, x, y);
           const hw = ctx.measureText(head).width;
           ctx.font = '26px system-ui, sans-serif';
           ctx.fillStyle = '#d6deee';
-          ctx.fillText(fit(ctx, p.involvement, maxW - hw), x + hw, y);
+          ctx.fillText(fit(ctx, tr(p.involvement), maxW - hw), x + hw, y);
         }
       }
       ctx.font = '21px system-ui, sans-serif';
       ctx.fillStyle = '#9fadc6';
-      const portraits = (c?.people ?? []).filter((p) => p.portrait).map((p) => `${p.name} (${p.portrait!.license})`);
+      const portraits = (c?.people ?? []).filter((p) => p.portrait).map((p) => `${tr(p.name)} (${p.portrait!.license})`);
       const lines = [
-        a?.kind === 'photo' ? `Photos: ${a.credits}. Wikimedia Commons.` : IMPRESSION_NOTE,
-        portraits.length ? `Portraits via Wikimedia Commons: ${portraits.join(', ')}.` : '',
-        'Offices checked against Wikidata or Wikipedia; see docs/history-verification.md. Pinch again to close.',
+        a?.kind === 'photo' ? t('portal.photoCredits', { credits: a.credits }) : t('portal.impression'),
+        portraits.length ? t('portal.portraits', { list: portraits.join(', ') }) : '',
+        t('portal.checked'),
       ].filter(Boolean);
       let yy = h - 30 - (lines.length - 1) * 28;
       for (const line of lines) {
@@ -834,20 +849,20 @@ async function buildCards(c: HistoryEventContent, initTexture: (t: Texture) => v
     let y = py + ph + 56;
     ctx.font = 'bold 46px system-ui, sans-serif';
     ctx.fillStyle = '#ffffff';
-    for (const line of wrap(ctx, p.name, tw).slice(0, 2)) {
+    for (const line of wrap(ctx, tr(p.name), tw).slice(0, 2)) {
       ctx.fillText(line, px, y);
       y += 52;
     }
     ctx.font = '36px system-ui, sans-serif';
     ctx.fillStyle = '#c9d5ec';
-    for (const line of wrap(ctx, p.role, tw).slice(0, 3)) {
+    for (const line of wrap(ctx, tr(p.role), tw).slice(0, 3)) {
       ctx.fillText(line, px, y);
       y += 42;
     }
     if (p.portrait) {
       ctx.font = '19px system-ui, sans-serif';
       ctx.fillStyle = '#8a97b4';
-      ctx.fillText(fit(ctx, `Portrait: ${p.portrait.license}`, tw), px, cv.height - 22);
+      ctx.fillText(fit(ctx, t('portal.portrait', { license: p.portrait.license }), tw), px, cv.height - 22);
     }
   });
   const tex = new CanvasTexture(cv);
@@ -874,11 +889,6 @@ function initials(name: string): string {
     .join('');
 }
 
-function longDate(iso: string): string {
-  const d = new Date(iso + 'T00:00:00Z');
-  return d.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' });
-}
-
 function roundRect(ctx: CanvasRenderingContext2D, x: number, y: number, w: number, h: number, r: number): void {
   ctx.beginPath();
   ctx.moveTo(x + r, y);
@@ -890,17 +900,7 @@ function roundRect(ctx: CanvasRenderingContext2D, x: number, y: number, w: numbe
 }
 
 function wrap(ctx: CanvasRenderingContext2D, text: string, maxW: number): string[] {
-  const lines: string[] = [];
-  let line = '';
-  for (const word of text.split(' ')) {
-    const next = line ? `${line} ${word}` : word;
-    if (ctx.measureText(next).width > maxW && line) {
-      lines.push(line);
-      line = word;
-    } else line = next;
-  }
-  if (line) lines.push(line);
-  return lines;
+  return wrapText(ctx, text, maxW);
 }
 
 /** Shorten a single line to fit (with an ellipsis). */

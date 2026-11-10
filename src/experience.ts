@@ -25,6 +25,14 @@
  *   playing   the Full Journey time-lapse (can be paused)
  *   today     the Full Journey reached the present; live rates are shown
  *
+ * Voice and subtitles: the guide's line is English, said by the voice
+ * (src/a11y/narration.ts) and shown in the display language (English, or its
+ * Japanese review translation, src/i18n). A line ends when the voice has said
+ * it; only with no working voice does the reading-time estimate decide. The
+ * display language can change at any moment without touching the journey:
+ * the year, the clock, the beat, the selection and the views stay; only the
+ * words shown are redrawn.
+ *
  * Selection (solo) and emphasis are one shared state: pinching a currency
  * on the map or the chart highlights its line, its region and its voice
  * together. In a Year Journey, pinching a map marker opens that place's
@@ -45,7 +53,7 @@ import {
   type Entity,
   type UIKitMLAsset,
 } from '@iwsdk/core';
-import { Narration } from './a11y/narration.js';
+import { Narration, type Delivery } from './a11y/narration.js';
 import { SoundEngine, type VoiceInput } from './audio/engine.js';
 import { strengthToSteps } from './audio/scale.js';
 import { Orb, PortalTarget, UiTarget } from './components.js';
@@ -88,7 +96,22 @@ import { CURRENCY_WORDS, readoutLine, type HistoryContent } from './data/history
 import { Timeline } from './data/timeline.js';
 import { loadToday, type TodayData } from './data/today.js';
 import type { WorldMapFile } from './data/world-map.js';
-import { buildYearScript, leaderSentence, lineSeconds, STORIES, STRINGS, summaryLine, type Beat, type Mood, type YearContext } from './guide/guide-scripts.js';
+import {
+  both,
+  buildYearScript,
+  INTRO_KEYS,
+  leaderSentence,
+  lineOf,
+  lineSeconds,
+  STORIES,
+  summaryLines,
+  type Beat,
+  type Line,
+  type Mood,
+  type YearContext,
+} from './guide/guide-scripts.js';
+import type { Key } from './i18n/en.js';
+import { fullDateText, getLang, listText, monthYearText, onLangChange, setLang, shortDayText, t, tr, type Lang } from './i18n/i18n.js';
 import { DEFAULT_PACING, PlaybackClock, slowDownsFor } from './playback/clock.js';
 import { PortalDirector } from './playback/portal-director.js';
 import { YearRunner } from './playback/year-journey.js';
@@ -108,8 +131,9 @@ type Phase = 'idle' | 'intro' | 'select' | 'warp' | 'review' | 'summary' | 'play
 export type JourneyMode = 'year' | 'full';
 
 interface Caption {
-  label: string;
-  text: string;
+  /** Heading and text in both languages (English is spoken). */
+  label: Line;
+  text: Line;
   minS: number;
   maxS: number;
   hint?: boolean;
@@ -203,10 +227,15 @@ export class ExperienceSystem extends createSystem({
   private selectedYear = 1985;
   private span = { min: 1948, max: 2026 };
   private introDone = false;
-  private introLines: string[] = [];
+  private introLines: Key[] = [];
   private introAge = 0;
-  private guideLine: string | null = null;
+  /** The guide's current line (English is spoken; the subtitle shows the display language). */
+  private guideLine: Line | null = null;
   private guideAge = 0;
+  /** The arrival line waits for the warp line to be said in full. */
+  private arrivalPending = false;
+  /** Rebuilds the stage's current view (in the display language) when the language changes. */
+  private viewOf: (() => StageView) | null = null;
   private spot: number[] | null = null;
   private allCurrencies = false;
   private usdFocus = 0;
@@ -311,7 +340,7 @@ export class ExperienceSystem extends createSystem({
   /**
    * Keyboard (PC browser): [ and ] change the year by one, - and = by ten,
    * Enter starts the travel (or goes to the next year), Escape skips, Space
-   * pauses. Dev builds add shortcuts for automation and demo clips:
+   * pauses, I switches the display language (English / Japanese review). Dev builds add shortcuts for automation and demo clips:
    *   1-5 chapters   g h j k l b n m , solo CAD..AUD   p pause   y Year Journey
    *   6 before the Asian crisis   7 before the 2022 yen slide   0 before the 1985 moment
    *   8 near the end   9 Full Journey   c no frame-time cap   v portal card
@@ -329,6 +358,7 @@ export class ExperienceSystem extends createSystem({
       else if (k === 'enter') this.onUi(this.phase === 'summary' ? UiAction.NextYear : UiAction.StartTravel);
       else if (k === 'escape') this.skip();
       else if (k === ' ') this.togglePause();
+      else if (k === 'i') setLang(getLang() === 'en' ? 'ja' : 'en'); // display language (review translation)
       if (!import.meta.env.DEV) return;
       if (k >= '1' && k <= '5') this.jumpTo(this.timeline.indexOf(CHAPTERS[Number(k) - 1].date));
       else if (soloKeys.includes(k)) this.onCurrencyPinch(soloKeys.indexOf(k));
@@ -383,7 +413,14 @@ export class ExperienceSystem extends createSystem({
     this.audio = new SoundEngine(SLOTS.map((s) => s.timbre));
     // Fires when the note is actually heard (not when it is booked).
     this.audio.onNote((i, velocity) => this.chart?.note(i, velocity));
-    this.narration.onSpeaking = (on) => this.audio.duck(on);
+    this.narration.onSpeaking = (on) => {
+      this.audio.duck(on);
+      if (import.meta.env.DEV) console.info(`[ctm-voice] ${on ? 'start' : 'end'} ${performance.now().toFixed(0)} ${this.narration.state}`);
+    };
+    if (import.meta.env.DEV) this.narration.onDebug = (m) => console.info(`[ctm-voice] ${performance.now().toFixed(0)} ${m}`);
+    // Pre-generated recordings of the guide's lines, if this build has any (else speech synthesis).
+    void this.narration.loadManifest(baseUrl);
+    this.cleanupFuncs.push(onLangChange(() => this.relabel()));
     // Start fetching today's rates right away; the ending needs them later.
     // (Slot ids are also today's codes: the EUR slot ends as the euro.)
     this.todayPromise = loadToday(SLOTS.map((s) => s.slot));
@@ -454,7 +491,7 @@ export class ExperienceSystem extends createSystem({
     this.stage = new YearStage();
     this.captions = new CaptionStrip(CAPTION_STRIP.width, CAPTION_STRIP.height);
     this.captions.root.position.set(0, CAPTION_STRIP.y, 0.012);
-    this.skipIntro = new CanvasButton(0.16, 0.055, UiAction.SkipIntro, 'Skip intro', 'ghost');
+    this.skipIntro = new CanvasButton(0.16, 0.055, UiAction.SkipIntro, t('skipIntro'), 'ghost');
     this.skipIntro.mesh.position.set(0.72, -0.12, 0.014);
     this.skipIntro.setShown(false);
     eventsBand.add(this.selector.root, this.stage.root, this.captions.root, this.skipIntro.mesh);
@@ -521,8 +558,9 @@ export class ExperienceSystem extends createSystem({
   // -------------------------------------------------------------------------
 
   /** Options from the start screen (inside its click: allowed to start audio and speech). */
-  configure(opts: { mode?: JourneyMode; voice?: boolean; calm?: boolean }): void {
+  configure(opts: { mode?: JourneyMode; voice?: boolean; calm?: boolean; lang?: Lang }): void {
     if (opts.mode) this.mode = opts.mode;
+    if (opts.lang) setLang(opts.lang);
     if (opts.voice !== undefined) this.narration.enabled = opts.voice && this.narration.available;
     if (opts.calm !== undefined) this.calm = opts.calm || this.calm;
     if (this.ready) this.updatePanel();
@@ -567,7 +605,7 @@ export class ExperienceSystem extends createSystem({
     this.robot.setVisible(true);
     this.robot.moveTo(...ROBOT_SPOTS.side);
     this.robot.mood = 'idle';
-    this.enqueue({ label: '', text: STRINGS.full, minS: 4, maxS: 6.5, hint: true });
+    this.enqueue({ label: NO_LINE, text: lineOf('guide.full'), minS: 4, maxS: 6.5, hint: true });
     this.updatePanel();
   }
 
@@ -622,9 +660,9 @@ export class ExperienceSystem extends createSystem({
   private setPaused(paused: boolean): void {
     this.clock.paused = paused;
     this.audio.setPaused(paused);
-    if (paused) this.narration.stop();
-    // Resuming in a year: say the current line again (speech cannot resume midway).
-    else if (this.phase === 'review' && this.guideLine) this.narration.speak(this.guideLine);
+    // The voice pauses where it is (a recording) or at its sentence (speech synthesis), and goes on from there.
+    if (paused) this.narration.pause();
+    else this.narration.resume();
     this.updatePanel();
   }
 
@@ -643,10 +681,12 @@ export class ExperienceSystem extends createSystem({
     on('btn-voice', () => {
       this.narration.enabled = !this.narration.enabled && this.narration.available;
       if (!this.narration.enabled) this.narration.stop();
-      else if (this.mode === 'year' && this.guideLine) this.narration.speak(this.guideLine);
-      else if (this.caption) this.narration.speak(`${this.caption.label}. ${this.caption.text}`);
+      else if (this.mode === 'year' && this.guideLine) this.narration.speak(this.guideLine.en);
+      else if (this.caption) this.narration.speak(captionSpeech(this.caption));
       this.updatePanel();
     });
+    // Display language: English, or the Japanese review translation (the voice stays English).
+    on('btn-lang', () => setLang(getLang() === 'en' ? 'ja' : 'en'));
     if (!this.narration.available) this.handPanel.requireElementById('btn-voice').setProperties({ display: 'none' });
     on('btn-skip', () => this.skip());
     on('btn-minus10', () => this.changeYear(-10));
@@ -677,6 +717,8 @@ export class ExperienceSystem extends createSystem({
     set('label-full', { text: this.mode === 'full' ? 'Restart Full' : 'Full Journey' });
     set('label-calm', { text: `Calm: ${this.calm ? 'on' : 'off'}` });
     set('label-voice', { text: this.narration.enabled ? 'Voice on' : 'Voice' });
+    // (The lap panel's font has Latin letters only: its labels stay English; the language shows as a code.)
+    set('label-lang', { text: t('lang.button', { lang: getLang() === 'ja' ? 'JA' : 'EN' }, 'en') });
     const pausable = this.pausable;
     const showPlay = pausable ? this.clock.paused : this.phase === 'today' || this.phase === 'idle';
     const label = this.phase === 'today' ? 'Replay' : this.phase === 'idle' ? 'Start' : !pausable ? 'Pause' : this.clock.paused ? 'Play' : 'Pause';
@@ -722,6 +764,7 @@ export class ExperienceSystem extends createSystem({
       if (this.explore) this.endExplore();
       else {
         this.narration.stop();
+        this.arrivalPending = false;
         this.visit.runner.skip();
       }
     }
@@ -782,7 +825,8 @@ export class ExperienceSystem extends createSystem({
     else if (index === USD_SLOT && this.solo >= 0) this.toggleSolo(this.solo);
     if (this.visit) {
       this.showRegion(region);
-      this.say(`${leaderSentence(this.visit.ctx, region)} Pinch it again to go on.`, 'pointing');
+      const ctx = this.visit.ctx;
+      this.say(both((lang) => t('guide.explore', { sentence: leaderSentence(ctx, region, lang) }, lang)), 'pointing');
       this.pointAtMarker(index === USD_SLOT ? 'USD' : SLOTS[index].slot);
     }
     this.updatePanel();
@@ -819,7 +863,7 @@ export class ExperienceSystem extends createSystem({
     this.mode = 'year';
     this.phase = 'intro';
     void this.audio.unlock().then(() => this.audio.setPaused(false));
-    this.introLines = [...STRINGS.intro];
+    this.introLines = [...INTRO_KEYS];
     this.introAge = 0;
     this.guideLine = null;
     this.robot.setVisible(true);
@@ -833,14 +877,15 @@ export class ExperienceSystem extends createSystem({
   }
 
   private nextIntroLine(): void {
-    const line = this.introLines.shift();
-    if (!line) {
+    const key = this.introLines.shift();
+    if (!key) {
       this.introDone = true;
       this.enterSelect();
       return;
     }
     this.introAge = 0;
-    this.say(line, this.introLines.length === STRINGS.intro.length - 1 ? 'excited' : 'talking');
+    const first = this.introLines.length === INTRO_KEYS.length - 1;
+    this.say(lineOf(key), first ? 'excited' : 'talking', first ? 'excited' : 'normal');
   }
 
   /** Choose a year (from the intro, the summary, the Full Journey, or the Years button). */
@@ -871,7 +916,7 @@ export class ExperienceSystem extends createSystem({
     this.visit = null;
     this.clock.paused = false;
     this.showYearPreview();
-    this.say(STRINGS.select, 'thinking');
+    this.say(lineOf('guide.select'), 'thinking');
     this.updatePanel();
   }
 
@@ -901,21 +946,23 @@ export class ExperienceSystem extends createSystem({
     const events = eventsInYear(this.annualEvents, year, last);
     const iso = this.isoOf(w.first);
     const notes: string[] = [];
-    if (w.startsLate) notes.push(`Our data begins on ${shortDate(iso)}, ${year}`);
-    if (w.ongoing) notes.push(`Year to date: data to ${shortDate(last)}, ${year}`);
+    if (w.startsLate) notes.push(t('select.dataBegins', { date: shortDayText(iso), year }));
+    if (w.ongoing) notes.push(t('select.yearToDate', { date: shortDayText(last), year }));
     this.timeline.slots.forEach((s, i) => {
-      if (s.first > w.first && s.first <= w.last) notes.push(`${SLOTS[i].slot === 'EUR' ? 'DEM' : SLOTS[i].slot} data begins ${shortDate(this.isoOf(s.first))}`);
-      else if (s.first > w.last) notes.push(`${SLOTS[i].slot} from ${this.firstYear[i]}`);
+      if (s.first > w.first && s.first <= w.last)
+        notes.push(t('select.slotBegins', { code: SLOTS[i].slot === 'EUR' ? 'DEM' : SLOTS[i].slot, date: shortDayText(this.isoOf(s.first)) }));
+      else if (s.first > w.last) notes.push(t('select.slotFrom', { code: SLOTS[i].slot, year: this.firstYear[i] }));
     });
+    const sep = getLang() === 'ja' ? '、' : ', ';
     const preview: YearPreview = {
       year,
-      era: eraAt(`${year}-07-01`).name,
+      era: tr(eraAt(`${year}-07-01`).name),
       events: events.map((e) => ({
-        date: eventDateText(e),
-        title: e.title,
-        places: e.regions.map((r) => regionName(r, e.date)).join(', '),
+        date: eventDateText(e, getLang()),
+        title: tr(e.title),
+        places: e.regions.map((r) => tr(regionName(r, e.date))).join(sep),
         currencies: e.currencies.map((c) => this.codeOn(c, e.date)).join(', '),
-        summary: e.summary,
+        summary: tr(e.summary),
       })),
       notes,
     };
@@ -952,7 +999,8 @@ export class ExperienceSystem extends createSystem({
     this.robot.moveTo(...ROBOT_SPOTS.warp);
     this.robot.mood = 'traveling';
     this.robot.point(null);
-    this.say(STRINGS.warp(target), 'traveling');
+    this.arrivalPending = false;
+    this.say(lineOf('guide.warp', { year: target }), 'traveling', 'excited');
     this.updatePanel();
   }
 
@@ -986,7 +1034,7 @@ export class ExperienceSystem extends createSystem({
     const beats = buildYearScript(ctx);
     this.visit = { year, window: w, ctx, runner: new YearRunner(beats, w.last), events };
     this.chartFrame.year = { start: w.first, axis0: w.axisStart, axis1: w.axisEnd };
-    this.chart.setEvents(events.filter(isDated).map((e) => ({ t: tl.indexOf(e.date), label: shortTitle(e.title) })));
+    this.chart.setEvents(this.yearMarks(events));
     this.chart.beginMorph();
     this.chart.reset();
     this.map.setYearMode(true);
@@ -999,7 +1047,18 @@ export class ExperienceSystem extends createSystem({
     this.stageRegion = null;
     this.monthKey = -2;
     this.stage.setNav(year > this.span.min, year < this.span.max);
-    this.stage.show(this.worldView());
+    this.showView(() => this.worldView());
+  }
+
+  /** The chart's event markers for a year's dated events (titles in the display language). */
+  private yearMarks(events: AnnualEvent[]): { t: number; label: string }[] {
+    return events.filter(isDated).map((e) => ({ t: this.timeline.indexOf(e.date), label: shortTitle(tr(e.title)) }));
+  }
+
+  /** Show a stage view, remembering how to rebuild it in another display language. */
+  private showView(build: () => StageView): void {
+    this.viewOf = build;
+    this.stage.show(build());
   }
 
   private enterReview(): void {
@@ -1009,7 +1068,8 @@ export class ExperienceSystem extends createSystem({
     this.robot.moveTo(...ROBOT_SPOTS.side);
     this.robot.mood = 'excited';
     this.audio.shimmer();
-    this.say(null);
+    // The warp or arrival line may still be being said: it keeps its subtitle until it ends.
+    if (!this.narration.speaking && !this.arrivalPending) this.say(null);
     this.updatePanel();
   }
 
@@ -1024,7 +1084,7 @@ export class ExperienceSystem extends createSystem({
     this.robot.mood = 'excited';
     this.robot.point(null);
     this.spot = null;
-    this.say(summaryLine(v.ctx), 'talking');
+    this.say(summaryLines(v.ctx), 'talking');
     this.updatePanel();
   }
 
@@ -1040,21 +1100,76 @@ export class ExperienceSystem extends createSystem({
     this.chartFrame.year = null;
     this.spot = null;
     this.clock.clearWindow();
-    this.chart.setEvents(this.fullEvents);
+    this.chart.setEvents(this.fullMarks());
     this.map.setYearMode(false);
     this.robot.point(null);
   }
 
-  /** The guide says a line (subtitles always; speech when the voice is on). */
-  private say(text: string | null, mood?: Mood): void {
-    this.guideLine = text;
+  /**
+   * The guide says a line: the subtitle in the display language (always), the
+   * English line in the voice (when it is on). A new line replaces the old one;
+   * callers wait for `lineDone` before moving on, so nothing is cut short.
+   */
+  private say(line: Line | null, mood?: Mood, delivery: Delivery = 'normal'): void {
+    this.guideLine = line;
     this.guideAge = 0;
-    this.captions.set(text);
+    this.captions.set(line ? this.shown(line) : null);
     if (mood) this.robot.mood = mood;
-    if (text) {
-      this.narration.speak(text);
+    if (line) {
+      if (import.meta.env.DEV) console.info(`[ctm-say] ${performance.now().toFixed(0)} ${line.en.slice(0, 50)}`);
+      this.narration.speak(line.en, delivery);
       this.audio.blip(true);
     }
+  }
+
+  /** A line in the display language. */
+  private shown(line: Line): string {
+    return getLang() === 'ja' ? line.ja : line.en;
+  }
+
+  /**
+   * The current line has been said: by the voice when one is working (with a
+   * short breath after it), else once its reading time has passed. (The
+   * reading time is that of the English line in both languages, so the
+   * journey's timing never depends on the display language.)
+   */
+  private lineDone(minS = 1): boolean {
+    // (A cleared subtitle does not end a line the voice is still saying.)
+    if (!this.guideLine) return !this.narration.speaking && this.quietFor >= 0.35;
+    if (this.narration.live) return !this.narration.speaking && this.guideAge >= minS && this.quietFor >= 0.35;
+    return this.guideAge >= lineSeconds(this.guideLine.en);
+  }
+
+  /** Seconds since the voice last spoke (0 while it speaks). */
+  private quietFor = 0;
+
+  /** The display language changed: redraw every text, keep every state. */
+  private relabel(): void {
+    if (!this.ready) return;
+    if (this.guideLine) this.captions.set(this.shown(this.guideLine));
+    this.captions.setLabel(t('captions.speaker'));
+    this.skipIntro.set(t('skipIntro'));
+    this.selector.relabel();
+    this.stage.relabel();
+    if (this.phase === 'select' || this.phase === 'intro') this.showYearPreview();
+    if (this.viewOf && this.visit) this.stage.show(this.viewOf());
+    if (this.phase === 'summary' && this.visit) this.showSummary();
+    if (this.visit) this.chart.setEvents(this.yearMarks(this.visit.events));
+    else if (this.mode === 'full') this.chart.setEvents(this.fullMarks());
+    this.chart.relabel();
+    this.portals.relabel();
+    this.map.relabel();
+    this.era.relabel();
+    if (this.caption) this.showCaption(this.caption);
+    this.monthKey = -2;
+    this.infoTimer = 0;
+    this.readoutTimer = 0;
+    this.updatePanel();
+  }
+
+  /** The Full Journey's chart markers (in the display language). */
+  private fullMarks(): { t: number; label: string }[] {
+    return this.fullEvents.map((e) => ({ t: e.t, label: tr(e.label) }));
   }
 
   // -------------------------------------------------------------------------
@@ -1065,49 +1180,62 @@ export class ExperienceSystem extends createSystem({
     const v = this.visit!;
     const iso = this.isoOf(Math.round((v.window.first + v.window.last) / 2));
     const era = eraAt(iso);
+    const lang = getLang();
     return {
       kind: 'world',
       year: v.year,
-      era: era.name,
-      eraText: era.text,
+      era: tr(era.name),
+      eraText: tr(era.text),
       places: v.ctx.featured.map((r) => {
         const slot = REGIONS[r].slot;
         const k = SLOTS.findIndex((s) => s.slot === slot);
-        return { name: regionName(r, iso), code: this.codeOn(slot, iso), color: k >= 0 ? css(SLOTS[k].color) : '#fff1c8' };
+        return { name: tr(regionName(r, iso)), code: this.codeOn(slot, iso), color: k >= 0 ? css(SLOTS[k].color) : '#fff1c8' };
       }),
-      events: v.events.map((e) => ({ date: eventDateText(e), title: e.title })),
-      note: `Exchange rates: weekly observations (Fridays), ${shortDate(this.isoOf(v.window.first))} to ${shortDate(this.isoOf(v.window.last))}${v.window.ongoing ? ' (year to date)' : ''}. ${eventsNote(v.events)}`,
+      events: v.events.map((e) => ({ date: eventDateText(e, lang), title: tr(e.title) })),
+      note: t('stage.note', {
+        from: shortDayText(this.isoOf(v.window.first)),
+        to: shortDayText(this.isoOf(v.window.last)),
+        ytd: v.window.ongoing ? t('stage.ytd') : '',
+        events: eventsNote(v.events),
+      }),
     };
   }
 
   private showRegion(region: RegionId): void {
     this.stageRegion = region;
     this.stageTimer = 0;
-    this.stage.show(this.regionView(region));
+    this.showView(() => this.regionView(region));
   }
 
   private regionView(region: RegionId): StageView {
     const v = this.visit!;
     const lastIso = this.isoOf(this.timeline.count - 1);
+    const lang = getLang();
+    const clip = (g: { from: string; to: string }) =>
+      t('stage.gapSpan', {
+        from: shortDayText(g.from < `${v.year}-01-01` ? `${v.year}-01-01` : g.from),
+        to: shortDayText(g.to > `${v.year}-12-31` ? `${v.year}-12-31` : g.to),
+      });
     const offices: StageOffice[] = (this.leaders ? leadersInYear(this.leaders, region, v.year, lastIso) : []).map((o) => ({
-      title: o.office.title,
-      people: o.terms.map((t) => ({
-        name: SHOW_PEOPLE ? t.name : null,
-        title: o.office.title,
-        term: termText(t, lastIso),
-        portrait: SHOW_PEOPLE && t.portrait ? `${this.baseUrl}${t.portrait.src}` : null,
-        credit: SHOW_PEOPLE && t.portrait ? `Photo: ${t.portrait.artist.slice(0, 60)} · ${t.portrait.license} · Wikimedia Commons` : null,
+      title: tr(o.office.title),
+      people: o.terms.map((x) => ({
+        name: SHOW_PEOPLE ? tr(x.name) : null,
+        title: tr(o.office.title),
+        term: termText(x, lastIso, lang),
+        portrait: SHOW_PEOPLE && x.portrait ? `${this.baseUrl}${x.portrait.src}` : null,
+        // Credits stay as the licensor gave them (author and license are not translated).
+        credit: SHOW_PEOPLE && x.portrait ? t('stage.photo', { artist: x.portrait.artist.slice(0, 60), license: x.portrait.license }) : null,
       })),
-      gap: o.gaps.length ? `No verified record: ${o.gaps.map((g) => `${shortDate(g.from < `${v.year}-01-01` ? `${v.year}-01-01` : g.from)} to ${shortDate(g.to > `${v.year}-12-31` ? `${v.year}-12-31` : g.to)}`).join(', ')}` : null,
+      gap: o.gaps.length ? t('stage.gap', { spans: o.gaps.map(clip).join(lang === 'ja' ? '、' : ', ') }) : null,
     }));
     const slot = REGIONS[region].slot;
     return {
       kind: 'region',
       year: v.year,
-      name: regionName(region, this.isoAt(this.clock.position)),
-      system: REGIONS[region].system,
+      name: tr(regionName(region, this.isoAt(this.clock.position))),
+      system: tr(REGIONS[region].system),
       offices: offices.slice(0, 3),
-      currency: slot === 'USD' ? { code: 'USD', color: '#fff1c8', lines: ['The US dollar is the base: every other currency is measured against it.'] } : this.currencyLines(slot),
+      currency: slot === 'USD' ? { code: 'USD', color: '#fff1c8', lines: [t('stage.usdBase')] } : this.currencyLines(slot),
       peopleHidden: !SHOW_PEOPLE,
     };
   }
@@ -1121,7 +1249,11 @@ export class ExperienceSystem extends createSystem({
     const p = Math.min(v.window.last, Math.floor(this.clock.position + 1e-6));
     const color = css(SLOTS[i].color);
     if (s.first > p) {
-      return { code: slot === 'EUR' ? 'DEM' : slot, color, lines: [s.first > v.window.last ? `Our data for this currency begins in ${this.firstYear[i]}.` : `Data begins ${shortDate(this.isoOf(s.first))}.`] };
+      return {
+        code: slot === 'EUR' ? 'DEM' : slot,
+        color,
+        lines: [s.first > v.window.last ? t('stage.dataBeginsIn', { year: this.firstYear[i] }) : t('stage.dataBegins', { date: shortDayText(this.isoOf(s.first)) })],
+      };
     }
     const from = Math.max(v.window.first, s.first);
     const code = this.timeline.codeAt(i, p);
@@ -1133,9 +1265,11 @@ export class ExperienceSystem extends createSystem({
       code,
       color,
       lines: [
-        `${shortDate(this.isoOf(from))}: ${formatRate(r0)} ${this.timeline.codeAt(i, from)} per USD`,
-        `${ended ? shortDate(this.isoOf(p)) : `Now (${shortDate(this.isoOf(p))})`}: ${formatRate(r1)} ${code} per USD`,
-        `${signedPct(pct)} vs USD ${ended ? 'over the year' : 'so far'} (${pct >= 0 ? 'stronger' : 'weaker'})`,
+        t('stage.rateOn', { date: shortDayText(this.isoOf(from)), rate: formatRate(r0), code: this.timeline.codeAt(i, from) }),
+        ended
+          ? t('stage.rateOn', { date: shortDayText(this.isoOf(p)), rate: formatRate(r1), code })
+          : t('stage.rateNow', { date: shortDayText(this.isoOf(p)), rate: formatRate(r1), code }),
+        t(ended ? 'stage.changeYear' : 'stage.changeSoFar', { pct: signedPct(pct), dir: t(pct >= 0 ? 'stage.stronger' : 'stage.weaker') }),
       ],
     };
   }
@@ -1147,22 +1281,23 @@ export class ExperienceSystem extends createSystem({
   }
 
   private eventView(e: AnnualEvent): StageView {
+    const lang = getLang();
+    const year = e.date.slice(0, 4);
     return {
       kind: 'event',
       year: this.visit!.year,
-      date: `${eventDateText(e)}${e.precision === 'year' ? '' : `, ${e.date.slice(0, 4)}`}`,
-      title: e.title,
-      place: `${e.city}, ${e.country}`,
-      summary: e.summary,
+      date: e.precision === 'year' ? eventDateText(e, lang) : lang === 'ja' ? `${year}年${eventDateText(e, lang)}` : `${eventDateText(e, lang)}, ${year}`,
+      title: tr(e.title),
+      place: lang === 'ja' ? `${tr(e.country)}、${tr(e.city)}` : `${e.city}, ${e.country}`,
+      summary: tr(e.summary),
       currencies: e.currencies.map((c) => {
         const k = SLOTS.findIndex((s) => s.slot === c);
         return { code: this.codeOn(c, e.date), color: k >= 0 ? css(SLOTS[k].color) : '#fff1c8' };
       }),
-      places: `Places: ${e.regions.map((r) => regionName(r, e.date)).join(', ')}`,
-      // (Contest-safe build: some source articles are named after people, so only their count is shown.)
+      places: t('stage.places', { places: e.regions.map((r) => tr(regionName(r, e.date))).join(lang === 'ja' ? '、' : ', ') }),
       // Publishers only (never article titles, which may name people): the same in both builds.
-      sources: sourcesNote(e),
-      observed: observationNote(e, this.observedIso(e)),
+      sources: t('src.label', { text: sourcesNote(e, lang) }),
+      observed: observationNote(e, this.observedIso(e), lang),
     };
   }
 
@@ -1176,30 +1311,32 @@ export class ExperienceSystem extends createSystem({
     if (SHOW_PEOPLE && this.leaders) {
       for (const r of v.ctx.featured) {
         for (const o of leadersInYear(this.leaders, r, v.year, lastIso).slice(0, 2)) {
-          for (const t of o.terms.slice(0, 2)) people.push(`${t.name}, ${o.office.title}`);
+          for (const x of o.terms.slice(0, 2)) people.push(t('stage.personOffice', { name: tr(x.name), office: tr(o.office.title) }));
         }
       }
     }
-    this.stage.show({
+    const lang = getLang();
+    this.showView(() => ({
       kind: 'summary',
       year: v.year,
-      period: first ? `${shortDate(first.fromDate)} to ${shortDate(first.toDate)}${v.window.ongoing ? ' (year to date)' : ''}` : '',
-      events: v.events.map((e) => ({ date: eventDateText(e), title: e.title })),
-      places: v.ctx.featured.map((r) => regionName(r, `${v.year}-07-01`)),
-      people: SHOW_PEOPLE ? people.slice(0, 6) : [STRINGS.peopleHidden],
+      period: first ? t('stage.period', { from: shortDayText(first.fromDate), to: shortDayText(first.toDate), ytd: v.window.ongoing ? t('stage.ytd') : '' }) : '',
+      events: v.events.map((e) => ({ date: eventDateText(e, lang), title: tr(e.title) })),
+      places: v.ctx.featured.map((r) => tr(regionName(r, `${v.year}-07-01`))),
+      people: SHOW_PEOPLE ? people.slice(0, 6) : [t('guide.peopleHidden')],
       ranking: ranked.map((c) => ({ code: c.codeTo, color: css(SLOTS[c.index].color), pct: c.pct })),
       others: changes
         .filter((c) => c && c.late)
-        .map((c) => `${c!.codeTo}: ${signedPct(c!.pct)} from ${shortDate(c!.fromDate)} (data begins; not ranked)`),
-    });
+        .map((c) => t('stage.lateChange', { code: c!.codeTo, pct: signedPct(c!.pct), date: shortDayText(c!.fromDate) })),
+    }));
     this.stage.setShown(true);
   }
 
   /** What a beat shows: the stage view, the spotlight, the robot's gesture. */
   private onBeat(b: Beat): void {
     const v = this.visit!;
-    const timesSay = b.text;
-    this.say(timesSay, b.mood);
+    // Important events in a steadier voice; the rest as the guide's mood.
+    const delivery: Delivery = b.part === 'event' && !b.undated ? 'serious' : b.part === 'world' ? 'excited' : 'normal';
+    this.say({ en: b.text, ja: b.ja }, b.mood, delivery);
     // Spotlight: the beat's currencies (the rest dim), unless All Currencies is on.
     this.spotBuf.fill(0);
     let any = false;
@@ -1222,7 +1359,7 @@ export class ExperienceSystem extends createSystem({
       const e = v.events.find((x) => x.id === b.eventId);
       if (e) {
         this.stageRegion = null;
-        this.stage.show(this.eventView(e));
+        this.showView(() => this.eventView(e));
       }
     } else if (b.part === 'event' && b.eventId) {
       const e = v.events.find((x) => x.id === b.eventId);
@@ -1230,7 +1367,7 @@ export class ExperienceSystem extends createSystem({
       if (scene >= 0) this.openPortal(scene);
       else if (e) {
         this.stageRegion = null;
-        this.stage.show(this.eventView(e));
+        this.showView(() => this.eventView(e));
       }
       // The moment itself: a gong, a warm marker on the lines it touched.
       this.audio.gong();
@@ -1326,7 +1463,16 @@ export class ExperienceSystem extends createSystem({
 
     this.audio.update(this.voiceInputs, turb, floatBlend, flowing);
     this.ambience.update(dt, turb);
-    this.robot.talking = this.guideLine !== null && (this.narration.speaking || this.guideAge < lineSeconds(this.guideLine) * 0.8);
+    // The mouth moves with the voice when one is working, else for the line's reading time.
+    this.quietFor = this.narration.speaking ? 0 : this.quietFor + dt;
+    const voiced = this.narration.live;
+    const line = this.mode === 'year' ? this.guideLine : this.caption ? this.caption.text : null;
+    const lineAge = this.mode === 'year' ? this.guideAge : this.captionAge;
+    this.robot.talking =
+      line !== null && (voiced ? this.narration.state === 'speaking' : lineAge < lineSeconds(line.en) * 0.8);
+    // Long lines page through the subtitle strip with the voice (or the reading time).
+    const progress = voiced && this.narration.speaking ? this.narration.progress : line ? Math.min(1, lineAge / lineSeconds(line.en)) : 1;
+    this.captions.setProgress(progress);
     this.robot.update(dt, this.calm);
     this.tunnel.update(dt);
     // The veil hides the bands during the warp (the robot and hand panel stay).
@@ -1361,21 +1507,22 @@ export class ExperienceSystem extends createSystem({
     this.guideAge += dt;
     if (this.phase === 'intro') {
       this.introAge += dt;
-      const line = this.guideLine ?? '';
-      if (this.introAge >= lineSeconds(line) && !this.narration.speaking) this.nextIntroLine();
+      if (this.lineDone()) this.nextIntroLine();
       return;
     }
     if (this.phase === 'select') {
       // A short line, then the robot waits (thinking) without repeating itself.
-      if (this.guideLine && this.guideAge > lineSeconds(this.guideLine) + 1.5 && !this.narration.speaking) this.say(null, 'thinking');
+      if (this.guideLine && this.lineDone() && this.guideAge > (this.narration.live ? 1.5 : lineSeconds(this.guideLine.en) + 1.5)) this.say(null, 'thinking');
       return;
     }
     if (this.phase === 'warp') {
       if (!this.warpRevealed && (this.tunnel.time >= this.tunnel.revealAt || !this.tunnel.active)) {
         this.warpRevealed = true;
         this.arrive(this.warpTarget);
-        this.say(STRINGS.arrive(this.warpTarget), 'excited');
+        // "Here we are" waits for "Hold on tight" to be said in full.
+        this.arrivalPending = true;
       }
+      if (this.arrivalPending && this.lineDone(0.6)) this.sayArrival();
       if (!this.tunnel.active) this.enterReview();
       return;
     }
@@ -1383,17 +1530,23 @@ export class ExperienceSystem extends createSystem({
     if (!v) return;
     if (this.phase === 'summary') {
       this.summaryAge += dt;
-      if (this.guideLine && this.guideAge > lineSeconds(this.guideLine) && !this.narration.speaking) this.say(null, 'idle');
+      if (this.guideLine && this.lineDone()) this.say(null, 'idle');
       this.refreshRegionView(dt);
       return;
     }
     if (this.phase !== 'review') return;
     const paused = this.clock.paused;
-    if (!paused && !this.explore) {
-      const started = v.runner.update(dt, this.clock.position, this.narration.speaking, false, (b) => ({
-        minS: lineSeconds(b.text) * 0.8,
-        maxS: lineSeconds(b.text) * 1.8 + 2,
-      }));
+    // The arrival line, if the warp ended before it could be said.
+    if (!paused && this.arrivalPending && this.lineDone(0.6)) this.sayArrival();
+    if (!paused && !this.explore && !this.arrivalPending) {
+      // With a working voice a beat lasts as long as its line is said (plus a breath); the maximum only
+      // guards against an engine that never ends. Without one, the English line's reading time.
+      const voiced = this.narration.live;
+      const started = v.runner.update(dt, this.clock.position, this.narration.speaking, false, (b) =>
+        voiced
+          ? { minS: 1.2, maxS: lineSeconds(b.text) * 3 + 20, tailS: 0.45 }
+          : { minS: lineSeconds(b.text), maxS: lineSeconds(b.text) * 1.8 + 2 },
+      );
       if (started) this.onBeat(started);
       else if (!v.runner.holding && this.guideLine && this.guideAge > 0.3) {
         // Between beats the subtitle clears and the robot relaxes; the year flows.
@@ -1411,13 +1564,18 @@ export class ExperienceSystem extends createSystem({
     if (v.runner.doneAt(this.clock.position) && !this.explore && !this.narration.speaking) this.enterSummary();
   }
 
+  private sayArrival(): void {
+    this.arrivalPending = false;
+    this.say(lineOf('guide.arrive', { year: this.warpTarget }), 'excited', 'excited');
+  }
+
   /** The region view's live currency lines (a few times a second). */
   private refreshRegionView(dt: number): void {
     this.stageTimer -= dt;
     if (this.stageTimer > 0) return;
     this.stageTimer = 0.5;
     const r = this.explore?.region ?? this.stageRegion;
-    if (r && this.stage.viewKind === 'region' && this.visit) this.stage.show(this.regionView(r));
+    if (r && this.stage.viewKind === 'region' && this.visit) this.showView(() => this.regionView(r));
   }
 
   /** ISO date at the playhead (today: the live rates' date). */
@@ -1452,6 +1610,7 @@ export class ExperienceSystem extends createSystem({
     const beat = this.visit ? `${this.visit.runner.index}/${this.visit.runner.beats.length}` : '-';
     const line =
       `[ctm] mode=${this.mode} phase=${this.phase} year=${year} beat=${beat} paused=${this.clock.paused} audio=${this.audio.ctx.state} ` +
+      `voice="${this.narration.voiceName || '-'}" speech=${this.narration.state} live=${this.narration.live} rec=${this.narration.recordings} lang=${getLang()} line="${(this.guideLine?.en ?? '').slice(0, 40)}" ` +
       `notes=${this.audio.noteCount} fps=${fps.toFixed(0)} solo=${this.solo} portal=${this.portals.debug} pct=${pcts} ` +
       `listener=(${l.positionX.value.toFixed(2)},${l.positionY.value.toFixed(2)},${l.positionZ.value.toFixed(2)})`;
     console.info(line);
@@ -1493,14 +1652,14 @@ export class ExperienceSystem extends createSystem({
     if (!this.hintShown && p >= this.hintIndex) {
       this.hintShown = true;
       const [minS, maxS] = CAPTION_TIMES.hint;
-      this.enqueue({ label: '', text: HINT_TEXT, minS, maxS, hint: true });
+      this.enqueue({ label: NO_LINE, text: dataLine(HINT_TEXT), minS, maxS, hint: true });
     }
     for (const m of this.moments) {
       if (m.fired || p < m.trigger) continue;
       m.fired = true;
       const e = m.event;
       const [minS, maxS] = CAPTION_TIMES[e.tier];
-      this.enqueue({ label: e.label, text: e.text, minS, maxS });
+      this.enqueue({ label: dataLine(e.label), text: dataLine(e.text), minS, maxS });
       const at = this.timeline.indexOf(e.date);
       for (const slot of e.focus) {
         const i = SLOTS.findIndex((s) => s.slot === slot);
@@ -1600,14 +1759,15 @@ export class ExperienceSystem extends createSystem({
       const s = this.timeline.slots[k];
       if (p < s.first || at < s.first) continue;
       const rate = (idx: number) => s.firstRate / Math.exp(Timeline.sample(s.strength, idx));
-      const word = CURRENCY_WORDS[this.timeline.codeAt(k, p)] ?? slot;
+      const en = CURRENCY_WORDS[this.timeline.codeAt(k, p)] ?? slot;
+      const word = getLang() === 'ja' ? tr(SLOTS[k].names[this.timeline.codeAt(k, p)] ?? en) : en;
       // "On the date" is the last weekly observation on or before it: the
       // decision day itself may fall between observations (even on a Sunday),
       // and no rate is invented for it. In the Year Journey the time stops on
       // observations, so both are named by their dates ("Sep 20 → Sep 27").
       const k0 = Math.floor(at + 1e-9);
-      const dates = this.mode === 'year' ? { event: shortDate(this.isoOf(k0)), now: shortDate(this.isoOf(Math.round(p))) } : undefined;
-      lines.push(readoutLine(word, rate(k0), rate(p), p >= at, dates));
+      const dates = this.mode === 'year' ? { event: shortDayText(this.isoOf(k0)), now: shortDayText(this.isoOf(Math.round(p))) } : undefined;
+      lines.push(readoutLine(word, rate(k0), rate(p), p >= at, dates, getLang()));
     }
     this.portals.setReadout(lines);
   }
@@ -1625,7 +1785,9 @@ export class ExperienceSystem extends createSystem({
     if (!this.clock.paused) this.captionAge += dt;
     const c = this.caption;
     const waiting = this.captionQueue.length > 0;
-    if (c && (this.captionAge >= c.maxS || (waiting && this.captionAge >= c.minS))) {
+    // A caption that is being said stays until the voice ends (within a hard limit: time keeps flowing here).
+    const saying = this.narration.speaking && this.captionAge < (c?.maxS ?? 0) + 12;
+    if (c && !saying && (this.captionAge >= c.maxS || (waiting && this.captionAge >= c.minS))) {
       this.caption = null;
       this.showCaption(null);
       this.robot.talking = false;
@@ -1635,13 +1797,13 @@ export class ExperienceSystem extends createSystem({
       this.caption = this.captionQueue.shift()!;
       this.captionAge = 0;
       this.showCaption(this.caption);
-      this.narration.speak(this.caption.label ? `${this.caption.label}. ${this.caption.text}` : this.caption.text);
+      this.narration.speak(captionSpeech(this.caption));
     }
   }
 
   /** Captions live in the Historical Events band (the era view shows them). */
   private showCaption(c: Caption | null): void {
-    this.era.setCaption(c);
+    this.era.setCaption(c ? { label: this.shown(c.label), text: this.shown(c.text), hint: c.hint } : null);
   }
 
   /** A soft chime at each new decade while time flows. */
@@ -1674,20 +1836,21 @@ export class ExperienceSystem extends createSystem({
    * (and when that copy was fetched), and when currencies' latest rates come
    * from different days, so they are not mistaken for one live moment.
    */
-  private todayCaption(today: TodayData | null): { label: string; text: string } {
+  private todayCaption(today: TodayData | null): { label: Line; text: Line } {
     if (!today) {
       const last = this.timeline.dateAt(this.timeline.count - 1).toISOString().slice(0, 10);
-      return { label: formatDate(last), text: 'Live rates are unavailable. This is the last week in our history.' };
+      return { label: both((l) => fullDateText(last, l)), text: lineOf('ending.unavailable') };
     }
     const dates = SLOTS.map((_, i) => this.todayRate(i, today)?.date).filter((d): d is string => !!d);
     const earliest = dates.reduce((m, d) => (d < m ? d : m), today.asOf);
     const mixed = earliest !== today.asOf;
     const bundled = today.source === 'bundled';
-    const label = bundled ? `Saved rates from ${formatFetched(today.fetchedAt ?? today.asOf)}` : formatDate(today.asOf);
-    let text: string;
-    if (mixed) text = `Each line ends at its latest rate; some are from ${formatShort(earliest)}. Pinch a currency for details.`;
-    else if (bundled) text = 'Live rates are unavailable right now. Pinch a currency to hear its latest move.';
-    else text = 'This is the world of money right now. Pinch a currency to hear how it moved since yesterday.';
+    const label = bundled
+      ? both((l) => t('ending.saved', { date: formatFetched(today.fetchedAt ?? today.asOf, l) }, l))
+      : both((l) => fullDateText(today.asOf, l));
+    const text = mixed
+      ? both((l) => t('ending.mixed', { date: shortDayText(earliest, l) }, l))
+      : lineOf(bundled ? 'ending.bundled' : 'ending.live');
     return { label, text };
   }
 
@@ -1749,7 +1912,9 @@ export class ExperienceSystem extends createSystem({
     const monthKey = isToday ? -1 : d.getUTCFullYear() * 12 + d.getUTCMonth();
     if (monthKey !== this.monthKey || isToday) {
       this.monthKey = monthKey;
-      this.chart.setDate(isToday ? `Today · ${formatShort(this.today!.asOf)} ${d.getUTCFullYear()}` : `${MONTHS[d.getUTCMonth()]} ${d.getUTCFullYear()}`);
+      this.chart.setDate(
+        isToday ? t('chart.today', { date: shortDayText(this.today!.asOf), year: d.getUTCFullYear() }) : monthYearText(d.toISOString().slice(0, 10)),
+      );
     }
     this.infoTimer -= dt;
     if (this.infoTimer > 0) return;
@@ -1757,33 +1922,50 @@ export class ExperienceSystem extends createSystem({
     const base = BASE_CURRENCY.code;
     const yr = this.chartFrame.year;
     const months = Math.round((CHART.windowWeeks * 7) / 30.44);
-    const since = yr ? `${shortDate(this.isoOf(yr.start))}, ${this.isoOf(yr.start).slice(0, 4)}` : '';
-    let text = yr
-      ? `Change in value vs ${base} since ${since} (the year's first weekly observation) · one scale · up = stronger`
-      : `Change in value vs ${base} over the last ${months} months · one scale for all · up = stronger than the dollar`;
+    const since = yr ? fullDateText(this.isoOf(yr.start)) : '';
+    let text = yr ? t('chart.headerYear', { base, since }) : t('chart.headerFull', { base, months });
     const i = this.solo;
     if (i >= 0) {
       const s = this.timeline.slots[i];
       const meta = SLOTS[i];
       const code = this.codes[i];
-      const title = `${code} ${meta.names[code] ?? code}`;
+      const title = `${code} ${tr(meta.names[code] ?? code)}`;
       const b = this.chart.baseOf(i);
       if (this.phase === 'today' && this.today) {
         const r = this.todayRate(i, this.today);
         const day = r ? (r.prev / r.rate - 1) * 100 : 0;
         text = r
-          ? `${title}: ${b ? `${signed(b.headPct, 1)}% in ${months} months, ` : ''}${formatShort(r.prevDate)} to ${formatShort(r.date)}: ${signed(day, 2)}% vs ${base}`
+          ? t('chart.soloToday', {
+              title,
+              recent: b ? t('chart.soloRecent', { pct: signed(b.headPct, 1), months }) : '',
+              from: shortDayText(r.prevDate),
+              to: shortDayText(r.date),
+              day: signed(day, 2),
+              base,
+            })
           : title;
       } else if (p < s.first) {
-        text = `${title}: data begins in ${this.firstYear[i]}`;
+        text = t('chart.soloBegins', { title, year: this.firstYear[i] });
       } else if (yr) {
         const k = Math.floor(p + 1e-6);
-        text = `${title}: ${b ? `${signed(b.headPct, 1)}% vs ${base} since ${b.late ? `its data begins (${shortDate(this.isoOf(s.first))})` : since}` : ''} · now ${formatRate(rateAt(s, k))} ${code} per ${base}  (pinch again to hear all)`;
+        const from = b?.late ? t('chart.soloSinceBegins', { date: shortDayText(this.isoOf(s.first)) }) : since;
+        text = t('chart.soloYear', {
+          title,
+          change: b ? t('chart.soloSince', { pct: signed(b.headPct, 1), base, since: from }) : '',
+          rate: formatRate(rateAt(s, k)),
+          code,
+          base,
+        });
       } else {
         const total = (Math.exp(Timeline.sample(s.strength, p)) - 1) * 100;
         const from = this.firstYear[i];
-        const span = b?.late ? `since its data begins (${from})` : `in ${months} months`;
-        text = `${title}: ${b ? `${signed(b.headPct, 1)}% vs ${base} ${span}` : ''} · since ${from}: ${signed(total, 0)}%  (pinch again to hear all)`;
+        const span = b?.late ? t('chart.soloSpanLate', { year: from }) : t('chart.soloSpan', { months });
+        text = t('chart.soloFull', {
+          title,
+          change: b ? t('chart.soloChange', { pct: signed(b.headPct, 1), base, span }) : '',
+          from,
+          total: signed(total, 0),
+        });
       }
     }
     this.chart.setHeader(text);
@@ -1848,21 +2030,34 @@ function css(color: number): string {
   return '#' + color.toString(16).padStart(6, '0');
 }
 
-/** A few words for a chart marker: the event's title, shortened. */
-/** How the year's events were checked: "2 events reviewed against quoted sources; 1 matched automatically." */
-function eventsNote(events: AnnualEvent[]): string {
-  if (!events.length) return 'No verified events this year.';
-  const reviewed = events.filter((e) => e.status === 'reviewed').length;
-  const matched = events.length - reviewed;
-  const parts = [];
-  if (reviewed) parts.push(`${reviewed} event${reviewed > 1 ? 's' : ''} reviewed against quoted sources`);
-  if (matched) parts.push(`${matched} matched automatically to a Wikipedia passage`);
-  return `${parts.join('; ')}.`;
+/** A Full Journey caption line from data text (its Japanese from the catalog). */
+function dataLine(en: string): Line {
+  return { en, ja: tr(en, 'ja') };
 }
 
+const NO_LINE: Line = { en: '', ja: '' };
+
+/** What the voice says for a Full Journey caption (always English). */
+function captionSpeech(c: Caption): string {
+  return c.label.en ? `${c.label.en}. ${c.text.en}` : c.text.en;
+}
+
+/** How the year's events were checked: "2 events reviewed against quoted sources; 1 matched automatically." */
+function eventsNote(events: AnnualEvent[]): string {
+  if (!events.length) return t('stage.eventsNone');
+  const reviewed = events.filter((e) => e.status === 'reviewed').length;
+  const matched = events.length - reviewed;
+  const parts: string[] = [];
+  if (reviewed) parts.push(reviewed > 1 ? t('stage.eventsReviewedN', { n: reviewed }) : t('stage.eventsReviewed1'));
+  if (matched) parts.push(t('stage.eventsMatched', { n: matched }));
+  return t('stage.eventsEnd', { text: parts.join(t('stage.eventsSep')) });
+}
+
+/** A few words for a chart marker: the event's title, shortened. */
 function shortTitle(title: string): string {
-  const t = title.replace(/^The /, '').replace(/^"|"$/g, '');
-  return t.length > 26 ? t.slice(0, 25).replace(/\s+\S*$/, '') + '…' : t;
+  const x = title.replace(/^The /, '').replace(/^"|"$/g, '');
+  const max = /[\u3000-\u9fff]/.test(x) ? 14 : 26;
+  return x.length > max ? x.slice(0, max - 1).replace(/\s+\S*$/, '') + '…' : x;
 }
 
 function signed(x: number, digits: number): string {
@@ -1877,14 +2072,9 @@ function formatShort(iso: string): string {
 }
 
 /** "Nov 8, 22:50 UTC" (short enough for one caption line), or a plain date. */
-function formatFetched(iso: string): string {
-  if (iso.length <= 10) return formatShort(iso);
+function formatFetched(iso: string, lang: Lang): string {
+  if (iso.length <= 10) return shortDayText(iso, lang);
   const d = new Date(iso);
   if (Number.isNaN(d.getTime())) return iso;
-  return `${formatShort(d.toISOString())}, ${d.toISOString().slice(11, 16)} UTC`;
-}
-
-function formatDate(iso: string): string {
-  const d = new Date(iso + 'T00:00:00Z');
-  return d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' });
+  return t('ending.fetched', { date: shortDayText(d.toISOString(), lang), time: d.toISOString().slice(11, 16) }, lang);
 }

@@ -13,6 +13,8 @@
  * events that have one; the stage steps aside for them.
  */
 import { Group, Mesh, MeshBasicMaterial, PlaneGeometry } from '@iwsdk/core';
+import type { Key } from '../i18n/en.js';
+import { getLang, t } from '../i18n/i18n.js';
 import { noRaycast, TextPlane } from './glow.js';
 import { cachedImage, CanvasButton, roundRect, UiAction, wrapText } from './ui-button.js';
 
@@ -61,6 +63,7 @@ const CONTENT_H = 0.335;
 export class YearStage {
   readonly root = new Group();
   readonly buttons: CanvasButton[] = [];
+  private readonly labels: Key[] = [];
   private readonly plate: MeshBasicMaterial;
   private readonly canvas: TextPlane;
   private view: StageView | null = null;
@@ -80,22 +83,28 @@ export class YearStage {
     this.canvas.mesh.position.set(0, 0.235 - CONTENT_H / 2, 0.002);
     this.root.add(this.canvas.mesh);
     // Summary actions (shown with the summary view).
-    const actions: [number, string, string, number][] = [
-      [UiAction.AnotherYear, 'Explore another year', 'primary', 0.3],
-      [UiAction.PrevYear, '◀  Previous year', 'secondary', 0.22],
-      [UiAction.NextYear, 'Next year  ▶', 'secondary', 0.22],
-      [UiAction.Replay, 'Replay this year', 'secondary', 0.22],
-      [UiAction.FullJourney, 'Full Journey', 'ghost', 0.2],
+    const actions: [number, Key, string, number][] = [
+      [UiAction.AnotherYear, 'stage.anotherYear', 'primary', 0.3],
+      [UiAction.PrevYear, 'stage.prevYear', 'secondary', 0.22],
+      [UiAction.NextYear, 'stage.nextYear', 'secondary', 0.22],
+      [UiAction.Replay, 'stage.replay', 'secondary', 0.22],
+      [UiAction.FullJourney, 'stage.fullJourney', 'ghost', 0.2],
     ];
     let x = -0.83;
     for (const [action, label, style, w] of actions) {
-      const b = new CanvasButton(w, 0.06, action, label, style as 'primary');
+      const b = new CanvasButton(w, 0.06, action, t(label), style as 'primary');
+      this.labels.push(label);
       b.mesh.position.set(x + w / 2, -0.123, 0.006);
       x += w + 0.025;
       b.setShown(false);
       this.root.add(b.mesh);
       this.buttons.push(b);
     }
+  }
+
+  /** The buttons' labels in the display language (the experience redraws the view itself). */
+  relabel(): void {
+    this.buttons.forEach((b, k) => b.set(t(this.labels[k])));
   }
 
   setShown(on: boolean): void {
@@ -130,7 +139,7 @@ export class YearStage {
   private redraw(): void {
     const v = this.view;
     if (!v) return;
-    const key = JSON.stringify(v);
+    const key = JSON.stringify(v) + getLang();
     if (key === this.key && !this.dirty) return;
     this.key = key;
     this.dirty = false;
@@ -171,6 +180,8 @@ export class YearStage {
 // ---------------------------------------------------------------------------
 
 const FONT = 'system-ui, sans-serif';
+/** Headings: upper case in English (no case in Japanese). */
+const head = (key: Key) => t(key);
 
 function heading(ctx: CanvasRenderingContext2D, text: string, x: number, y: number, size: number, color = '#ffffff', weight = 700): void {
   ctx.font = `${weight} ${size}px ${FONT}`;
@@ -209,7 +220,7 @@ function drawWorld(ctx: CanvasRenderingContext2D, w: number, h: number, v: Extra
   heading(ctx, v.era, 34, 262, 40, '#9fd8ff', 700);
   para(ctx, v.eraText, 34, 310, 600, 30, 3, '#c9d6ea');
   // Places to watch.
-  heading(ctx, 'PLACES TO WATCH', 700, 62, 30, '#9fd8ff', 700);
+  heading(ctx, head('stage.placesToWatch'), 700, 62, 30, '#9fd8ff', 700);
   v.places.forEach((p, k) => {
     const y = 136 + k * 84;
     ctx.fillStyle = p.color;
@@ -220,8 +231,8 @@ function drawWorld(ctx: CanvasRenderingContext2D, w: number, h: number, v: Extra
     heading(ctx, p.code, 752 + ctx.measureText(p.name).width + 20, y, 36, p.color, 700);
   });
   // Events this year.
-  heading(ctx, 'THIS YEAR', 1300, 62, 30, '#9fd8ff', 700);
-  if (!v.events.length) para(ctx, 'No verified event recorded for this year.', 1300, 124, 700, 34, 3, '#c9d6ea');
+  heading(ctx, head('stage.thisYear'), 1300, 62, 30, '#9fd8ff', 700);
+  if (!v.events.length) para(ctx, t('stage.noEvent'), 1300, 124, 700, 34, 3, '#c9d6ea');
   v.events.slice(0, 4).forEach((e, k) => {
     const y = 128 + k * 74;
     heading(ctx, e.date, 1300, y, 30, '#ffd27a', 700);
@@ -284,9 +295,9 @@ function drawRegion(ctx: CanvasRenderingContext2D, w: number, h: number, v: Extr
     ctx.fillStyle = '#9fd8ff';
     ctx.fillText(o.title.toUpperCase(), x + 18, top + 36, cardW - 36);
     if (v.peopleHidden) {
-      para(ctx, 'Names and portraits are not shown in this version.', x + 18, top + 84, cardW - 36, 30, 3, '#c9d6ea');
+      para(ctx, t('stage.peopleHidden'), x + 18, top + 84, cardW - 36, 30, 3, '#c9d6ea');
     } else if (!o.people.length) {
-      para(ctx, o.gap ?? 'No verified record for this year.', x + 18, top + 84, cardW - 36, 30, 3, '#c9d6ea');
+      para(ctx, o.gap ?? t('stage.noRecord'), x + 18, top + 84, cardW - 36, 30, 3, '#c9d6ea');
     } else {
       const people = o.people.slice(0, 2);
       const ps = people.length > 1 ? 128 : size;
@@ -312,7 +323,7 @@ function drawRegion(ctx: CanvasRenderingContext2D, w: number, h: number, v: Extr
     roundRect(ctx, cx, top, w - cx - 20, h - top - 14, 18);
     ctx.fillStyle = 'rgba(14,26,48,0.82)';
     ctx.fill();
-    heading(ctx, 'CURRENCY', cx + 20, top + 36, 24, '#9fd8ff', 700);
+    heading(ctx, head('stage.currency'), cx + 20, top + 36, 24, '#9fd8ff', 700);
     heading(ctx, v.currency.code, cx + 20, top + 96, 54, v.currency.color, 800);
     let y = top + 140;
     for (const line of v.currency.lines) y = para(ctx, line, cx + 20, y, w - cx - 60, 28, 2, '#e4ecf8', 1.2) + 4;
@@ -328,18 +339,18 @@ function drawEvent(ctx: CanvasRenderingContext2D, w: number, h: number, v: Extra
   heading(ctx, v.place, 32, 136 + titleLines.length * 64 + 8, 28, '#9fd8ff', 600);
   para(ctx, v.summary, 860, 70, 1150, 34, 4, '#eef4fc');
   let x = 860;
-  heading(ctx, 'CURRENCIES TO WATCH', 860, 250, 20, '#9fd8ff', 700);
+  heading(ctx, head('stage.currenciesToWatch'), 860, 250, 20, '#9fd8ff', 700);
   for (const c of v.currencies) x = chip(ctx, c.code, c.color, x, 300);
   para(ctx, v.places, 860, 352, 1150, 22, 1, '#a9c4e4');
   // The event's date and the rates' date are different things: say which week the bands show.
   para(ctx, v.observed, 32, h - 86, 800, 24, 2, '#e8f0fb');
-  para(ctx, `Source: ${v.sources}`, 32, h - 22, w - 64, 21, 1, '#9fb3d1');
+  para(ctx, v.sources, 32, h - 22, w - 64, 21, 1, '#9fb3d1');
 }
 
 function drawSummary(ctx: CanvasRenderingContext2D, w: number, h: number, v: Extract<StageView, { kind: 'summary' }>): void {
   ctx.textBaseline = 'alphabetic';
   heading(ctx, String(v.year), 30, 118, 120, '#ffe1a0', 800);
-  heading(ctx, 'YEAR IN REVIEW', 34, 160, 28, '#9fd8ff', 700);
+  heading(ctx, head('stage.yearInReview'), 34, 160, 28, '#9fd8ff', 700);
   let y = 210;
   v.events.slice(0, 3).forEach((e) => {
     heading(ctx, e.date, 34, y, 26, '#ffd27a', 700);
@@ -348,10 +359,10 @@ function drawSummary(ctx: CanvasRenderingContext2D, w: number, h: number, v: Ext
     ctx.fillText(e.title, 34, y + 32, 600);
     y += 72;
   });
-  if (!v.events.length) para(ctx, 'No verified event recorded.', 34, y, 600, 28, 1, '#c9d6ea');
+  if (!v.events.length) para(ctx, t('stage.noEventShort'), 34, y, 600, 28, 1, '#c9d6ea');
   // Ranking: change in value vs USD over the same period.
   const x0 = 680;
-  heading(ctx, 'CHANGE VS US DOLLAR', x0, 44, 28, '#9fd8ff', 700);
+  heading(ctx, head('stage.changeVsUsd'), x0, 44, 28, '#9fd8ff', 700);
   para(ctx, v.period, x0 + 370, 44, 480, 24, 1, '#8fa5c6');
   const rows = v.ranking.slice(0, 9);
   const maxAbs = Math.max(2, ...rows.map((r) => Math.abs(r.pct)));
@@ -378,9 +389,9 @@ function drawSummary(ctx: CanvasRenderingContext2D, w: number, h: number, v: Ext
   if (v.others.length) para(ctx, v.others.join('  ·  '), x0, h - 14, 800, 22, 1, '#8fa5c6');
   // Places and people.
   const x1 = 1500;
-  heading(ctx, 'PLACES', x1, 44, 28, '#9fd8ff', 700);
-  para(ctx, v.places.join(', '), x1, 84, w - x1 - 24, 30, 2, '#ffffff');
-  heading(ctx, 'KEY POLICYMAKERS', x1, 170, 28, '#9fd8ff', 700);
+  heading(ctx, head('stage.placesHead'), x1, 44, 28, '#9fd8ff', 700);
+  para(ctx, v.places.join(getLang() === 'ja' ? '、' : ', '), x1, 84, w - x1 - 24, 30, 2, '#ffffff');
+  heading(ctx, head('stage.policymakers'), x1, 170, 28, '#9fd8ff', 700);
   let py = 208;
   for (const p of v.people.slice(0, 6)) {
     py = para(ctx, p, x1, py, w - x1 - 24, 24, 1, '#dbe6f5', 1.2) + 6;
