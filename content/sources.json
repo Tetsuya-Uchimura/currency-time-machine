@@ -120,6 +120,13 @@
       "kind": "html",
       "primary": true
     },
+    "boj-2024-03-19": {
+      "publisher": "Bank of Japan",
+      "title": "Changes in the Monetary Policy Framework (19 March 2024)",
+      "url": "https://www.boj.or.jp/en/mopo/mpmdeci/mpr_2024/k240319a.pdf",
+      "kind": "pdf",
+      "primary": true
+    },
     "mof-feio": {
       "publisher": "Ministry of Finance Japan",
       "title": "Foreign Exchange Intervention Operations: historical data (daily, from April 1991)",

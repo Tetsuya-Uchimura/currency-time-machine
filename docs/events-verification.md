@@ -10,7 +10,7 @@ Generated 2026-11-10 by `scripts/build_events.py`. Do not edit by hand.
 - **Event dates and exchange rates are different things.** The rates are weekly observations (Fridays). The
   app stops the year at the first observation on or after an event's date and says which week it shows.
 
-## Reviewed (15)
+## Reviewed (16)
 
 ### 1971-05-10 The Mark floats
 
@@ -115,6 +115,14 @@ Generated 2026-11-10 by `scripts/build_events.py`. Do not edit by hand.
 - 5,620.2 billion yen bought on 21 October 2022 (gives the date): data row 2022-10-21: 56,202 (100 million yen), yen bought. [Ministry of Finance Japan, Foreign Exchange Intervention Operations: historical data (daily, from April 1991)](https://www.mof.go.jp/english/policy/international_policy/reference/feio/foreign_exchange_intervention_operations.csv) (primary)
 - 729.6 billion yen bought on 24 October 2022 (gives the date): data row 2022-10-24: 7,296 (100 million yen), yen bought. [Ministry of Finance Japan, Foreign Exchange Intervention Operations: historical data (daily, from April 1991)](https://www.mof.go.jp/english/policy/international_policy/reference/feio/foreign_exchange_intervention_operations.csv) (primary)
 
+### 2024-03-19 Japan ends negative interest rates
+
+> The Bank of Japan ends its negative interest rate policy and yield curve control, and guides the overnight call rate to around 0 to 0.1 percent.
+
+- the Bank of Japan's statement is dated 19 March 2024 (gives the date): "March 19, 2024 Bank of Japan Changes in the Monetary Policy Framework". [Bank of Japan, Changes in the Monetary Policy Framework (19 March 2024)](https://www.boj.or.jp/en/mopo/mpmdeci/mpr_2024/k240319a.pdf) (primary)
+- yield curve control and the negative interest rate policy end: "Quantitative and Qualitative Monetary Easing (QQE) with Yield Curve Control and the negative interest rate policy to date have fulfilled their roles". [Bank of Japan, Changes in the Monetary Policy Framework (19 March 2024)](https://www.boj.or.jp/en/mopo/mpmdeci/mpr_2024/k240319a.pdf) (primary)
+- the overnight call rate is guided to around 0 to 0.1 percent: "encourage the uncollateralized overnight call rate to remain at around 0 to 0.1 percent". [Bank of Japan, Changes in the Monetary Policy Framework (19 March 2024)](https://www.boj.or.jp/en/mopo/mpmdeci/mpr_2024/k240319a.pdf) (primary)
+
 ### 2026-07-31 Japan and the US buy yen together
 
 > Japan's Ministry of Finance buys yen in coordination with the US Treasury on 31 July (US Eastern Time). Over 30 July, 31 July and 3 August, Japan buys 15.4 trillion yen in all.
@@ -124,7 +132,7 @@ Generated 2026-11-10 by `scripts/build_events.py`. Do not edit by hand.
 - 5,552.3 billion yen bought on 31 July 2026 (gives the date): data row 2026-07-31: 55,523 (100 million yen), yen bought. [Ministry of Finance Japan, Foreign Exchange Intervention Operations: historical data (daily, from April 1991)](https://www.mof.go.jp/english/policy/international_policy/reference/feio/foreign_exchange_intervention_operations.csv) (primary)
 - 1,871.4 billion yen bought on 3 August 2026 (15,399.3 billion over the three days) (gives the date): data row 2026-08-03: 18,714 (100 million yen), yen bought. [Ministry of Finance Japan, Foreign Exchange Intervention Operations: historical data (daily, from April 1991)](https://www.mof.go.jp/english/policy/international_policy/reference/feio/foreign_exchange_intervention_operations.csv) (primary)
 
-## Matched automatically (45)
+## Matched automatically (44)
 
 - 1948-06-20 The Deutsche Mark is born: [Deutsche Mark](https://en.wikipedia.org/wiki/Deutsche_Mark): "The Deutsche Mark was officially introduced on Sunday 20 June 1948 by Ludwig Erhard."
 - 1949-04-25 The yen is fixed at 360 per dollar: [Japanese yen](https://en.wikipedia.org/wiki/Japanese_yen): "After a period of instability, on 25 April 1949, the U.S. occupation government fixed the value of the yen at ¥360/US$ through the Dodge plan, which was part of the Bretton Woods system, to stabilize prices in the Japanese economy."
@@ -173,7 +181,6 @@ Generated 2026-11-10 by `scripts/build_events.py`. Do not edit by hand.
 - 2018-07-06 US-China tariffs begin: [China–United States trade war](https://en.wikipedia.org/wiki/China%E2%80%93United_States_trade_war): "June 15: Trump declared that the United States would impose a 25% tariff on $50 billion of Chinese exports. $34 billion would start July 6, 2018, with a further $16 billion to begin at a later date."
 - 2020-03-11 A pandemic is declared: [Tedros Adhanom Ghebreyesus](https://en.wikipedia.org/wiki/Tedros_Adhanom_Ghebreyesus): "On 11 March 2020, the WHO declared COVID-19 a pandemic."
 - 2023-03-10 Silicon Valley Bank fails: [Collapse of Silicon Valley Bank](https://en.wikipedia.org/wiki/Collapse_of_Silicon_Valley_Bank): "On March 10, 2023, Silicon Valley Bank (SVB) failed after a bank run, marking the third-largest bank failure in United States history and the largest since the 2008 financial crisis."
-- 2024-03-19 Japan raises rates for the first time in 17 years: [Kazuo Ueda](https://en.wikipedia.org/wiki/Kazuo_Ueda): "On 19 March 2024, the BoJ under Ueda decided to end the zero-interest-rate policy and the yield curve control."
 - 2025-04-02 Sweeping US tariffs: [Liberation Day tariffs](https://en.wikipedia.org/wiki/Liberation_Day_tariffs): "Trump announced that he would unveil the reciprocal tariffs on April 2, 2025, a date he referred to as Liberation Day."
 
 ## Left out: no passage with the date and keywords (2)

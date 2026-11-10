@@ -1460,7 +1460,7 @@
   {
    "id": "boj-2024",
    "date": "2024-03-19",
-   "title": "Japan raises rates for the first time in 17 years",
+   "title": "Japan ends negative interest rates",
    "city": "Tokyo",
    "country": "Japan",
    "regions": [
@@ -1469,14 +1469,14 @@
    "currencies": [
     "JPY"
    ],
-   "summary": "The Bank of Japan ends its zero-interest-rate policy and yield curve control: its first rate rise in 17 years.",
-   "status": "matched",
+   "summary": "The Bank of Japan ends its negative interest rate policy and yield curve control, and guides the overnight call rate to around 0 to 0.1 percent.",
+   "status": "reviewed",
    "sources": [
     {
-     "publisher": "Wikipedia",
-     "title": "Kazuo Ueda",
-     "url": "https://en.wikipedia.org/wiki/Kazuo_Ueda",
-     "primary": false
+     "publisher": "Bank of Japan",
+     "title": "Changes in the Monetary Policy Framework (19 March 2024)",
+     "url": "https://www.boj.or.jp/en/mopo/mpmdeci/mpr_2024/k240319a.pdf",
+     "primary": true
     }
    ]
   },

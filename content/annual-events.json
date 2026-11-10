@@ -1535,7 +1535,7 @@
   {
    "id": "boj-2024",
    "date": "2024-03-19",
-   "title": "Japan raises rates for the first time in 17 years",
+   "title": "Japan ends negative interest rates",
    "city": "Tokyo",
    "country": "Japan",
    "regions": [
@@ -1544,15 +1544,33 @@
    "currencies": [
     "JPY"
    ],
-   "summary": "The Bank of Japan ends its zero-interest-rate policy and yield curve control: its first rate rise in 17 years.",
+   "summary": "The Bank of Japan ends its negative interest rate policy and yield curve control, and guides the overnight call rate to around 0 to 0.1 percent.",
    "keys": [
     "BoJ",
-    "zero-interest-rate"
+    "negative interest"
    ],
    "sources": [
     "https://en.wikipedia.org/wiki/Bank_of_Japan",
     "https://en.wikipedia.org/wiki/Kazuo_Ueda",
     "https://en.wikipedia.org/wiki/March_2024"
+   ],
+   "evidence": [
+    {
+     "source": "boj-2024-03-19",
+     "claim": "the Bank of Japan's statement is dated 19 March 2024",
+     "quote": "March 19, 2024 Bank of Japan Changes in the Monetary Policy Framework",
+     "date": true
+    },
+    {
+     "source": "boj-2024-03-19",
+     "claim": "yield curve control and the negative interest rate policy end",
+     "quote": "Quantitative and Qualitative Monetary Easing (QQE) with Yield Curve Control and the negative interest rate policy to date have fulfilled their roles"
+    },
+    {
+     "source": "boj-2024-03-19",
+     "claim": "the overnight call rate is guided to around 0 to 0.1 percent",
+     "quote": "encourage the uncollateralized overnight call rate to remain at around 0 to 0.1 percent"
+    }
    ]
   },
   {
