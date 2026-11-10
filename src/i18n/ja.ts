@@ -485,6 +485,22 @@ export const JA: Partial<Record<Key, { en: string; ja: string }>> = {
     en: "Skip intro",
     ja: "イントロをスキップ",
   },
+  "panel.grab": {
+    en: "Grab to move",
+    ja: "つまんで移動",
+  },
+  "panel.reset": {
+    en: "Reset",
+    ja: "元に戻す",
+  },
+  "tock.touch": {
+    en: "Touch Tock!",
+    ja: "Tockにさわってみて！",
+  },
+  "tock.highFive": {
+    en: "High five!",
+    ja: "ハイタッチ！",
+  },
   "captions.speaker": {
     en: "TOCK",
     ja: "トック",
@@ -852,6 +868,14 @@ export const JA: Partial<Record<Key, { en: string; ja: string }>> = {
   "start.calm": {
     en: "Calm motion",
     ja: "動きを抑える",
+  },
+  "start.resetPanel": {
+    en: "Reset the hand panel",
+    ja: "手元パネルの位置を元に戻す",
+  },
+  "start.panelReset": {
+    en: "The hand panel is back in its place.",
+    ja: "手元パネルを元の位置に戻しました。",
   },
   "start.language": {
     en: "Language",

@@ -137,6 +137,10 @@ export const EN = {
   'quick.2008': 'Financial crisis',
   'quick.2022': 'Yen slides',
   'skipIntro': 'Skip intro',
+  'panel.grab': 'Grab to move',
+  'panel.reset': 'Reset',
+  'tock.touch': 'Touch Tock!',
+  'tock.highFive': 'High five!',
   'captions.speaker': 'TOCK',
 
   // --- Year stage ------------------------------------------------------------
@@ -239,6 +243,8 @@ export const EN = {
   'start.fullSub': 'Every year from 1948 to today (about 4 minutes)',
   'start.voice': 'Guide voice in English (subtitles always on)',
   'start.calm': 'Calm motion',
+  'start.resetPanel': 'Reset the hand panel',
+  'start.panelReset': 'The hand panel is back in its place.',
   'start.language': 'Language',
   'start.languageNote': 'Japanese is a review translation of the English subtitles and panels; the voice stays English.',
   'start.enterVr': 'Enter VR',

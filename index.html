@@ -35,6 +35,7 @@
       fieldset.lang { align-items: center; margin: -4px 0 6px; font-size: 15px; color: #d8deea; }
       fieldset.lang label { padding: 6px 12px; font-size: 15px; }
       .lang-note { margin: 0 0 18px; }
+      button.link { min-width: 0; padding: 4px 10px; font-size: 14px; font-weight: 500; border: 0; background: none; color: #9fd0ff; text-decoration: underline; }
       .opts { display: flex; gap: 18px; justify-content: center; flex-wrap: wrap; margin: -6px 0 18px; font-size: 15px; color: #d8deea; }
     </style>
   </head>
@@ -63,6 +64,7 @@
           <button id="watch-browser" disabled data-i18n="start.watch">Watch in browser</button>
         </div>
         <p class="small" id="start-status" data-i18n="start.loading">Loading...</p>
+        <p class="small" id="reset-panel-row" hidden><button id="reset-panel" class="link" data-i18n="start.resetPanel">Reset the hand panel</button></p>
         <p class="small" data-i18n="start.credit">Exchange rate data: Frankfurter (frankfurter.dev)</p>
       </div>
     </div>

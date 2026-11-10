@@ -92,7 +92,7 @@
     color: #c3c7d0;
   }
 </style>
-<Panel class="panel-root">
+<Panel class="panel-root" id="panel-root">
   <div class="row" id="row-main">
     <Button id="btn-pause" class="main-button">
       <ButtonIcon>

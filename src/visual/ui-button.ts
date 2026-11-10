@@ -29,6 +29,7 @@ export const UiAction = {
   Calm: 45,
   AllCurrencies: 46,
   SkipIntro: 47,
+  ResetPanel: 48,
 } as const;
 
 export type ButtonStyle = 'primary' | 'secondary' | 'chip' | 'ghost';

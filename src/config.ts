@@ -166,5 +166,20 @@ export const ROBOT_SPOTS = {
   warp: [-0.3, -0.16, -0.68] as const,
 };
 
+/**
+ * Touching Tock: pinch it from afar and it floats within reach (`spot`, front
+ * left and low, about half a meter away: a seated arm reaches it), then goes
+ * back to its place after `idleS` without a touch. It comes from its side spot
+ * on the left, so it never crosses in front of the face. If the hand panel was
+ * moved to that side, `alt` is used instead (higher and further left).
+ */
+export const TOCK_REACH = {
+  spot: [-0.32, -0.17, -0.36] as const,
+  alt: [-0.4, -0.05, -0.3] as const,
+  /** The panel counts as "next to" the usual spot within this many degrees of yaw. */
+  clearDeg: 28,
+  idleS: 9,
+};
+
 /** The guide's subtitle strip: along the bottom of the top band (band-local y). */
 export const CAPTION_STRIP = { y: -0.2, width: 1.66, height: 0.08 };

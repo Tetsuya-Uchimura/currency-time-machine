@@ -524,6 +524,39 @@ export class SoundEngine {
     });
   }
 
+  /**
+   * Tock answers a touch: a short, soft electronic sound (two or three sine
+   * blips, quieter than the decade chime). Never played while the guide is
+   * speaking (the caller checks; under the voice the effects bus is not
+   * ducked, so the voice would be covered).
+   *   pat       a low-high purr     chirp  a quick rising "bip-bip"
+   *   highfive  a bright three-note sparkle
+   */
+  tockChirp(kind: 'pat' | 'chirp' | 'highfive'): void {
+    if (!this.running) return;
+    const ctx = this.ctx;
+    const t = ctx.currentTime + 0.02;
+    const notes: [number, number, number][] =
+      kind === 'pat' ? [[9, 0, 0.35], [12, 0.12, 0.4]] : kind === 'chirp' ? [[12, 0, 0.12], [16, 0.09, 0.16]] : [[14, 0, 0.5], [16, 0.08, 0.5], [19, 0.16, 0.7]];
+    const level = kind === 'highfive' ? 0.016 : 0.012;
+    for (const [degree, at, len] of notes) {
+      const osc = ctx.createOscillator();
+      osc.type = 'sine';
+      osc.frequency.value = degreeToHz(degree);
+      const g = ctx.createGain();
+      const s = t + at;
+      g.gain.setValueAtTime(0, s);
+      g.gain.linearRampToValueAtTime(level, s + 0.012);
+      g.gain.exponentialRampToValueAtTime(0.0001, s + len);
+      osc.connect(g);
+      g.connect(this.fx);
+      g.connect(this.reverbSend);
+      this.track(osc);
+      osc.start(s);
+      osc.stop(s + len + 0.05);
+    }
+  }
+
   /** Bring one voice forward (or -1 to clear). */
   setSolo(index: number): void {
     this.solo = index;

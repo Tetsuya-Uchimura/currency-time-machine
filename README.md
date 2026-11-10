@@ -43,10 +43,15 @@ Exchange rate data: Frankfurter (frankfurter.dev)
 | Pinch **All** | Show all nine currencies at full strength (the guide's spotlight off). |
 | At the end of the year | The summary: events, places, policymakers, and the ranking of the year's changes. **Explore another year, Previous year, Next year, Replay this year, Full Journey.** |
 | **Pause**, **Voice**, **Skip**, **Calm**, **Lang** on the lap panel | Pause and resume, speech on/off, skip a line, reduced motion for the tunnel, and the display language (EN / JA). |
+| **Pinch the bar on top of the lap panel** ("Grab to move"), move your hand, let go | The panel follows your hand and stays where you leave it (saved in this browser). **Reset** beside the bar puts it back. Only the bar moves it: its buttons never do. |
+| **Pinch Tock** | Tock floats within reach and waves. **Touch its head** (it is happy), **its body** (a little surprise, then a wave), and when it holds up a hand, **give it a high five**. It goes back to its place when left alone. |
 
 On a PC: click the buttons with the mouse, or use the keyboard: `[` `]` change the year by one, `-` `=`
 by ten, Enter starts the travel (or goes to the next year), Escape skips, Space pauses, `I` switches the
-display language.
+display language, `R` puts the hand panel back. Drag the panel's bar with the mouse to move it (the wheel,
+while dragging, brings it nearer or farther); click Tock to call it and click its head, body or hand to
+touch it; drag with the right mouse button to turn the view a little. The start screen has **Reset the hand
+panel** when a moved panel is saved.
 
 ## Languages
 
@@ -114,6 +119,70 @@ Its voice is English (see [Tock's voice](#tocks-voice)): a pre-generated recordi
 otherwise the browser's speech synthesis with a natural English voice chosen explicitly. Speech starts only
 after a user action, subtitles never depend on it, and while it speaks the music steps back so the words
 stay clear.
+
+### Touching Tock
+
+Pinch Tock from afar and it floats within reach (front left, about half a meter away, low: a seated arm
+reaches it; it comes from its side spot on the left, so it never crosses in front of your face, and it
+keeps its size). Then touch it with a finger, or pinch it with your hand's ray:
+
+| Where | Reaction (2 to 3 s) |
+| --- | --- |
+| Head (the top of the shell) | **Petted**: happy eyes, a soft bounce, the antenna glows warmer, a quiet purr. Patting again keeps it going (up to 4 s). |
+| Body (the bottom of the shell) | **Surprised** (wide eyes, a small hop back), then **Greeting**: it tilts its head and waves. |
+| Hand | When it holds up a hand ("High five!"): **High five**, a few gold sparkles and a bright chime. Otherwise a small wave. |
+
+- **Touch zones.** Invisible shapes take the touch (the visible parts take none): the top cap of the shell,
+  the bottom cap and the two hands, which do not overlap. A held-up hand's zone is larger. They use IWSDK's
+  `RayInteractable` and `PokeInteractable`, like every other target in the app.
+- **Never in the way of the story.** A touch never stops or starts the voice (no `speechSynthesis.cancel()`),
+  never moves the year or a beat. While Tock speaks (or in the tunnel) a touch gets only the small reaction
+  (eyes and glow, no wave, no sound); a beat that needs its hand to point cancels a held-up hand.
+- **No runaway.** Reactions never stack (a touch during one is ignored, a pat during a pat extends it), the
+  same zone rests a moment after a reaction, and a burst of touches is ignored. Every reaction ends by itself.
+- **Back to its place** after 9 s without a touch, and at once when the time tunnel starts. If the hand
+  panel was moved next to its reach spot, it uses another one (higher and further left).
+- **Hints:** "Touch Tock!" above it the first time (until the first touch on this browser), "High five!"
+  while its hand is up. The sounds are quieter than the decade chime and never play under the voice.
+- Logic: src/interaction/tock-reactions.ts (tested in tests/tock.test.ts), src/interaction/tock-companion.ts.
+
+### The lap panel moves
+
+The lap panel's top bar ("⋮⋮ Grab to move") is its handle: pinch it (from afar with the hand's ray, or with
+the hand right at the bar), keep pinching and move the hand: the panel follows one to one; let go and it
+stays. Either hand. The panel's buttons never move it.
+
+- **Safe zone** (src/interaction/panel-placement.ts, tested in tests/panel.test.ts): 30 to 62 cm from the
+  head (within reach, never in the face), at most 60 degrees to either side (never behind), below the eyes;
+  in front of the bands its top edge stays under the chart, beside them it may come up to about eye level.
+  It always turns to face you.
+- **Saved** in this browser as a pose relative to where your head was when the session started (not as a
+  world position), so it is restored next time, kept across years and journeys, and right after re-entering
+  VR (the scene is re-anchored to the head then). A saved pose that is malformed or outside the safe zone is
+  ignored.
+- **Reset:** the button beside the bar, `R` on a PC, or **Reset the hand panel** on the start screen (for a
+  panel you cannot see).
+- **A tip for pinching the map:** within about 15 cm of something you can poke (the lap panel, Tock), IWSDK
+  hands your hand to its touch pointer, and a pinch does not reach far targets. Pinch the map with the hand
+  away from the panel, or move the panel aside.
+
+### The room
+
+The three bands stand in a room of their own (src/visual/depth-layers.ts), so they read as objects in
+space, not a screen:
+
+- **Still frame:** two tall arcs at the sides (the deck's window struts) and two rings with a compass rose on
+  the floor below the seat. Moving the head shows real parallax between them and the bands at their three
+  depths; still things also steady the eye.
+- **Slow motion, small and far:** glints at 2 to 3 m sway a few centimeters (half a minute per sway); faint
+  points behind the chart and the events band drift toward the past while the year flows; a far dial of
+  ticks turns a few degrees a minute.
+- **Time currents:** at the left and right, ahead of you, two currents of light drift toward you out of the
+  depth and fade before they come near. In the time tunnel they flow faster (eased over a second) and stay
+  visible through the tunnel's veil.
+- **Comfort:** the camera is never moved or turned; text and controls never move on their own; no flashing.
+  **Calm motion** stops every automatic drift (the currents barely move even in the tunnel). On a PC a
+  right-drag turns the view a little, with the eyes moving as a head would, to see the depth.
 
 ### The time tunnel
 

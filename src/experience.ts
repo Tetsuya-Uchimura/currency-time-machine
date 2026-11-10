@@ -33,6 +33,11 @@
  * the year, the clock, the beat, the selection and the views stay; only the
  * words shown are redrawn.
  *
+ * Your own space (src/interaction): the hand panel moves by its grip (pinch,
+ * move, let go; saved; Reset); Tock comes within reach when pinched and reacts
+ * to a pat, a tap or a high five, without ever interrupting the story; depth
+ * layers (src/visual/depth-layers.ts) give the bands a room around them.
+ *
  * Selection (solo) and emphasis are one shared state: pinching a currency
  * on the map or the chart highlights its line, its region and its voice
  * together. In a Year Journey, pinching a map marker opens that place's
@@ -57,14 +62,13 @@ import { Narration, type Delivery } from './a11y/narration.js';
 import { SoundEngine, type VoiceInput } from './audio/engine.js';
 import type { SoundMode } from './audio/mix.js';
 import { strengthToSteps } from './audio/scale.js';
-import { Orb, PortalTarget, UiTarget } from './components.js';
+import { GripTarget, Orb, PortalTarget, TockTarget, UiTarget } from './components.js';
 import {
   BANDS,
   bandPitch,
   BASE_CURRENCY,
   CAPTION_STRIP,
   CHART,
-  HAND_PANEL,
   ROBOT_SPOTS,
   SHOW_PEOPLE,
   SLOTS,
@@ -113,10 +117,14 @@ import {
 } from './guide/guide-scripts.js';
 import type { Key } from './i18n/en.js';
 import { fullDateText, getLang, listText, monthYearText, onLangChange, setLang, shortDayText, t, tr, type Lang } from './i18n/i18n.js';
+import { PanelMover } from './interaction/panel-mover.js';
+import { TockCompanion, type CompanionState } from './interaction/tock-companion.js';
+import type { Zone } from './interaction/tock-reactions.js';
 import { DEFAULT_PACING, PlaybackClock, slowDownsFor } from './playback/clock.js';
 import { PortalDirector } from './playback/portal-director.js';
 import { YearRunner } from './playback/year-journey.js';
 import { Ambience } from './visual/ambience.js';
+import { BandGlints, DepthLayers } from './visual/depth-layers.js';
 import { EraPanel } from './visual/era-panel.js';
 import { GuideRobot } from './visual/guide-robot.js';
 import { HistoricalPortals } from './visual/historical-portals.js';
@@ -178,6 +186,10 @@ export class ExperienceSystem extends createSystem({
   pressedPortal: { required: [PortalTarget, Pressed] },
   pressedUi: { required: [UiTarget, Pressed] },
   hoveredUi: { required: [UiTarget, Hovered] },
+  pressedGrip: { required: [GripTarget, Pressed] },
+  hoveredGrip: { required: [GripTarget, Hovered] },
+  pressedTock: { required: [TockTarget, Pressed] },
+  hoveredTock: { required: [TockTarget, Hovered] },
 }) {
   private ready = false;
   private phase: Phase = 'idle';
@@ -205,6 +217,14 @@ export class ExperienceSystem extends createSystem({
   private mapBand!: Group;
   private bands: Group[] = [];
   private robot!: GuideRobot;
+  private tock!: TockCompanion;
+  private readonly tockState: CompanionState = { quiet: false, warp: false, shown: false, panelYaw: 0 };
+  private mover!: PanelMover;
+  private depth!: DepthLayers;
+  private chartGlints!: BandGlints;
+  private eventGlints!: BandGlints;
+  /** PC browser: where the view is turned by a right-drag (radians), eased. */
+  private readonly look = { yaw: 0, pitch: 0, shownYaw: 0, shownPitch: 0, base: null as { pos: Vector3; quat: Quaternion } | null };
   private tunnel!: TimeMachineTunnel;
   private selector!: YearSelector;
   private stage!: YearStage;
@@ -328,6 +348,15 @@ export class ExperienceSystem extends createSystem({
       this.queries.hoveredUi.subscribe('disqualify', (entity) => {
         if (entity.object3D) this.buttonsByObject.get(entity.object3D)?.setHover(false);
       }),
+      this.queries.pressedGrip.subscribe('qualify', () => {
+        void this.audio?.unlock();
+        this.mover?.gripPressed();
+      }),
+      this.queries.hoveredGrip.subscribe('qualify', () => this.mover?.grip.setHover(true)),
+      this.queries.hoveredGrip.subscribe('disqualify', () => this.mover?.grip.setHover(false)),
+      this.queries.pressedTock.subscribe('qualify', (entity) => this.onTockTouch(entity.getValue(TockTarget, 'zone') ?? 0)),
+      this.queries.hoveredTock.subscribe('qualify', () => this.robot?.setNear(true)),
+      this.queries.hoveredTock.subscribe('disqualify', () => this.robot?.setNear(this.queries.hoveredTock.entities.size > 0)),
       this.world.visibilityState.subscribe((state) => this.onVisibility(state)),
     );
     const onHidden = () => {
@@ -342,7 +371,8 @@ export class ExperienceSystem extends createSystem({
   /**
    * Keyboard (PC browser): [ and ] change the year by one, - and = by ten,
    * Enter starts the travel (or goes to the next year), Escape skips, Space
-   * pauses, I switches the display language (English / Japanese review). Dev builds add shortcuts for automation and demo clips:
+   * pauses, I switches the display language (English / Japanese review), R puts the hand panel back
+   * (a right-drag turns the view; dragging the panel's grip moves it). Dev builds add shortcuts for automation and demo clips:
    *   1-5 chapters   g h j k l b n m , solo CAD..AUD   p pause   y Year Journey
    *   6 before the Asian crisis   7 before the 2022 yen slide   0 before the 1985 moment
    *   8 near the end   9 Full Journey   c no frame-time cap   v portal card
@@ -361,6 +391,7 @@ export class ExperienceSystem extends createSystem({
       else if (k === 'escape') this.skip();
       else if (k === ' ') this.togglePause();
       else if (k === 'i') setLang(getLang() === 'en' ? 'ja' : 'en'); // display language (review translation)
+      else if (k === 'r') this.resetPanel();
       if (!import.meta.env.DEV) return;
       if (k >= '1' && k <= '5') this.jumpTo(this.timeline.indexOf(CHAPTERS[Number(k) - 1].date));
       else if (soloKeys.includes(k)) this.onCurrencyPinch(soloKeys.indexOf(k));
@@ -432,6 +463,8 @@ export class ExperienceSystem extends createSystem({
     this.ambience = new Ambience();
     this.world.createTransformEntity(this.ambience.sky, { parent: this.rig });
     this.world.createTransformEntity(this.ambience.motes, { parent: this.rig });
+    this.depth = new DepthLayers();
+    this.world.createTransformEntity(this.depth.root, { parent: this.rig });
 
     // The actual day of each event (portal events: the decision's date).
     const actualDay = (e: HistoryEvent) => e.actual ?? content?.get(e.id)?.date ?? e.date;
@@ -447,6 +480,8 @@ export class ExperienceSystem extends createSystem({
       (index) => timeline.dateAt(index).getUTCFullYear(),
     );
     this.chartBand.add(this.chart.root);
+    this.chartGlints = new BandGlints(BANDS.chart.width, BANDS.chart.height, 36, 0.03);
+    this.chartBand.add(this.chartGlints.points);
     const chartEntity = this.world.createTransformEntity(this.chartBand, { parent: this.rig });
     this.chart.hits.forEach((hit, i) => this.pinchTarget(hit, i, chartEntity));
 
@@ -476,6 +511,8 @@ export class ExperienceSystem extends createSystem({
       timeline.count - 1,
     );
     eventsBand.add(this.era.root);
+    this.eventGlints = new BandGlints(BANDS.events.width, BANDS.events.height, 30, 0.04, 0xffd9a0);
+    eventsBand.add(this.eventGlints.points);
     this.director = new PortalDirector(
       PORTAL_SCENES.map((sc) => {
         const at = timeline.indexOf(sc.eventDate);
@@ -506,22 +543,50 @@ export class ExperienceSystem extends createSystem({
 
     // The guide robot and the time tunnel.
     this.robot = new GuideRobot();
-    this.world.createTransformEntity(this.robot.root, { parent: this.rig });
+    const robotEntity = this.world.createTransformEntity(this.robot.root, { parent: this.rig });
+    // Touch zones (head, body, hands): pinch from afar or poke.
+    const zoneIndex: Record<Zone, number> = { head: 0, body: 1, hand: 2 };
+    for (const z of this.robot.zones) {
+      const e = this.world.createTransformEntity(z.mesh, { parent: robotEntity });
+      e.addComponent(TockTarget, { zone: zoneIndex[z.zone] });
+      e.addComponent(RayInteractable);
+      e.addComponent(PokeInteractable);
+    }
+    this.tock = new TockCompanion(this.robot, (k) => this.audio.tockChirp(k), (key) => t(key));
     this.world.createTransformEntity(this.robot.beamLine, { parent: this.rig });
     this.robot.moveTo(...ROBOT_SPOTS.front, true);
     this.robot.setVisible(false);
     this.tunnel = new TimeMachineTunnel();
     this.world.createTransformEntity(this.tunnel.root, { parent: this.rig });
 
-    // Hand panel: low and close like a lap tray, below the map.
+    // Hand panel: low and close like a lap tray, below the map; movable by its grip (src/interaction/panel-mover.ts).
+    this.mover = new PanelMover(
+      {
+        input: this.input,
+        player: this.player,
+        camera: this.world.camera,
+        dom: this.world.renderer.domElement,
+        rig: this.rig.object3D!,
+        inXR: () => !!this.world.session,
+      },
+      t('panel.grab'),
+      t('panel.reset'),
+    );
+    this.cleanupFuncs.push(() => this.mover.dispose());
+    const holderEntity = this.world.createTransformEntity(this.mover.holder, { parent: this.rig });
     this.handPanel = await this.world.assets.instantiate<UIKitMLAsset>('hand-panel');
-    this.handPanel.position.set(0, HAND_PANEL.y, -HAND_PANEL.z);
-    this.handPanel.rotation.x = HAND_PANEL.tiltRad;
     this.handPanel.scale.setScalar(0.1);
-    const panelEntity = this.world.createTransformEntity(this.handPanel, { parent: this.rig });
+    const panelEntity = this.world.createTransformEntity(this.handPanel, { parent: holderEntity });
     panelEntity.addComponent(RayInteractable);
     panelEntity.addComponent(PokeInteractable);
+    this.mover.setPanel(this.handPanel);
+    const gripEntity = this.world.createTransformEntity(this.mover.grip.bar, { parent: holderEntity });
+    gripEntity.addComponent(GripTarget);
+    gripEntity.addComponent(RayInteractable);
+    gripEntity.addComponent(PokeInteractable);
+    this.uiTarget(this.mover.grip.reset, holderEntity);
     this.wirePanel();
+    this.browserLook();
 
     this.ensureListener();
     this.calm = typeof matchMedia !== 'undefined' && matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -754,6 +819,7 @@ export class ExperienceSystem extends createSystem({
     else if (action === UiAction.NextYear && this.visit && this.visit.year < this.span.max) this.travel(this.visit.year + 1);
     else if (action === UiAction.Replay && this.visit) this.travel(this.visit.year);
     else if (action === UiAction.SkipIntro) this.skip();
+    else if (action === UiAction.ResetPanel) this.resetPanel();
     else if (action === UiAction.Calm) {
       this.calm = !this.calm;
       this.updatePanel();
@@ -919,6 +985,7 @@ export class ExperienceSystem extends createSystem({
     this.robot.moveTo(...ROBOT_SPOTS.front);
     this.robot.mood = 'thinking';
     this.robot.point(null);
+    this.tock.invite();
     if (this.visit) this.selectedYear = this.visit.year;
     this.visit = null;
     this.clock.paused = false;
@@ -1003,6 +1070,7 @@ export class ExperienceSystem extends createSystem({
     const seconds = this.calm ? YEAR_JOURNEY.calmWarpSeconds : YEAR_JOURNEY.warpSeconds;
     this.tunnel.start(from === target ? target + 1 : from, target, seconds, this.calm);
     this.audio.warp(seconds, this.calm);
+    this.tock.dismiss();
     this.robot.moveTo(...ROBOT_SPOTS.warp);
     this.robot.mood = 'traveling';
     this.robot.point(null);
@@ -1156,6 +1224,8 @@ export class ExperienceSystem extends createSystem({
     if (this.guideLine) this.captions.set(this.shown(this.guideLine));
     this.captions.setLabel(t('captions.speaker'));
     this.skipIntro.set(t('skipIntro'));
+    this.mover.grip.setLabel(t('panel.grab'), t('panel.reset'));
+    this.tock.relabel((key) => t(key));
     this.selector.relabel();
     this.stage.relabel();
     if (this.phase === 'select' || this.phase === 'intro') this.showYearPreview();
@@ -1488,7 +1558,14 @@ export class ExperienceSystem extends createSystem({
     // Long lines page through the subtitle strip with the voice (or the reading time).
     const progress = voiced && this.narration.speaking ? this.narration.progress : line ? Math.min(1, lineAge / lineSeconds(line.en)) : 1;
     this.captions.setProgress(progress);
+    this.fillTockState();
+    this.tock.update(dt, this.tockState);
     this.robot.update(dt, this.calm);
+    this.mover.update(dt);
+    this.depth.update(dt, { calm: this.calm, warp: this.phase === 'warp' });
+    this.chartGlints.update(dt, flowing, this.calm);
+    this.eventGlints.update(dt, flowing, this.calm);
+    this.updateBrowserLook(dt);
     this.tunnel.update(dt);
     // The veil hides the bands during the warp (the robot and hand panel stay).
     const hide = this.tunnel.active && this.tunnel.curtain > 0.9;
@@ -2013,6 +2090,96 @@ export class ExperienceSystem extends createSystem({
       }
     }
     this.chart.setHeader(text);
+  }
+
+  // -------------------------------------------------------------------------
+  // Your own space: the hand panel, Tock's touches, the PC view
+  // -------------------------------------------------------------------------
+
+  /** Put the hand panel back in its place (Reset on its grip, R, or the start screen). */
+  resetPanel(): void {
+    if (this.ready) this.mover.reset();
+  }
+
+  /** A touch zone of Tock was pinched, poked or clicked. */
+  private onTockTouch(zone: number): void {
+    if (!this.ready) return;
+    void this.audio.unlock();
+    this.fillTockState();
+    this.tock.touch(zone === 0 ? 'head' : zone === 1 ? 'body' : 'hand', this.tockState);
+  }
+
+  private fillTockState(): void {
+    const s = this.tockState;
+    // "Quiet": Tock is talking (the voice, or a line shown without one): touches get the small reaction.
+    s.quiet = this.robot.talking || this.narration.speaking;
+    s.warp = this.phase === 'warp';
+    s.shown = this.phase !== 'idle';
+    s.panelYaw = this.mover.yaw;
+  }
+
+  /**
+   * PC browser (no headset): a right-drag turns the view a little (up to 35
+   * degrees each way), and the eyes move with the head as they would (a few
+   * centimeters), so the bands, Tock and the room show their depth. Only the
+   * user moves it; it is never moved on its own. Not used in a headset.
+   */
+  private browserLook(): void {
+    const dom = this.world.renderer.domElement;
+    let drag = false;
+    let lx = 0;
+    let ly = 0;
+    const down = (e: PointerEvent) => {
+      if (e.button !== 2 || this.world.session) return;
+      drag = true;
+      lx = e.clientX;
+      ly = e.clientY;
+    };
+    const move = (e: PointerEvent) => {
+      if (!drag) return;
+      const clamp = (v: number, a: number) => Math.max(-a, Math.min(a, v));
+      this.look.yaw = clamp(this.look.yaw - (e.clientX - lx) * 0.004, 0.61);
+      this.look.pitch = clamp(this.look.pitch - (e.clientY - ly) * 0.004, 0.45);
+      lx = e.clientX;
+      ly = e.clientY;
+    };
+    const up = (e: PointerEvent) => {
+      if (e.button === 2) drag = false;
+    };
+    const menu = (e: Event) => e.preventDefault();
+    dom.addEventListener('pointerdown', down);
+    window.addEventListener('pointermove', move);
+    window.addEventListener('pointerup', up);
+    dom.addEventListener('contextmenu', menu);
+    this.cleanupFuncs.push(
+      () => dom.removeEventListener('pointerdown', down),
+      () => window.removeEventListener('pointermove', move),
+      () => window.removeEventListener('pointerup', up),
+      () => dom.removeEventListener('contextmenu', menu),
+    );
+  }
+
+  private updateBrowserLook(dt: number): void {
+    const l = this.look;
+    if (this.world.session) {
+      l.base = null;
+      return;
+    }
+    const cam = this.world.camera;
+    if (!l.base) {
+      if (l.yaw === 0 && l.pitch === 0) return; // (untouched: leave the camera as configured)
+      l.base = { pos: cam.position.clone(), quat: cam.quaternion.clone() };
+    }
+    const k = Math.min(1, dt / 0.12);
+    l.shownYaw += (l.yaw - l.shownYaw) * k;
+    l.shownPitch += (l.pitch - l.shownPitch) * k;
+    // Turn about the neck: the eyes sit 9 cm in front of it; a little lean with the turn (up to 8 cm).
+    this.q1.setFromAxisAngle(this.v1.set(0, 1, 0), l.shownYaw);
+    this.q2.setFromAxisAngle(this.v1.set(1, 0, 0), l.shownPitch);
+    cam.quaternion.copy(l.base.quat).multiply(this.q1).multiply(this.q2);
+    const neck = this.v2.set(0, 0, -0.09).applyQuaternion(l.base.quat).negate().add(l.base.pos);
+    cam.position.copy(neck).add(this.v1.set(0, 0, -0.09).applyQuaternion(cam.quaternion));
+    cam.position.add(this.v1.set(-Math.sin(l.shownYaw) * 0.08, 0, 0).applyQuaternion(l.base.quat));
   }
 
   // -------------------------------------------------------------------------

@@ -12,6 +12,7 @@ import { loadAnnualData } from './data/annual-history.js';
 import { loadHistoryContent } from './data/history-content.js';
 import { loadTimeline } from './data/timeline.js';
 import { ExperienceSystem, type JourneyMode } from './experience.js';
+import { PANEL_STORAGE_KEY } from './interaction/panel-placement.js';
 import { STYLES, type BgmStyle } from './audio/score.js';
 import { getLang, onLangChange, setLang, setTextCatalog, t, type Lang } from './i18n/i18n.js';
 import { loadWorldMap } from './visual/world-currency-map.js';
@@ -104,6 +105,26 @@ async function main(): Promise<void> {
       }, 2500);
     });
   }
+  // A moved hand panel can always be put back from here (its saved place is forgotten).
+  const resetRow = document.getElementById('reset-panel-row');
+  const hasSavedPanel = () => {
+    try {
+      return localStorage.getItem(PANEL_STORAGE_KEY) !== null;
+    } catch {
+      return false;
+    }
+  };
+  if (resetRow) resetRow.hidden = !hasSavedPanel();
+  document.getElementById('reset-panel')?.addEventListener('click', () => {
+    experience.resetPanel();
+    try {
+      localStorage.removeItem(PANEL_STORAGE_KEY);
+    } catch {
+      /* private mode */
+    }
+    if (resetRow) resetRow.hidden = true;
+    showStatus('start.panelReset');
+  });
   watch?.addEventListener('click', () => {
     hideOverlay();
     experience.configure(options());
@@ -155,7 +176,7 @@ async function vrSupported(): Promise<boolean> {
 }
 
 /** A start-screen message in the display language (kept translated when the language changes). */
-function showStatus(key: 'start.noVr' | 'start.vrFailed'): void {
+function showStatus(key: 'start.noVr' | 'start.vrFailed' | 'start.panelReset'): void {
   if (!status) return;
   status.dataset.i18n = key;
   status.textContent = t(key);

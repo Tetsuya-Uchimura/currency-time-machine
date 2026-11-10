@@ -16,4 +16,12 @@ export const UiTarget = createComponent('UiTarget', {
   action: { type: Types.Int16, default: 0 },
 });
 
-export default defineComponents([Orb, PortalTarget, UiTarget]);
+/** The hand panel's grip: pinch it and move the hand to move the panel. */
+export const GripTarget = createComponent('GripTarget', {});
+
+/** A touch zone of Tock, the guide robot: 0 head, 1 body, 2 hand. */
+export const TockTarget = createComponent('TockTarget', {
+  zone: { type: Types.Int8, default: 0 },
+});
+
+export default defineComponents([Orb, PortalTarget, UiTarget, GripTarget, TockTarget]);
