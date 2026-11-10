@@ -86,11 +86,22 @@ async function main(): Promise<void> {
     delete status.dataset.i18n;
   }
   if (enterVr) {
+    // The world is configured for VR, but this device may not be able to run it (a PC browser
+    // without a headset): ask the browser, and say so instead of a button that silently fails.
     enterVr.disabled = !world.xrEnabled;
+    void vrSupported().then((ok) => {
+      if (ok) return;
+      enterVr.disabled = true;
+      showStatus('start.noVr');
+    });
     enterVr.addEventListener('click', () => {
       experience.configure(options());
       experience.unlockAudio(); // inside the click: allowed to start audio
       world.launchXR();
+      // launchXR reports a refused session only in the console: tell the user if no session came.
+      window.setTimeout(() => {
+        if (!world.session && !world.sessionRequestPending && !overlay?.classList.contains('hidden')) showStatus('start.vrFailed');
+      }, 2500);
     });
   }
   watch?.addEventListener('click', () => {
@@ -130,6 +141,24 @@ function initMusic(experience: ExperienceSystem): void {
       if (e.key.toLowerCase() === 'o' && !e.ctrlKey && !e.metaKey && !e.altKey) open();
     });
   }
+}
+
+/** Can this browser start an immersive VR session (a headset, Quest Browser, or the dev emulator)? */
+async function vrSupported(): Promise<boolean> {
+  const xr = (navigator as Navigator & { xr?: { isSessionSupported(mode: string): Promise<boolean> } }).xr;
+  if (!xr) return false;
+  try {
+    return await xr.isSessionSupported('immersive-vr');
+  } catch {
+    return false;
+  }
+}
+
+/** A start-screen message in the display language (kept translated when the language changes). */
+function showStatus(key: 'start.noVr' | 'start.vrFailed'): void {
+  if (!status) return;
+  status.dataset.i18n = key;
+  status.textContent = t(key);
 }
 
 main().catch((err) => {

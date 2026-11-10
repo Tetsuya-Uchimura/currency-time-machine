@@ -245,6 +245,8 @@ export const EN = {
   'start.watch': 'Watch in browser',
   'start.loading': 'Loading...',
   'start.failed': 'Something went wrong while loading. Please reload the page.',
+  'start.noVr': 'VR needs a headset: open this page in the Meta Quest Browser. On this device, use Watch in browser.',
+  'start.vrFailed': 'VR could not start on this device. Use Watch in browser, or open this page in the Meta Quest Browser.',
   'start.credit': 'Exchange rate data: Frankfurter (frankfurter.dev)',
 } as const;
 

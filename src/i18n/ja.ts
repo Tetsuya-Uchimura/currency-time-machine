@@ -877,6 +877,14 @@ export const JA: Partial<Record<Key, { en: string; ja: string }>> = {
     en: "Something went wrong while loading. Please reload the page.",
     ja: "読み込み中に問題が発生しました。ページを再読み込みしてください。",
   },
+  "start.noVr": {
+    en: "VR needs a headset: open this page in the Meta Quest Browser. On this device, use Watch in browser.",
+    ja: "VRにはヘッドセットが必要です。Meta Questのブラウザでこのページを開いてください。この端末では「ブラウザで見る」をお使いください。",
+  },
+  "start.vrFailed": {
+    en: "VR could not start on this device. Use Watch in browser, or open this page in the Meta Quest Browser.",
+    ja: "この端末ではVRを開始できませんでした。「ブラウザで見る」を使うか、Meta Questのブラウザでこのページを開いてください。",
+  },
   "start.credit": {
     en: "Exchange rate data: Frankfurter (frankfurter.dev)",
     ja: "為替レートデータ：Frankfurter（frankfurter.dev）",
