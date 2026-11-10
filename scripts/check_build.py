@@ -21,7 +21,7 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-DATA = ["history.json", "snapshot.json", "world-map.json", "leaders.json", "annual-events.json", "history-content.json"]
+DATA = ["history.json", "snapshot.json", "world-map.json", "leaders.json", "annual-events.json", "history-content.json", "i18n-ja.json"]
 TEXT_EXT = {".html", ".js", ".map", ".json", ".css", ".uikitml", ".txt", ".md", ".svg"}
 
 
@@ -31,6 +31,52 @@ def people_names() -> set[str]:
     hist = json.loads((ROOT / "content" / "history.json").read_text(encoding="utf-8"))
     names |= {p["name"] for p in hist["people"].values()}
     return {n for n in names if n and " " in n.strip()}
+
+
+def japanese_names() -> set[str]:
+    """The same people's names in Japanese (Wikidata labels used by the review translation)."""
+    f = ROOT / "content" / "i18n" / "names-ja.json"
+    if not f.exists():
+        return set()
+    return {v["ja"] for v in json.loads(f.read_text(encoding="utf-8"))["names"].values() if len(v["ja"]) >= 2}
+
+
+def japanese_hits(dist: Path, names: set[str]) -> list[str]:
+    """Japanese names in shipped text (no word boundaries in Japanese: a plain search)."""
+    hits = []
+    for f in dist.rglob("*"):
+        if f.is_file() and f.suffix.lower() in TEXT_EXT:
+            text = f.read_text(encoding="utf-8", errors="replace")
+            hits += [f"{f.relative_to(dist)}: {n}" for n in names if n in text]
+    return hits
+
+
+def voice_problems(dist: Path, mode: str, names: set[str]) -> list[str]:
+    """Recordings: every file listed and present; in the contest build, only lines without names, and no metadata naming anyone."""
+    problems = []
+    manifest = dist / "voice" / "manifest.json"
+    if not manifest.exists():
+        return problems
+    lines = json.loads(manifest.read_text(encoding="utf-8")).get("lines", {})
+    listed = {r["file"] for r in lines.values()}
+    for r in lines.values():
+        if not (dist / r["file"]).exists():
+            problems.append(f"voice: {r['file']} is listed but missing")
+        if mode == "contest" and "contest" not in r.get("modes", []):
+            problems.append(f"voice: {r['id']} is a full-build line in the contest build")
+    for f in (dist / "voice").glob("*"):
+        if f.name != "manifest.json" and f"voice/{f.name}" not in listed:
+            problems.append(f"voice: {f.name} is shipped but not listed")
+    if mode == "contest":
+        rec_file = ROOT / "content" / "voice" / "recordings.json"
+        texts = json.loads(rec_file.read_text(encoding="utf-8"))["recordings"] if rec_file.exists() else {}
+        all_names = names | japanese_names()
+        for h, r in lines.items():
+            said = texts.get(h, {}).get("text", "")
+            problems += [f"voice: {r['id']} says {n}" for n in names if re.search(r"\b" + re.escape(n) + r"\b", said)]
+            data = (dist / r["file"]).read_bytes() if (dist / r["file"]).exists() else b""
+            problems += [f"voice: {r['file']} metadata names {n}" for n in all_names if n.encode("utf-8") in data]
+    return problems
 
 
 def name_hits(dist: Path, names: set[str]) -> list[str]:
@@ -94,6 +140,13 @@ def check(dist: Path, mode: str) -> list[str]:
                 problems.append(f"event {e['id']}: source titles or links shipped")
                 break
         problems += [f"a person's name is shipped: {h}" for h in name_hits(dist, people_names())]
+        problems += [f"a person's name in Japanese is shipped: {h}" for h in japanese_hits(dist, japanese_names())]
+        i18n = data.get("i18n-ja.json", {})
+        if i18n.get("names"):
+            problems.append("i18n-ja.json still has people's names")
+    if not data.get("i18n-ja.json", {}).get("text"):
+        problems.append("i18n-ja.json: no Japanese texts")
+    problems += voice_problems(dist, mode, people_names())
     return problems
 
 

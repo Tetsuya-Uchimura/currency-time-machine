@@ -1,4 +1,4 @@
-# Basic CI: install, typecheck, tests, then both builds, each checked.
+# Basic CI: install, typecheck, tests, the translation check, then both builds, each checked.
 # Offline only: the data scripts that call outside services (Frankfurter, Wikidata, FRED, sources) are run by
 # hand and their outputs are committed; CI never fetches them.
 name: CI
@@ -40,6 +40,9 @@ jobs:
 
       - name: Tests (pytest and node --test)
         run: npm test
+
+      - name: Japanese review translation complete and current
+        run: npm run i18n:check
 
       - name: Build (full)
         run: npm run build

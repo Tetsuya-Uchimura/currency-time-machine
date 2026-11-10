@@ -1,0 +1,6084 @@
+{
+ "generatedBy": "scripts/voice-lines.ts",
+ "years": "all",
+ "lines": [
+  {
+   "id": "arrive.1948",
+   "text": "Here we are: 1948.",
+   "hash": "8f8e55850148dfaf",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "arrive.1949",
+   "text": "Here we are: 1949.",
+   "hash": "8f8b338501467012",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "arrive.1950",
+   "text": "Here we are: 1950.",
+   "hash": "86c9aa84fc49c7bc",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "arrive.1951",
+   "text": "Here we are: 1951.",
+   "hash": "86cd0c84fc4ca419",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "arrive.1952",
+   "text": "Here we are: 1952.",
+   "hash": "86c32a84fc44828e",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "arrive.1953",
+   "text": "Here we are: 1953.",
+   "hash": "86c68c84fc475eeb",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "arrive.1954",
+   "text": "Here we are: 1954.",
+   "hash": "86bc0a84fc3e2d80",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "arrive.1955",
+   "text": "Here we are: 1955.",
+   "hash": "86bf8c84fc41403d",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "arrive.1956",
+   "text": "Here we are: 1956.",
+   "hash": "86b58a84fc38e852",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "arrive.1957",
+   "text": "Here we are: 1957.",
+   "hash": "86b8ac84fc3b57ef",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "arrive.1958",
+   "text": "Here we are: 1958.",
+   "hash": "86ae8a84fc32c9a4",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "arrive.1959",
+   "text": "Here we are: 1959.",
+   "hash": "86b22c84fc3612c1",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "arrive.1960",
+   "text": "Here we are: 1960.",
+   "hash": "7db38384f70585ed",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "arrive.1961",
+   "text": "Here we are: 1961.",
+   "hash": "7db00184f7027330",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "arrive.1962",
+   "text": "Here we are: 1962.",
+   "hash": "7dace384f7000a5f",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "arrive.1963",
+   "text": "Here we are: 1963.",
+   "hash": "7da98184f6fd2e02",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "arrive.1964",
+   "text": "Here we are: 1964.",
+   "hash": "7dc10384f710e9c9",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "arrive.1965",
+   "text": "Here we are: 1965.",
+   "hash": "7dbde184f70e7a2c",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "arrive.1966",
+   "text": "Here we are: 1966.",
+   "hash": "7dba8384f70ba49b",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "arrive.1967",
+   "text": "Here we are: 1967.",
+   "hash": "7db6e184f7085b7e",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "arrive.1968",
+   "text": "Here we are: 1968.",
+   "hash": "7d988384f6eebe35",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "arrive.1969",
+   "text": "Here we are: 1969.",
+   "hash": "7d94e184f6eb7518",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "arrive.1970",
+   "text": "Here we are: 1970.",
+   "hash": "76503884f3329b72",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "arrive.1971",
+   "text": "Here we are: 1971.",
+   "hash": "7653da84f335e48f",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "arrive.1972",
+   "text": "Here we are: 1972.",
+   "hash": "76573884f338ba20",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "arrive.1973",
+   "text": "Here we are: 1973.",
+   "hash": "765aba84f33bccdd",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "arrive.1974",
+   "text": "Here we are: 1974.",
+   "hash": "765dd884f33e35ae",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "arrive.1975",
+   "text": "Here we are: 1975.",
+   "hash": "76613a84f341120b",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "arrive.1976",
+   "text": "Here we are: 1976.",
+   "hash": "7664d884f344545c",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "arrive.1977",
+   "text": "Here we are: 1977.",
+   "hash": "76683a84f34730b9",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "arrive.1978",
+   "text": "Here we are: 1978.",
+   "hash": "76355884f31c0a1a",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "arrive.1979",
+   "text": "Here we are: 1979.",
+   "hash": "7638ba84f31ee677",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "arrive.1980",
+   "text": "Here we are: 1980.",
+   "hash": "6d3a3184edee9003",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "arrive.1981",
+   "text": "Here we are: 1981.",
+   "hash": "6d368f84edeb46e6",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "arrive.1982",
+   "text": "Here we are: 1982.",
+   "hash": "6d411184edf47851",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "arrive.1983",
+   "text": "Here we are: 1983.",
+   "hash": "6d3daf84edf19bf4",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "arrive.1984",
+   "text": "Here we are: 1984.",
+   "hash": "6d2cb184ede32c27",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "arrive.1985",
+   "text": "Here we are: 1985.",
+   "hash": "6d290f84eddfe30a",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "arrive.1986",
+   "text": "Here we are: 1986.",
+   "hash": "6d333184ede87155",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "arrive.1987",
+   "text": "Here we are: 1987.",
+   "hash": "6d300f84ede601b8",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "arrive.1988",
+   "text": "Here we are: 1988.",
+   "hash": "6d553184ee0557bb",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "arrive.1989",
+   "text": "Here we are: 1989.",
+   "hash": "6d520f84ee02e81e",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "arrive.1990",
+   "text": "Here we are: 1990.",
+   "hash": "64240684e8aa4768",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "arrive.1991",
+   "text": "Here we are: 1991.",
+   "hash": "64276884e8ad23c5",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "arrive.1992",
+   "text": "Here we are: 1992.",
+   "hash": "641d0684e8a428ba",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "arrive.1993",
+   "text": "Here we are: 1993.",
+   "hash": "64206884e8a70517",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "arrive.1994",
+   "text": "Here we are: 1994.",
+   "hash": "64316684e8b574e4",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "arrive.1995",
+   "text": "Here we are: 1995.",
+   "hash": "64350884e8b8be01",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "arrive.1996",
+   "text": "Here we are: 1996.",
+   "hash": "642a8684e8af8c96",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "arrive.1997",
+   "text": "Here we are: 1997.",
+   "hash": "642de884e8b268f3",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "arrive.1998",
+   "text": "Here we are: 1998.",
+   "hash": "643ee684e8c0d8c0",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "arrive.1999",
+   "text": "Here we are: 1999.",
+   "hash": "64426884e8c3eb7d",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "arrive.2000",
+   "text": "Here we are: 2000.",
+   "hash": "61e3b955b05fcf0b",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "arrive.2001",
+   "text": "Here we are: 2001.",
+   "hash": "61e05755b05cf2ae",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "arrive.2002",
+   "text": "Here we are: 2002.",
+   "hash": "61eab955b065edb9",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "arrive.2003",
+   "text": "Here we are: 2003.",
+   "hash": "61e75755b063115c",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "arrive.2004",
+   "text": "Here we are: 2004.",
+   "hash": "61d65955b054a18f",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "arrive.2005",
+   "text": "Here we are: 2005.",
+   "hash": "61d2b755b0515872",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "arrive.2006",
+   "text": "Here we are: 2006.",
+   "hash": "61dd3955b05a89dd",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "arrive.2007",
+   "text": "Here we are: 2007.",
+   "hash": "61d9b755b0577720",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "arrive.2008",
+   "text": "Here we are: 2008.",
+   "hash": "61c8b955b0490753",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "arrive.2009",
+   "text": "Here we are: 2009.",
+   "hash": "61c55755b0462af6",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "arrive.2010",
+   "text": "Here we are: 2010.",
+   "hash": "58cdae55ab1bbcd0",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "arrive.2011",
+   "text": "Here we are: 2011.",
+   "hash": "58d13055ab1ecf8d",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "arrive.2012",
+   "text": "Here we are: 2012.",
+   "hash": "58c6ae55ab159e22",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "arrive.2013",
+   "text": "Here we are: 2013.",
+   "hash": "58ca1055ab187a7f",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "arrive.2014",
+   "text": "Here we are: 2014.",
+   "hash": "58db0e55ab26ea4c",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "arrive.2015",
+   "text": "Here we are: 2015.",
+   "hash": "58deb055ab2a3369",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "arrive.2016",
+   "text": "Here we are: 2016.",
+   "hash": "58d48e55ab21a51e",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "arrive.2017",
+   "text": "Here we are: 2017.",
+   "hash": "58d7b055ab2414bb",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "arrive.2018",
+   "text": "Here we are: 2018.",
+   "hash": "58b28e55ab04beb8",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "arrive.2019",
+   "text": "Here we are: 2019.",
+   "hash": "58b5b055ab072e55",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "arrive.2020",
+   "text": "Here we are: 2020.",
+   "hash": "4fb78755a5d77b01",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "arrive.2021",
+   "text": "Here we are: 2021.",
+   "hash": "4fb3e555a5d431e4",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "arrive.2022",
+   "text": "Here we are: 2022.",
+   "hash": "4fb06755a5d125f3",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "arrive.2023",
+   "text": "Here we are: 2023.",
+   "hash": "4fad0555a5ce4996",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "arrive.2024",
+   "text": "Here we are: 2024.",
+   "hash": "4fa9e755a5cbe0c5",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "arrive.2025",
+   "text": "Here we are: 2025.",
+   "hash": "4fa68555a5c90468",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "arrive.2026",
+   "text": "Here we are: 2026.",
+   "hash": "4fa2e755a5c5c217",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "full.asia-arrives",
+   "text": "1981. The Chinese yuan and the Korean won enter the picture.",
+   "hash": "7a78d4a0be74416a",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "full.asian-crisis",
+   "text": "1997. Currency turmoil spreads across Asia. The Korean won loses much of its value.",
+   "hash": "4eb4433556e2fe9d",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "full.black-wednesday",
+   "text": "September 1992. Speculators force the pound out of Europe's exchange-rate system.",
+   "hash": "1377539ad408e240",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "full.brexit",
+   "text": "June 2016. Britain votes to leave the European Union. The pound tumbles.",
+   "hash": "09bad84e8c20e6c0",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "full.chf-shock",
+   "text": "January 2015. Switzerland drops its cap on the franc, which jumps overnight.",
+   "hash": "f7e308ffaf263eaa",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "full.dm-born",
+   "text": "June 1948. West Germany launches a new currency, the Deutsche Mark. Rates are fixed to the dollar, and the dollar to gold.",
+   "hash": "094a3c480c106329",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "full.dollar-adjustment",
+   "text": "September 1985. Major economies coordinate to weaken the dollar. The yen strengthens in the years that follow.",
+   "hash": "608d14312c1d84af",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "full.euro",
+   "text": "January 1999. Eleven countries adopt the euro. The Deutsche Mark passes on its light.",
+   "hash": "08d6035182b3a4dd",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "full.float",
+   "text": "1973. Fixed exchange rates collapse. Currencies begin to float freely.",
+   "hash": "8615f1d11e494304",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "full.gfc",
+   "text": "2008. A global financial crisis sends shockwaves through currency markets.",
+   "hash": "9b4b1a040598551b",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "full.gold-break",
+   "text": "August 1971. The dollar's link to gold breaks. A new monetary era begins.",
+   "hash": "9531c988ca8238d2",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "full.hint",
+   "text": "Pinch a currency on the map or the chart to hear it alone. Pinch the hand panel to pause or jump in time.",
+   "hash": "449b1447c80fbe76",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "full.pandemic",
+   "text": "March 2020. The pandemic sends investors rushing into dollars, for a few weeks.",
+   "hash": "15da5b8674f85e46",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "full.sterling-1967",
+   "text": "1967. Britain devalues the pound from $2.80 to $2.40.",
+   "hash": "768fe9c228eeed8c",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "full.yen-joins",
+   "text": "1969. The yen joins the stream, held at 360 yen to the dollar since 1949.",
+   "hash": "ff3cca0b6d428d99",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "full.yen-slide",
+   "text": "2022. US interest rates climb while Japan's stay near zero. The yen slides to its weakest in decades.",
+   "hash": "b3bd541730158c77",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "guide.full",
+   "text": "The full journey: every year from 1948 to today, in about four minutes. Pinch a currency to hear it alone.",
+   "hash": "2f04eaceb56c84e5",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "guide.intro.1",
+   "text": "Welcome aboard the Currency Time Machine!",
+   "hash": "1ebe34e2db0bb4b5",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "guide.intro.2",
+   "text": "I'm Tock, your guide to the history of money.",
+   "hash": "ad5306b56eaac967",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "guide.intro.3",
+   "text": "Pick a year, and we'll travel back to see who shaped the world, what happened, and how currencies changed.",
+   "hash": "a6db47e0ca6d6464",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "guide.select",
+   "text": "Which year shall we visit? Turn the dial, or pick a famous year. Then press Start Travel.",
+   "hash": "8e79521c5f7ed6fa",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "warp.1948",
+   "text": "Hold on tight! Setting the dial to 1948.",
+   "hash": "d003cd1c41411240",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "warp.1949",
+   "text": "Hold on tight! Setting the dial to 1949.",
+   "hash": "d0074f1c414424fd",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "warp.1950",
+   "text": "Hold on tight! Setting the dial to 1950.",
+   "hash": "d8ff181c466ec983",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "warp.1951",
+   "text": "Hold on tight! Setting the dial to 1951.",
+   "hash": "d8fb761c466b8066",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "warp.1952",
+   "text": "Hold on tight! Setting the dial to 1952.",
+   "hash": "d905f81c4674b1d1",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "warp.1953",
+   "text": "Hold on tight! Setting the dial to 1953.",
+   "hash": "d902961c4671d574",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "warp.1954",
+   "text": "Hold on tight! Setting the dial to 1954.",
+   "hash": "d8f1981c466365a7",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "warp.1955",
+   "text": "Hold on tight! Setting the dial to 1955.",
+   "hash": "d8edf61c46601c8a",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "warp.1956",
+   "text": "Hold on tight! Setting the dial to 1956.",
+   "hash": "d8f8181c4668aad5",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "warp.1957",
+   "text": "Hold on tight! Setting the dial to 1957.",
+   "hash": "d8f4f61c46663b38",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "warp.1958",
+   "text": "Hold on tight! Setting the dial to 1958.",
+   "hash": "d91a181c4685913b",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "warp.1959",
+   "text": "Hold on tight! Setting the dial to 1959.",
+   "hash": "d916f61c4683219e",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "warp.1960",
+   "text": "Hold on tight! Setting the dial to 1960.",
+   "hash": "be28fb1c36fdb87e",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "warp.1961",
+   "text": "Hold on tight! Setting the dial to 1961.",
+   "hash": "be2c9d1c3701019b",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "warp.1962",
+   "text": "Hold on tight! Setting the dial to 1962.",
+   "hash": "be2ffb1c3703d72c",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "warp.1963",
+   "text": "Hold on tight! Setting the dial to 1963.",
+   "hash": "be331d1c370646c9",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "warp.1964",
+   "text": "Hold on tight! Setting the dial to 1964.",
+   "hash": "be1b9b1c36f28b02",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "warp.1965",
+   "text": "Hold on tight! Setting the dial to 1965.",
+   "hash": "be1efd1c36f5675f",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "warp.1966",
+   "text": "Hold on tight! Setting the dial to 1966.",
+   "hash": "be221b1c36f7d030",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "warp.1967",
+   "text": "Hold on tight! Setting the dial to 1967.",
+   "hash": "be259d1c36fae2ed",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "warp.1968",
+   "text": "Hold on tight! Setting the dial to 1968.",
+   "hash": "be0dfb1c36e6f0c6",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "warp.1969",
+   "text": "Hold on tight! Setting the dial to 1969.",
+   "hash": "be111d1c36e96063",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "warp.1970",
+   "text": "Hold on tight! Setting the dial to 1970.",
+   "hash": "c73f261c3c420119",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "warp.1971",
+   "text": "Hold on tight! Setting the dial to 1971.",
+   "hash": "c73bc41c3c3f24bc",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "warp.1972",
+   "text": "Hold on tight! Setting the dial to 1972.",
+   "hash": "c738a61c3c3cbbeb",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "warp.1973",
+   "text": "Hold on tight! Setting the dial to 1973.",
+   "hash": "c735441c3c39df8e",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "warp.1974",
+   "text": "Hold on tight! Setting the dial to 1974.",
+   "hash": "c731a61c3c369d3d",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "warp.1975",
+   "text": "Hold on tight! Setting the dial to 1975.",
+   "hash": "c72e241c3c338a80",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "warp.1976",
+   "text": "Hold on tight! Setting the dial to 1976.",
+   "hash": "c72ac61c3c30b4ef",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "warp.1977",
+   "text": "Hold on tight! Setting the dial to 1977.",
+   "hash": "c727a41c3c2e4552",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "warp.1978",
+   "text": "Hold on tight! Setting the dial to 1978.",
+   "hash": "c724461c3c2b6fc1",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "warp.1979",
+   "text": "Hold on tight! Setting the dial to 1979.",
+   "hash": "c720a41c3c2826a4",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "warp.1980",
+   "text": "Hold on tight! Setting the dial to 1980.",
+   "hash": "f28e911c54ca013c",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "warp.1981",
+   "text": "Hold on tight! Setting the dial to 1981.",
+   "hash": "f291f31c54ccdd99",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "warp.1982",
+   "text": "Hold on tight! Setting the dial to 1982.",
+   "hash": "f288111c54c4bc0e",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "warp.1983",
+   "text": "Hold on tight! Setting the dial to 1983.",
+   "hash": "f28b731c54c7986b",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "warp.1984",
+   "text": "Hold on tight! Setting the dial to 1984.",
+   "hash": "f280f11c54be6700",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "warp.1985",
+   "text": "Hold on tight! Setting the dial to 1985.",
+   "hash": "f284731c54c179bd",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "warp.1986",
+   "text": "Hold on tight! Setting the dial to 1986.",
+   "hash": "f27a711c54b921d2",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "warp.1987",
+   "text": "Hold on tight! Setting the dial to 1987.",
+   "hash": "f27d931c54bb916f",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "warp.1988",
+   "text": "Hold on tight! Setting the dial to 1988.",
+   "hash": "f273711c54b30324",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "warp.1989",
+   "text": "Hold on tight! Setting the dial to 1989.",
+   "hash": "f277131c54b64c41",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "warp.1990",
+   "text": "Hold on tight! Setting the dial to 1990.",
+   "hash": "fb381c1c59b21b17",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "warp.1991",
+   "text": "Hold on tight! Setting the dial to 1991.",
+   "hash": "fb34ba1c59af3eba",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "warp.1992",
+   "text": "Hold on tight! Setting the dial to 1992.",
+   "hash": "fb3f1c1c59b839c5",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "warp.1993",
+   "text": "Hold on tight! Setting the dial to 1993.",
+   "hash": "fb3bba1c59b55d68",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "warp.1994",
+   "text": "Hold on tight! Setting the dial to 1994.",
+   "hash": "fb459c1c59bd7ef3",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "warp.1995",
+   "text": "Hold on tight! Setting the dial to 1995.",
+   "hash": "fb423a1c59baa296",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "warp.1996",
+   "text": "Hold on tight! Setting the dial to 1996.",
+   "hash": "fb4cbc1c59c3d401",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "warp.1997",
+   "text": "Hold on tight! Setting the dial to 1997.",
+   "hash": "fb491a1c59c08ae4",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "warp.1998",
+   "text": "Hold on tight! Setting the dial to 1998.",
+   "hash": "fb533c1c59c9192f",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "warp.1999",
+   "text": "Hold on tight! Setting the dial to 1999.",
+   "hash": "fb501a1c59c6a992",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "warp.2000",
+   "text": "Hold on tight! Setting the dial to 2000.",
+   "hash": "6f5e10925019cc38",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "warp.2001",
+   "text": "Hold on tight! Setting the dial to 2001.",
+   "hash": "6f613292501c3bd5",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "warp.2002",
+   "text": "Hold on tight! Setting the dial to 2002.",
+   "hash": "6f5710925013ad8a",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "warp.2003",
+   "text": "Hold on tight! Setting the dial to 2003.",
+   "hash": "6f5ab2925016f6a7",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "warp.2004",
+   "text": "Hold on tight! Setting the dial to 2004.",
+   "hash": "6f6bb09250256674",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "warp.2005",
+   "text": "Hold on tight! Setting the dial to 2005.",
+   "hash": "6f6f1292502842d1",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "warp.2006",
+   "text": "Hold on tight! Setting the dial to 2006.",
+   "hash": "6f649092501f1166",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "warp.2007",
+   "text": "Hold on tight! Setting the dial to 2007.",
+   "hash": "6f68329250225a83",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "warp.2008",
+   "text": "Hold on tight! Setting the dial to 2008.",
+   "hash": "6f7930925030ca50",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "warp.2009",
+   "text": "Hold on tight! Setting the dial to 2009.",
+   "hash": "6f7cb2925033dd0d",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "warp.2010",
+   "text": "Hold on tight! Setting the dial to 2010.",
+   "hash": "78743b92555e14d3",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "warp.2011",
+   "text": "Hold on tight! Setting the dial to 2011.",
+   "hash": "7870d992555b3876",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "warp.2012",
+   "text": "Hold on tight! Setting the dial to 2012.",
+   "hash": "787adb9255639061",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "warp.2013",
+   "text": "Hold on tight! Setting the dial to 2013.",
+   "hash": "7877b992556120c4",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "warp.2014",
+   "text": "Hold on tight! Setting the dial to 2014.",
+   "hash": "7866bb925552b0f7",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "warp.2015",
+   "text": "Hold on tight! Setting the dial to 2015.",
+   "hash": "78635992554fd49a",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "warp.2016",
+   "text": "Hold on tight! Setting the dial to 2016.",
+   "hash": "786d3b925557f625",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "warp.2017",
+   "text": "Hold on tight! Setting the dial to 2017.",
+   "hash": "7869d992555519c8",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "warp.2018",
+   "text": "Hold on tight! Setting the dial to 2018.",
+   "hash": "788f3b925574dc8b",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "warp.2019",
+   "text": "Hold on tight! Setting the dial to 2019.",
+   "hash": "788bd9925572002e",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "warp.2020",
+   "text": "Hold on tight! Setting the dial to 2020.",
+   "hash": "5d9e5e9245ed708e",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "warp.2021",
+   "text": "Hold on tight! Setting the dial to 2021.",
+   "hash": "5da1c09245f04ceb",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "warp.2022",
+   "text": "Hold on tight! Setting the dial to 2022.",
+   "hash": "5da4de9245f2b5bc",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "warp.2023",
+   "text": "Hold on tight! Setting the dial to 2023.",
+   "hash": "5da8409245f59219",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "warp.2024",
+   "text": "Hold on tight! Setting the dial to 2024.",
+   "hash": "5d90be9245e1d652",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "warp.2025",
+   "text": "Hold on tight! Setting the dial to 2025.",
+   "hash": "5d93e09245e445ef",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "warp.2026",
+   "text": "Hold on tight! Setting the dial to 2026.",
+   "hash": "5d973e9245e71b80",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1948.event-dm-born",
+   "text": "June 20: The Deutsche Mark is born. A currency reform replaces the Reichsmark with the Deutsche Mark in the western zones of Germany. Watch the Mark.",
+   "hash": "d8a6da29a10a2864",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1948.leaders-DEU",
+   "text": "In Western zones of Germany, we have no verified record of who governed this year.",
+   "hash": "32745f7cd597a8d9",
+   "modes": [
+    "full"
+   ]
+  },
+  {
+   "id": "year.1948.leaders-DEU",
+   "text": "Western zones of Germany. Federal parliamentary republic: the Chancellor leads the government.",
+   "hash": "9ad8e0ce702a1ecf",
+   "modes": [
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1948.result",
+   "text": "Over the year, the currencies we follow barely moved against the dollar.",
+   "hash": "46e66ccc03855a76",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1948.summary",
+   "text": "That was 1948: The Deutsche Mark is born. Over the year, the currencies we follow barely moved against the dollar. Where shall we go next?",
+   "hash": "399896a8dc320879",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1948.world",
+   "text": "1948. Bretton Woods: fixed rates. Currencies are pegged to the US dollar, and the dollar to gold. Rates move only when a government resets its peg. This year, let's look at Western zones of Germany.",
+   "hash": "4a6c448f84caef99",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1949.event-sterling-1949",
+   "text": "September 19: Britain devalues the pound. The pound is devalued by about 30%, to 2.80 dollars. Many other currencies follow within days. Watch the pound and the Mark.",
+   "hash": "9b113764e6743cee",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1949.event-yen-360",
+   "text": "April 25: The yen is fixed at 360 per dollar. Japan sets a single exchange rate of 360 yen to the US dollar, which holds until 1971.",
+   "hash": "55615ea4ee128dd2",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1949.joins-CHF",
+   "text": "The Swiss franc joins our data here, at 4.37 Swiss francs per US dollar.",
+   "hash": "f45b5a8f539844f4",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1949.joins-GBP",
+   "text": "The pound joins our data here, at 0.357 pounds per US dollar.",
+   "hash": "4bfe9f708d9fac35",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1949.leaders-DEU",
+   "text": "In West Germany: Chancellor Konrad Adenauer.",
+   "hash": "aab670bd2515b6ed",
+   "modes": [
+    "full"
+   ]
+  },
+  {
+   "id": "year.1949.leaders-DEU",
+   "text": "West Germany. Federal parliamentary republic: the Chancellor leads the government.",
+   "hash": "b42135fb66a54a7e",
+   "modes": [
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1949.leaders-GBR",
+   "text": "In United Kingdom: Prime Minister Clement Attlee; Thomas Catto, 1st Baron Catto, then Cameron Cobbold, 1st Baron Cobbold leads the Bank of England.",
+   "hash": "f1df73f1b04fe960",
+   "modes": [
+    "full"
+   ]
+  },
+  {
+   "id": "year.1949.leaders-GBR",
+   "text": "United Kingdom. Constitutional monarchy: the Prime Minister leads the government.",
+   "hash": "9cf0824cdc6d32be",
+   "modes": [
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1949.leaders-JPN",
+   "text": "In Japan: Prime Minister Shigeru Yoshida; Hisato Ichimada leads the Bank of Japan.",
+   "hash": "45cf78e92d502f60",
+   "modes": [
+    "full"
+   ]
+  },
+  {
+   "id": "year.1949.leaders-JPN",
+   "text": "Japan. Constitutional monarchy: the Prime Minister leads the government.",
+   "hash": "e7a77876d4c00da6",
+   "modes": [
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1949.result",
+   "text": "Over the year, the Mark lost the most against the dollar, 21%. None of the others gained more than 1%.",
+   "hash": "3b1864cfafff99ac",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1949.summary",
+   "text": "That was 1949: The yen is fixed at 360 per dollar and Britain devalues the pound. Over the year, the Mark lost the most against the dollar, 21%. None of the others gained more than 1%. Where shall we go next?",
+   "hash": "e4620f0909d24002",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1949.world",
+   "text": "1949. Bretton Woods: fixed rates. Currencies are pegged to the US dollar, and the dollar to gold. Rates move only when a government resets its peg. This year, let's look at West Germany, United Kingdom and Japan.",
+   "hash": "da59120c909487dc",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1950.leaders-CAN",
+   "text": "In Canada: Prime Minister Louis St. Laurent; Graham Towers leads the Bank of Canada.",
+   "hash": "2eac57c6ba0e1ce8",
+   "modes": [
+    "full"
+   ]
+  },
+  {
+   "id": "year.1950.leaders-CAN",
+   "text": "Canada. Constitutional monarchy: the Prime Minister leads the government.",
+   "hash": "67bdfbfa0d2ed426",
+   "modes": [
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1950.summary",
+   "text": "That was 1950: Canada lets its dollar float. Over the year, the currencies we follow barely moved against the dollar. Where shall we go next?",
+   "hash": "99d083cab18e33f4",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1950.undated",
+   "text": "Also in 1950, on a date our sources do not give: Canada lets its dollar float. Unlike the fixed currencies of the Bretton Woods system, the Canadian dollar is left to the market.",
+   "hash": "135d3cc9ebbbf945",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1950.world",
+   "text": "1950. Bretton Woods: fixed rates. Currencies are pegged to the US dollar, and the dollar to gold. Rates move only when a government resets its peg. This year, let's look at Canada.",
+   "hash": "f6acf2cd53b5da9f",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1951.leaders-USA",
+   "text": "In United States: President Harry S. Truman; Thomas B. McCabe, then William McChesney Martin chairs the Federal Reserve.",
+   "hash": "53533b9c1b4a43af",
+   "modes": [
+    "full"
+   ]
+  },
+  {
+   "id": "year.1951.leaders-USA",
+   "text": "United States. Presidential republic: the President leads the government. The Federal Reserve sets interest rates.",
+   "hash": "6601763822a49888",
+   "modes": [
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1951.summary",
+   "text": "That was 1951. Over the year, the currencies we follow barely moved against the dollar. Where shall we go next?",
+   "hash": "584d56ebd2b2b993",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1951.world",
+   "text": "1951. Bretton Woods: fixed rates. Currencies are pegged to the US dollar, and the dollar to gold. Rates move only when a government resets its peg. This year, let's look at United States. Our history file has no verified event for this year, so let us watch the currencies themselves.",
+   "hash": "f082e1db944bddfc",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1952.leaders-USA",
+   "text": "In United States: President Harry S. Truman; William McChesney Martin chairs the Federal Reserve.",
+   "hash": "e1068a8e73abab01",
+   "modes": [
+    "full"
+   ]
+  },
+  {
+   "id": "year.1952.summary",
+   "text": "That was 1952. Over the year, the currencies we follow barely moved against the dollar. Where shall we go next?",
+   "hash": "46204890380bcf6e",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1952.world",
+   "text": "1952. Bretton Woods: fixed rates. Currencies are pegged to the US dollar, and the dollar to gold. Rates move only when a government resets its peg. This year, let's look at United States. Our history file has no verified event for this year, so let us watch the currencies themselves.",
+   "hash": "81c104f2c9463acd",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1953.joins-CAD",
+   "text": "The Canadian dollar joins our data here, at 0.995 Canadian dollars per US dollar.",
+   "hash": "4e956e7e60e293a5",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1953.leaders-CHE",
+   "text": "In Switzerland, the Federal Council governs together: Philipp Etter presides over the Federal Council.",
+   "hash": "dac8c1e678d4bc38",
+   "modes": [
+    "full"
+   ]
+  },
+  {
+   "id": "year.1953.leaders-CHE",
+   "text": "Switzerland. Collective government: the seven-member Federal Council. Its presidency rotates every year.",
+   "hash": "82642be32bcf321e",
+   "modes": [
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1953.result",
+   "text": "Over the year, the Swiss franc gained the most against the dollar, 1.9%, and the pound lost the most, 0.6%.",
+   "hash": "81f99bead3f82e95",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1953.summary",
+   "text": "That was 1953. Over the year, the Swiss franc gained the most against the dollar, 1.9%, and the pound lost the most, 0.6%. Where shall we go next?",
+   "hash": "1e306b2180b53696",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1953.world",
+   "text": "1953. Bretton Woods: fixed rates. Currencies are pegged to the US dollar, and the dollar to gold. Rates move only when a government resets its peg. This year, let's look at Switzerland. Our history file has no verified event for this year, so let us watch the currencies themselves.",
+   "hash": "e83e05e9ea5a28d0",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1954.leaders-USA",
+   "text": "In United States: President Dwight D. Eisenhower; William McChesney Martin chairs the Federal Reserve.",
+   "hash": "d266a508e66ea593",
+   "modes": [
+    "full"
+   ]
+  },
+  {
+   "id": "year.1954.summary",
+   "text": "That was 1954. Over the year, the currencies we follow barely moved against the dollar. Where shall we go next?",
+   "hash": "aafceb458b5c6834",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1954.world",
+   "text": "1954. Bretton Woods: fixed rates. Currencies are pegged to the US dollar, and the dollar to gold. Rates move only when a government resets its peg. This year, let's look at United States. Our history file has no verified event for this year, so let us watch the currencies themselves.",
+   "hash": "319448ba279a7d0b",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1955.leaders-CAN",
+   "text": "In Canada: Prime Minister Louis St. Laurent; James Coyne leads the Bank of Canada.",
+   "hash": "b26f3cf6660656c8",
+   "modes": [
+    "full"
+   ]
+  },
+  {
+   "id": "year.1955.result",
+   "text": "Over the year, the Canadian dollar lost the most against the dollar, 3.4%. None of the others gained more than 1%.",
+   "hash": "1c2903e529493fc8",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1955.summary",
+   "text": "That was 1955. Over the year, the Canadian dollar lost the most against the dollar, 3.4%. None of the others gained more than 1%. Where shall we go next?",
+   "hash": "3b992eb923efade1",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1955.world",
+   "text": "1955. Bretton Woods: fixed rates. Currencies are pegged to the US dollar, and the dollar to gold. Rates move only when a government resets its peg. This year, let's look at Canada. Our history file has no verified event for this year, so let us watch the currencies themselves.",
+   "hash": "9a3d476f155ab759",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1956.result",
+   "text": "Over the year, the Canadian dollar gained the most against the dollar, 4.1%.",
+   "hash": "5bd30dbbabf80759",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1956.summary",
+   "text": "That was 1956. Over the year, the Canadian dollar gained the most against the dollar, 4.1%. Where shall we go next?",
+   "hash": "502bd1efbd96bb7d",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1956.world",
+   "text": "1956. Bretton Woods: fixed rates. Currencies are pegged to the US dollar, and the dollar to gold. Rates move only when a government resets its peg. This year, let's look at Canada. Our history file has no verified event for this year, so let us watch the currencies themselves.",
+   "hash": "28c0885b1d69ec66",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1957.event-bundesbank",
+   "text": "August 1: The Bundesbank is founded. West Germany's new central bank, the Deutsche Bundesbank, takes over from the Bank deutscher Laender. Watch the Mark.",
+   "hash": "7ae928c6ad66bc5e",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1957.leaders-CAN",
+   "text": "In Canada: Prime Minister Louis St. Laurent, then John Diefenbaker; James Coyne leads the Bank of Canada.",
+   "hash": "9140566ce8f274dc",
+   "modes": [
+    "full"
+   ]
+  },
+  {
+   "id": "year.1957.result",
+   "text": "Over the year, the Canadian dollar lost the most against the dollar, 2.3%. None of the others gained more than 1%.",
+   "hash": "1906c019fff88b2a",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1957.summary",
+   "text": "That was 1957: The Bundesbank is founded. Over the year, the Canadian dollar lost the most against the dollar, 2.3%. None of the others gained more than 1%. Where shall we go next?",
+   "hash": "39d96496b039d210",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1957.world",
+   "text": "1957. Bretton Woods: fixed rates. Currencies are pegged to the US dollar, and the dollar to gold. Rates move only when a government resets its peg. This year, let's look at West Germany and Canada.",
+   "hash": "8b30c257ba3e0c71",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1958.leaders-CAN",
+   "text": "In Canada: Prime Minister John Diefenbaker; James Coyne leads the Bank of Canada.",
+   "hash": "81950855f91e9d45",
+   "modes": [
+    "full"
+   ]
+  },
+  {
+   "id": "year.1958.result",
+   "text": "Over the year, the Canadian dollar gained the most against the dollar, 2.4%, and the pound lost the most, 0.1%.",
+   "hash": "d88823ea43d18708",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1958.summary",
+   "text": "That was 1958. Over the year, the Canadian dollar gained the most against the dollar, 2.4%, and the pound lost the most, 0.1%. Where shall we go next?",
+   "hash": "c073d80103148ec0",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1958.world",
+   "text": "1958. Bretton Woods: fixed rates. Currencies are pegged to the US dollar, and the dollar to gold. Rates move only when a government resets its peg. This year, let's look at Canada. Our history file has no verified event for this year, so let us watch the currencies themselves.",
+   "hash": "d30fb13eab5e84f4",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1959.result",
+   "text": "Over the year, the Canadian dollar gained the most against the dollar, 1.6%, and the pound lost the most, 0.2%.",
+   "hash": "215c9ff29bb262d8",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1959.summary",
+   "text": "That was 1959. Over the year, the Canadian dollar gained the most against the dollar, 1.6%, and the pound lost the most, 0.2%. Where shall we go next?",
+   "hash": "32baaa1b14bfbe3d",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1959.world",
+   "text": "1959. Bretton Woods: fixed rates. Currencies are pegged to the US dollar, and the dollar to gold. Rates move only when a government resets its peg. This year, let's look at Canada. Our history file has no verified event for this year, so let us watch the currencies themselves.",
+   "hash": "5f6fb9d882e37c75",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1960.event-rba",
+   "text": "January 14: The Reserve Bank of Australia opens. Australia's central banking moves to a new institution, the Reserve Bank of Australia.",
+   "hash": "02c8d857d9050e68",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1960.leaders-AUS",
+   "text": "In Australia: Prime Minister Robert Menzies.",
+   "hash": "941e05b3ade167f5",
+   "modes": [
+    "full"
+   ]
+  },
+  {
+   "id": "year.1960.leaders-AUS",
+   "text": "Australia. Constitutional monarchy: the Prime Minister leads the government.",
+   "hash": "b87537c0863b5db8",
+   "modes": [
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1960.result",
+   "text": "Over the year, the Canadian dollar lost the most against the dollar, 4.5%. None of the others gained more than 1%.",
+   "hash": "ac42372b32e06f3a",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1960.sharpest",
+   "text": "Look at the Canadian dollar: in the eight weeks to May, it lost 3.5% against the dollar.",
+   "hash": "a49e3117b0223793",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1960.summary",
+   "text": "That was 1960: The Reserve Bank of Australia opens. Over the year, the Canadian dollar lost the most against the dollar, 4.5%. None of the others gained more than 1%. Where shall we go next?",
+   "hash": "dcec2bab10237108",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1960.world",
+   "text": "1960. Bretton Woods: fixed rates. Currencies are pegged to the US dollar, and the dollar to gold. Rates move only when a government resets its peg. This year, let's look at Australia and Canada.",
+   "hash": "9149cd8029467ed3",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1961.leaders-CAN",
+   "text": "In Canada: Prime Minister John Diefenbaker; James Coyne, then Louis Rasminsky leads the Bank of Canada.",
+   "hash": "2362cc2dab16981d",
+   "modes": [
+    "full"
+   ]
+  },
+  {
+   "id": "year.1961.leaders-DEU",
+   "text": "In West Germany: Chancellor Konrad Adenauer; Karl Blessing leads the Bundesbank.",
+   "hash": "b6fc38e5f0e1d218",
+   "modes": [
+    "full"
+   ]
+  },
+  {
+   "id": "year.1961.result",
+   "text": "Over the year, the Mark gained the most against the dollar, 4.4%, and the Canadian dollar lost the most, 4.5%.",
+   "hash": "a92b8d452627b25b",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1961.sharpest",
+   "text": "Look at the Mark: in the eight weeks to March, it gained 5.1% against the dollar.",
+   "hash": "a433a841edd17227",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1961.summary",
+   "text": "That was 1961. Over the year, the Mark gained the most against the dollar, 4.4%, and the Canadian dollar lost the most, 4.5%. Where shall we go next?",
+   "hash": "6ad33793bfd96219",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1961.world",
+   "text": "1961. Bretton Woods: fixed rates. Currencies are pegged to the US dollar, and the dollar to gold. Rates move only when a government resets its peg. This year, let's look at Canada and West Germany. Our history file has no verified event for this year, so let us watch the currencies themselves.",
+   "hash": "fc2243be45616527",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1962.event-cad-peg-1962",
+   "text": "May 2: Canada fixes its dollar again. Canada returns to a fixed rate, at 92.5 US cents. Watch the Canadian dollar.",
+   "hash": "3781b154b03fa28b",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1962.leaders-CAN",
+   "text": "In Canada: Prime Minister John Diefenbaker; Louis Rasminsky leads the Bank of Canada.",
+   "hash": "d39df9837e19086a",
+   "modes": [
+    "full"
+   ]
+  },
+  {
+   "id": "year.1962.result",
+   "text": "Over the year, the Canadian dollar lost the most against the dollar, 3.1%. None of the others gained more than 1%.",
+   "hash": "f6fc9f453ec84397",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1962.sharpest",
+   "text": "Look at the Canadian dollar: in the eight weeks to June, it lost 3.8% against the dollar.",
+   "hash": "8cfe7756b672d9b7",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1962.summary",
+   "text": "That was 1962: Canada fixes its dollar again. Over the year, the Canadian dollar lost the most against the dollar, 3.1%. None of the others gained more than 1%. Where shall we go next?",
+   "hash": "566bbd8bccbc59d7",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1962.world",
+   "text": "1962. Bretton Woods: fixed rates. Currencies are pegged to the US dollar, and the dollar to gold. Rates move only when a government resets its peg. This year, let's look at Canada.",
+   "hash": "3db6d9b08723605e",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1963.leaders-USA",
+   "text": "In United States: President John F. Kennedy, then Lyndon B. Johnson; William McChesney Martin chairs the Federal Reserve.",
+   "hash": "c3cee06520a65d50",
+   "modes": [
+    "full"
+   ]
+  },
+  {
+   "id": "year.1963.result",
+   "text": "Over the year, the pound lost the most against the dollar, 0.3%. None of the others gained more than 1%.",
+   "hash": "5ce9423523e2687b",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1963.summary",
+   "text": "That was 1963. Over the year, the pound lost the most against the dollar, 0.3%. None of the others gained more than 1%. Where shall we go next?",
+   "hash": "920d5f7f6346ce47",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1963.world",
+   "text": "1963. Bretton Woods: fixed rates. Currencies are pegged to the US dollar, and the dollar to gold. Rates move only when a government resets its peg. This year, let's look at United States. Our history file has no verified event for this year, so let us watch the currencies themselves.",
+   "hash": "db76a9106f1cdc71",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1964.leaders-USA",
+   "text": "In United States: President Lyndon B. Johnson; William McChesney Martin chairs the Federal Reserve.",
+   "hash": "fce94d7f78df8bb0",
+   "modes": [
+    "full"
+   ]
+  },
+  {
+   "id": "year.1964.summary",
+   "text": "That was 1964. Over the year, the pound lost the most against the dollar, 0.3%. None of the others gained more than 1%. Where shall we go next?",
+   "hash": "8357ae70477b4a42",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1964.world",
+   "text": "1964. Bretton Woods: fixed rates. Currencies are pegged to the US dollar, and the dollar to gold. Rates move only when a government resets its peg. This year, let's look at United States. Our history file has no verified event for this year, so let us watch the currencies themselves.",
+   "hash": "b30c7a8c381fa54c",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1965.result",
+   "text": "Over the year, the Mark lost the most against the dollar, 0.7%. None of the others gained more than 1%.",
+   "hash": "c9d37ea8a6fe2154",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1965.summary",
+   "text": "That was 1965. Over the year, the Mark lost the most against the dollar, 0.7%. None of the others gained more than 1%. Where shall we go next?",
+   "hash": "c720bee85e5491b0",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1965.world",
+   "text": "1965. Bretton Woods: fixed rates. Currencies are pegged to the US dollar, and the dollar to gold. Rates move only when a government resets its peg. This year, let's look at United States. Our history file has no verified event for this year, so let us watch the currencies themselves.",
+   "hash": "36684c1b41c312e7",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1966.event-aud-1966",
+   "text": "February 14: The Australian dollar is introduced. Australia switches to decimal currency: the Australian dollar replaces the Australian pound.",
+   "hash": "4785c7f754c1aa4a",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1966.event-inr-1966",
+   "text": "June 6: India devalues the rupee. India lowers the official value of the rupee against the dollar.",
+   "hash": "f54a0092a84f559a",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1966.leaders-AUS",
+   "text": "In Australia: Prime Minister Robert Menzies, then Harold Holt.",
+   "hash": "f2c916b0ea5cb2af",
+   "modes": [
+    "full"
+   ]
+  },
+  {
+   "id": "year.1966.leaders-IND",
+   "text": "In India: Prime Minister Lal Bahadur Shastri, then Gulzarilal Nanda and Indira Gandhi.",
+   "hash": "16fa0bb4a6ad0e08",
+   "modes": [
+    "full"
+   ]
+  },
+  {
+   "id": "year.1966.leaders-IND",
+   "text": "India. Parliamentary republic: the Prime Minister leads the government.",
+   "hash": "2e17c804a94bb9e5",
+   "modes": [
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1966.result",
+   "text": "Over the year, the Canadian dollar lost the most against the dollar, 1.0%. None of the others gained more than 1%.",
+   "hash": "20a18d28ce0f7716",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1966.summary",
+   "text": "That was 1966: The Australian dollar is introduced and India devalues the rupee. Over the year, the Canadian dollar lost the most against the dollar, 1.0%. None of the others gained more than 1%. Where shall we go next?",
+   "hash": "a5a4deef266c30a4",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1966.world",
+   "text": "1966. Bretton Woods: fixed rates. Currencies are pegged to the US dollar, and the dollar to gold. Rates move only when a government resets its peg. This year, let's look at India and Australia.",
+   "hash": "a3051acc174e249c",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1967.event-sterling-1967",
+   "text": "November 18: Britain devalues the pound again. The pound is devalued from 2.80 to 2.40 dollars. Watch the pound.",
+   "hash": "af23720e64a35544",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1967.leaders-GBR",
+   "text": "In United Kingdom: Prime Minister Harold Wilson; Leslie O'Brien, Baron O'Brien of Lothbury leads the Bank of England.",
+   "hash": "3d5a5d98f1f8badf",
+   "modes": [
+    "full"
+   ]
+  },
+  {
+   "id": "year.1967.result",
+   "text": "Over the year, the pound lost the most against the dollar, 14%. None of the others gained more than 1%.",
+   "hash": "e1f6fe929aa90449",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1967.summary",
+   "text": "That was 1967: Britain devalues the pound again. Over the year, the pound lost the most against the dollar, 14%. None of the others gained more than 1%. Where shall we go next?",
+   "hash": "eb1382c13887f5d2",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1967.world",
+   "text": "1967. Bretton Woods: fixed rates. Currencies are pegged to the US dollar, and the dollar to gold. Rates move only when a government resets its peg. This year, let's look at United Kingdom.",
+   "hash": "7926b77805369a95",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1968.event-gold-pool",
+   "text": "March 14: The US asks to close the London gold market. The United States asks Britain to close the London gold market the following day, to stop heavy demand for gold. Watch the pound.",
+   "hash": "de158068c06fb01f",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1968.result",
+   "text": "Over the year, the pound lost the most against the dollar, 1.0%. None of the others gained more than 1%.",
+   "hash": "03efe5f2da365971",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1968.summary",
+   "text": "That was 1968: The US asks to close the London gold market. Over the year, the pound lost the most against the dollar, 1.0%. None of the others gained more than 1%. Where shall we go next?",
+   "hash": "9682012783b8d537",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1968.world",
+   "text": "1968. Bretton Woods: fixed rates. Currencies are pegged to the US dollar, and the dollar to gold. Rates move only when a government resets its peg. This year, let's look at United States and United Kingdom.",
+   "hash": "6d1e1f8949a733b2",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1969.joins-JPY",
+   "text": "The yen joins our data here, at 358 yen per US dollar.",
+   "hash": "098fa93f718f5395",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1969.leaders-DEU",
+   "text": "In West Germany: Chancellor Kurt Georg Kiesinger, then Willy Brandt; Karl Blessing leads the Bundesbank.",
+   "hash": "243277776b110594",
+   "modes": [
+    "full"
+   ]
+  },
+  {
+   "id": "year.1969.result",
+   "text": "Over the year, the Mark gained the most against the dollar, 8.4%, and the Canadian dollar lost the most, 0.1%.",
+   "hash": "a9736df224ffd0cf",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1969.sharpest",
+   "text": "Look at the Mark: in the eight weeks to October, it gained 7.8% against the dollar.",
+   "hash": "47c0706d78c8de9b",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1969.summary",
+   "text": "That was 1969. Over the year, the Mark gained the most against the dollar, 8.4%, and the Canadian dollar lost the most, 0.1%. Where shall we go next?",
+   "hash": "ee47c9910155d4dd",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1969.world",
+   "text": "1969. Bretton Woods: fixed rates. Currencies are pegged to the US dollar, and the dollar to gold. Rates move only when a government resets its peg. This year, let's look at West Germany. Our history file has no verified event for this year, so let us watch the currencies themselves.",
+   "hash": "4fe731f65ba5a420",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1970.leaders-CAN",
+   "text": "In Canada: Prime Minister Pierre Trudeau; Louis Rasminsky leads the Bank of Canada.",
+   "hash": "a4ec3add0d2f76aa",
+   "modes": [
+    "full"
+   ]
+  },
+  {
+   "id": "year.1970.leaders-DEU",
+   "text": "In West Germany: Chancellor Willy Brandt; Karl Klasen leads the Bundesbank.",
+   "hash": "e683b9750332aab3",
+   "modes": [
+    "full"
+   ]
+  },
+  {
+   "id": "year.1970.result",
+   "text": "Over the year, the Canadian dollar gained the most against the dollar, 5.9%, and the pound lost the most, 0.3%.",
+   "hash": "702442c28ed0d488",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1970.sharpest",
+   "text": "Look at the Canadian dollar: in the eight weeks to July, it gained 4.2% against the dollar.",
+   "hash": "7d8098f0006b2074",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1970.summary",
+   "text": "That was 1970: Canada floats its dollar again. Over the year, the Canadian dollar gained the most against the dollar, 5.9%, and the pound lost the most, 0.3%. Where shall we go next?",
+   "hash": "4aa6479e0b3060ed",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1970.undated",
+   "text": "Also in 1970, on a date our sources do not give: Canada floats its dollar again. As an inflation-fighting measure, Canada lets its dollar float once more.",
+   "hash": "7e6b1f7314c8804a",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1970.world",
+   "text": "1970. Bretton Woods: fixed rates. Currencies are pegged to the US dollar, and the dollar to gold. Rates move only when a government resets its peg. This year, let's look at Canada and West Germany.",
+   "hash": "879230cfff4a37fc",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1971.event-dm-float-1971",
+   "text": "May 10: The Mark floats. When currency markets reopen on 10 May, West Germany lets the Mark float instead of holding its fixed rate. Watch the Mark and the Swiss franc.",
+   "hash": "7d89234001045d9a",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1971.event-gold-break",
+   "text": "August 15: The dollar-gold break. The United States suspends the convertibility of the dollar into gold. The fixed-rate system begins to break apart. Among those involved: Richard Nixon and John Connally. Watch the yen, the Mark and the Swiss franc.",
+   "hash": "7781a6bc57bf74af",
+   "modes": [
+    "full"
+   ]
+  },
+  {
+   "id": "year.1971.event-gold-break",
+   "text": "August 15: The dollar-gold break. The United States suspends the convertibility of the dollar into gold. The fixed-rate system begins to break apart. Watch the yen, the Mark and the Swiss franc.",
+   "hash": "20eac3ecd5d33de6",
+   "modes": [
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1971.event-smithsonian",
+   "text": "December 18: The Smithsonian Agreement. Meeting at the Smithsonian Institution in Washington, the Group of Ten agrees on new fixed rates: the dollar is devalued against gold, and the yen is set at 308 per dollar. Watch the yen, the Mark and the pound.",
+   "hash": "99cf1908c73cb22e",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1971.event-yen-float-1971",
+   "text": "August 28: Japan lets the yen float. Two weeks after the US move, Japan stops holding the yen at 360 per dollar and lets it float. Watch the yen.",
+   "hash": "c5bac96c83f1d4c4",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1971.joins-AUD",
+   "text": "The Australian dollar joins our data here, at 0.899 Australian dollars per US dollar.",
+   "hash": "cd7f4a238f0dde56",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1971.leaders-JPN",
+   "text": "In Japan: Prime Minister Eisaku Satō; Tadashi Sasaki leads the Bank of Japan.",
+   "hash": "23126db768c0618a",
+   "modes": [
+    "full"
+   ]
+  },
+  {
+   "id": "year.1971.leaders-USA",
+   "text": "In United States: President Richard Nixon; Arthur Frank Burns chairs the Federal Reserve.",
+   "hash": "672366a77b32aae3",
+   "modes": [
+    "full"
+   ]
+  },
+  {
+   "id": "year.1971.result",
+   "text": "Over the year, the yen gained the most against the dollar, 14%.",
+   "hash": "ed90d38e97495e00",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1971.summary",
+   "text": "That was 1971: The Mark floats and the dollar-gold break. Over the year, the yen gained the most against the dollar, 14%. Where shall we go next?",
+   "hash": "01e01e05e264f2d0",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1971.world",
+   "text": "1971. For more than twenty years, most major currencies have been fixed to the dollar, and the dollar to gold. This is the year that system breaks.",
+   "hash": "006b9f84c090da41",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1972.event-gbp-float-1972",
+   "text": "June 23: Britain floats the pound. Britain stops defending its fixed rate and lets the pound float. Watch the pound.",
+   "hash": "9c82debc01ecf8f1",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1972.leaders-AUS",
+   "text": "In Australia: Prime Minister William McMahon, then Gough Whitlam.",
+   "hash": "f51bc22726ba6dfb",
+   "modes": [
+    "full"
+   ]
+  },
+  {
+   "id": "year.1972.leaders-CHE",
+   "text": "In Switzerland, the Federal Council governs together: Nello Celio presides over the Federal Council.",
+   "hash": "c63b7eb5cbb586aa",
+   "modes": [
+    "full"
+   ]
+  },
+  {
+   "id": "year.1972.leaders-GBR",
+   "text": "In United Kingdom: Prime Minister Edward Heath; Leslie O'Brien, Baron O'Brien of Lothbury leads the Bank of England.",
+   "hash": "9d4c3dcbdf1ef1be",
+   "modes": [
+    "full"
+   ]
+  },
+  {
+   "id": "year.1972.result",
+   "text": "Over the year, the Australian dollar gained the most against the dollar, 6.9%, and the pound lost the most, 8.0%.",
+   "hash": "b126e1ebdd20b543",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1972.sharpest",
+   "text": "Look at the Australian dollar: in the eight weeks to December, it gained 6.9% against the dollar.",
+   "hash": "9c947001705a3457",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1972.summary",
+   "text": "That was 1972: Britain floats the pound. Over the year, the Australian dollar gained the most against the dollar, 6.9%, and the pound lost the most, 8.0%. Where shall we go next?",
+   "hash": "6a650f47edf90e08",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1972.world",
+   "text": "1972. After the gold link. The dollar no longer converts into gold. Governments try to hold new fixed rates. This year, let's look at United Kingdom, Australia and Switzerland.",
+   "hash": "cf70ae9dcd1d7638",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1973.event-oil-1973",
+   "text": "October 16: The oil price shock. Gulf oil producers announce a sharp rise in the price of oil; production cuts and an embargo follow. Watch the yen and the pound.",
+   "hash": "8c90df36376be787",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1973.event-usd-1973",
+   "text": "February 14: The dollar falls again; the yen floats. After a second devaluation of the dollar, Japan and much of Europe let their currencies float. Watch the yen and the Mark.",
+   "hash": "8c908c85326610f5",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1973.leaders-JPN",
+   "text": "In Japan: Prime Minister Kakuei Tanaka; Tadashi Sasaki leads the Bank of Japan.",
+   "hash": "abe0de0aa3ab6022",
+   "modes": [
+    "full"
+   ]
+  },
+  {
+   "id": "year.1973.result",
+   "text": "Over the year, the Mark gained the most against the dollar, 19%, and the rupee lost the most, 1.8%.",
+   "hash": "42bdb7a27974abad",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1973.sharpest",
+   "text": "Look at the Mark: in the eight weeks to July, it gained 24% against the dollar.",
+   "hash": "487e76b9b6553068",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1973.summary",
+   "text": "That was 1973: The dollar falls again; the yen floats and the oil price shock. Over the year, the Mark gained the most against the dollar, 19%, and the rupee lost the most, 1.8%. Where shall we go next?",
+   "hash": "c194a800a019c5a1",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1973.world",
+   "text": "1973. Floating rates. The major currencies float: markets set their prices every day. Some others stay managed by their governments. This year, let's look at United States, Japan and West Germany.",
+   "hash": "ade1ea877c4bc65f",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1974.leaders-AUS",
+   "text": "In Australia: Prime Minister Gough Whitlam.",
+   "hash": "e6da63fdfe71d8c4",
+   "modes": [
+    "full"
+   ]
+  },
+  {
+   "id": "year.1974.leaders-CHE",
+   "text": "In Switzerland, the Federal Council governs together: Ernst Brugger presides over the Federal Council.",
+   "hash": "d6790b7fe8fa8a5e",
+   "modes": [
+    "full"
+   ]
+  },
+  {
+   "id": "year.1974.leaders-DEU",
+   "text": "In West Germany: Chancellor Willy Brandt, then Walter Scheel and Helmut Schmidt; Karl Klasen leads the Bundesbank.",
+   "hash": "d9488021d62b04c1",
+   "modes": [
+    "full"
+   ]
+  },
+  {
+   "id": "year.1974.result",
+   "text": "Over the year, the Swiss franc gained the most against the dollar, 32%, and the Australian dollar lost the most, 11%.",
+   "hash": "a91d5796338529e6",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1974.sharpest",
+   "text": "Look at the Swiss franc: in the eight weeks to December, it gained 14% against the dollar.",
+   "hash": "70529fc13efd35fc",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1974.summary",
+   "text": "That was 1974. Over the year, the Swiss franc gained the most against the dollar, 32%, and the Australian dollar lost the most, 11%. Where shall we go next?",
+   "hash": "352e42e902cff254",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1974.world",
+   "text": "1974. Floating rates. The major currencies float: markets set their prices every day. Some others stay managed by their governments. This year, let's look at West Germany, Switzerland and Australia. Our history file has no verified event for this year, so let us watch the currencies themselves.",
+   "hash": "c822f026a413940d",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1975.leaders-DEU",
+   "text": "In West Germany: Chancellor Helmut Schmidt; Karl Klasen leads the Bundesbank.",
+   "hash": "06c3a917953b8fc2",
+   "modes": [
+    "full"
+   ]
+  },
+  {
+   "id": "year.1975.leaders-GBR",
+   "text": "In United Kingdom: Prime Minister Harold Wilson; Gordon Richardson, Baron Richardson of Duntisbourne leads the Bank of England.",
+   "hash": "fbc59716c3573fc7",
+   "modes": [
+    "full"
+   ]
+  },
+  {
+   "id": "year.1975.leaders-IND",
+   "text": "In India: Prime Minister Indira Gandhi.",
+   "hash": "a97156578456559b",
+   "modes": [
+    "full"
+   ]
+  },
+  {
+   "id": "year.1975.sharpest",
+   "text": "Look at the Mark: in the eight weeks to August, it lost 9.7% against the dollar.",
+   "hash": "30e3f0ac84bdacdf",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1975.summary",
+   "text": "That was 1975. Over the year, the pound lost the most against the dollar, 14%. None of the others gained more than 1%. Where shall we go next?",
+   "hash": "11b17a767a2636fa",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1975.world",
+   "text": "1975. Floating rates. The major currencies float: markets set their prices every day. Some others stay managed by their governments. This year, let's look at United Kingdom, India and West Germany. Our history file has no verified event for this year, so let us watch the currencies themselves.",
+   "hash": "a2185a6dbf19b238",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1976.leaders-AUS",
+   "text": "In Australia: Prime Minister Malcolm Fraser.",
+   "hash": "9ac40be6a49e1e48",
+   "modes": [
+    "full"
+   ]
+  },
+  {
+   "id": "year.1976.leaders-GBR",
+   "text": "In United Kingdom: Prime Minister Harold Wilson, then James Callaghan; Gordon Richardson, Baron Richardson of Duntisbourne leads the Bank of England.",
+   "hash": "b01c2fea549392eb",
+   "modes": [
+    "full"
+   ]
+  },
+  {
+   "id": "year.1976.result",
+   "text": "Over the year, the Mark gained the most against the dollar, 11%, and the pound lost the most, 16%.",
+   "hash": "cc2ed0b7e0816f7e",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1976.sharpest",
+   "text": "Look at the Australian dollar: in the eight weeks to December, it lost 19% against the dollar.",
+   "hash": "8395bb689a40e9ae",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1976.summary",
+   "text": "That was 1976. Over the year, the Mark gained the most against the dollar, 11%, and the pound lost the most, 16%. Where shall we go next?",
+   "hash": "e7d7f7665742f714",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1976.world",
+   "text": "1976. Floating rates. The major currencies float: markets set their prices every day. Some others stay managed by their governments. This year, let's look at United Kingdom, Australia and West Germany. Our history file has no verified event for this year, so let us watch the currencies themselves.",
+   "hash": "18d65b8cef6bf10e",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1977.leaders-CHE",
+   "text": "In Switzerland, the Federal Council governs together: Kurt Furgler presides over the Federal Council.",
+   "hash": "246638056ec49c41",
+   "modes": [
+    "full"
+   ]
+  },
+  {
+   "id": "year.1977.leaders-GBR",
+   "text": "In United Kingdom: Prime Minister James Callaghan; Gordon Richardson, Baron Richardson of Duntisbourne leads the Bank of England.",
+   "hash": "15c7354ea4d92730",
+   "modes": [
+    "full"
+   ]
+  },
+  {
+   "id": "year.1977.leaders-JPN",
+   "text": "In Japan: Prime Minister Takeo Fukuda; Teiichiro Morinaga leads the Bank of Japan.",
+   "hash": "e9f7b73e331e87b8",
+   "modes": [
+    "full"
+   ]
+  },
+  {
+   "id": "year.1977.result",
+   "text": "Over the year, the Swiss franc gained the most against the dollar, 23%, and the Canadian dollar lost the most, 8.3%.",
+   "hash": "bd2bd7eeed742552",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1977.sharpest",
+   "text": "Look at the Swiss franc: in the eight weeks to December, it gained 11% against the dollar.",
+   "hash": "9b35a6af0a9e499d",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1977.summary",
+   "text": "That was 1977. Over the year, the Swiss franc gained the most against the dollar, 23%, and the Canadian dollar lost the most, 8.3%. Where shall we go next?",
+   "hash": "d81d3f3085294fa7",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1977.world",
+   "text": "1977. Floating rates. The major currencies float: markets set their prices every day. Some others stay managed by their governments. This year, let's look at United Kingdom, Switzerland and Japan. Our history file has no verified event for this year, so let us watch the currencies themselves.",
+   "hash": "29d2536c8fec8168",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1978.event-china-reform",
+   "text": "December 18: China begins reform and opening up. A Communist Party meeting starts China's economic reforms and opening to the world.",
+   "hash": "7b3fad71a3c43886",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1978.leaders-CHE",
+   "text": "In Switzerland, the Federal Council governs together: Willi Ritschard presides over the Federal Council.",
+   "hash": "5dbddf23094cde0d",
+   "modes": [
+    "full"
+   ]
+  },
+  {
+   "id": "year.1978.leaders-CHN",
+   "text": "In China: Premier Hua Guofeng; Hua Guofeng leads the Communist Party.",
+   "hash": "a237491caf76463d",
+   "modes": [
+    "full"
+   ]
+  },
+  {
+   "id": "year.1978.leaders-CHN",
+   "text": "China. One-party state: the Communist Party's leader, and the Premier who heads the government.",
+   "hash": "6a832c985a357ede",
+   "modes": [
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1978.leaders-DEU",
+   "text": "In West Germany: Chancellor Helmut Schmidt; Otmar Emminger leads the Bundesbank.",
+   "hash": "aa07f046cbfbdb35",
+   "modes": [
+    "full"
+   ]
+  },
+  {
+   "id": "year.1978.result",
+   "text": "Over the year, the Swiss franc gained the most against the dollar, 24%, and the Canadian dollar lost the most, 7.8%.",
+   "hash": "b5abb82ef05c1345",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1978.sharpest",
+   "text": "Look at the Swiss franc: in the eight weeks to September, it gained 15% against the dollar.",
+   "hash": "96a7a8d5678d0829",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1978.summary",
+   "text": "That was 1978: China begins reform and opening up. Over the year, the Swiss franc gained the most against the dollar, 24%, and the Canadian dollar lost the most, 7.8%. Where shall we go next?",
+   "hash": "1ee204b48738e633",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1978.world",
+   "text": "1978. Floating rates. The major currencies float: markets set their prices every day. Some others stay managed by their governments. This year, let's look at China, West Germany and Switzerland.",
+   "hash": "e289bd7cb274bef3",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1979.event-ems-1979",
+   "text": "March 13: The European Monetary System begins. Several European countries agree to keep their currencies within bands against each other. Watch the Mark.",
+   "hash": "7c09146cdb6e0a94",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1979.event-volcker-1979",
+   "text": "October 6: The Fed turns to fight inflation. The Federal Reserve changes how it runs monetary policy to bring down high inflation; interest rates rise sharply. Watch the Mark, the yen and the Swiss franc.",
+   "hash": "a29eb44e78a8dcd9",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1979.leaders-JPN",
+   "text": "In Japan: Prime Minister Masayoshi Ōhira; Teiichiro Morinaga, then Haruo Maekawa leads the Bank of Japan.",
+   "hash": "b39f4b21cb9ade14",
+   "modes": [
+    "full"
+   ]
+  },
+  {
+   "id": "year.1979.leaders-USA",
+   "text": "In United States: President Jimmy Carter; G. William Miller, then Paul Volcker chairs the Federal Reserve.",
+   "hash": "66ed585c770db2c5",
+   "modes": [
+    "full"
+   ]
+  },
+  {
+   "id": "year.1979.result",
+   "text": "Over the year, the pound gained the most against the dollar, 11%, and the yen lost the most, 18%.",
+   "hash": "4d7fe30f30b630d3",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1979.sharpest",
+   "text": "Look at the yen: in the eight weeks to November, it lost 10% against the dollar.",
+   "hash": "ec14d88f5d7b857a",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1979.summary",
+   "text": "That was 1979: The European Monetary System begins and the Fed turns to fight inflation. Over the year, the pound gained the most against the dollar, 11%, and the yen lost the most, 18%. Where shall we go next?",
+   "hash": "84db61b2f5b1fafa",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1979.world",
+   "text": "1979. Floating rates. The major currencies float: markets set their prices every day. Some others stay managed by their governments. This year, let's look at West Germany, United States and Japan.",
+   "hash": "231a6dfc53c48acf",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1980.leaders-CHE",
+   "text": "In Switzerland, the Federal Council governs together: Georges-André Chevallaz presides over the Federal Council.",
+   "hash": "63c9df69dca04cc8",
+   "modes": [
+    "full"
+   ]
+  },
+  {
+   "id": "year.1980.leaders-DEU",
+   "text": "In West Germany: Chancellor Helmut Schmidt; Karl Otto Pöhl leads the Bundesbank.",
+   "hash": "00e1a96bbb44ad61",
+   "modes": [
+    "full"
+   ]
+  },
+  {
+   "id": "year.1980.leaders-JPN",
+   "text": "In Japan: Prime Minister Masayoshi Ōhira, then Masayoshi Ito and Zenkō Suzuki; Haruo Maekawa leads the Bank of Japan.",
+   "hash": "42a9a66572725d9e",
+   "modes": [
+    "full"
+   ]
+  },
+  {
+   "id": "year.1980.result",
+   "text": "Over the year, the yen gained the most against the dollar, 14%, and the Mark lost the most, 12%.",
+   "hash": "b183ec861d211af1",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1980.sharpest",
+   "text": "Look at the yen: in the eight weeks to May, it gained 15% against the dollar.",
+   "hash": "e749215939532e88",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1980.summary",
+   "text": "That was 1980. Over the year, the yen gained the most against the dollar, 14%, and the Mark lost the most, 12%. Where shall we go next?",
+   "hash": "3b1c8ef8355e88e6",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1980.world",
+   "text": "1980. Floating rates. The major currencies float: markets set their prices every day. Some others stay managed by their governments. This year, let's look at Japan, West Germany and Switzerland. Our history file has no verified event for this year, so let us watch the currencies themselves.",
+   "hash": "b7887a58679f31ba",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1981.leaders-GBR",
+   "text": "In United Kingdom: Prime Minister Margaret Thatcher; Gordon Richardson, Baron Richardson of Duntisbourne leads the Bank of England.",
+   "hash": "fcdfbe83bc7c305f",
+   "modes": [
+    "full"
+   ]
+  },
+  {
+   "id": "year.1981.result",
+   "text": "Over the year, the pound lost the most against the dollar, 21%. None of the others gained more than 1%.",
+   "hash": "848fc02278e66a61",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1981.sharpest",
+   "text": "Look at the Mark: in the eight weeks to October, it gained 15% against the dollar.",
+   "hash": "3a173b6f419fe6de",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1981.summary",
+   "text": "That was 1981. Over the year, the pound lost the most against the dollar, 21%. None of the others gained more than 1%. Where shall we go next?",
+   "hash": "164f490ef6faf7b7",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1981.world",
+   "text": "1981. Floating rates. The major currencies float: markets set their prices every day. Some others stay managed by their governments. This year, let's look at United Kingdom, West Germany and India. Our history file has no verified event for this year, so let us watch the currencies themselves.",
+   "hash": "020b785ac1b94e7b",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1982.leaders-AUS",
+   "text": "In Australia: Prime Minister Malcolm Fraser; Bob Johnston leads the Reserve Bank of Australia.",
+   "hash": "c29eb13d6f519df4",
+   "modes": [
+    "full"
+   ]
+  },
+  {
+   "id": "year.1982.leaders-CHE",
+   "text": "In Switzerland, the Federal Council governs together: Fritz Honegger presides over the Federal Council.",
+   "hash": "901c3db023db5016",
+   "modes": [
+    "full"
+   ]
+  },
+  {
+   "id": "year.1982.result",
+   "text": "Over the year, the pound lost the most against the dollar, 16%. None of the others gained more than 1%.",
+   "hash": "ab8b41861bbd1f47",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1982.summary",
+   "text": "That was 1982. Over the year, the pound lost the most against the dollar, 16%. None of the others gained more than 1%. Where shall we go next?",
+   "hash": "e44b8af0c1a71b06",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1982.world",
+   "text": "1982. Floating rates. The major currencies float: markets set their prices every day. Some others stay managed by their governments. This year, let's look at United Kingdom, Australia and Switzerland. Our history file has no verified event for this year, so let us watch the currencies themselves.",
+   "hash": "192c95f8f85f5ebe",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1983.event-aud-float",
+   "text": "December 9: Australia floats its dollar. Australia lets the market set the value of its dollar. Watch the Australian dollar.",
+   "hash": "00ed02689c07d7c6",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1983.leaders-AUS",
+   "text": "In Australia: Prime Minister Malcolm Fraser, then Bob Hawke; Bob Johnston leads the Reserve Bank of Australia.",
+   "hash": "5926b2eb870768a4",
+   "modes": [
+    "full"
+   ]
+  },
+  {
+   "id": "year.1983.leaders-CHE",
+   "text": "In Switzerland, the Federal Council governs together: Pierre Aubert presides over the Federal Council.",
+   "hash": "7d862e1adc5e74fa",
+   "modes": [
+    "full"
+   ]
+  },
+  {
+   "id": "year.1983.leaders-DEU",
+   "text": "In West Germany: Chancellor Helmut Kohl; Karl Otto Pöhl leads the Bundesbank.",
+   "hash": "eb27252a36bfc26b",
+   "modes": [
+    "full"
+   ]
+  },
+  {
+   "id": "year.1983.result",
+   "text": "Over the year, the Mark lost the most against the dollar, 14%. None of the others gained more than 1%.",
+   "hash": "76a66c178ee95fa0",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1983.sharpest",
+   "text": "Look at the Australian dollar: in the eight weeks to March, it lost 13% against the dollar.",
+   "hash": "a4b165302d7cf572",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1983.summary",
+   "text": "That was 1983: Australia floats its dollar. Over the year, the Mark lost the most against the dollar, 14%. None of the others gained more than 1%. Where shall we go next?",
+   "hash": "e923d7b79cee8f37",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1983.world",
+   "text": "1983. Floating rates. The major currencies float: markets set their prices every day. Some others stay managed by their governments. This year, let's look at Australia, West Germany and Switzerland.",
+   "hash": "6e3c57cb16300cc2",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1984.leaders-CHE",
+   "text": "In Switzerland, the Federal Council governs together: Leon Schlumpf presides over the Federal Council.",
+   "hash": "64b8579ed4f7f988",
+   "modes": [
+    "full"
+   ]
+  },
+  {
+   "id": "year.1984.leaders-GBR",
+   "text": "In United Kingdom: Prime Minister Margaret Thatcher; Robin Leigh-Pemberton, Baron Kingsdown leads the Bank of England.",
+   "hash": "90ec06881af897a5",
+   "modes": [
+    "full"
+   ]
+  },
+  {
+   "id": "year.1984.leaders-IND",
+   "text": "In India: Prime Minister Indira Gandhi, then Rajiv Gandhi; Manmohan Singh leads the Reserve Bank of India.",
+   "hash": "1582aff93a259728",
+   "modes": [
+    "full"
+   ]
+  },
+  {
+   "id": "year.1984.result",
+   "text": "Over the year, the yuan lost the most against the dollar, 28%. None of the others gained more than 1%.",
+   "hash": "88376290df17c183",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1984.sharpest",
+   "text": "Look at the pound: in the eight weeks to October, it lost 8.8% against the dollar.",
+   "hash": "7307bfb29aa92241",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1984.summary",
+   "text": "That was 1984. Over the year, the yuan lost the most against the dollar, 28%. None of the others gained more than 1%. Where shall we go next?",
+   "hash": "0262ba2c542eaa80",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1984.world",
+   "text": "1984. Floating rates. The major currencies float: markets set their prices every day. Some others stay managed by their governments. This year, let's look at United Kingdom, Switzerland and India. Our history file has no verified event for this year, so let us watch the currencies themselves.",
+   "hash": "20860fa9de8c7d99",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1985.event-dollar-adjustment",
+   "text": "September 22: The Plaza Accord. Finance ministers and central bank governors of five major economies, meeting at the Plaza Hotel, say a further orderly rise of other currencies against the dollar is desirable. Among those involved: James A. Baker III and Noboru Takeshita. Watch the yen, the Mark and the pound.",
+   "hash": "1f53c418d0b00581",
+   "modes": [
+    "full"
+   ]
+  },
+  {
+   "id": "year.1985.event-dollar-adjustment",
+   "text": "September 22: The Plaza Accord. Finance ministers and central bank governors of five major economies, meeting at the Plaza Hotel, say a further orderly rise of other currencies against the dollar is desirable. Watch the yen, the Mark and the pound.",
+   "hash": "5c67ad3b4448af26",
+   "modes": [
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1985.leaders-JPN",
+   "text": "In Japan: Prime Minister Yasuhiro Nakasone; Satoshi Sumita leads the Bank of Japan.",
+   "hash": "fe137e4cf9b5f7be",
+   "modes": [
+    "full"
+   ]
+  },
+  {
+   "id": "year.1985.leaders-USA",
+   "text": "In United States: President Ronald Reagan; Paul Volcker chairs the Federal Reserve.",
+   "hash": "9d52da1a468aca66",
+   "modes": [
+    "full"
+   ]
+  },
+  {
+   "id": "year.1985.result",
+   "text": "Over the year, the Mark gained the most against the dollar, 27%, and the Australian dollar lost the most, 16%.",
+   "hash": "2dcf1c2025079b33",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1985.sharpest",
+   "text": "Look at the yen: in the eight weeks to November, it gained 19% against the dollar.",
+   "hash": "eb28c314dc0b433b",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1985.summary",
+   "text": "That was 1985: The Plaza Accord. Over the year, the Mark gained the most against the dollar, 27%, and the Australian dollar lost the most, 16%. Where shall we go next?",
+   "hash": "31e7d3b75c39dcbe",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1985.world",
+   "text": "1985. The dollar is strong. Since 1980 the Mark has lost 46% of its value against it, and the yen 6%. In September, five major economies say other currencies should rise against it, and stand ready to cooperate.",
+   "hash": "072bd8556511d6f2",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1986.leaders-CHE",
+   "text": "In Switzerland, the Federal Council governs together: Alphons Egli presides over the Federal Council.",
+   "hash": "2aa0d7fb02c41868",
+   "modes": [
+    "full"
+   ]
+  },
+  {
+   "id": "year.1986.leaders-CHN",
+   "text": "In China, we have no verified record of who governed this year.",
+   "hash": "3ac55e1ee964dbe5",
+   "modes": [
+    "full"
+   ]
+  },
+  {
+   "id": "year.1986.result",
+   "text": "Over the year, the Swiss franc gained the most against the dollar, 25%, and the yuan lost the most, 14%.",
+   "hash": "4363550546fc322c",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1986.sharpest",
+   "text": "Look at the yuan: in the eight weeks to July, it lost 14% against the dollar.",
+   "hash": "c60f2fcb60acfaa9",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1986.summary",
+   "text": "That was 1986. Over the year, the Swiss franc gained the most against the dollar, 25%, and the yuan lost the most, 14%. Where shall we go next?",
+   "hash": "5903d1ca4784d671",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1986.world",
+   "text": "1986. Floating rates. The major currencies float: markets set their prices every day. Some others stay managed by their governments. This year, let's look at West Germany, Switzerland and China. Our history file has no verified event for this year, so let us watch the currencies themselves.",
+   "hash": "d16a61da90c372bb",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1987.event-black-monday",
+   "text": "October 19: Black Monday. Stock markets around the world crash in a single day. Watch the Australian dollar and the pound.",
+   "hash": "eaf7df5ff62e2252",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1987.event-louvre",
+   "text": "February 22: The Louvre Accord. Six major economies agree to steady the dollar after its long fall. Watch the yen and the Mark.",
+   "hash": "126a53ff5b14b4da",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1987.leaders-USA",
+   "text": "In United States: President Ronald Reagan; Paul Volcker, then Alan Greenspan chairs the Federal Reserve.",
+   "hash": "ca3ca309c91c8796",
+   "modes": [
+    "full"
+   ]
+  },
+  {
+   "id": "year.1987.result",
+   "text": "Over the year, the yen gained the most against the dollar, 25%, and the yuan lost the most, 0.2%.",
+   "hash": "7333b32a5288d3a8",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1987.sharpest",
+   "text": "Look at the Mark: in the eight weeks to December, it gained 11% against the dollar.",
+   "hash": "0899592bb3da207f",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1987.summary",
+   "text": "That was 1987: The Louvre Accord and Black Monday. Over the year, the yen gained the most against the dollar, 25%, and the yuan lost the most, 0.2%. Where shall we go next?",
+   "hash": "8210c5c0d5f2dc26",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1987.world",
+   "text": "1987. Floating rates. The major currencies float: markets set their prices every day. Some others stay managed by their governments. This year, let's look at United States, United Kingdom and West Germany.",
+   "hash": "bc935b1938ef1f98",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1988.leaders-CHE",
+   "text": "In Switzerland, the Federal Council governs together: Otto Stich presides over the Federal Council.",
+   "hash": "f01ecb831d91dea5",
+   "modes": [
+    "full"
+   ]
+  },
+  {
+   "id": "year.1988.leaders-IND",
+   "text": "In India: Prime Minister Rajiv Gandhi; R. N. Malhotra leads the Reserve Bank of India.",
+   "hash": "8db1e5d53d63187f",
+   "modes": [
+    "full"
+   ]
+  },
+  {
+   "id": "year.1988.leaders-KOR",
+   "text": "In South Korea: President Chun Doo-hwan, then Roh Tae-woo; Kun Kim leads the Bank of Korea.",
+   "hash": "3dae7756d7cc8c51",
+   "modes": [
+    "full"
+   ]
+  },
+  {
+   "id": "year.1988.leaders-KOR",
+   "text": "South Korea. Presidential republic: the President leads the government.",
+   "hash": "6c6b0bc3b4412f4a",
+   "modes": [
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1988.result",
+   "text": "Over the year, the Australian dollar gained the most against the dollar, 19%, and the Swiss franc lost the most, 15%.",
+   "hash": "f22fd6661a5aca4b",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1988.sharpest",
+   "text": "Look at the Swiss franc: in the eight weeks to November, it gained 11% against the dollar.",
+   "hash": "3ca50143dada7bb2",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1988.summary",
+   "text": "That was 1988. Over the year, the Australian dollar gained the most against the dollar, 19%, and the Swiss franc lost the most, 15%. Where shall we go next?",
+   "hash": "baf8472a26a824e0",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1988.world",
+   "text": "1988. Floating rates. The major currencies float: markets set their prices every day. Some others stay managed by their governments. This year, let's look at Switzerland, India and South Korea. Our history file has no verified event for this year, so let us watch the currencies themselves.",
+   "hash": "280d1552bdff1440",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1989.event-berlin-wall",
+   "text": "November 9: The Berlin Wall falls. East Germany opens its border. Within a year the two German states unite. Watch the Mark.",
+   "hash": "cd6ed2dcd055afee",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1989.leaders-CHN",
+   "text": "In China: Premier Li Peng.",
+   "hash": "8f5d4da1db85d22a",
+   "modes": [
+    "full"
+   ]
+  },
+  {
+   "id": "year.1989.leaders-JPN",
+   "text": "In Japan: Prime Minister Noboru Takeshita, then Sōsuke Uno and Toshiki Kaifu; Satoshi Sumita, then Yasushi Mieno leads the Bank of Japan.",
+   "hash": "ee27c314956c56e4",
+   "modes": [
+    "full"
+   ]
+  },
+  {
+   "id": "year.1989.result",
+   "text": "Over the year, the Mark gained the most against the dollar, 6.3%, and the yuan lost the most, 21%.",
+   "hash": "27b58146aceb8094",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1989.sharpest",
+   "text": "Look at the yuan: in the eight weeks to December, it lost 21% against the dollar.",
+   "hash": "4501ae63dfbd21c2",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1989.summary",
+   "text": "That was 1989: The Berlin Wall falls. Over the year, the Mark gained the most against the dollar, 6.3%, and the yuan lost the most, 21%. Where shall we go next?",
+   "hash": "75c981d8138ad487",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1989.world",
+   "text": "1989. Floating rates. The major currencies float: markets set their prices every day. Some others stay managed by their governments. This year, let's look at West Germany, China and Japan.",
+   "hash": "59494964cd47dc94",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1990.event-gmu-1990",
+   "text": "July 1: German monetary union. The Deutsche Mark becomes the currency of East Germany too, three months before unification. Watch the Mark.",
+   "hash": "e6d929d6f85de334",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1990.event-reunification",
+   "text": "October 3: Germany is reunified. East and West Germany become one country. Watch the Mark.",
+   "hash": "722824cfd4cb5770",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1990.event-uk-erm-1990",
+   "text": "October 8: Britain joins the ERM. The pound joins Europe's Exchange Rate Mechanism, which limits how far it may move against other European currencies. Watch the pound.",
+   "hash": "edc7469958a0f340",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1990.leaders-CHE",
+   "text": "In Switzerland, the Federal Council governs together: Arnold Koller presides over the Federal Council.",
+   "hash": "50079c6f8744426b",
+   "modes": [
+    "full"
+   ]
+  },
+  {
+   "id": "year.1990.leaders-GBR",
+   "text": "In United Kingdom: Prime Minister Margaret Thatcher, then John Major; Robin Leigh-Pemberton, Baron Kingsdown leads the Bank of England.",
+   "hash": "79aa8ab34110417e",
+   "modes": [
+    "full"
+   ]
+  },
+  {
+   "id": "year.1990.result",
+   "text": "Over the year, the Swiss franc gained the most against the dollar, 19%, and the yuan lost the most, 9.5%.",
+   "hash": "b6415d57f71501ec",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1990.sharpest",
+   "text": "Look at the pound: in the eight weeks to August, it gained 12% against the dollar.",
+   "hash": "5b902d3aeba85aab",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1990.summary",
+   "text": "That was 1990: German monetary union and Germany is reunified. Over the year, the Swiss franc gained the most against the dollar, 19%, and the yuan lost the most, 9.5%. Where shall we go next?",
+   "hash": "e47c5f5d05d56377",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1990.world",
+   "text": "1990. Floating rates. The major currencies float: markets set their prices every day. Some others stay managed by their governments. This year, let's look at West Germany, United Kingdom and Switzerland.",
+   "hash": "3a7d5733571ed0f2",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1991.event-india-1991",
+   "text": "July 24: India opens its economy. In a balance-of-payments crisis, India's budget of 24 July begins wide economic reforms. Watch the rupee.",
+   "hash": "61fd2c9d904c9ed0",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1991.leaders-IND",
+   "text": "In India: Prime Minister Chandra Shekhar, then P. V. Narasimha Rao; S. Venkitaramanan leads the Reserve Bank of India.",
+   "hash": "3b2ccde6453d1763",
+   "modes": [
+    "full"
+   ]
+  },
+  {
+   "id": "year.1991.leaders-JPN",
+   "text": "In Japan: Prime Minister Toshiki Kaifu, then Kiichi Miyazawa; Yasushi Mieno leads the Bank of Japan.",
+   "hash": "47ab4c16511cf194",
+   "modes": [
+    "full"
+   ]
+  },
+  {
+   "id": "year.1991.leaders-KOR",
+   "text": "In South Korea: President Roh Tae-woo; Kun Kim leads the Bank of Korea.",
+   "hash": "814bb6653eec492d",
+   "modes": [
+    "full"
+   ]
+  },
+  {
+   "id": "year.1991.result",
+   "text": "Over the year, the yen gained the most against the dollar, 6.0%, and the rupee lost the most, 30%.",
+   "hash": "6eb6ff3b0bd5d930",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1991.summary",
+   "text": "That was 1991: India opens its economy. Over the year, the yen gained the most against the dollar, 6.0%, and the rupee lost the most, 30%. Where shall we go next?",
+   "hash": "41a29c2558edeb8d",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1991.world",
+   "text": "1991. Floating rates. The major currencies float: markets set their prices every day. Some others stay managed by their governments. This year, let's look at India, Japan and South Korea.",
+   "hash": "7e6461903d92e6aa",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1992.event-black-wednesday",
+   "text": "September 16: Black Wednesday. Under heavy selling, Britain takes the pound out of the Exchange Rate Mechanism. Watch the pound.",
+   "hash": "288a63999cc77155",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1992.leaders-CAN",
+   "text": "In Canada: Prime Minister Brian Mulroney; John Crow leads the Bank of Canada.",
+   "hash": "2095822620c9d68f",
+   "modes": [
+    "full"
+   ]
+  },
+  {
+   "id": "year.1992.leaders-GBR",
+   "text": "In United Kingdom: Prime Minister John Major; Robin Leigh-Pemberton, Baron Kingsdown leads the Bank of England.",
+   "hash": "65b77b4d21a70da9",
+   "modes": [
+    "full"
+   ]
+  },
+  {
+   "id": "year.1992.leaders-IND",
+   "text": "In India: Prime Minister P. V. Narasimha Rao; S. Venkitaramanan leads the Reserve Bank of India.",
+   "hash": "384ace77baff3797",
+   "modes": [
+    "full"
+   ]
+  },
+  {
+   "id": "year.1992.result",
+   "text": "Over the year, the pound lost the most against the dollar, 18%. None of the others gained more than 1%.",
+   "hash": "eff0ded97f51a9ad",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1992.sharpest",
+   "text": "Look at the pound: in the eight weeks to October, it lost 21% against the dollar.",
+   "hash": "104d0ddface88c00",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1992.summary",
+   "text": "That was 1992: Black Wednesday. Over the year, the pound lost the most against the dollar, 18%. None of the others gained more than 1%. Where shall we go next?",
+   "hash": "6f46c24ea4695418",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1992.world",
+   "text": "1992. Floating rates. The major currencies float: markets set their prices every day. Some others stay managed by their governments. This year, let's look at United Kingdom, India and Canada.",
+   "hash": "a986d32c99627186",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1993.leaders-DEU",
+   "text": "In Germany: Chancellor Helmut Kohl; Helmut Schlesinger, then Hans Tietmeyer leads the Bundesbank.",
+   "hash": "ff00ada91d2d13aa",
+   "modes": [
+    "full"
+   ]
+  },
+  {
+   "id": "year.1993.leaders-DEU",
+   "text": "Germany. Federal parliamentary republic: the Chancellor leads the government.",
+   "hash": "1fa6008638b5b177",
+   "modes": [
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1993.leaders-IND",
+   "text": "In India: Prime Minister P. V. Narasimha Rao.",
+   "hash": "d34512c0f7ddd355",
+   "modes": [
+    "full"
+   ]
+  },
+  {
+   "id": "year.1993.leaders-JPN",
+   "text": "In Japan: Prime Minister Kiichi Miyazawa, then Morihiro Hosokawa; Yasushi Mieno leads the Bank of Japan.",
+   "hash": "55e5c25ec2d30e3b",
+   "modes": [
+    "full"
+   ]
+  },
+  {
+   "id": "year.1993.result",
+   "text": "Over the year, the yen gained the most against the dollar, 12%, and the rupee lost the most, 7.8%.",
+   "hash": "ac28232763aa4ec1",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1993.sharpest",
+   "text": "Look at the rupee: in the eight weeks to March, it lost 9.7% against the dollar.",
+   "hash": "e68e32b5dc15b169",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1993.summary",
+   "text": "That was 1993. Over the year, the yen gained the most against the dollar, 12%, and the rupee lost the most, 7.8%. Where shall we go next?",
+   "hash": "49b317c67f7b09a2",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1993.world",
+   "text": "1993. Floating rates. The major currencies float: markets set their prices every day. Some others stay managed by their governments. This year, let's look at Japan, India and Germany. Our history file has no verified event for this year, so let us watch the currencies themselves.",
+   "hash": "83586887c70a80e5",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1994.leaders-DEU",
+   "text": "In Germany: Chancellor Helmut Kohl; Hans Tietmeyer leads the Bundesbank.",
+   "hash": "462998a56cd720af",
+   "modes": [
+    "full"
+   ]
+  },
+  {
+   "id": "year.1994.leaders-JPN",
+   "text": "In Japan: Prime Minister Morihiro Hosokawa, then Tsutomu Hata and Tomiichi Murayama; Yasushi Mieno, then Yasuo Matsushita leads the Bank of Japan.",
+   "hash": "b917888c9ca5f485",
+   "modes": [
+    "full"
+   ]
+  },
+  {
+   "id": "year.1994.result",
+   "text": "Over the year, the Australian dollar gained the most against the dollar, 14%, and the Canadian dollar lost the most, 5.9%.",
+   "hash": "d9b3be9e93bbe5cc",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1994.sharpest",
+   "text": "Look at the Swiss franc: in the eight weeks to July, it gained 7.7% against the dollar.",
+   "hash": "804af5e6585e7088",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1994.summary",
+   "text": "That was 1994. Over the year, the Australian dollar gained the most against the dollar, 14%, and the Canadian dollar lost the most, 5.9%. Where shall we go next?",
+   "hash": "d96b6d0ee4cec2ba",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1994.world",
+   "text": "1994. Floating rates. The major currencies float: markets set their prices every day. Some others stay managed by their governments. This year, let's look at Germany, Switzerland and Japan. Our history file has no verified event for this year, so let us watch the currencies themselves.",
+   "hash": "3b9ab0fce88c5b58",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1995.leaders-CHE",
+   "text": "In Switzerland, the Federal Council governs together: Kaspar Villiger presides over the Federal Council.",
+   "hash": "06c5db974f167e62",
+   "modes": [
+    "full"
+   ]
+  },
+  {
+   "id": "year.1995.result",
+   "text": "Over the year, the Swiss franc gained the most against the dollar, 13%, and the rupee lost the most, 11%.",
+   "hash": "6c9d1db90da942f0",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1995.sharpest",
+   "text": "Look at the Swiss franc: in the eight weeks to April, it gained 15% against the dollar.",
+   "hash": "eb1c22ec8542d9d0",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1995.summary",
+   "text": "That was 1995. Over the year, the Swiss franc gained the most against the dollar, 13%, and the rupee lost the most, 11%. Where shall we go next?",
+   "hash": "e5452c2f6608a28d",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1995.world",
+   "text": "1995. Floating rates. The major currencies float: markets set their prices every day. Some others stay managed by their governments. This year, let's look at Switzerland, India and Germany. Our history file has no verified event for this year, so let us watch the currencies themselves.",
+   "hash": "fb4842a495110e6c",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1996.leaders-CHE",
+   "text": "In Switzerland, the Federal Council governs together: Jean-Pascal Delamuraz presides over the Federal Council.",
+   "hash": "5c20b12e507d3d1a",
+   "modes": [
+    "full"
+   ]
+  },
+  {
+   "id": "year.1996.leaders-GBR",
+   "text": "In United Kingdom: Prime Minister John Major; Edward George, Baron George leads the Bank of England.",
+   "hash": "5a7715976f7261d0",
+   "modes": [
+    "full"
+   ]
+  },
+  {
+   "id": "year.1996.leaders-JPN",
+   "text": "In Japan: Prime Minister Tomiichi Murayama, then Ryutaro Hashimoto; Yasuo Matsushita leads the Bank of Japan.",
+   "hash": "3e042714906f0028",
+   "modes": [
+    "full"
+   ]
+  },
+  {
+   "id": "year.1996.result",
+   "text": "Over the year, the pound gained the most against the dollar, 8.4%, and the Swiss franc lost the most, 14%.",
+   "hash": "c322cd92fbba06d4",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1996.sharpest",
+   "text": "Look at the pound: in the eight weeks to November, it gained 7.8% against the dollar.",
+   "hash": "40dc2b41d2ad830e",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1996.summary",
+   "text": "That was 1996. Over the year, the pound gained the most against the dollar, 8.4%, and the Swiss franc lost the most, 14%. Where shall we go next?",
+   "hash": "ac4a4f3cd5c91f14",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1996.world",
+   "text": "1996. Floating rates. The major currencies float: markets set their prices every day. Some others stay managed by their governments. This year, let's look at Switzerland, Japan and United Kingdom. Our history file has no verified event for this year, so let us watch the currencies themselves.",
+   "hash": "94c310c635511bd1",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1997.event-asian-crisis",
+   "text": "December 3: Korea agrees an IMF rescue. South Korea agrees a rescue program with the International Monetary Fund as the won falls. Among those involved: Kim Young-sam and Lee Kyung-shik. Watch the won.",
+   "hash": "afe600ebc3337e94",
+   "modes": [
+    "full"
+   ]
+  },
+  {
+   "id": "year.1997.event-asian-crisis",
+   "text": "December 3: Korea agrees an IMF rescue. South Korea agrees a rescue program with the International Monetary Fund as the won falls. Watch the won.",
+   "hash": "31364907579aa282",
+   "modes": [
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1997.event-thai-float",
+   "text": "July 2: Thailand floats the baht. Thailand moves the baht to a managed float, its value set by the market. The crisis that begins there spreads to other Asian economies, among them South Korea. Watch the won.",
+   "hash": "2154ff759f97f599",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1997.leaders-JPN",
+   "text": "In Japan: Prime Minister Ryutaro Hashimoto; Yasuo Matsushita leads the Bank of Japan.",
+   "hash": "32ca7baaec855998",
+   "modes": [
+    "full"
+   ]
+  },
+  {
+   "id": "year.1997.leaders-KOR",
+   "text": "In South Korea: President Kim Young-sam; Kyung Shik Lee leads the Bank of Korea.",
+   "hash": "f14f0f016e126d6f",
+   "modes": [
+    "full"
+   ]
+  },
+  {
+   "id": "year.1997.leaders-USA",
+   "text": "In United States: President Bill Clinton; Alan Greenspan chairs the Federal Reserve.",
+   "hash": "dc6a5052d191ddff",
+   "modes": [
+    "full"
+   ]
+  },
+  {
+   "id": "year.1997.result",
+   "text": "Over the year, the won lost the most against the dollar, 52%. None of the others gained more than 1%.",
+   "hash": "ba6c912c35fab83d",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1997.summary",
+   "text": "That was 1997: Thailand floats the baht and Korea agrees an IMF rescue. Over the year, the won lost the most against the dollar, 52%. None of the others gained more than 1%. Where shall we go next?",
+   "hash": "eae448eeaa78ceb4",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1997.world",
+   "text": "1997. From the middle of this year, money flows out of several East and Southeast Asian economies, and their currencies fall. Watch South Korea.",
+   "hash": "d709efe385d9416e",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1998.event-ecb-1998",
+   "text": "June 1: The European Central Bank is founded. The European Central Bank replaces the European Monetary Institute, ready for the euro. Watch the Mark.",
+   "hash": "890a4395526a59e1",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1998.event-russia-1998",
+   "text": "August 17: Russia defaults. Russia devalues the ruble and defaults on its debt, unsettling markets worldwide. Watch the yen and the Australian dollar.",
+   "hash": "b22bf8cf38265564",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1998.leaders-DEU",
+   "text": "In Germany: Chancellor Helmut Kohl, then Gerhard Schröder; Hans Tietmeyer leads the Bundesbank.",
+   "hash": "37035cea4bbc430b",
+   "modes": [
+    "full"
+   ]
+  },
+  {
+   "id": "year.1998.leaders-KOR",
+   "text": "In South Korea: President Kim Young-sam, then Kim Dae-jung; Kyung Shik Lee, then Chʻŏr-hwan Chŏn leads the Bank of Korea.",
+   "hash": "5c091f7de69f896f",
+   "modes": [
+    "full"
+   ]
+  },
+  {
+   "id": "year.1998.result",
+   "text": "Over the year, the won gained the most against the dollar, 39%, and the Canadian dollar lost the most, 7.8%.",
+   "hash": "fe077df418ace580",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1998.sharpest",
+   "text": "Look at the won: in the eight weeks to May, it gained 21% against the dollar.",
+   "hash": "ae2ff24a864cc029",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1998.summary",
+   "text": "That was 1998: The European Central Bank is founded and Russia defaults. Over the year, the won gained the most against the dollar, 39%, and the Canadian dollar lost the most, 7.8%. Where shall we go next?",
+   "hash": "dd6f21c752f5794a",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1998.world",
+   "text": "1998. Floating rates. The major currencies float: markets set their prices every day. Some others stay managed by their governments. This year, let's look at United States, Germany and South Korea.",
+   "hash": "1bf8e5bbab0ed054",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1999.event-euro",
+   "text": "January 1: The euro is launched. Eleven countries adopt the euro for markets and banks; notes and coins follow in 2002. Watch the euro.",
+   "hash": "4a49d980b6ace595",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1999.leaders-CHE",
+   "text": "In Switzerland, the Federal Council governs together: Ruth Dreifuss presides over the Federal Council.",
+   "hash": "aab538c39bac2c68",
+   "modes": [
+    "full"
+   ]
+  },
+  {
+   "id": "year.1999.leaders-EA",
+   "text": "In the euro area: Wim Duisenberg leads the European Central Bank.",
+   "hash": "305f7fb2f7879132",
+   "modes": [
+    "full"
+   ]
+  },
+  {
+   "id": "year.1999.leaders-EA",
+   "text": "Euro area. No single government: member states keep their own leaders. The European Central Bank sets monetary policy for all.",
+   "hash": "830294eeecbc1c65",
+   "modes": [
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1999.leaders-JPN",
+   "text": "In Japan: Prime Minister Keizō Obuchi; Masaru Hayami leads the Bank of Japan.",
+   "hash": "f15a71e4832aa161",
+   "modes": [
+    "full"
+   ]
+  },
+  {
+   "id": "year.1999.result",
+   "text": "Over the year, the yen gained the most against the dollar, 12%, and the euro lost the most, 14%.",
+   "hash": "0cfce8b3afcacc41",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1999.sharpest",
+   "text": "Look at the yen: in the eight weeks to September, it gained 11% against the dollar.",
+   "hash": "7f8b2451ef5ef33e",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1999.summary",
+   "text": "That was 1999: The euro is launched. Over the year, the yen gained the most against the dollar, 12%, and the euro lost the most, 14%. Where shall we go next?",
+   "hash": "b6cff9b4f3a917c4",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.1999.world",
+   "text": "1999. Floating rates and the euro. Countries of the euro area share one currency, the euro, which takes over from the Deutsche Mark. The major currencies keep floating. This year, let's look at Euro area, Switzerland and Japan.",
+   "hash": "84e5e866733e9373",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.2000.leaders-AUS",
+   "text": "In Australia: Prime Minister John Howard; Ian Macfarlane leads the Reserve Bank of Australia.",
+   "hash": "7c825569b50dd24a",
+   "modes": [
+    "full"
+   ]
+  },
+  {
+   "id": "year.2000.leaders-KOR",
+   "text": "In South Korea: President Kim Dae-jung; Chʻŏr-hwan Chŏn leads the Bank of Korea.",
+   "hash": "04ce2d3187d63eeb",
+   "modes": [
+    "full"
+   ]
+  },
+  {
+   "id": "year.2000.result",
+   "text": "Over the year, the Australian dollar lost the most against the dollar, 15%. None of the others gained more than 1%.",
+   "hash": "6066bf832090d782",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.2000.sharpest",
+   "text": "Look at the Australian dollar: in the eight weeks to October, it lost 10% against the dollar.",
+   "hash": "f3fe84b1bab3f6d8",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.2000.summary",
+   "text": "That was 2000. Over the year, the Australian dollar lost the most against the dollar, 15%. None of the others gained more than 1%. Where shall we go next?",
+   "hash": "6f9a95327f13cb91",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.2000.world",
+   "text": "2000. Floating rates and the euro. Countries of the euro area share one currency, the euro, which takes over from the Deutsche Mark. The major currencies keep floating. This year, let's look at Australia, Euro area and South Korea. Our history file has no verified event for this year, so let us watch the currencies themselves.",
+   "hash": "58d20dc2286f0246",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.2001.event-boj-qe-2001",
+   "text": "March 19: Japan begins quantitative easing. The Bank of Japan starts buying assets on a large scale to fight deflation. Watch the yen.",
+   "hash": "08fa46e93b616f38",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.2001.leaders-JPN",
+   "text": "In Japan: Prime Minister Yoshirō Mori, then Junichiro Koizumi; Masaru Hayami leads the Bank of Japan.",
+   "hash": "fe7e645baee3d827",
+   "modes": [
+    "full"
+   ]
+  },
+  {
+   "id": "year.2001.result",
+   "text": "Over the year, the yen lost the most against the dollar, 12%. None of the others gained more than 1%.",
+   "hash": "08b3255913cb866d",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.2001.summary",
+   "text": "That was 2001: Japan begins quantitative easing. Over the year, the yen lost the most against the dollar, 12%. None of the others gained more than 1%. Where shall we go next?",
+   "hash": "0dc27b6cc481acf3",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.2001.world",
+   "text": "2001. Floating rates and the euro. Countries of the euro area share one currency, the euro, which takes over from the Deutsche Mark. The major currencies keep floating. This year, let's look at Japan, Australia and Euro area.",
+   "hash": "3214748a072e5df5",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.2002.event-euro-cash",
+   "text": "January 1: Euro notes and coins arrive. Euro banknotes and coins replace the national currencies in everyday use. Watch the euro.",
+   "hash": "41c353ceecb40fdd",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.2002.leaders-GBR",
+   "text": "In United Kingdom: Prime Minister Tony Blair; Edward George, Baron George leads the Bank of England.",
+   "hash": "66a74f031d9ca06e",
+   "modes": [
+    "full"
+   ]
+  },
+  {
+   "id": "year.2002.result",
+   "text": "Over the year, the Swiss franc gained the most against the dollar, 17%, and the yuan lost the most, 0.0%.",
+   "hash": "bd329edb71596ce2",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.2002.sharpest",
+   "text": "Look at the euro: in the eight weeks to July, it gained 9.9% against the dollar.",
+   "hash": "2b888f6ae54f6a92",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.2002.summary",
+   "text": "That was 2002: Euro notes and coins arrive. Over the year, the Swiss franc gained the most against the dollar, 17%, and the yuan lost the most, 0.0%. Where shall we go next?",
+   "hash": "e567726a9ccdc651",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.2002.world",
+   "text": "2002. Floating rates and the euro. Countries of the euro area share one currency, the euro, which takes over from the Deutsche Mark. The major currencies keep floating. This year, let's look at Euro area, Switzerland and United Kingdom.",
+   "hash": "70dc3dfcb4021957",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.2003.leaders-CAN",
+   "text": "In Canada: Prime Minister Jean Chrétien, then Paul Martin; David A. Dodge leads the Bank of Canada.",
+   "hash": "a16dc0b748391c71",
+   "modes": [
+    "full"
+   ]
+  },
+  {
+   "id": "year.2003.leaders-EA",
+   "text": "In the euro area: Wim Duisenberg, then Jean-Claude Trichet leads the European Central Bank.",
+   "hash": "de61e96df3cb0bdf",
+   "modes": [
+    "full"
+   ]
+  },
+  {
+   "id": "year.2003.result",
+   "text": "Over the year, the Australian dollar gained the most against the dollar, 31%, and the won lost the most, 0.1%.",
+   "hash": "cf1d9e639953635b",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.2003.sharpest",
+   "text": "Look at the euro: in the eight weeks to May, it gained 10% against the dollar.",
+   "hash": "61ed2ef2e8db35dc",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.2003.summary",
+   "text": "That was 2003. Over the year, the Australian dollar gained the most against the dollar, 31%, and the won lost the most, 0.1%. Where shall we go next?",
+   "hash": "9c64377c51fe46c9",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.2003.world",
+   "text": "2003. Floating rates and the euro. Countries of the euro area share one currency, the euro, which takes over from the Deutsche Mark. The major currencies keep floating. This year, let's look at Canada, Euro area and Australia. Our history file has no verified event for this year, so let us watch the currencies themselves.",
+   "hash": "b9c5d6deff66b936",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.2004.leaders-CHE",
+   "text": "In Switzerland, the Federal Council governs together: Joseph Deiss presides over the Federal Council.",
+   "hash": "d88f318221ba34fd",
+   "modes": [
+    "full"
+   ]
+  },
+  {
+   "id": "year.2004.leaders-EA",
+   "text": "In the euro area: Jean-Claude Trichet leads the European Central Bank.",
+   "hash": "53f1955649a74151",
+   "modes": [
+    "full"
+   ]
+  },
+  {
+   "id": "year.2004.leaders-KOR",
+   "text": "In South Korea: President Roh Moo-hyun; Park Seung leads the Bank of Korea.",
+   "hash": "6c8e93efba44936c",
+   "modes": [
+    "full"
+   ]
+  },
+  {
+   "id": "year.2004.result",
+   "text": "Over the year, the won gained the most against the dollar, 15%, and the yuan lost the most, 0.0%.",
+   "hash": "db701c24f0d5c3c9",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.2004.sharpest",
+   "text": "Look at the won: in the eight weeks to December, it gained 10% against the dollar.",
+   "hash": "7d0620bcbdcf648d",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.2004.summary",
+   "text": "That was 2004. Over the year, the won gained the most against the dollar, 15%, and the yuan lost the most, 0.0%. Where shall we go next?",
+   "hash": "c6233f717fce31a6",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.2004.world",
+   "text": "2004. Floating rates and the euro. Countries of the euro area share one currency, the euro, which takes over from the Deutsche Mark. The major currencies keep floating. This year, let's look at South Korea, Switzerland and Euro area. Our history file has no verified event for this year, so let us watch the currencies themselves.",
+   "hash": "b2fea8a529df2b63",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.2005.event-china-2005",
+   "text": "July 21: China loosens the yuan's peg. China lifts the yuan's fixed peg to the dollar, with a one-time revaluation. Watch the yuan.",
+   "hash": "2a2cd20faec19961",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.2005.leaders-CHE",
+   "text": "In Switzerland, the Federal Council governs together: Samuel Schmid presides over the Federal Council.",
+   "hash": "9d62190bff7691c7",
+   "modes": [
+    "full"
+   ]
+  },
+  {
+   "id": "year.2005.leaders-CHN",
+   "text": "In China: Premier Wen Jiabao.",
+   "hash": "b8705b028e9d8e13",
+   "modes": [
+    "full"
+   ]
+  },
+  {
+   "id": "year.2005.leaders-JPN",
+   "text": "In Japan: Prime Minister Junichiro Koizumi; Toshihiko Fukui leads the Bank of Japan.",
+   "hash": "512de58abb988d9d",
+   "modes": [
+    "full"
+   ]
+  },
+  {
+   "id": "year.2005.result",
+   "text": "Over the year, the Canadian dollar gained the most against the dollar, 5.7%, and the yen lost the most, 11%.",
+   "hash": "74be9ad77e2a05ed",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.2005.summary",
+   "text": "That was 2005: China loosens the yuan's peg. Over the year, the Canadian dollar gained the most against the dollar, 5.7%, and the yen lost the most, 11%. Where shall we go next?",
+   "hash": "6772376e3d7674a7",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.2005.world",
+   "text": "2005. Floating rates and the euro. Countries of the euro area share one currency, the euro, which takes over from the Deutsche Mark. The major currencies keep floating. This year, let's look at China, Japan and Switzerland.",
+   "hash": "084b402850589891",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.2006.leaders-GBR",
+   "text": "In United Kingdom: Prime Minister Tony Blair; Mervyn King leads the Bank of England.",
+   "hash": "296092f790973665",
+   "modes": [
+    "full"
+   ]
+  },
+  {
+   "id": "year.2006.leaders-KOR",
+   "text": "In South Korea: President Roh Moo-hyun; Park Seung, then Seongtae Lee leads the Bank of Korea.",
+   "hash": "0f2ad867d74056ef",
+   "modes": [
+    "full"
+   ]
+  },
+  {
+   "id": "year.2006.result",
+   "text": "Over the year, the pound gained the most against the dollar, 12%, and the yen lost the most, 2.5%.",
+   "hash": "d9b462380d75cbac",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.2006.sharpest",
+   "text": "Look at the pound: in the eight weeks to May, it gained 8.2% against the dollar.",
+   "hash": "1d27f1c855c8c20a",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.2006.summary",
+   "text": "That was 2006. Over the year, the pound gained the most against the dollar, 12%, and the yen lost the most, 2.5%. Where shall we go next?",
+   "hash": "1a1d20d693b1fc65",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.2006.world",
+   "text": "2006. Floating rates and the euro. Countries of the euro area share one currency, the euro, which takes over from the Deutsche Mark. The major currencies keep floating. This year, let's look at United Kingdom, Euro area and South Korea. Our history file has no verified event for this year, so let us watch the currencies themselves.",
+   "hash": "996473bd41151d42",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.2007.event-credit-crunch",
+   "text": "August 9: The credit crunch begins. A large European bank freezes funds exposed to US mortgages, and lending between banks seizes up. Watch the yen and the Australian dollar.",
+   "hash": "acdb58ebadcca0b4",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.2007.leaders-CAN",
+   "text": "In Canada: Prime Minister Stephen Harper; David A. Dodge leads the Bank of Canada.",
+   "hash": "05fda9360259ef9b",
+   "modes": [
+    "full"
+   ]
+  },
+  {
+   "id": "year.2007.leaders-USA",
+   "text": "In United States: President George W. Bush; Ben Bernanke chairs the Federal Reserve.",
+   "hash": "4f376ed4e6eb2ea7",
+   "modes": [
+    "full"
+   ]
+  },
+  {
+   "id": "year.2007.result",
+   "text": "Over the year, the Canadian dollar gained the most against the dollar, 20%, and the won lost the most, 0.3%.",
+   "hash": "62d79f3c9c2d9ad8",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.2007.sharpest",
+   "text": "Look at the Canadian dollar: in the eight weeks to November, it gained 11% against the dollar.",
+   "hash": "9aa0298595a2ad7c",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.2007.summary",
+   "text": "That was 2007: The credit crunch begins. Over the year, the Canadian dollar gained the most against the dollar, 20%, and the won lost the most, 0.3%. Where shall we go next?",
+   "hash": "1c7f7d9921b8b0c9",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.2007.world",
+   "text": "2007. Floating rates and the euro. Countries of the euro area share one currency, the euro, which takes over from the Deutsche Mark. The major currencies keep floating. This year, let's look at Euro area, United States and Canada.",
+   "hash": "1237a8592fc7b30a",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.2008.event-gfc",
+   "text": "October 8: Central banks cut rates together. Six central banks, among them the Federal Reserve and the European Central Bank, cut interest rates in a joint move. Among those involved: George W. Bush and Henry Paulson. Watch the yen, the won and the Australian dollar.",
+   "hash": "44bd4f63606cc11a",
+   "modes": [
+    "full"
+   ]
+  },
+  {
+   "id": "year.2008.event-gfc",
+   "text": "October 8: Central banks cut rates together. Six central banks, among them the Federal Reserve and the European Central Bank, cut interest rates in a joint move. Watch the yen, the won and the Australian dollar.",
+   "hash": "f272195d597f03c9",
+   "modes": [
+    "contest"
+   ]
+  },
+  {
+   "id": "year.2008.event-lehman",
+   "text": "September 15: Lehman Brothers collapses. The US financial firm Lehman Brothers files for bankruptcy protection. Watch the pound, the won and the Australian dollar.",
+   "hash": "50b7921a2201d075",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.2008.leaders-GBR",
+   "text": "In United Kingdom: Prime Minister Gordon Brown; Mervyn King leads the Bank of England.",
+   "hash": "71786af389c276d2",
+   "modes": [
+    "full"
+   ]
+  },
+  {
+   "id": "year.2008.leaders-KOR",
+   "text": "In South Korea: President Roh Moo-hyun, then Lee Myung-bak; Seongtae Lee leads the Bank of Korea.",
+   "hash": "ce459b15c267c476",
+   "modes": [
+    "full"
+   ]
+  },
+  {
+   "id": "year.2008.result",
+   "text": "Over the year, the yen gained the most against the dollar, 21%, and the won lost the most, 29%.",
+   "hash": "5f7220faa3b46052",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.2008.summary",
+   "text": "That was 2008: Lehman Brothers collapses and Central banks cut rates together. Over the year, the yen gained the most against the dollar, 21%, and the won lost the most, 29%. Where shall we go next?",
+   "hash": "5d16a6f45161334b",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.2008.world",
+   "text": "2008. A financial crisis that began in the United States is about to spread around the world.",
+   "hash": "8e9c563ad47dc200",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.2009.leaders-AUS",
+   "text": "In Australia: Prime Minister Kevin Rudd; Glenn Stevens leads the Reserve Bank of Australia.",
+   "hash": "cf95a82ab5b99696",
+   "modes": [
+    "full"
+   ]
+  },
+  {
+   "id": "year.2009.leaders-CAN",
+   "text": "In Canada: Prime Minister Stephen Harper; Mark Carney leads the Bank of Canada.",
+   "hash": "8614e1e513ada838",
+   "modes": [
+    "full"
+   ]
+  },
+  {
+   "id": "year.2009.result",
+   "text": "Over the year, the Australian dollar gained the most against the dollar, 27%, and the yen lost the most, 0.8%.",
+   "hash": "29a7922948a229ad",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.2009.sharpest",
+   "text": "Look at the Australian dollar: in the eight weeks to May, it gained 16% against the dollar.",
+   "hash": "fcb4c29f1566de0d",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.2009.summary",
+   "text": "That was 2009. Over the year, the Australian dollar gained the most against the dollar, 27%, and the yen lost the most, 0.8%. Where shall we go next?",
+   "hash": "7ab3eaec92b57415",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.2009.world",
+   "text": "2009. Floating rates and the euro. Countries of the euro area share one currency, the euro, which takes over from the Deutsche Mark. The major currencies keep floating. This year, let's look at Canada, Australia and United Kingdom. Our history file has no verified event for this year, so let us watch the currencies themselves.",
+   "hash": "b8df42bc06c8436e",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.2010.leaders-AUS",
+   "text": "In Australia: Prime Minister Kevin Rudd, then Julia Gillard; Glenn Stevens leads the Reserve Bank of Australia.",
+   "hash": "0f78ca38497d05c1",
+   "modes": [
+    "full"
+   ]
+  },
+  {
+   "id": "year.2010.leaders-CHE",
+   "text": "In Switzerland, the Federal Council governs together: Doris Leuthard presides over the Federal Council; Philipp Hildebrand leads the Swiss National Bank.",
+   "hash": "328095bd2e734435",
+   "modes": [
+    "full"
+   ]
+  },
+  {
+   "id": "year.2010.leaders-JPN",
+   "text": "In Japan: Prime Minister Yukio Hatoyama, then Naoto Kan; Masaaki Shirakawa leads the Bank of Japan.",
+   "hash": "ecbf0e8fe47f76fd",
+   "modes": [
+    "full"
+   ]
+  },
+  {
+   "id": "year.2010.result",
+   "text": "Over the year, the Australian dollar gained the most against the dollar, 13%, and the euro lost the most, 7.5%.",
+   "hash": "a6c3b34ccd426fef",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.2010.sharpest",
+   "text": "Look at the Australian dollar: in the eight weeks to October, it gained 11% against the dollar.",
+   "hash": "fe62b1392248eff9",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.2010.summary",
+   "text": "That was 2010. Over the year, the Australian dollar gained the most against the dollar, 13%, and the euro lost the most, 7.5%. Where shall we go next?",
+   "hash": "656462cf53dedadf",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.2010.world",
+   "text": "2010. Floating rates and the euro. Countries of the euro area share one currency, the euro, which takes over from the Deutsche Mark. The major currencies keep floating. This year, let's look at Japan, Australia and Switzerland. Our history file has no verified event for this year, so let us watch the currencies themselves.",
+   "hash": "0249deb4d56092d3",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.2011.event-snb-floor",
+   "text": "September 6: Switzerland caps the franc. The Swiss National Bank sets a minimum of 1.20 francs per euro to stop the franc rising. Watch the Swiss franc and the euro.",
+   "hash": "3a9cd3bcb6d518a8",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.2011.leaders-CHE",
+   "text": "In Switzerland, the Federal Council governs together: Micheline Calmy-Rey presides over the Federal Council; Philipp Hildebrand leads the Swiss National Bank.",
+   "hash": "f1ad462c40f118f6",
+   "modes": [
+    "full"
+   ]
+  },
+  {
+   "id": "year.2011.leaders-IND",
+   "text": "In India: Prime Minister Manmohan Singh.",
+   "hash": "23e3d9a5d11c32c5",
+   "modes": [
+    "full"
+   ]
+  },
+  {
+   "id": "year.2011.leaders-JPN",
+   "text": "In Japan: Prime Minister Naoto Kan, then Yoshihiko Noda; Masaaki Shirakawa leads the Bank of Japan.",
+   "hash": "18f2ad61aad26f6f",
+   "modes": [
+    "full"
+   ]
+  },
+  {
+   "id": "year.2011.result",
+   "text": "Over the year, the yen gained the most against the dollar, 7.3%, and the rupee lost the most, 15%.",
+   "hash": "92f13edd3ff4e8af",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.2011.summary",
+   "text": "That was 2011: Switzerland caps the franc. Over the year, the yen gained the most against the dollar, 7.3%, and the rupee lost the most, 15%. Where shall we go next?",
+   "hash": "ea401870a10a305d",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.2011.world",
+   "text": "2011. Floating rates and the euro. Countries of the euro area share one currency, the euro, which takes over from the Deutsche Mark. The major currencies keep floating. This year, let's look at Switzerland, India and Japan.",
+   "hash": "c5f47725d8925c3e",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.2012.event-whatever-it-takes",
+   "text": "July 26: \"Whatever it takes\". The ECB's president says it will do whatever it takes to preserve the euro. Watch the euro.",
+   "hash": "bd7cd681a33faf8a",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.2012.leaders-EA",
+   "text": "In the euro area: Mario Draghi leads the European Central Bank.",
+   "hash": "a8c77a89736bb064",
+   "modes": [
+    "full"
+   ]
+  },
+  {
+   "id": "year.2012.leaders-JPN",
+   "text": "In Japan: Prime Minister Yoshihiko Noda, then Shinzō Abe; Masaaki Shirakawa leads the Bank of Japan.",
+   "hash": "6524d2666da59d58",
+   "modes": [
+    "full"
+   ]
+  },
+  {
+   "id": "year.2012.leaders-KOR",
+   "text": "In South Korea: President Lee Myung-bak; Kim Choong-soo leads the Bank of Korea.",
+   "hash": "d5500e3a612d51a1",
+   "modes": [
+    "full"
+   ]
+  },
+  {
+   "id": "year.2012.result",
+   "text": "Over the year, the won gained the most against the dollar, 8.2%, and the yen lost the most, 10%.",
+   "hash": "c833d59d4775c057",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.2012.sharpest",
+   "text": "Look at the yen: in the eight weeks to March, it lost 7.8% against the dollar.",
+   "hash": "4babc5c00620fd97",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.2012.summary",
+   "text": "That was 2012: Whatever it takes. Over the year, the won gained the most against the dollar, 8.2%, and the yen lost the most, 10%. Where shall we go next?",
+   "hash": "acda01abeabdeece",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.2012.world",
+   "text": "2012. Floating rates and the euro. Countries of the euro area share one currency, the euro, which takes over from the Deutsche Mark. The major currencies keep floating. This year, let's look at Euro area, Japan and South Korea.",
+   "hash": "dc80dafe91db098a",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.2013.event-boj-qqe-2013",
+   "text": "April 4: Japan's big monetary easing. The Bank of Japan launches a new, much larger program of asset purchases. Watch the yen.",
+   "hash": "e4e44fef7359670a",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.2013.leaders-AUS",
+   "text": "In Australia: Prime Minister Julia Gillard, then Kevin Rudd and Tony Abbott; Glenn Stevens leads the Reserve Bank of Australia.",
+   "hash": "e5c296ac38777a2a",
+   "modes": [
+    "full"
+   ]
+  },
+  {
+   "id": "year.2013.leaders-IND",
+   "text": "In India: Prime Minister Manmohan Singh; Raghuram Rajan leads the Reserve Bank of India.",
+   "hash": "7d8bbc420d935e6f",
+   "modes": [
+    "full"
+   ]
+  },
+  {
+   "id": "year.2013.leaders-JPN",
+   "text": "In Japan: Prime Minister Shinzō Abe; Masaaki Shirakawa, then Haruhiko Kuroda leads the Bank of Japan.",
+   "hash": "dbeb01aaab3a4eb8",
+   "modes": [
+    "full"
+   ]
+  },
+  {
+   "id": "year.2013.result",
+   "text": "Over the year, the euro gained the most against the dollar, 5.1%, and the yen lost the most, 16%.",
+   "hash": "ca8200842ec3123a",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.2013.sharpest",
+   "text": "Look at the Australian dollar: in the eight weeks to June, it lost 10% against the dollar.",
+   "hash": "573cbc121dedfaf2",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.2013.summary",
+   "text": "That was 2013: Japan's big monetary easing. Over the year, the euro gained the most against the dollar, 5.1%, and the yen lost the most, 16%. Where shall we go next?",
+   "hash": "d430ea75bfd99741",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.2013.world",
+   "text": "2013. Floating rates and the euro. Countries of the euro area share one currency, the euro, which takes over from the Deutsche Mark. The major currencies keep floating. This year, let's look at Japan, Australia and India.",
+   "hash": "00f84d4a5132ae63",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.2014.leaders-AUS",
+   "text": "In Australia: Prime Minister Tony Abbott; Glenn Stevens leads the Reserve Bank of Australia.",
+   "hash": "016d4b2814036c58",
+   "modes": [
+    "full"
+   ]
+  },
+  {
+   "id": "year.2014.leaders-JPN",
+   "text": "In Japan: Prime Minister Shinzō Abe; Haruhiko Kuroda leads the Bank of Japan.",
+   "hash": "4a9909f17dd7c313",
+   "modes": [
+    "full"
+   ]
+  },
+  {
+   "id": "year.2014.result",
+   "text": "Over the year, the yen lost the most against the dollar, 13%. None of the others gained more than 1%.",
+   "hash": "c2d8a719c4292c8a",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.2014.sharpest",
+   "text": "Look at the yen: in the eight weeks to December, it lost 10% against the dollar.",
+   "hash": "dfd9269b5c1b846d",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.2014.summary",
+   "text": "That was 2014. Over the year, the yen lost the most against the dollar, 13%. None of the others gained more than 1%. Where shall we go next?",
+   "hash": "24a17af8df55b99a",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.2014.world",
+   "text": "2014. Floating rates and the euro. Countries of the euro area share one currency, the euro, which takes over from the Deutsche Mark. The major currencies keep floating. This year, let's look at Japan, Euro area and Australia. Our history file has no verified event for this year, so let us watch the currencies themselves.",
+   "hash": "9cfa0615c83b1a14",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.2015.event-chf-shock",
+   "text": "January 15: The franc cap is dropped. The Swiss National Bank abandons its minimum rate against the euro, and the franc jumps. Watch the Swiss franc.",
+   "hash": "429583f004b35659",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.2015.event-china-2015",
+   "text": "August 11: China devalues the yuan. China changes how its daily reference rate is set, and the yuan falls by the most in two decades. Watch the yuan and the Australian dollar.",
+   "hash": "d8164468f10552a1",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.2015.leaders-CAN",
+   "text": "In Canada: Prime Minister Stephen Harper, then Justin Trudeau; Stephen Poloz leads the Bank of Canada.",
+   "hash": "3db4419c6d2a1774",
+   "modes": [
+    "full"
+   ]
+  },
+  {
+   "id": "year.2015.leaders-CHE",
+   "text": "In Switzerland, the Federal Council governs together: Simonetta Sommaruga presides over the Federal Council; Thomas Jordan leads the Swiss National Bank.",
+   "hash": "d70cbf8dbe0e2916",
+   "modes": [
+    "full"
+   ]
+  },
+  {
+   "id": "year.2015.leaders-CHN",
+   "text": "In China: Premier Li Keqiang.",
+   "hash": "5b8005e2421d768c",
+   "modes": [
+    "full"
+   ]
+  },
+  {
+   "id": "year.2015.result",
+   "text": "Over the year, the Canadian dollar lost the most against the dollar, 16%. None of the others gained more than 1%.",
+   "hash": "23779e2fbc14c5fa",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.2015.sharpest",
+   "text": "Look at the Swiss franc: in the eight weeks to March, it lost 13% against the dollar.",
+   "hash": "ae8dfa525bc5022f",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.2015.summary",
+   "text": "That was 2015: The franc cap is dropped and China devalues the yuan. Over the year, the Canadian dollar lost the most against the dollar, 16%. None of the others gained more than 1%. Where shall we go next?",
+   "hash": "16550411d122f75b",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.2015.world",
+   "text": "2015. Floating rates and the euro. Countries of the euro area share one currency, the euro, which takes over from the Deutsche Mark. The major currencies keep floating. This year, let's look at China, Switzerland and Canada.",
+   "hash": "f51d81589948473c",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.2016.event-brexit",
+   "text": "June 23: The Brexit vote. The United Kingdom votes to leave the European Union, and the pound falls sharply. Watch the pound.",
+   "hash": "1c68c60a624615cb",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.2016.leaders-GBR",
+   "text": "In United Kingdom: Prime Minister David Cameron, then Theresa May; Mark Carney leads the Bank of England.",
+   "hash": "8d7172715e2445ff",
+   "modes": [
+    "full"
+   ]
+  },
+  {
+   "id": "year.2016.result",
+   "text": "Over the year, the yen gained the most against the dollar, 3.1%, and the pound lost the most, 17%.",
+   "hash": "8b980f97a7125a50",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.2016.summary",
+   "text": "That was 2016: The Brexit vote. Over the year, the yen gained the most against the dollar, 3.1%, and the pound lost the most, 17%. Where shall we go next?",
+   "hash": "80ff35c381801c8d",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.2016.world",
+   "text": "2016. Floating rates and the euro. Countries of the euro area share one currency, the euro, which takes over from the Deutsche Mark. The major currencies keep floating. This year, let's look at United Kingdom, China and Euro area.",
+   "hash": "9927fa472b31a34c",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.2017.leaders-GBR",
+   "text": "In United Kingdom: Prime Minister Theresa May; Mark Carney leads the Bank of England.",
+   "hash": "8bc64b76a46247e3",
+   "modes": [
+    "full"
+   ]
+  },
+  {
+   "id": "year.2017.leaders-KOR",
+   "text": "In South Korea: President Park Geun-hye, then Hwang Kyo-ahn and Moon Jae-in; Lee Ju-yeol leads the Bank of Korea.",
+   "hash": "78edd5a57b655e79",
+   "modes": [
+    "full"
+   ]
+  },
+  {
+   "id": "year.2017.result",
+   "text": "Over the year, the euro gained the most against the dollar, 13%.",
+   "hash": "ca4bd54fd82227da",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.2017.sharpest",
+   "text": "Look at the pound: in the eight weeks to May, it gained 6.1% against the dollar.",
+   "hash": "892735f7a510edc3",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.2017.summary",
+   "text": "That was 2017. Over the year, the euro gained the most against the dollar, 13%. Where shall we go next?",
+   "hash": "220393e7f1092b41",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.2017.world",
+   "text": "2017. Floating rates and the euro. Countries of the euro area share one currency, the euro, which takes over from the Deutsche Mark. The major currencies keep floating. This year, let's look at Euro area, South Korea and United Kingdom. Our history file has no verified event for this year, so let us watch the currencies themselves.",
+   "hash": "6986aa89bfff1c78",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.2018.event-trade-war",
+   "text": "July 6: US-China tariffs begin. The United States and China put tariffs on each other's goods. Watch the yuan, the won and the Australian dollar.",
+   "hash": "5424029f972cf977",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.2018.leaders-AUS",
+   "text": "In Australia: Prime Minister Malcolm Turnbull, then Scott Morrison; Philip Lowe leads the Reserve Bank of Australia.",
+   "hash": "650563215b653241",
+   "modes": [
+    "full"
+   ]
+  },
+  {
+   "id": "year.2018.leaders-USA",
+   "text": "In United States: President Donald Trump; Janet Yellen, then Jerome Powell chairs the Federal Reserve.",
+   "hash": "a51092bb77a01045",
+   "modes": [
+    "full"
+   ]
+  },
+  {
+   "id": "year.2018.result",
+   "text": "Over the year, the yen gained the most against the dollar, 2.2%, and the Australian dollar lost the most, 10%.",
+   "hash": "087ba560867cd60f",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.2018.summary",
+   "text": "That was 2018: US-China tariffs begin. Over the year, the yen gained the most against the dollar, 2.2%, and the Australian dollar lost the most, 10%. Where shall we go next?",
+   "hash": "7748d929a9acbbef",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.2018.world",
+   "text": "2018. Floating rates and the euro. Countries of the euro area share one currency, the euro, which takes over from the Deutsche Mark. The major currencies keep floating. This year, let's look at United States, China and Australia.",
+   "hash": "36bbf738f9b4fda7",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.2019.leaders-CAN",
+   "text": "In Canada: Prime Minister Justin Trudeau; Stephen Poloz leads the Bank of Canada.",
+   "hash": "f3366975bc73d77a",
+   "modes": [
+    "full"
+   ]
+  },
+  {
+   "id": "year.2019.leaders-GBR",
+   "text": "In United Kingdom: Prime Minister Theresa May, then Boris Johnson; Mark Carney leads the Bank of England.",
+   "hash": "0fc174fbbe97472c",
+   "modes": [
+    "full"
+   ]
+  },
+  {
+   "id": "year.2019.leaders-KOR",
+   "text": "In South Korea: President Moon Jae-in; Lee Ju-yeol leads the Bank of Korea.",
+   "hash": "ea185da4da8dda69",
+   "modes": [
+    "full"
+   ]
+  },
+  {
+   "id": "year.2019.result",
+   "text": "Over the year, the pound gained the most against the dollar, 3.1%, and the won lost the most, 3.2%.",
+   "hash": "cf796b57764eb8bf",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.2019.sharpest",
+   "text": "Look at the pound: in the eight weeks to December, it gained 5.4% against the dollar.",
+   "hash": "e77c4e3e784b7925",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.2019.summary",
+   "text": "That was 2019. Over the year, the pound gained the most against the dollar, 3.1%, and the won lost the most, 3.2%. Where shall we go next?",
+   "hash": "db3c51ac8d6093f2",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.2019.world",
+   "text": "2019. Floating rates and the euro. Countries of the euro area share one currency, the euro, which takes over from the Deutsche Mark. The major currencies keep floating. This year, let's look at South Korea, United Kingdom and Canada. Our history file has no verified event for this year, so let us watch the currencies themselves.",
+   "hash": "e51e4d22c66c718c",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.2020.event-pandemic",
+   "text": "March 11: A pandemic is declared. The World Health Organization declares COVID-19 a pandemic. Investors rush into dollars for a few weeks. Watch the Australian dollar, the pound and the won.",
+   "hash": "52aa55c0a1c74411",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.2020.leaders-AUS",
+   "text": "In Australia: Prime Minister Scott Morrison; Philip Lowe leads the Reserve Bank of Australia.",
+   "hash": "973af5e4d4d68159",
+   "modes": [
+    "full"
+   ]
+  },
+  {
+   "id": "year.2020.leaders-USA",
+   "text": "In United States: President Donald Trump; Jerome Powell chairs the Federal Reserve.",
+   "hash": "1e96d41ce3f59663",
+   "modes": [
+    "full"
+   ]
+  },
+  {
+   "id": "year.2020.result",
+   "text": "Over the year, the Swiss franc gained the most against the dollar, 9.2%, and the rupee lost the most, 2.9%.",
+   "hash": "6b038294ad4f49c0",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.2020.summary",
+   "text": "That was 2020: A pandemic is declared. Over the year, the Swiss franc gained the most against the dollar, 9.2%, and the rupee lost the most, 2.9%. Where shall we go next?",
+   "hash": "8bce1c3019cd22ef",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.2020.world",
+   "text": "2020. Floating rates and the euro. Countries of the euro area share one currency, the euro, which takes over from the Deutsche Mark. The major currencies keep floating. This year, let's look at Australia, United States and South Korea.",
+   "hash": "9b599f13f4d9696c",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.2021.leaders-EA",
+   "text": "In the euro area: Christine Lagarde leads the European Central Bank.",
+   "hash": "7bae18c12ba81216",
+   "modes": [
+    "full"
+   ]
+  },
+  {
+   "id": "year.2021.leaders-JPN",
+   "text": "In Japan: Prime Minister Yoshihide Suga, then Fumio Kishida; Haruhiko Kuroda leads the Bank of Japan.",
+   "hash": "633c9a9731f8a2e1",
+   "modes": [
+    "full"
+   ]
+  },
+  {
+   "id": "year.2021.result",
+   "text": "Over the year, the yuan gained the most against the dollar, 2.6%, and the yen lost the most, 10%.",
+   "hash": "9264a87ac3c1db0c",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.2021.sharpest",
+   "text": "Look at the yen: in the eight weeks to March, it lost 4.9% against the dollar.",
+   "hash": "ad9fa94f7fdb0c4d",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.2021.summary",
+   "text": "That was 2021. Over the year, the yuan gained the most against the dollar, 2.6%, and the yen lost the most, 10%. Where shall we go next?",
+   "hash": "5466de5b2a1a71d0",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.2021.world",
+   "text": "2021. Floating rates and the euro. Countries of the euro area share one currency, the euro, which takes over from the Deutsche Mark. The major currencies keep floating. This year, let's look at Japan, South Korea and Euro area. Our history file has no verified event for this year, so let us watch the currencies themselves.",
+   "hash": "44600c6119c816fd",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.2022.event-fed-2022",
+   "text": "March 16: The Fed starts raising rates. The Federal Reserve raises its target range for interest rates to 1/4 to 1/2 percent and expects further increases. Watch the yen, the euro and the pound.",
+   "hash": "924d129c585d4386",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.2022.event-mini-budget",
+   "text": "September 23: The UK mini-budget. The UK announces large tax cuts that need more borrowing, with no independent forecast published. The pound falls sharply; by the next trading day it hits an all-time low against the dollar. Watch the pound.",
+   "hash": "101a5e8ed3964c30",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.2022.event-ukraine-2022",
+   "text": "February 24: Russia invades Ukraine. Russia launches a full-scale invasion of Ukraine, starting the largest war in Europe since the Second World War. Watch the euro.",
+   "hash": "ec77b09e887cc679",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.2022.event-yen-intervention-2022",
+   "text": "September 22: Japan buys yen. Japan's Ministry of Finance sells dollars and buys yen, 2.84 trillion yen in one day: its first purchase of yen since June 1998. Watch the yen.",
+   "hash": "65d3d4ced9f7fc68",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.2022.event-yen-intervention-2022-10",
+   "text": "October 21: Japan buys yen again. Japan's Ministry of Finance buys yen again: 5.62 trillion yen on 21 October and 0.73 trillion yen on 24 October. Watch the yen.",
+   "hash": "f3e3f0a24bd094f7",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.2022.leaders-GBR",
+   "text": "In United Kingdom: Prime Minister Boris Johnson, then Liz Truss and Rishi Sunak; Andrew Bailey leads the Bank of England.",
+   "hash": "7dc1c56c86847465",
+   "modes": [
+    "full"
+   ]
+  },
+  {
+   "id": "year.2022.leaders-JPN",
+   "text": "In Japan: Prime Minister Fumio Kishida; Haruhiko Kuroda leads the Bank of Japan.",
+   "hash": "00ce4655e392b978",
+   "modes": [
+    "full"
+   ]
+  },
+  {
+   "id": "year.2022.leaders-USA",
+   "text": "In United States: President Joe Biden; Jerome Powell chairs the Federal Reserve.",
+   "hash": "d6256783750a02ff",
+   "modes": [
+    "full"
+   ]
+  },
+  {
+   "id": "year.2022.sharpest",
+   "text": "Look at the yen: in the eight weeks to December, it gained 11% against the dollar.",
+   "hash": "3ff709f9094ea9ec",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.2022.summary",
+   "text": "That was 2022: Russia invades Ukraine and the Fed starts raising rates. Over the year, the yen lost the most against the dollar, 13%. None of the others gained more than 1%. Where shall we go next?",
+   "hash": "bb1f262b664f9d65",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.2022.world",
+   "text": "2022. Prices rise fast around the world, and central banks raise interest rates. Watch the yen.",
+   "hash": "f931f77c1d947b7c",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.2023.event-svb-2023",
+   "text": "March 10: Silicon Valley Bank fails. A large US bank collapses, and fears spread to other banks. Watch the Swiss franc.",
+   "hash": "6dd4b74b61355430",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.2023.leaders-CHE",
+   "text": "In Switzerland, the Federal Council governs together: Ignazio Cassis, then Alain Berset presides over the Federal Council; Thomas Jordan leads the Swiss National Bank.",
+   "hash": "77266746be12f6c8",
+   "modes": [
+    "full"
+   ]
+  },
+  {
+   "id": "year.2023.leaders-GBR",
+   "text": "In United Kingdom: Prime Minister Rishi Sunak; Andrew Bailey leads the Bank of England.",
+   "hash": "7865191c2f88c2db",
+   "modes": [
+    "full"
+   ]
+  },
+  {
+   "id": "year.2023.result",
+   "text": "Over the year, the Swiss franc gained the most against the dollar, 11%, and the yen lost the most, 5.6%.",
+   "hash": "42eec027ffcc096a",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.2023.sharpest",
+   "text": "Look at the Swiss franc: in the eight weeks to December, it gained 7.6% against the dollar.",
+   "hash": "143bf9681b0f3324",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.2023.summary",
+   "text": "That was 2023: Silicon Valley Bank fails. Over the year, the Swiss franc gained the most against the dollar, 11%, and the yen lost the most, 5.6%. Where shall we go next?",
+   "hash": "61a0feb48e6961c3",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.2023.world",
+   "text": "2023. Floating rates and the euro. Countries of the euro area share one currency, the euro, which takes over from the Deutsche Mark. The major currencies keep floating. This year, let's look at Switzerland, United States and United Kingdom.",
+   "hash": "e12278520d9c0711",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.2024.event-boj-2024",
+   "text": "March 19: Japan ends negative interest rates. The Bank of Japan ends its negative interest rate policy and yield curve control, and guides the overnight call rate to around 0 to 0.1 percent. Watch the yen.",
+   "hash": "50475a3b84e040a9",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.2024.leaders-CAN",
+   "text": "In Canada: Prime Minister Justin Trudeau; Tiff Macklem leads the Bank of Canada.",
+   "hash": "d7f6b852ae8a57a4",
+   "modes": [
+    "full"
+   ]
+  },
+  {
+   "id": "year.2024.leaders-JPN",
+   "text": "In Japan: Prime Minister Fumio Kishida, then Shigeru Ishiba; Kazuo Ueda leads the Bank of Japan.",
+   "hash": "3ff6c7f54d614222",
+   "modes": [
+    "full"
+   ]
+  },
+  {
+   "id": "year.2024.leaders-KOR",
+   "text": "In South Korea: President Yoon Suk Yeol; Rhee Changyong leads the Bank of Korea.",
+   "hash": "bcbd4f31664db5ba",
+   "modes": [
+    "full"
+   ]
+  },
+  {
+   "id": "year.2024.result",
+   "text": "Over the year, the won lost the most against the dollar, 11%. None of the others gained more than 1%.",
+   "hash": "b42e81b0910c621c",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.2024.sharpest",
+   "text": "Look at the yen: in the eight weeks to September, it gained 12% against the dollar.",
+   "hash": "be94d9dbed9e39d5",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.2024.summary",
+   "text": "That was 2024: Japan ends negative interest rates. Over the year, the won lost the most against the dollar, 11%. None of the others gained more than 1%. Where shall we go next?",
+   "hash": "5dc2c0cc0bf3fddd",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.2024.world",
+   "text": "2024. Floating rates and the euro. Countries of the euro area share one currency, the euro, which takes over from the Deutsche Mark. The major currencies keep floating. This year, let's look at Japan, South Korea and Canada.",
+   "hash": "3fc249e9cf7387cb",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.2025.event-tariffs-2025",
+   "text": "April 2: Sweeping US tariffs. The United States announces broad new tariffs on imports from most countries. Watch the yuan, the Canadian dollar and the yen.",
+   "hash": "d394073819b4a028",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.2025.leaders-CAN",
+   "text": "In Canada: Prime Minister Justin Trudeau, then Mark Carney; Tiff Macklem leads the Bank of Canada.",
+   "hash": "17a59e41e329693a",
+   "modes": [
+    "full"
+   ]
+  },
+  {
+   "id": "year.2025.leaders-CHN",
+   "text": "In China: Premier Li Qiang.",
+   "hash": "69389db938c95080",
+   "modes": [
+    "full"
+   ]
+  },
+  {
+   "id": "year.2025.leaders-USA",
+   "text": "In United States: President Joe Biden, then Donald Trump; Jerome Powell chairs the Federal Reserve.",
+   "hash": "b1c67c5048b90722",
+   "modes": [
+    "full"
+   ]
+  },
+  {
+   "id": "year.2025.result",
+   "text": "Over the year, the Swiss franc gained the most against the dollar, 15%, and the rupee lost the most, 4.3%.",
+   "hash": "3d6365658fc89009",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.2025.summary",
+   "text": "That was 2025: Sweeping US tariffs. Over the year, the Swiss franc gained the most against the dollar, 15%, and the rupee lost the most, 4.3%. Where shall we go next?",
+   "hash": "b6a8c9c2a987b706",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.2025.world",
+   "text": "2025. Floating rates and the euro. Countries of the euro area share one currency, the euro, which takes over from the Deutsche Mark. The major currencies keep floating. This year, let's look at United States, Canada and China.",
+   "hash": "d680cad004e8da49",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.2026.event-yen-2026",
+   "text": "July 31: Japan and the US buy yen together. Japan's Ministry of Finance buys yen in coordination with the US Treasury on 31 July (US Eastern Time). Over 30 July, 31 July and 3 August, Japan buys 15.4 trillion yen in all. Watch the yen.",
+   "hash": "039af17680be975d",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.2026.leaders-JPN",
+   "text": "In Japan: Prime Minister Sanae Takaichi; Kazuo Ueda leads the Bank of Japan.",
+   "hash": "21ea2a963104850d",
+   "modes": [
+    "full"
+   ]
+  },
+  {
+   "id": "year.2026.leaders-KOR",
+   "text": "In South Korea: President Lee Jae Myung; Rhee Changyong leads the Bank of Korea.",
+   "hash": "7f714d040501d149",
+   "modes": [
+    "full"
+   ]
+  },
+  {
+   "id": "year.2026.leaders-USA",
+   "text": "In United States: President Donald Trump; Jerome Powell, then Kevin Warsh chairs the Federal Reserve.",
+   "hash": "3f0d67da11347270",
+   "modes": [
+    "full"
+   ]
+  },
+  {
+   "id": "year.2026.result",
+   "text": "So far this year, the won gained the most against the dollar, 6.7%, and the rupee lost the most, 4.5%.",
+   "hash": "991ab6ae8c4849b3",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.2026.summary",
+   "text": "That was 2026: Japan and the US buy yen together. So far this year, the won gained the most against the dollar, 6.7%, and the rupee lost the most, 4.5%. Where shall we go next?",
+   "hash": "0c89c3a0508f1870",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  },
+  {
+   "id": "year.2026.world",
+   "text": "2026. Floating rates and the euro. Countries of the euro area share one currency, the euro, which takes over from the Deutsche Mark. The major currencies keep floating. This year, let's look at Japan, United States and South Korea. This year is not over yet: our data runs to November 6, 2026.",
+   "hash": "2840783bfa929e69",
+   "modes": [
+    "full",
+    "contest"
+   ]
+  }
+ ]
+}

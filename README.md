@@ -42,10 +42,55 @@ Exchange rate data: Frankfurter (frankfurter.dev)
 | **Pinch a country's marker on the map** (or a currency's label on the chart) | That place opens: its leaders this year, how it is governed, and its currency so far. The guide pauses. Pinch it again to go on. |
 | Pinch **All** | Show all nine currencies at full strength (the guide's spotlight off). |
 | At the end of the year | The summary: events, places, policymakers, and the ranking of the year's changes. **Explore another year, Previous year, Next year, Replay this year, Full Journey.** |
-| **Pause**, **Voice**, **Skip**, **Calm** on the lap panel | Pause and resume, speech on/off, skip a line, and reduced motion for the tunnel. |
+| **Pause**, **Voice**, **Skip**, **Calm**, **Lang** on the lap panel | Pause and resume, speech on/off, skip a line, reduced motion for the tunnel, and the display language (EN / JA). |
 
 On a PC: click the buttons with the mouse, or use the keyboard: `[` `]` change the year by one, `-` `=`
-by ten, Enter starts the travel (or goes to the next year), Escape skips, Space pauses.
+by ten, Enter starts the travel (or goes to the next year), Escape skips, Space pauses, `I` switches the
+display language.
+
+## Languages
+
+**English is the app's language.** Every line, event and panel is written in English, and Tock speaks
+English only. **Japanese (日本語) is a review translation** for the developer and Japanese-speaking
+reviewers: the same English, translated, shown in the subtitles and on every panel. It is chosen on the
+start screen (Language: English / 日本語; English by default), with `?lang=ja` in the address, with the lap
+panel's **Lang** button, or with `I` on a PC, at any moment: the year, the clock, the beat being said, the
+selection, the chart and the map stay as they are; only the words shown change.
+
+- **One journey.** The guide's beats, their order and their moments are built once, from the data. Each
+  line is built in English and in Japanese from the same values (src/guide/guide-scripts.ts `Beat.text`
+  and `Beat.ja`). No Japanese-only content, timing or voice.
+- **Voice in Japanese mode.** With **Voice** on, the English line is said and its Japanese translation is
+  shown. With **Voice** off, the subtitles carry the journey alone, timed by the English line's reading
+  time (the same timing in both languages).
+- **Where the Japanese comes from.** Fixed lines and sentence patterns: src/i18n/en.ts (the source) and
+  src/i18n/ja.ts (each translation next to a copy of the English it translates). Events, portals, places,
+  offices and eras: content/i18n/ja-text.json, keyed by the English. People's names: Wikidata's Japanese
+  label of the same item (content/i18n/names-ja.json, `npm run names:ja`), never transliterated by hand; 30
+  people with no Japanese label keep their English name. `npm run i18n` builds public/data/i18n-ja.json.
+- **Nothing left behind.** A change to an English template makes its Japanese stale; changed data text has
+  no translation yet. Both show English, are logged in dev builds, and fail the tests
+  (tests/i18n.test.ts) and `npm run i18n:check`. The tests also check that every number (years, dates,
+  amounts, percentages) of every English line is in its Japanese, for every year. Status:
+  [docs/translation-status.md](docs/translation-status.md).
+- **Not translated:** currency codes, rates, numbers and dates (formatted from the same ISO date),
+  licence and author credits, and the lap panel's button labels (its font has Latin letters only).
+
+## Tock's voice
+
+The voice waits for itself: a line ends when it has been said, never when an estimate runs out, so long
+explanations are said in full and a new line never cuts the previous one. Without a working voice, the
+reading time of the English line decides. Details, the causes of the earlier cut-offs and the fixes:
+[docs/voice.md](docs/voice.md).
+
+- **Best first:** a pre-generated recording of the exact words (found by their hash), then the browser's
+  speech synthesis with an explicitly chosen natural English voice (one sentence at a time), then
+  subtitles only.
+- **Pause** stops the voice at the sentence it is saying and goes on from there; **Skip** ends the line;
+  **Voice** off stops it at once. Tock's mouth moves while the voice is speaking.
+- **Recordings** are ready to be made (scripts/voice-lines.ts lists every line; scripts/voice_tool.py
+  estimates, generates and publishes), but none are made yet: paid generation waits for approval.
+  Estimated cost for every line of every year: about $1.3-2.3 with OpenAI, $3-6 with ElevenLabs.
 
 ## Year Journey
 
@@ -65,9 +110,10 @@ and shows what it is doing:
 | Traveling | leans into the tunnel, thruster bright |
 | Thinking | looks up and aside, three dots breathe above its head (while you choose a year) |
 
-Its voice is the browser's speech synthesis (English; the script's strings are in one place for
-translation). Speech starts only after a user action, subtitles never depend on it, and while it speaks the
-music steps back so the words stay clear.
+Its voice is English (see [Tock's voice](#tocks-voice)): a pre-generated recording when there is one,
+otherwise the browser's speech synthesis with a natural English voice chosen explicitly. Speech starts only
+after a user action, subtitles never depend on it, and while it speaks the music steps back so the words
+stay clear.
 
 ### The time tunnel
 
@@ -118,7 +164,7 @@ no verified event.
 | --- | --- |
 | Leaders (23 offices, 1948 to today) | Wikidata "position held" with start and end dates (`npm run leaders`). Each term is cross-checked against the person's English Wikipedia infobox; 190+ terms agree, the rest are Wikidata-only and listed for review. Periods with no recorded holder show "no verified record". Gaps filled by name are verified the same way. Report: [docs/leaders-verification.md](docs/leaders-verification.md). |
 | Portraits | The person's Wikidata image, used only with a free license that allows reuse with attribution (public domain, CC0, CC BY, CC BY-SA, OGL, GODL-India, GFDL, Attribution), with its credit on screen. |
-| Events (60 shown, 1948 to 2026) | Written in `content/annual-events.json`, checked by `npm run events` at two levels the app tells apart. **Reviewed** (15, every event of the featured years plus the 2026 yen intervention): quotes from named sources (`content/sources.json`), mostly primary, each found in its source, one giving the day; the Japanese interventions are rows of the Ministry of Finance's own intervention data. **Matched** (45): an automatic check that one passage of a Wikipedia article (a sentence and the next) has the date and keywords; a page that has them in different places does not pass (this left out two events and turned two into year-only ones). When the sources give only the month or the year, the app shows no more. Report: [docs/events-verification.md](docs/events-verification.md). |
+| Events (60 shown, 1948 to 2026) | Written in `content/annual-events.json`, checked by `npm run events` at two levels the app tells apart. **Reviewed** (16, every event of the featured years, the 2026 yen intervention and the Bank of Japan's 2024 exit from negative rates): quotes from named sources (`content/sources.json`), mostly primary, each found in its source, one giving the day; the Japanese interventions are rows of the Ministry of Finance's own intervention data. **Matched** (44): an automatic check that one passage of a Wikipedia article (a sentence and the next) has the date and keywords; a page that has them in different places does not pass (this left out two events and turned two into year-only ones). When the sources give only the month or the year, the app shows no more. Report: [docs/events-verification.md](docs/events-verification.md). |
 | Featured years | Every portal summary, policy, person's role, portal scene and opening line of 1971, 1985, 1997, 2008 and 2022, next to the quotes behind it (`content/featured-review.json`, `npm run review`). Tests fail if the app's wording changes without a new review. Report: [docs/featured-years-review.md](docs/featured-years-review.md). |
 | Exchange rates | Frankfurter composite rates, weekly (see Data). For the featured years, every weekly observation and every figure the app states is recomputed from the Federal Reserve's H.10 rates (`npm run rates`): 58 figures agree, one is explained (the won on 26 December 1997, a day it swung by a fifth: -51.6% for the year with the composite, -43.8% with H.10). Report: [docs/rates-crosscheck.md](docs/rates-crosscheck.md). |
 
@@ -129,8 +175,10 @@ depictions of identifiable people other than the entrant. Showing historical lea
 central to this design, but **the organizers' written permission has not been confirmed**. Until it is,
 `npm run build:contest` makes a build that shows **no names or portraits of real people**: the guide speaks
 of offices, not names, the panels show offices and terms only, the Historical Portals keep their places and
-policies, and the names and portraits are removed from the built files. The public site and the demo video
-must be made from this build unless the organizers confirm in writing.
+policies, and the names and portraits are removed from the built files: in English, in the Japanese review
+translation (its names are removed from data/i18n-ja.json), and in recordings (only lines the contest build
+says are kept; `npm run check:contest` fails if a recording says a name or carries one in its metadata). The
+public site and the demo video must be made from this build unless the organizers confirm in writing.
 
 ## The three bands
 
@@ -340,7 +388,8 @@ Designed in from the start, not added at the end:
 - **Understandable by ear alone.** Each currency has its own timbre and direction; pitch encodes strength,
   density encodes volatility, the drone's tension encodes market stress, a gong marks major moments, a soft
   chime marks each new decade, and the ending's grace notes say up or down.
-- **Optional spoken captions** (Voice button) using the browser's speech synthesis.
+- **Optional spoken captions** (Voice button): recordings or the browser's speech synthesis, in English;
+  long subtitles turn their pages with the voice.
 - **Never color alone.** Every line and marker also carries its currency code, its label has an arrow and a
   sign (▲ +8.4%, ▼ −12.1%), its place on the map is fixed, and each currency has its own sound. Chart labels
   and map labels use the same code and the same color. The palette is based on Okabe-Ito, a
@@ -400,7 +449,14 @@ functions/api/today.ts     Cloudflare Pages Function for today's rates (cached, 
 src/index.ts               boot: World.create, load data, start screen
 src/config.ts              currencies, the three bands' placement (BANDS), chart/map sizes, voice positions
 src/experience.ts          the conductor: phases, one clock -> top band, chart, map, robot and sound
-src/guide/guide-scripts.ts what the guide says for any year, and when (pure, tested)
+src/guide/guide-scripts.ts what the guide says for any year, and when, in English and Japanese (pure, tested)
+src/a11y/narration.ts      Tock's voice: recordings, then speech synthesis, sentence by sentence (tested)
+src/i18n/                  the display language: English templates (en.ts), Japanese (ja.ts), dates, line breaking
+content/i18n/              Japanese data texts (by English) and names (from Wikidata)
+scripts/i18n.ts            builds public/data/i18n-ja.json; lists missing or stale translations
+scripts/build_names_ja.py  people's names in Japanese from Wikidata labels
+scripts/voice-lines.ts     every line Tock can say, for every year and both builds -> content/voice/lines.json
+scripts/voice_tool.py      recordings: estimate, generate (paid, only with --yes), publish, check
 src/playback/year-journey.ts  walks a year's beats on the clock; the tunnel's year counter (pure, tested)
 src/data/annual-currency.ts   a year's window, annual changes, ranking, sharpest move (pure, tested)
 src/data/annual-history.ts    regions and systems, leaders in a year, the year's events (pure, tested)
@@ -444,6 +500,10 @@ npm run events     # re-check the Year Journey's events against their sources (n
 npm run review     # re-check the featured years' statements against their quotes (network, cached)
 npm run rates      # cross-check the featured years' rates with the Fed's H.10 (network, cached)
 npm run pacing     # print when each event happens in the time-lapse
+npm run i18n       # rebuild public/data/i18n-ja.json and docs/translation-status.md (i18n:check fails on gaps)
+npm run names:ja   # people's names in Japanese from Wikidata (network, cached)
+npm run voice:lines     # list every line Tock can say (content/voice/lines.json)
+npm run voice:estimate  # characters, minutes and cost of recording them (nothing is sent)
 npm run build      # production build into dist/
 npm run build:contest  # the same without any real person's name or portrait (Rule 17)
 npm run check:build    # check a full build in dist/ (run after npm run build)
