@@ -19,6 +19,10 @@
     "map": "python scripts/build_map.py",
     "leaders": "python scripts/build_leaders.py",
     "events": "python scripts/build_events.py",
+    "rates": "python scripts/check_rates.py",
+    "review": "python scripts/review_featured.py",
+    "check:build": "python scripts/check_build.py dist --mode full",
+    "check:contest": "python scripts/check_build.py dist --mode contest",
     "data": "python scripts/build_history.py",
     "pacing": "node scripts/simulate-pacing.ts"
   },
@@ -43,6 +47,6 @@
     "three": "npm:super-three@0.185.0"
   },
   "engines": {
-    "node": ">=20.19.0 <21.0.0-0 || >=22.12.0 <23.0.0-0 || >=24.0.0"
+    "node": ">=22.18.0 <23.0.0-0 || >=24.0.0"
   }
 }

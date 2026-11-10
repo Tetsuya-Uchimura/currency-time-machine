@@ -1,0 +1,54 @@
+# Basic CI: install, typecheck, tests, then both builds, each checked.
+# Offline only: the data scripts that call outside services (Frankfurter, Wikidata, FRED, sources) are run by
+# hand and their outputs are committed; CI never fetches them.
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test-and-build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+          cache-dependency-path: requirements-dev.txt
+
+      - name: Install Python tools
+        run: python -m pip install -r requirements-dev.txt
+
+      - name: Install
+        run: npm ci
+
+      - name: Typecheck
+        run: npm run typecheck
+
+      - name: Tests (pytest and node --test)
+        run: npm test
+
+      - name: Build (full)
+        run: npm run build
+
+      - name: Check the full build
+        run: npm run check:build
+
+      - name: Build (contest-safe, no real people)
+        run: npm run build:contest
+
+      - name: Check the contest-safe build
+        run: npm run check:contest

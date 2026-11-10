@@ -1,0 +1,5 @@
+# Python tools for the tests and the build scripts (Python 3.10+).
+#   python -m pip install -r requirements-dev.txt
+pytest>=8
+Pillow>=10      # scripts/build_media.py, build_leaders.py (portraits); imported by the tests
+pypdf>=4        # scripts/build_events.py, review_featured.py (PDF sources only)

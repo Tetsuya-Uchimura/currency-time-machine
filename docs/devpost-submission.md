@@ -34,15 +34,17 @@ talking about, points at countries on the map, and pauses the year while it spea
 about it; pinch again and the story goes on. At the end, a summary ranks the year's changes, and you can go to
 the next year, the previous one, any other, or the full journey from 1948 to today.
 
-Every name, date and number is checked: leaders' terms against Wikidata and Wikipedia, events against their
-sources, and every figure is computed from weekly rates, never typed in. Years with no verified event say so.
+Every fact says how it was checked. In the five featured years, every event, portal text and opening line is
+reviewed against quoted sources, mostly primary (ministries, central banks, the IMF); other years' events are
+matched to a Wikipedia passage with their date, and say so. Every figure is computed from weekly rates, never
+typed in, and cross-checked against the Federal Reserve's H.10.
 
 ### How we built it
 
 Built on Meta's Immersive Web SDK with three.js. Python build scripts download composite rates since 1948
 from the Frankfurter API, assemble 346 leadership terms in 23 offices from Wikidata (cross-checked with
-Wikipedia infoboxes, with licensed portraits), and keep an event only if its source contains its date and
-keywords. The robot is made in code from a few shapes with a generated matcap; the tunnel is sixteen shader
+Wikipedia infoboxes, with licensed portraits), and check every event against a quoted passage that gives
+its date. The robot is made in code from a few shapes with a generated matcap; the tunnel is sixteen shader
 rings, streaks and motes. Sound is synthesized live with Web Audio: one spatialized voice per currency, a
 gong for events, a tunnel rush, and the music ducks under the robot's speech-synthesis voice. Subtitles are
 always on.
@@ -57,7 +59,7 @@ moving the user; and keeping nine currencies readable by letting the guide choos
 Japanese narration (the script is built for translation), richer stories for more years, and your own home
 currency as the base.
 
-(about 450 words)
+(about 480 words)
 
 ## How we implemented hand interactions
 

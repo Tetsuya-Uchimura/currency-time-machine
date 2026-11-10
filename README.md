@@ -15,8 +15,12 @@ clock:
 3. **Interactive World Currency Map** (bottom): each currency's home, its code and the same change; the
    robot points at the places it introduces, and you can pinch any of them to open its leaders.
 
-Every name, date and number is checked: leaders' terms against Wikidata and Wikipedia, events against
-their sources, and every exchange-rate figure is computed from the weekly data, never typed in.
+Every fact says how it was checked. In the five featured years (1971, 1985, 1997, 2008, 2022) every event,
+portal text and opening line is reviewed against quoted sources, mostly primary ones (ministries, central
+banks, the IMF, government records); other years' events are matched automatically to a Wikipedia passage
+that gives their date, and the app says so. Leaders' terms come from Wikidata, cross-checked with Wikipedia.
+Every exchange-rate figure is computed from the weekly data, never typed in, and the featured years' figures
+are cross-checked against the Federal Reserve's H.10 rates.
 
 - Play: https://currency-time-machine.pages.dev (open in the Meta Quest browser and tap Enter VR)
 - **Year Journey** (default): about 1.5 to 2 minutes per year; go to the previous or next year, or any other.
@@ -82,8 +86,12 @@ light through them instead. It lasts about 3 seconds and can be skipped.
    for central banks, who led them; each place by its own system (presidents, prime ministers, chancellors,
    the Swiss Federal Council, the Communist Party's leader and the Premier; the euro area is the European
    Central Bank, not one head of government). West Germany and Germany are told apart.
-3. **The events**: each verified event at its date, with a gong, a marker on the chart and the lines it
-   touched lit; the four great moments also open their Historical Portal (city photographs, decision makers).
+3. **The events**: each event at the first weekly observation on or after its day (the card names both: "Event
+   on Sunday, September 22 ... the first observation after it, Friday, September 27"), with a gong, a marker on
+   the chart and the lines it touched lit; the four great moments also open their Historical Portal (city
+   photographs, decision makers), whose rates are dated too ("Yen 242 (Sep 20) → 219 (Sep 27)"). An event whose
+   sources give only the month or the year is told at the end of the year, said to be undated, with no stop,
+   gong or marker: no day is made up for it.
 4. **The currencies**: the sharpest eight-week stretch of the year while it happens, then the year's result.
 5. **The summary**: events, places, policymakers and the year's changes, ranked.
 
@@ -101,6 +109,8 @@ no verified event.
   **not ranked** with the others. 1948 begins in June (the data's first week). The latest year is
   **year to date**, and nothing after the last observation is shown.
 - The chart draws each line only up to the playhead: the year is never shown ahead of time.
+- **Event dates and rate dates are different things.** Rates are weekly observations (Fridays). The year stops
+  at the first observation on or after an event's day, and the app names that observation's date.
 
 ### Where the facts come from
 
@@ -108,8 +118,9 @@ no verified event.
 | --- | --- |
 | Leaders (23 offices, 1948 to today) | Wikidata "position held" with start and end dates (`npm run leaders`). Each term is cross-checked against the person's English Wikipedia infobox; 190+ terms agree, the rest are Wikidata-only and listed for review. Periods with no recorded holder show "no verified record". Gaps filled by name are verified the same way. Report: [docs/leaders-verification.md](docs/leaders-verification.md). |
 | Portraits | The person's Wikidata image, used only with a free license that allows reuse with attribution (public domain, CC0, CC BY, CC BY-SA, OGL, GODL-India, GFDL, Attribution), with its credit on screen. |
-| Events (61, 1948 to 2026) | Written in `content/annual-events.json`; `npm run events` keeps an event only if one of its sources contains its date and keywords. When the sources give only the month or the year, the app shows no more than that. Report: [docs/events-verification.md](docs/events-verification.md). |
-| Exchange rates | Frankfurter composite rates, weekly (see Data). |
+| Events (60 shown, 1948 to 2026) | Written in `content/annual-events.json`, checked by `npm run events` at two levels the app tells apart. **Reviewed** (15, every event of the featured years plus the 2026 yen intervention): quotes from named sources (`content/sources.json`), mostly primary, each found in its source, one giving the day; the Japanese interventions are rows of the Ministry of Finance's own intervention data. **Matched** (45): an automatic check that one passage of a Wikipedia article (a sentence and the next) has the date and keywords; a page that has them in different places does not pass (this left out two events and turned two into year-only ones). When the sources give only the month or the year, the app shows no more. Report: [docs/events-verification.md](docs/events-verification.md). |
+| Featured years | Every portal summary, policy, person's role, portal scene and opening line of 1971, 1985, 1997, 2008 and 2022, next to the quotes behind it (`content/featured-review.json`, `npm run review`). Tests fail if the app's wording changes without a new review. Report: [docs/featured-years-review.md](docs/featured-years-review.md). |
+| Exchange rates | Frankfurter composite rates, weekly (see Data). For the featured years, every weekly observation and every figure the app states is recomputed from the Federal Reserve's H.10 rates (`npm run rates`): 58 figures agree, one is explained (the won on 26 December 1997, a day it swung by a fifth: -51.6% for the year with the composite, -43.8% with H.10). Report: [docs/rates-crosscheck.md](docs/rates-crosscheck.md). |
 
 ### Contest-safe build (Rule 17)
 
@@ -376,7 +387,13 @@ scripts/build_history.py   Frankfurter -> public/data/history.json + snapshot.js
 scripts/build_map.py       Natural Earth -> public/data/world-map.json (Equal Earth dots + coastlines)
 scripts/build_media.py     verified people, portraits and city photos -> public/data/history-content.json
 scripts/build_leaders.py   Wikidata + Wikipedia -> public/data/leaders.json, portraits (every year's leaders)
-scripts/build_events.py    content/annual-events.json, checked against sources -> public/data/annual-events.json
+scripts/build_events.py    content/annual-events.json, reviewed or matched against sources -> public/data/annual-events.json
+scripts/review_featured.py the featured years' statements vs their quotes -> docs/featured-years-review.md
+scripts/check_rates.py     the featured years' rates and figures vs the Fed's H.10 -> docs/rates-crosscheck.md
+scripts/check_build.py     checks a built dist/ (full, or contest-safe: no real person's name anywhere)
+content/sources.json       the sources quoted as evidence (publisher, title, link, primary or not)
+content/featured-review.json  the featured years' statements, as reviewed, with their evidence
+.github/workflows/ci.yml   CI: npm ci, typecheck, tests, both builds, each checked
 scripts/strip_people.py    the contest-safe build: removes names and portraits from dist/
 scripts/simulate-pacing.ts how long each era and event takes with the current pacing
 functions/api/today.ts     Cloudflare Pages Function for today's rates (cached, with fallback)
@@ -412,7 +429,8 @@ tests/                     pytest for the data, media, map, leaders and events p
 
 ## Development
 
-Requirements: Node.js 22.12+ (or 20.19+), Python 3.10+ with pytest.
+Requirements: Node.js 22.18+ (`.nvmrc`; the tests run TypeScript directly, which needs 22.18 or later) or
+24+, Python 3.10+ with `python -m pip install -r requirements-dev.txt` (pytest, Pillow, pypdf).
 
 ```bash
 npm install
@@ -422,10 +440,14 @@ npm run data       # re-download history and rebuild public/data/history.json + 
 npm run map        # rebuild the world map from Natural Earth
 npm run media      # re-verify people and rebuild portraits and city photos
 npm run leaders    # rebuild every year's leaders from Wikidata (cross-checked with Wikipedia) + portraits
-npm run events     # re-check the Year Journey's events against their sources
+npm run events     # re-check the Year Journey's events against their sources (network, cached)
+npm run review     # re-check the featured years' statements against their quotes (network, cached)
+npm run rates      # cross-check the featured years' rates with the Fed's H.10 (network, cached)
 npm run pacing     # print when each event happens in the time-lapse
 npm run build      # production build into dist/
 npm run build:contest  # the same without any real person's name or portrait (Rule 17)
+npm run check:build    # check a full build in dist/ (run after npm run build)
+npm run check:contest  # check a contest-safe build in dist/ (run after npm run build:contest)
 ```
 
 In the emulator, enter XR, then switch the input to hands to try pinch and poke. Point a hand at a button,
