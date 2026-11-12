@@ -58,3 +58,6 @@ data-raw/
 .dev.vars
 # BGM preview renders (audition panel, dev server)
 audition/
+
+# The demo video work (user, 2026-11-12: never push anything under submission-video/)
+submission-video/

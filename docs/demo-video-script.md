@@ -1,8 +1,9 @@
 # Demo video script (target 2:45, hard limit under 3:00)
 
 (The produced cut is in submission-video/: its storyboard.md, timeline.json and narration-en.md are the
-source for the video as made. This page is the plan; the two "new" rows below add the movable panel and
-touching Tock, which came after the cut was made: see submission-video/storyboard.md, "Next cut".)
+source for the video as made, 2:30, with three shots recorded on a real Meta Quest. This page is the
+plan. The two "new" rows below, the movable panel and touching Tock, are in the produced cut, after the
+map pinch; it shows a high five, not a pat.)
 
 Recorded from the IWSDK emulator with sound. The first 10 seconds show the most striking moment.
 
