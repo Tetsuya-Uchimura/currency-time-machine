@@ -1,7 +1,7 @@
 # Demo video script (target 2:45, hard limit under 3:00)
 
-(The produced cut is in submission-video/: its storyboard.md, timeline.json and narration-en.md are the
-source for the video as made, 2:30, with three shots recorded on a real Meta Quest. This page is the
+(The produced cut is made in submission-video/, which is kept locally and not in this repository: its
+storyboard.md, timeline.json and narration-en.md are the source for the video as made, 2:30, with three shots recorded on a real Meta Quest. This page is the
 plan. The two "new" rows below, the movable panel and touching Tock, are in the produced cut, after the
 map pinch; it shows a high five, not a pat.)
 
